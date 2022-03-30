@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h2>Problem Solving</h2>
+        <ul>
+            <li><b>Polya's Process</b>: Method for solving problems developed by George Polya</li>
+            <ol>
+                <li>Understand the Problem:  </li>
+                    <ul>
+                        <li>Re-read, research, or self-explain the problem until it is understood</li>
+                        <li>Determine unknowns (facts or data) and knowns (available data)</li>
+                        <li>Determine if available data is sufficient to solve unknowns</li>
+                    </ul>
+                <li>Make a Plan: </li>
+                    <ul>
+                        <li>Consider if a similar problem has been previously addressed or if there is an existing framework</li>
+                        <li>Break problem down into smaller pieces that can be solved independently (pseudo-code)</li>
+                    </ul>
+                <li>Carry out the Plan:</li>
+                    <ul>
+                        <li>Execute plan by solving smaller pieces. Evaluate results against what was expected</li>
+                        <li>Debug often to avoid catastrophic outcome when consolidating results.</li>
+                    </ul>
+                <li>Looking back:</li>
+                    <ul>
+                        <li>If possible, check-fig or prove result is correct</li>
+                        <li>Optimize and generalize the completed answer,</li>
+                    </ul>
+            </ol>
+        </ul>
+
+        <h2>Git and Github</h2>
+        <ul>
+            <li>Git</li>
+                <ul>
+                    <li>'brand' of version control</li>
+                    <li>Saves groups of changes (since the last time there was a commit)</li>
+                    <li>Triggered manually</li>
+                    <li>Creates a chain of history that allows one to go back to a specific commit</li>
+                    <li>Intelligently combines changes from different source - asks specifically about conflicts</li>
+                    <br />
+                    <li><b>'git init'</b> - initializes new git repository</li>
+                    <li><b>'git status'</b> - shows status of project from perspective of git</li>
+                    <li><b>'git add file-name'</b> or 'git add -A' - staging files for commit - allows you to pick and choose what will be committed. Adding ' -A' stages all files</li>
+                    <li><b>'git commit -m "message"'</b> - commits staged files, note that -m "message" flag is required and should include brief description of what was changed</li>
+                    <li><b>'git log'</b> - shows log of previous commits</li>
+                    <li><b>'git remote add origin URL_TO_GITHUB'</b> - creates remote connection between local git and github</li>
+                    <ul>
+                        <li>Example using HTTPS (required periodic login): 'git remote add origin https://github.com/vbuongiovanni/vs-level-1.git'</li>
+                        <li>Example without SSH Key (required periodic login): 'git remote add origin git@github.com:vbuongiovanni/vs-level-1.git'</li>
+                    </ul>
+                    <li><b>'git remote -v'</b> - shows details and permission of remote connection between local and Github. can be used to verify 'git remote add' worked</li>
+                    <li><b>'git push -u origin master'</b> - required for initial setup of repo, initializes git push command</li>
+                    <li><b>'git push'</b> - pushes commits to repository. In this case, Github</li>
+                </ul>
+            <li>Github</li>
+                <ul>
+                    <li>Online repositories of project - uses git</li>
+                    <li>Facilitates collaboration between team members or the public</li>
+                </ul>
+        </ul>
+
+        <h2>Elements, Console, and Sources</h2>
+        <ul>
+            <li>Google Chrome Dev Tools:</li>
+            <ol>
+                <li><b>Elements tab</b> - focuses on the HTML and CSS aspects (color picker, element names, class names, etc.)</li>
+                <li><b>Console</b> - first place to look in event of JS not working quite right. Check for errors</li>
+                <li><b>Sources tab</b> - Allows us to look at JS file line by line. Can also access .css file</li>
+                    <ul>
+                        <li>This is also the best way to determine whether or not external files are actually linking</li>
+                        <li>you can also use <b>breakpoints</b>, which will make the browser <em>pause</em> the JS script at a certain point and allow to gradually work through step by step or line by line.</li>
+                    </ul>
+            </ol>
+        </ul>
+
+
+
+    </body>
+</html>
