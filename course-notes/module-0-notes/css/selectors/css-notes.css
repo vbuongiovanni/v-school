@@ -1,0 +1,48 @@
+h1 { /*applies to all elements of type stated*/
+    color:blue;
+    font-size:35p;
+}
+.dark-coffee {  /*classes can be called in css by using the following syntax ".name-of-class"*/
+    color:brown;
+    font-size:15px;
+}
+.medium-coffee {
+    color:#a54d13;
+    font-size:14px;
+}
+.light-coffee {
+    color:#e56c1b;
+    font-size:13px;
+}
+h1, h2 { /*apply style to multiple HTML elements*/
+    color:grey;
+    font-size:35px;
+}
+div .coffee { /*select specific class that is CONTAINED within a specified html element */
+    color:red;
+    font-size:25px;
+} /*the difference here is that div is the containing element that holds the span.coffee*/
+span.coffee { /*apply style only to certain classes of the specified html element */
+    color:purple;
+    font-size:10px;
+}
+/*direct children selector*/
+.parent > p { /*changes style of all p elements that fall within the parent class*/
+    align-items: center;
+}
+.main-title {
+    color:blue;
+    font-size:65px;
+}
+.secondary-title {
+    color:lightblue;
+    font-size:45px;   
+}
+.comment-1 {
+    font-weight:lighter;
+    color:green;
+}
+.comment-2 {
+    font-weight: 100;
+    color:brown;
+}

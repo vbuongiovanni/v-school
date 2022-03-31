@@ -1,0 +1,56 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    
+}
+
+/*
+CSS positioning-  gives you access to the top, bottom, left, and right properties.
+    static - default    
+    relative - leaves elements where they fall naturally, unless they are then further specified (t, b, l, r)
+    absolute - positions element with respect to window. Other elements will push to fill in its palce
+    fixed - Look exactly like absolute, except that it will remain in the same place regardless of scrolling.
+        Note that this is how you create a sticky navbar or sticky header
+*/
+
+.coffee {
+    
+    /*moves element 55 pixels to the left from where it would have otherwise fallen by default*/
+    /*
+    position: relative;
+    left: 55px; 
+    */
+
+    /*moves element 55 pixels to the left, irrespective of other elements. Starts at (0, 0, 0, 0) within (t,b,l,r)*/    
+    /*
+    position: absolute;
+    left: 55px; 
+    */
+
+    /*Challenge - get red image to fall below blue*/
+    /*
+    position: absolute;
+    left: 55px; 
+    top: 403px; 
+    */
+
+    /*
+    places element at the given px coordinates, and said element will remain there regardless of scrolling
+    or screensize
+    */    
+    position:fixed;
+    left: 55px; 
+    top: 403px; 
+
+    width: 425px;
+    border: 2px solid red;
+
+
+    
+    
+}
+.decaf {
+    height: 400px;
+    width: 555px;
+    border: 2px solid blue;
+}

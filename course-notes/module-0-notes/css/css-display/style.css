@@ -1,0 +1,42 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+you can force elements to be inline if needed. For example, the li element
+is a block element, but we may want to make it into an inline element.
+*/
+
+li.inline { 
+    display: inline;
+}
+
+/* 
+Conversly, img default to inline. this can be changes via css using the display property with 'block'
+*/
+
+img.block {
+    display: block;
+    height: 175px;
+    width: 175px;
+}
+
+/* 
+Also, we can make in-line blocks using the the display property, with 'inline-block'
+Effectively, this can be used to create two columns of text.
+*/
+
+p {
+    width:20%
+}
+p.inline-block {
+    display: inline-block;
+    width:20%
+}
+/* 
+We can also make elements disappear altogether by adjusting the display property to "none" 
+*/
+h1.not-visible {
+    display: none;
+}

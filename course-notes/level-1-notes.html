@@ -56,7 +56,7 @@
                     <li><b>'git remote -v'</b> - shows details and permission of remote connection between local and Github. can be used to verify 'git remote add' worked</li>
                     <li><b>'git push -u origin master'</b> - required for initial setup of repo, initializes git push command</li>
                     <li><b>'git push'</b> - pushes commits to repository. In this case, Github</li>
-                    
+
                 </ul>
             <li>Github</li>
                 <ul>
@@ -78,7 +78,45 @@
                     </ul>
             </ol>
         </ul>
-
+        <h2>Naming Conventions</h2>
+        <ul>
+            <li>JavaScript</li>
+            <ul>
+                <li>camelCase for all variable and function names. Exception - constructor functions</li>
+                <li>Use 4-spaces to ident code. 2-space is also common</li>
+                <li>add whitespace around all operators</li>
+                <li>Each property of an object is given its own line</li>
+                <li>Add Semicolons after every simple statement. Do NOT include a semicolon after loops, }, func declarations, etc</li>
+                <li>Use logical and meaningful names. Additionally, the following rules apply based on type:</li>
+                <ul>
+                    <li>Booleans are often named after questions - "isAlive" or "isPositive"</li>
+                    <li>Functions should be given a verb or action word describing its job</li>
+                    <li>Arrays should be given plural names</li>
+                    <li>Objects should be given singular names</li>
+                </ul>
+                <li>Line comments should be used more often than block comments. Generally, you should reserved block comments for extensive documentation.</li>    
+            </ul>
+            <li>HTML</li>
+            <ul>
+                <li>lower case all html element, attributes, tags etc. One exception - the DOCTYPE at the start of the page </li>
+                <li>Names should be broken up with a dash</li>
+            </ul>
+        </ul>
+        <h2>The Document Object Model (DOM)</h2>
+        <ul>
+            <li>Selecting Single Item</li>
+            <ul>
+                <li>Most common way is to use '.getElementByTag' method</li>
+                <li>single items from DOM</li>
+                <li>If you attempt to call on a nonexistent element, 'null' will return</li>
+            </ul>
+            <li>Selecting Multiple Items</li>
+            <ul>
+                <li>Two most common ways are using either '.getElementsByClassName' or '.getElementsByTag' methods</li>
+                <li>Returns an HTMLCollection, which is effective just an array of single items from DOM</li>
+                <li>If you attempt to call one of these methods on a nonexistent element, an array of length 0 will return</li>
+            </ul>
+        </ul>
 
 
     </body>

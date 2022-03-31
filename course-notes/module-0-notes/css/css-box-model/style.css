@@ -1,0 +1,24 @@
+body, html {
+    margin: 10px;
+}
+.space-one {
+    display: inline-block;
+    /* create a border around content:*/
+    border: 3px solid black;
+    /* we can also increase space between the content and the border by changing padding:*/
+    padding: 15px;
+    /* Increase space between elements, outside of the border by changing the margin*/
+    margin: 15px;
+
+}
+.space-two{
+    display: inline-block;
+    /* borders can also be specified to a single side*/
+    border-bottom: 3px solid black;
+    margin: 15px;
+    
+}
+.box-model {
+    height: 350px;
+    width: 450px;
+}
