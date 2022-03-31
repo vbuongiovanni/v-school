@@ -15,6 +15,8 @@
 //  2) added spaces between operators
 //  3) added indention for readability
 
+    "use strict";
+
 // *** VB - changed 'var' to 'const'
 // *** VB - changed 'Enemies' to 'enemyNames'
     const enemyNames = ["Lex", "Batman", "Darkseid", "Brainiac", "General Zod", "Doomsday"];
