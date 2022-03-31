@@ -104,18 +104,60 @@
         </ul>
         <h2>The Document Object Model (DOM)</h2>
         <ul>
-            <li>Selecting Single Item</li>
-            <ul>
-                <li>Most common way is to use '.getElementByTag' method</li>
-                <li>single items from DOM</li>
-                <li>If you attempt to call on a nonexistent element, 'null' will return</li>
+            <li>Selecting Elements:</li>
+                <ul>
+                    <li>Using HTML attributes, tags, or class names</li>
+                    <ul>
+                        <li>Selecting Single Item</li>
+                        <ul>
+                            <li>Most common way is to use '.getElementByID("tag-name")' method</li>
+                            <li>single items from DOM</li>
+                            <li>If you attempt to call on a nonexistent element, 'null' will return</li>
+                        </ul>
+                        <li>Selecting Multiple Items</li>
+                        <ul>
+                            <li>Two most common ways are using either '.getElementsByClassName' or '.getElementsByTag' methods</li>
+                            <li>Returns an HTMLCollection, which is effective just an array of single items from DOM</li>
+                            <li>If you attempt to call one of these methods on a nonexistent element, an array of length 0 will return</li>
+                        </ul>
+                    </ul>
+                    <li>Using CSS syntax (QuerySelectors)</li>
+                    <ul>
+                        <li>Selecting Single Item</li>
+                        <ul>
+                            <li>'.querySelector("#id-name")' method</li>
+                            <li>returns single element, regardless of number of instances (first match is returned)</li>
+                        </ul>
+                        <li>Selecting Multiple Items</li>
+                        <ul>
+                            <li>'.querySelectorAll("#id-name")' method</li>
+                            <li>returns a NodeList object that consists of all elements that match the query</li>
+                        </ul>
+                        <li>HTML classes can be selected by using ".class-name" and IDs can be selected by using "#id-name" </li>
+                        <li>Same CSS syntax applies - "ol#favorite-things > li" </li>
+                    </ul>
+                <li>Modifying Text</li>
+                    <ul>
+                        <li>There are three primary properties that can be used to modify textual content:</li>
+                        <ol>
+                            <li>innerHTML - can be a security risk, so usually best to avoid</li>
+                            <li>innerText - can be computationally extensive </li>
+                            <li>textContent - **best option for changing text of HTML element**</li>
+                        </ol>
+                    </ul>
+                <li>Modifying Styles</li>
+                    <ul>
+                        <li>There are three primary properties that can be used to modify textual content:</li>
+                        <ol>
+                            <li>innerHTML - can be a security risk, so usually best to avoid</li>
+                            <li>innerText - can be computationally extensive </li>
+                            <li>textContent - **best option for changing text of HTML element**</li>
+                        </ol>
+                    </ul>
+
+
             </ul>
-            <li>Selecting Multiple Items</li>
-            <ul>
-                <li>Two most common ways are using either '.getElementsByClassName' or '.getElementsByTag' methods</li>
-                <li>Returns an HTMLCollection, which is effective just an array of single items from DOM</li>
-                <li>If you attempt to call one of these methods on a nonexistent element, an array of length 0 will return</li>
-            </ul>
+
         </ul>
 
 
