@@ -17,22 +17,19 @@
 
 
 // *** VB - changed 'var' to 'const'
-// *** VB - changed 'Enemies' to 'enemies'
-    const enemies=["Lex","Batman","Darkseid","Brainiac","General Zod","Doomsday"];
+// *** VB - changed 'Enemies' to 'enemyNames'
+    const enemyNames = ["Lex", "Batman", "Darkseid", "Brainiac", "General Zod", "Doomsday"];
 
 // *** VB - corrected 'funtion' to 'function'
 // *** VB - Corrected name of function form Snake_Case to camelCase
 // *** VB - Corrected parameter names from html-naming-convention to camelCase
 
-
     function whoWins(isThereKryptonite,enemyName) {
-        
         if (!isThereKryptonite) {
             return "Superman beats " + enemyName + ", of course";
         } else {
         return "Depends on how quick Superman can get rid of the Kryptonite. "+ enemyName +" could possibly win this one.";
         }
-
     }
 
 
@@ -42,24 +39,22 @@
 
     let isThereKryptonite;
 
-    for(let i = 0; i < enemies.length; i++){
-
-        is_there_kryptonite = (i % 2) ? true : false;
-
-        console.log(whoWins(is_there_kryptonite, enemies[i]));
+    for(let i = 0; i < enemyNames.length; i++){
+        isThereKryptonite = (i % 2) ? true : false;
+        console.log(whoWins(isThereKryptonite, enemyNames[i]));
     }
 
 
 // *** VB - changed 'Mat.random' to 'Math.random'
 
-    function HowAttractedIsLoisLaneToMe () {
+    function howAttractedIsLoisLaneToMe () {
         // 1 is not at all attracted, 10 is "super" attracted...
         return Math.floor((Math.random()*10)+1);
     }
 
 // *** VB - changed 'consol' to 'console'
 
-    console.log( HowAttractedIsLoisLaneToMe());
+    console.log( howAttractedIsLoisLaneToMe());
 
 // *** VB - added '=' between false and 'superman' 
 // *** VB - changed 'var' to 'let'
@@ -72,11 +67,8 @@
     let phoneBoothQuickChange;
 
     while (clarkKent){
-
         console.log("I'm just a nerdy columnist");
-
         phoneBoothQuickChange = Math.random();
-
         if (phoneBoothQuickChange>= 0.5) {
             clarkKent=false;
             superman=true;
