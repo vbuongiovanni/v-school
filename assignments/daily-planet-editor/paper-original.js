@@ -9,6 +9,7 @@ just fix the existing ones.
 
 // Written by Kent, Clark
 
+/* 
 let Enemies=["Lex","Batman","Darkseid","Brainiac","General Zod","Doomsday"];
 
 funtion Who_Wins(is-there-kryptonite,enemy_name) 
@@ -52,3 +53,5 @@ while (clarkKent){
         clarkKent=false;
         superman=true;
         console.log("Now I'm Superman!");}}
+
+ */
