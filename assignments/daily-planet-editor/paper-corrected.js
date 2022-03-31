@@ -50,12 +50,12 @@
 
     function howAttractedIsLoisLaneToMe () {
         // 1 is not at all attracted, 10 is "super" attracted...
-        return Math.floor((Math.random()*10)+1);
+        return Math.floor((Math.random() * 10) + 1);
     }
 
 // *** VB - changed 'consol' to 'console'
 
-    console.log( howAttractedIsLoisLaneToMe());
+    console.log(howAttractedIsLoisLaneToMe());
 
 // *** VB - added '=' between false and 'superman' 
 // *** VB - changed 'var' to 'let'
@@ -70,9 +70,9 @@
     while (clarkKent){
         console.log("I'm just a nerdy columnist");
         phoneBoothQuickChange = Math.random();
-        if (phoneBoothQuickChange>= 0.5) {
-            clarkKent=false;
-            superman=true;
+        if (phoneBoothQuickChange >= 0.5) {
+            clarkKent = false;
+            superman = true;
             console.log("Now I'm Superman!");
         }
     }
