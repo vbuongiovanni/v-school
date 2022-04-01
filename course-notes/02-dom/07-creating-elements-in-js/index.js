@@ -1,4 +1,3 @@
-
 // Creating new elements - use the createElement("html-tag-name-of-new-element") method:
 
     // step 1 - create and save new element:
@@ -150,13 +149,96 @@ const powerRangers = [
 
 for (let element of powerRangers){
     
-    newRangerListItem = document.createElement("li");
+    newRangerListItem = document.createElement("li"); 
 
     newRangerListItem.textContent = element.name + ", the " + element.color + " ranger!";
 
     rangerList.append(newRangerListItem);
 
 }
+
+
+
+// experimenting with other types of DOM additions:
+
+const existingInnerDiv = document.getElementById("inner-div");
+existingInnerDiv.style.border = "solid black 1px";
+existingInnerDiv.style.marginLeft = "30px";
+
+const existingOuterDiv = document.getElementById("outer-div");
+existingOuterDiv.style.border = "solid black 1px";
+existingOuterDiv.style.marginLeft = "20px";
+
+const referenceElement = document.getElementById("reference-text");
+
+
+let newSpanItem;
+
+const existingToNew = ["existingInnerDiv.append(newSpanItem)", "existingInnerDiv.prepend(newSpanItem)",
+"existingInnerDiv.before(newSpanItem)", "existingInnerDiv.after(newSpanItem);"]
+
+const newToExisting = ["existingInnerDiv.insertBefore(newSpanItem)", "existingInnerDiv.insertAdjacentElement(position, newSpanItem)",
+"existingInnerDiv.insertAdjacentElement(position, newSpanItem)", "existingInnerDiv.appendChild(newSpanItem)"]
+
+for (let i = 0; i < existingToNew.length; i++) {
+
+    newSpanItem = document.createElement("p");
+
+    newSpanItem.style.background = "yellow";
+
+    newSpanItem.textContent = existingToNew[i];
+
+    if (i === 0) {
+
+        existingInnerDiv.append(newSpanItem);
+
+    } else if (i === 1) {
+
+        existingInnerDiv.prepend(newSpanItem);
+
+    } else if (i === 2) {
+        
+        existingInnerDiv.before(newSpanItem);
+
+    } else if (i === 3) {
+
+        existingInnerDiv.after(newSpanItem);
+        
+    }
+
+    newSpanItem = document.createElement("p");
+
+    newSpanItem.textContent = newToExisting[i];
+
+    newSpanItem.style.background = "lightblue";
+
+
+    if (i === 0) {
+
+        existingInnerDiv.insertBefore(newSpanItem, referenceElement);
+
+    } else if (i === 1) {
+
+        newSpanItem.textContent = "existingInnerDiv.insertAdjacentElement('beforebegin', newSpanItem);"
+        existingInnerDiv.insertAdjacentElement("beforebegin", newSpanItem);
+
+    } else if (i === 2) {
+        newSpanItem.textContent = "existingInnerDiv.insertAdjacentElement('afterend', newSpanItem);"
+        existingInnerDiv.insertAdjacentElement("afterend", newSpanItem);
+        
+
+    } else if (i === 3) {
+
+        existingInnerDiv.appendChild(newSpanItem);
+        
+    }    
+
+}
+
+
+
+
+
 
 
 

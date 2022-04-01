@@ -1,0 +1,11 @@
+.list-item {
+    background-color: aqua;
+}
+.added-paragraph-elements {
+    background-color:burlywood;
+}
+.added-title-elements {
+    background-color: lightgray;
+    font-size: 20px;
+    font-weight: bold;
+}

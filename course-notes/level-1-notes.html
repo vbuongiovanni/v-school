@@ -2,6 +2,7 @@
 
 <html>
     <head>
+        <link href="level-1-notes.css" rel="stylesheet"/>
 
     </head>
     <body>
@@ -42,20 +43,45 @@
                     <li>Triggered manually</li>
                     <li>Creates a chain of history that allows one to go back to a specific commit</li>
                     <li>Intelligently combines changes from different source - asks specifically about conflicts</li>
-                    <br />
-                    <li><b>'git init'</b> - initializes new git repository</li>
-                    <li><b>'git status'</b> - shows status of project from perspective of git</li>
-                    <li><b>'git add file-name'</b> or 'git add -A' - staging files for commit - allows you to pick and choose what will be committed. Adding ' -A' stages all files</li>
-                    <li><b>'git commit -m "message"'</b> - commits staged files, note that -m "message" flag is required and should include brief description of what was changed</li>
-                    <li><b>'git log'</b> - shows log of previous commits</li>
-                    <li><b>'git remote add origin URL_TO_GITHUB'</b> - creates remote connection between local git and github</li>
+                    <li><span class="code">'git init'</span></li>
                     <ul>
-                        <li>Example using HTTPS (required periodic login): 'git remote add origin https://github.com/vbuongiovanni/vs-level-1.git'</li>
-                        <li>Example without SSH Key (required periodic login): 'git remote add origin git@github.com:vbuongiovanni/vs-level-1.git'</li>
+                        <li>Initializes new git repository in local directory</li>
                     </ul>
-                    <li><b>'git remote -v'</b> - shows details and permission of remote connection between local and Github. can be used to verify 'git remote add' worked</li>
-                    <li><b>'git push -u origin master'</b> - required for initial setup of repo, initializes git push command</li>
-                    <li><b>'git push'</b> - pushes commits to repository. In this case, Github</li>
+                    <li><span class="code">'git status'</span></li>
+                    <ul>
+                        <li>Shows status of project from perspective of git</li>
+                    </ul>
+                    <li><span class="code">'git add file-name'</span> or <span class="code">'git add -A'</span></li>
+                    <ul>
+                        <li>Staging files for commit - allows you to pick and choose what will be committed. Adding ' -A' stages all files</li>
+                    </ul>
+                    <li><span class="code">'git commit -m "meaningful message that describes changes here"'</span></li>
+                    <ul>
+                        <li>commits staged files, note that -m "message" flag is required and should include brief description of what was changed</li>
+                    </ul>
+                    <li><span class="code">'git log'</span></li>
+                    <ul>
+                        <li>shows log of previous commits</li>
+                    </ul>
+                    <li><span class="code">'git remote add origin URL_TO_GITHUB'</span></li>
+                    <ul>
+                        <li>Creates remote connection between local git folder and github</li>
+                        <li>Example using HTTPS (requires periodic login): 'git remote add origin https://github.com/vbuongiovanni/vs-level-1.git'</li>
+                        <li>Example without SSH Key (requires set up of key file, must be initialized locally, then copy-pasted to github): 'git remote add origin git@github.com:vbuongiovanni/vs-level-1.git'</li>
+                    </ul>
+                    <li><span class="code">'git remote -v'</span></li>
+                    <ul>
+                        <li>Shows details and permission of remote connection between local and Github. can be used to verify 'git remote add' worked</li>
+                    </ul>
+                    <li><span class="code">'git push -u origin master'</span></li>
+                    <ul>
+                        <li>Required for initial setup of repo, initializes git push command</li>
+                    </ul>
+                    <li><span class="code">'git push'</span></li>
+                    <ul>
+                        <li>Pushes commits to repository. In this case, Github</li>
+                    </ul>
+
 
                 </ul>
             <li>Github</li>
@@ -79,7 +105,7 @@
             </ol>
         </ul>
 
-    <h2>Naming Conventions</h2>
+    <h2>Naming Conventions and General on Syntax</h2>
         <ul>
             <li>JavaScript</li>
             <ul>
@@ -102,84 +128,115 @@
                 <li>lower case all html element, attributes, tags etc. One exception - the DOCTYPE at the start of the page </li>
                 <li>Names should be broken up with a dash</li>
             </ul>
+            <li>CSS Selector Syntax</li>
+            <ul>
+                <li>Basic Selectors</li>
+                <ul>
+                    <li>Select all HTML elements of a given tag: <span class="code">html.tag {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: div elements: <span class="code">div {background-color: white;}</span></li>
+                    </ul>
+                    <li>Select all elements with a given class: <span class="code">.html-class-name {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: select all elements with a class name of 'important-list-items': <span class="code">.important-list-items {background-color: white;}</span></li>
+                    </ul>
+                    <li>Select all elements with a given html ID: <span class="code">#html-id-name {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: select all elements (should only be one) with an ID name of 'earnings-input': <span class="code">#earnings-input {background-color: white;}</span></li>
+                    </ul>
+                </ul>
+                <li>Combining Selectors</li>
+                <ul>
+                    <li>Descendant Combinator - Select all X descendants of Y: <span class="code">Y X {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: this will select all li elements that exist within the ul elements: <span class="code">ul li {background-color: white;}</span></li>
+                    </ul>
+                    <li>Wildcare Descendant Combinator - Select all elements that are descendants of Y: <span class="code">Y * {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: this will select all elements that exist within the ul elements on the page: <span class="code">ul * {background-color: white;}</span></li>
+                    </ul>
+                    <li>Difference Combinator - Select only direct elements of X that are descendants of Y: <span class="code">Y > X {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: this will select all li elements that exist within the ul elements on the page (sub elements will be ignored): <span class="code">ul > li {background-color: white;}</span></li>
+                    </ul>
+                    <li>Adjacent Combinator - Selects element that is immediately preceded by former, or the first X with each Y: <span class="code">Y + X {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: this will select the first li element within each ul element on the page: <span class="code">ul + li {background-color: white;}</span></li>
+                    </ul>
+                    <li>Multi Selection - Selects all X and Y elements. Can be chained as long as needed: <span class="code">Y, X {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: this will select all ul and ol elements: <span class="code">ul, li {background-color: white;}</span></li>
+                    </ul>
+                    <li>Sibling Selector - Selects all X element, but only if it is immediately contained within a Y element. <span class="code">Y ~ X {background-color: white;}</span></li>
+                    <ul>
+                        <li>Example: this will select all p elements, but only if it is contained directly within a div element: <span class="code">div ~ p {background-color: white;}</span></li>
+                    </ul>
+                </ul>
+    
+            </ul>
         </ul>
 
     <h2>The Document Object Model (DOM)</h2>
         <ul>
-        <h3>Selecting Elements:</h3>
-
-            <li>Using HTML attributes, tags, or class names</li>
-
+        <h3>Selecting Elements</h3>
+            <li>Selecting A Single DOM Object</li>
             <ul>
-                <li>Selecting Single Item</li>
+                <li><span class="code">document.getElementByID("id-name-here")</span></li>
                 <ul>
-                    <li>Most common way is to use '.getElementByID("tag-name")' method</li>
-                    <li>single items from DOM</li>
+                    <li>Most common way to make single selection</li>
+                    <li>Ideal for single DOM Object, because the id-name should be, in theory, unique</li>
                     <li>If you attempt to call on a nonexistent element, 'null' will return</li>
                 </ul>
-                <li>Selecting Multiple Items</li>
+                <li><span class="code">document.querySelector("css-syntax-here")</span></li>
                 <ul>
-                    <li>Two most common ways are using either '.getElementsByClassName' or '.getElementsByTag' methods</li>
+                    <li>returns single element, regardless of how many instances exist (first match is returned)</li>
+                    <li>All css selection syntax applies - "#id-name", ".class-name", "html-tag", "html-tag.class-name", "ol#favorite-things > li"</li>
+                </ul>
+                <li>Selecting Multiple Items</li>
+            </ul>
+            <li>Selecting Multiple DOM Objects</li>
+            <ul>    
+                <li><span class="code">document.getElementsByTagName("html-tag"); document.getElementsByClassName("class-name"); document.getElementsByName("element-name"); </span></li>
+                <ul>
+                    <li>Two most common ways are using either '.getElementsByClassName' or '.getElementsByTagName' methods</li>
                     <li>Returns an HTMLCollection, which is effective just an array of single items from DOM</li>
                     <li>If you attempt to call one of these methods on a nonexistent element, an array of length 0 will return</li>
                 </ul>
-            </ul>
-            <li>Using CSS syntax (QuerySelectors)</li>
-            <ul>
-                <li>Selecting Single Item</li>
+                <li><span class="code">document.querySelectorAll("css-syntax-here")</span></li>
                 <ul>
-                    <li>'.querySelector("#id-name")' method</li>
-                    <li>returns single element, regardless of number of instances (first match is returned)</li>
-                </ul>
-                <li>Selecting Multiple Items</li>
-                <ul>
-                    <li>'.querySelectorAll("#id-name")' method</li>
                     <li>returns a NodeList object that consists of all elements that match the query</li>
+                    <li>All css selection syntax applies - "#id-name", ".class-name", "html-tag", "html-tag.class-name", "ol#favorite-things > li"</li>
                 </ul>
-                <li>HTML classes can be selected by using ".class-name" and IDs can be selected by using "#id-name" </li>
-                <li>Same CSS syntax applies - "ol#favorite-things > li" </li>
             </ul>
 
             
         <h3>Modifying HTML from JS</h3>
             
-            <li>Modifying Text</li>
+            <li>Modifying Text & Values</li>
+            <ul>
+                <li>Accessing and Modifying <b>content</b> that exists within the webpage:</li>
                 <ul>
                     <li>There are three primary properties that can be used to modify textual content:</li>
                     <ol>
-                        <li>innerHTML - can be a security risk, so usually best to avoid... but many examples use it, so don't be surprised when it comes up. </li>
+                        <li><span class="code">domObject.textContent</span></li>
                             <ul>
+                                <li>Best option for changing text of HTML element</li>
+                                <li> When used in console.log, the result will show VALUES of content, even if content is nested in child element.</li>
+                            </ul>
+                        <li><span class="code">domObject.innerHTML</span></li>
+                            <ul>
+                                <li>Can be a security risk, so usually best to avoid... but many examples use it, so don't be surprised when it comes up</li>
                                 <li>When used in console.log, the result will show raw HTML of DOM element</li>
                                 <li>Provides a string representation of HTML. However, that said, innerHTML can be used to add new elements to an existing page.</li>
+                                <li>Less efficient than .textContent, but not really noticeable unless it is a large scale process </li>
                             </ul>
-                        <li>innerText - can be computationally extensive </li>
-                        <li>textContent - **best option for changing text of HTML element**. When used in console.log, the result will show VALUES of content, even if content is nested in child element.</li>
+                        <li><span class="code">domObject.innerText</span></li>
+                            <ul>
+                                <li>can be computationally extensive</li>
+                            </ul>
                     </ol>
                 </ul>
-            <li>Modifying Styles</li>
-                <ul>
-                    <li>Method 1 - '.style' object</li>
-                        <ul>
-                            <li>Within any DOM object, there is a .style object that stores the CSS properties</li>
-                            <li>These properties can be changed in the .JS file via javascript. Note that you must follow the CSS parameter naming conventions</li>
-                            <li>The name of the properties  mirror the CSS names, with the exception that the names follow JS convention (camelCase) rather than HTMl/CSS ("-" seperated lower case)</li>
-                        </ul>
-                    <li>Method 2 - className & classList methods</li>
-                        <ul>
-                            <li>className (least preferred)</li>
-                            <ul>
-                                <li>Shows the name of the class(s), however all classes are shown in a single string and space separated</li>
-                                <li>The class(s) can be modified by changing the .className value of DOM Object:</li>
-                                <li>Note - it can be problematic to REMOVE elements, since it is all shown in a single string.</li>    
-                            </ul>
-                            <li>classList (preferred)</li>
-                            <ul>
-                                <li>provides a 'DOMTokenList' or an object with key-value pairs representing the class names. Additionally, the object comes with various methods that make modifications much easier:</li>
-                                <li>Comes with various methods to streamline adding, removing, and toggling classes</li>
-                            </ul>
-                        </ul>
-                </ul>
-            <li>Modifying Values</li>
+                <li>Accessing and Modifying <b>values</b> that exists within inputs fields:</li>
                 <ul>
                     <li>Contrary to HTML content text, input values are accessed via the 'value' property within the DOM object</li>
                         <ul>
@@ -187,16 +244,57 @@
                             <li>Just like virtually any other property, this can be redefined in JS</li>
                         </ul>
                 </ul>
+            </ul>
+
+            <li>Modifying Styles</li>
+                <ol>
+                    <li><span class="code">domObject.style</span></li>
+                    <ul>
+                        <li>Within any DOM object, there is a .style object that stores the CSS properties</li>
+                        <li>These properties can be changed in the .JS file via javascript. Note that you must follow the CSS parameter naming conventions</li>
+                        <li>The name of the properties  mirror the CSS names, with the exception that the names follow JS convention (camelCase) rather than HTMl/CSS ("-" seperated lower case)</li>
+                    </ul>
+                    <li><span class="code">domObject.className</span> and <span class="code">domObject.classList</span></li>
+                    <ul>
+                        <li><span class="code">domObject.className</span> (least preferred)</li>
+                        <ul>
+                            <li>Shows the name of the class(s), however all classes are shown in a single string and space separated</li>
+                            <li>The class(s) can be modified by changing the .className value of DOM Object:</li>
+                            <li>Note - it can be problematic to REMOVE elements, since it is all shown in a single string.</li>    
+                        </ul>
+                        <li><span class="code">domObject.classList</span> (preferred)</li>
+                        <ul>
+                            <li>provides a 'DOMTokenList' or an object with key-value pairs representing the class names</li>
+                            <li>Object comes with various methods that make modifications much easier.</li>
+                        </ul>
+                    </ul>
+                </ol>
             <li>Creating New Elements in JS</li>
-                <ul>
-                    <li>New elements can be added and modified via JS using the DOM. In general, there are 4 steps:</li>
-                        <ol>
-                            <li>Create and save new element - 'document.createElement("li")'</li>
-                            <li>Find immediate parent element (e.g., 'ul' tag would be used to add new 'li' element)</li>
-                            <li>Use either the .append(newElement) or .prepend(newElement) methods depending on where you want new element to be placed</li>
-                            <li>Change .textContent or .style properties as you would any other DOM object (note this can really happen at any time in the process)</li>
-                        </ol>
-                </ul>
+            <ul>
+                <li>New elements can be added and modified via JS using the DOM. In general, there are 4 steps:</li>
+                <ol>
+                    <li>Create and save new element - <span class="code">const newListItem = document.createElement("li")</span></li>
+                    <li>Find reference element - <span class="code">const existingListElement = document.getElementById("grocery-list")</span></li>
+                    <li>Place new element into DOM by using one of the many available methods:</li>
+                    <ul>
+                        <li><span class="code">existingListElement.append(newListItem)</span> : adds new element to <b>end</b> of existing descendants within existing element</li>
+                        <li><span class="code">existingListElement.appendChild(newListItem)</span> : adds new element to <b>end</b> of existing descendants within existing element. Only takes new element and not raw text, and returns a value equal to the new node.</li>
+                        <li><span class="code">existingListElement.prepend(newListItem)</span> : adds new element to <b>start</b> of existing descendants within existing element</li>
+                        <li><span class="code">existingListElement.before(newListItem)</span> : adds new element just <b>before</b> existing element</li>
+                        <li><span class="code">existingListElement.after(newListItem)</span> : adds new element just <b>after</b> existing element</li>
+                        <li><span class="code">existingListElement.insertBefore(newListItem, existingListItem)</span> : adds new element into descendants of existing element, but places new element immediately <b>before</b> the existingListItem parameter</li>
+                        <li><span class="code">existingListElement.insertAdjacentElement('position', newListItem)</span> : parameterized method of <span class="code">.append</span>,<span class="code">.prepend</span>,<span class="code">.before</span>,<span class="code">.after</span>:</li>
+                        <ul>
+                            <li><span class="code">.insertAdjacentElement('beforebegin', newListItem)</span> : adds new element before targetElement</li>
+                            <li><span class="code">.insertAdjacentElement('afterbegin', newListItem)</span> : adds new element inside targetElement in the first position</li>
+                            <li><span class="code">.insertAdjacentElement('beforeend', newListItem)</span>  : adds new element inside targetElement in the last position</li>
+                            <li><span class="code">.insertAdjacentElement('afterend', newListItem)</span> : adds new element after targetElement</li>
+                        </ul>
+
+                    </ul>
+                    <li>Change <span class="code">newListItem.textContent</span> or <span class="code">newListItem.style</span> properties as you would any other DOM object (<em>this final step can really happen any time after step 1</em>)</li>
+                </ol>
+            </ul>
         </ul>
 
 
