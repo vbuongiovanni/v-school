@@ -102,13 +102,14 @@
 
 // Using loops to create elements
 
-const powerRangers = [
+/* const powerRangers = [
     "Jason Lee Scott",
     "Kimberly Hart",
     "Zack Taylor",
     "Trini Kwan",
     "Billy Cranson"
-]
+] 
+*/
 
 const rangerList = document.getElementById("rangers");
 let newRangerListItem;
@@ -127,13 +128,35 @@ for (let element of powerRangers){
 
  */
 
-// using innerHTML
+/* // using innerHTML
 
 for (let element of powerRangers){
     
     rangerList.innerHTML += "<li>" + element + "</li>";
 
 
+} */
+
+// Challenge - do the same thing, but with an object that also contains the ranger's colors:
+
+const powerRangers = [
+    {name: "Jason Lee Scott", color: "Red"},
+    {name: "Kimberly Hart", color: "Pink"},
+    {name: "Zack Taylor", color: "Black"},
+    {name: "Trini Kwan", color: "Yellow"},
+    {name: "Billy Cranson", color: "Blue"},
+    {name: "Tommy Oliver", color: "Green"}
+]
+
+for (let element of powerRangers){
+    
+    newRangerListItem = document.createElement("li");
+
+    newRangerListItem.textContent = element.name + ", the " + element.color + " ranger!";
+
+    rangerList.append(newRangerListItem);
+
 }
+
 
 
