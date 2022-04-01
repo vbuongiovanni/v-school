@@ -104,38 +104,43 @@
         </ul>
         <h2>The Document Object Model (DOM)</h2>
         <ul>
-            <li>Selecting Elements:</li>
+            <h3>Selecting Elements:</h3>
+
+                <li>Using HTML attributes, tags, or class names</li>
+
                 <ul>
-                    <li>Using HTML attributes, tags, or class names</li>
+                    <li>Selecting Single Item</li>
                     <ul>
-                        <li>Selecting Single Item</li>
-                        <ul>
-                            <li>Most common way is to use '.getElementByID("tag-name")' method</li>
-                            <li>single items from DOM</li>
-                            <li>If you attempt to call on a nonexistent element, 'null' will return</li>
-                        </ul>
-                        <li>Selecting Multiple Items</li>
-                        <ul>
-                            <li>Two most common ways are using either '.getElementsByClassName' or '.getElementsByTag' methods</li>
-                            <li>Returns an HTMLCollection, which is effective just an array of single items from DOM</li>
-                            <li>If you attempt to call one of these methods on a nonexistent element, an array of length 0 will return</li>
-                        </ul>
+                        <li>Most common way is to use '.getElementByID("tag-name")' method</li>
+                        <li>single items from DOM</li>
+                        <li>If you attempt to call on a nonexistent element, 'null' will return</li>
                     </ul>
-                    <li>Using CSS syntax (QuerySelectors)</li>
+                    <li>Selecting Multiple Items</li>
                     <ul>
-                        <li>Selecting Single Item</li>
-                        <ul>
-                            <li>'.querySelector("#id-name")' method</li>
-                            <li>returns single element, regardless of number of instances (first match is returned)</li>
-                        </ul>
-                        <li>Selecting Multiple Items</li>
-                        <ul>
-                            <li>'.querySelectorAll("#id-name")' method</li>
-                            <li>returns a NodeList object that consists of all elements that match the query</li>
-                        </ul>
-                        <li>HTML classes can be selected by using ".class-name" and IDs can be selected by using "#id-name" </li>
-                        <li>Same CSS syntax applies - "ol#favorite-things > li" </li>
+                        <li>Two most common ways are using either '.getElementsByClassName' or '.getElementsByTag' methods</li>
+                        <li>Returns an HTMLCollection, which is effective just an array of single items from DOM</li>
+                        <li>If you attempt to call one of these methods on a nonexistent element, an array of length 0 will return</li>
                     </ul>
+                </ul>
+                <li>Using CSS syntax (QuerySelectors)</li>
+                <ul>
+                    <li>Selecting Single Item</li>
+                    <ul>
+                        <li>'.querySelector("#id-name")' method</li>
+                        <li>returns single element, regardless of number of instances (first match is returned)</li>
+                    </ul>
+                    <li>Selecting Multiple Items</li>
+                    <ul>
+                        <li>'.querySelectorAll("#id-name")' method</li>
+                        <li>returns a NodeList object that consists of all elements that match the query</li>
+                    </ul>
+                    <li>HTML classes can be selected by using ".class-name" and IDs can be selected by using "#id-name" </li>
+                    <li>Same CSS syntax applies - "ol#favorite-things > li" </li>
+                </ul>
+
+                
+            <h3>Modifying HTML from JS</h3>
+                
                 <li>Modifying Text</li>
                     <ul>
                         <li>There are three primary properties that can be used to modify textual content:</li>
@@ -147,18 +152,27 @@
                     </ul>
                 <li>Modifying Styles</li>
                     <ul>
-                        <li>There are three primary properties that can be used to modify textual content:</li>
-                        <ol>
-                            <li>innerHTML - can be a security risk, so usually best to avoid</li>
-                            <li>innerText - can be computationally extensive </li>
-                            <li>textContent - **best option for changing text of HTML element**</li>
-                        </ol>
+                        <li>Method 1 - '.style' object</li>
+                            <ul>
+                                <li>Within any DOM object, there is a .style object that stores the CSS properties</li>
+                                <li>These properties can be changed in the .JS file via javascript. Note that you must follow the CSS parameter naming conventions</li>
+                                <li>The name of the properties  mirror the CSS names, with the exception that the names follow JS convention (camelCase) rather than HTMl/CSS ("-" seperated lower case)</li>
+                            </ul>
+                        <li>Method 2 - className & classList methods</li>
+                            <ul>
+                                <li>className (least preferred)</li>
+                                <ul>
+                                    <li>Shows the name of the class(s), however all classes are shown in a single string and space separated</li>
+                                    <li>The class(s) can be modified by changing the .className value of DOM Object:</li>
+                                    <li>Note - it can be problematic to REMOVE elements, since it is all shown in a single string.</li>    
+                                </ul>
+                                <li>classList (preferred)</li>
+                                <ul>
+                                    <li>provides a 'DOMTokenList' or an object with key-value pairs representing the class names. Additionally, the object comes with various methods that make modifications much easier:</li>
+                                    <li>Comes with various methods to streamline adding, removing, and toggling classes</li>
+                                </ul>
+                            </ul>
                     </ul>
-
-
-            </ul>
-
-        </ul>
 
 
     </body>

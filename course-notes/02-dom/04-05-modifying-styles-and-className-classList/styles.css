@@ -1,0 +1,13 @@
+.title {
+    color:blue;
+    font-size: 30px;
+}
+.red-title {
+    color:red;
+}
+.green-title {
+    color:green;
+}
+.needs-border {
+    border: dashed purple 2px;
+}
