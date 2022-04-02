@@ -14,14 +14,11 @@ and have the box change to that color. Check out the key and keyCode property of
 const squareElement = document.getElementById("square");
 const windowElement = document.getElementById("window");
 
-
 // declare function to change color
 
 backgroundChange = function(newColor){
     squareElement.style.backgroundColor = newColor;
 }
-
-
 
 // create eventListeners
 
@@ -41,7 +38,6 @@ squareElement.addEventListener("dblclick" , function(){backgroundChange("green")
 windowElement.addEventListener("wheel" , function(){backgroundChange("orange")});
 
 // implementation of key control requirement:
-
 
 const keyColorTable = {
     b : "blue",

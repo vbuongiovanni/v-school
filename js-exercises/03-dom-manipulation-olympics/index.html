@@ -12,11 +12,13 @@
     <label>Theme</label>
     <select id="theme-drop-down">
         <option value="theme-one">blue/brown</option>
-        <option value="theme-two">red/black</option>
+        <option value="theme-two">red/grey</option>
+        <option value="theme-three">green/purple</option>
+        <option value="theme-four">gold/blue</option>
     </select>
     <div id="main">
         <button id='clear-button'>clear</button>
-        <div class="messages">
+        <div class="messages" id="message-board">
             <div class="message left">
                 I have something serious to talk about
             </div>
@@ -32,7 +34,7 @@
         </div>
         <form name="message">
             <input id="input" value="Thanks! Goodbye"/>
-            <button>Send</button>
+            <input id="send-input" type="button" value="Send"/>
         </form>
     </div>
    
