@@ -1,4 +1,4 @@
-'use-strict'
+'use strict'
 // Qualifier - add "JavaScript Made this!!" to header in large bold font
 // also add "[name] wrote the JavaScript" to sub-header
 
@@ -39,7 +39,7 @@ const awesomeDude = /simple farmer/;
 
 let textContent = "";
 
-for (message of messageElements) {
+for (let message of messageElements) {
     textContent = message.textContent.replace("police", "party patrol");
     textContent = textContent.replace("serious", "seriously awesome");
     textContent = textContent.replace("I don't want to talk", "Does it pertain to me? I am not sure if I want to talk about it...");
@@ -49,7 +49,7 @@ for (message of messageElements) {
 
 const clearButton = document.getElementById("clear-button");
 
-clearMessages = function(){
+function clearMessages(){
     messageDiv.innerHTML = "";
 }
 
@@ -64,15 +64,15 @@ let leftMessages = document.getElementsByClassName("left");
 let themeValue = document.getElementById("theme-drop-down");
 
 
-iterateLeftBackgroundChange = function(messages, newColor){
+function iterateLeftBackgroundChange(messages, newColor){
 
-    for (element of messages) {
+    for (let element of messages) {
         element.style.backgroundColor = newColor;
     }
 
 }
 
-updateTheme = function(){
+function updateTheme(){
     switch (themeValue.value) {
         case "theme-one": 
             iterateLeftBackgroundChange(rightMessages, "lightblue");    
@@ -96,22 +96,20 @@ updateTheme = function(){
 
 themeValue.addEventListener("change", updateTheme);
 
-
 /* 
 Gold - be able to add more messages.
+extra credit - alternate side of new messages
 */
 
 const inputValue = document.getElementById("input");
 const sendButton = document.getElementById("send-input");
-
-
 
 let existingMessages ;
 let existingMessageSide;
 let newMessageElement;
 let messageSide = "";
 
-sendInput = function(){
+function sendInput(){
     if (inputValue.value === ""){
         return "";
     }
@@ -135,10 +133,4 @@ sendInput = function(){
     inputValue.value = "";
 }
 
-
-
-
-
 sendButton.addEventListener("click", sendInput);
-
-

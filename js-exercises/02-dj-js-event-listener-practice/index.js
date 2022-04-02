@@ -1,4 +1,4 @@
-'use-strict'
+'use strict'
 
 /* 
 - Blue when the mouse hovers over the square
@@ -16,7 +16,7 @@ const windowElement = document.getElementById("window");
 
 // declare function to change color
 
-backgroundChange = function(newColor){
+function backgroundChange(newColor){
     squareElement.style.backgroundColor = newColor;
 }
 
@@ -47,7 +47,7 @@ const keyColorTable = {
     o : "orange"
 }
 
-backgroundKeyCommand = function(key){
+function backgroundKeyCommand(key){
     let requestedColor = keyColorTable[key.key];
     squareElement.style.backgroundColor = requestedColor;
 }

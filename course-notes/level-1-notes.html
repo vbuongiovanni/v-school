@@ -121,12 +121,83 @@
                     <li>Arrays should be given plural names</li>
                     <li>Objects should be given singular names</li>
                 </ul>
-                <li>Line comments should be used more often than block comments. Generally, you should reserved block comments for extensive documentation.</li>    
+                <li>Line comments should be used more often than block comments. Generally, you should reserved block comments for extensive documentation.</li> 
+                <li>Special Loops</li>
+                <ul>
+                    <li class="key-concept">'For-Of' Loop</li>
+                    <ul>
+                        <li>Can be used on any iterable object with an index, such as an array or string</li>
+                        <li>Elements are visited in sequential order</li>
+                        <li>Cannot be used on elements that don't have an ordinal index, such as an object</li>
+                        <li>Example:</span></li>
+                        <span class="code">const someIterable = [1, 2, 3, 4, 5];</span> <br />
+                        <span class="code">for (element of someIterable) {<br/>console.log(element)<br/>}</span>
+                        <p class="code-output">1</p>
+                        <p class="code-output">2</p>
+                        <p class="code-output">3</p>
+                        <p class="code-output">4</p>
+                        <p class="code-output">5</p>
+                        <li>Example: </li>
+                    </ul>
+                    <li class="key-concept">'For-In' Loop</li>
+                    <ul>
+                        <li>Iterates over <b>keys</b> in an object</li>
+                        <li>Effectively the same as 'for each' in Java</li>
+                        <li>Elements are visited in a nonsequential order based on implementation, so don't rely on a specific sequence.</li>
+                        <li>Prototype properties and standard keys are included in loop, however, certain other elements are not.</li>
+                        <li>Note that the 'For-In' loop can be used for arrays, but the resulting element is the index number:</li>
+                        <li>Examples - Objects:</span></li>
+                        <span class="code">const companyRoster = {EID1 : "Jack", EID2 : "Jill", EID3 : "Pete", EID4 : "Susan"}</span> <br />
+                        <span class="code">for (employee in companyRoster) {<br/>console.log(employee)<br/>}</span>
+                        <p class="code-output">EID1</p>
+                        <p class="code-output">EID2</p>
+                        <p class="code-output">EID3</p>
+                        <p class="code-output">EID4</p>
+                        <span class="code">for (employee in companyRoster) {<br/>console.log(companyRoster[employee])<br/>}</span>
+                        <p class="code-output">Jack</p>
+                        <p class="code-output">Jill</p>
+                        <p class="code-output">Pete</p>
+                        <p class="code-output">Susan</p>
+                        <li>Example - Arrays:</span></li>
+                        <span class="code">const someIterable = [1, 2, 3, 4, 5];</span> <br />
+                        <span class="code">for (element in someIterable) {<br/>console.log(element)<br/>}</span>
+                        <p class="code-output">0</p>
+                        <p class="code-output">1</p>
+                        <p class="code-output">2</p>
+                        <p class="code-output">3</p>
+                        <p class="code-output">4</p>
+                    </ul>
+                </ul>
+                <li class="key-concept">The ES6 Arrow Function</li>
+                <ul>
+                    <li>Best practice is to arrow functions in place of all standard anonymous functions, and most other standard functions.</li>
+                    <li>Basically, remove <span class="code">function</span> keyword and replace assignment operator with an arrow ("=>")</li>
+                    <li>If there is a single argument, the parentheses can be deleted</li>
+                    <li>If there is a single line with a return, the <span class="code">return</span> keyword can be deleted. This is known as an 'implicit return'</li>
+                    <li>Exmaples:</li>
+                    <ul>
+                        <li>Traditional Named Function:</li>
+                        <span class="code">function typicalNamedFunction(){return "Clicked!"}</span>
+                        <li>Named ES6 Arrow Function Equivalent, with implicit return:</li>
+                        <span class="code">let typicalNamedFunction = () => "Clicked!";</span>
+                        <li>Traditional Anonymous Function:</li>
+                        <span class="code">function(){return "Clicked!"}</span>
+                        <li>Anonymous ES6 Arrow Function Equivalent, with implicit return:</li>
+                        <span class="code">() => "Clicked!";</span>
+                        <li>Named ES6 Arrow Function with one argument:</li>
+                        <span class="code">let whoClicked = name => name + " clicked the element!";</span>
+                        <li>Named ES6 Arrow Function with two or more arguments:</li>
+                        <span class="code">let whoLikesClicking = (nameFirst, nameSecond) => nameFirst + " and " + nameSecond + " enjoy clicking elements!";</span>
+                        
+                    </ul>
+                    
+                </ul>
             </ul>
             <li>HTML</li>
             <ul>
                 <li>lower case all html element, attributes, tags etc. One exception - the DOCTYPE at the start of the page </li>
                 <li>Names should be broken up with a dash</li>
+
             </ul>
             <li>CSS Selector Syntax</li>
             <ul>
