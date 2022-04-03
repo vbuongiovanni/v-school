@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+
+    </head>
+
+    <body>
+
+        <h1>FORMS! Part 1 and 2</h1>
+
+        <!-- 
+            Convention - always put inputs in a <form> element:    
+            <forms> are often referenced by the 'name' attribute instead of the 'id' attributed.
+        -->
+        <form name="my-form">
+            <!-- 
+            <input>, which doesn't have a closing element, has many different types. Default is 'text'
+
+            notable attributes of the <input> element:
+                'placeholder="some string here"' : Shows sample text for use in input box. To the DOM this an empty string
+                'required' : when this keyword is present, the form will not submit unless the field has some text
+            -->
+
+            <span>First Name</span>
+            <input type="text" name="first-name" placeholder="first name" required/> <br />
+            <span>Last Name</span>
+            <input type="text" name="last-name" placeholder="last name" required/><br />
+            
+            <!-- 
+            number creates an input box that exclusively accepts numbers. Also... you can set a min, max, or step counter
+            -->
+            <span>Age</span>
+            <input type="number" name="age" min=0/><br />
+            
+            <!-- 
+            tel creates a textbox specific for phone numbers. by default, it is basically just a textbox, but it has additional properties that allow it to show phone numbers as a given format:
+            The pattern attribute enforces a specific format:
+            -->
+            <span>Phone Number</span>
+            <input type="tel" name="phone-number" placeholder="123-456-7890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value = "123-456-7890"/><br />
+
+            <!-- 
+            password creates a redacted textbox
+            -->
+            <span>New Password</span>
+            <input type="password" name="password"/><br />
+            
+            <!-- 
+            Regarding birth date: creates a calendar widget
+            -->
+            <span>Birth date</span>
+            <input type="date" name="birth-date"/><br />
+            
+            <!-- 
+            Regarding color: this creates a color selector widget on the page:
+            -->
+            <span>Favorite Color</span>
+            <input type="color" name="color"/><br />
+
+            <!-- 
+            Regarding Radio buttons: these often select 'either or' selections from the user. With that, you need to give all selections the same name attribute.
+            Additionally, you must tie a specific value to each radio button.
+            -->
+            <span>Gender</span> <br />
+            <span>Male</span>:<input type="radio" name="gender" value="male"/>
+            <span>Female</span>:<input type="radio" name="gender" value="female"/><br />
+
+            <!-- 
+            Regarding check boxes: similiar to radio buttons in all aspects, except that on the JS side you have to access the values of the 'food' checkboxes by using form.food (e.g., do NOT include the .value attribute)
+            the returned element is a 'RadioNodeList', which is an array of the selected values.
+            -->
+            <span>favorite foods</span> <br />
+            <span>ramen</span>:<input type="checkbox" name="food" value="ramen"/><br />
+            <span>tacos</span>:<input type="checkbox" name="food" value="tacos"/><br />
+            <span>pizza</span>:<input type="checkbox" name="food" value="pizza"/><br />
+            <span>pho</span>:<input type="checkbox" name="food" value="pho"/><br />
+
+            <!-- 
+            Select Options (drop-down menue): note that the drop down menu as a whole is referenced, but the values are specific to the options:
+            -->
+            <select name="city">
+                <option value="Paris">Paris</option>
+                <option value="New York">New York</option>
+                <option value="Chicago">Chicago</option>
+            </select>
+        
+
+
+
+            <!-- 
+            Note: <button> elements are preferred over <input type="button"/> because the latter doesn't recognize the user pressing the 'enter' key. 
+            -->
+            <button>Submit</button>
+
+        </form>
+
+
+        <script src="index.js"></script>
+    </body>
+</html>
