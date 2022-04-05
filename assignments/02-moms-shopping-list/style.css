@@ -2,10 +2,12 @@
     text-align: center;
 }
 
+
 .main {
     border: 1px solid black;
     width: 50%;
     margin: auto;
+    padding: 20px;
 }
 
 #add-item {
@@ -29,15 +31,14 @@
 #list {
     flex-direction: column;
     display: flex;
-}
-
-#list > li{
     list-style-type: none;
-    margin: 10px auto;
 }
 
 #list div {
     margin-bottom: 10px;
-    text-align: center;
-    display: inline-block;
+    display: inline-block;  
+}
+
+.shopping-button {
+    margin: 10px;
 }

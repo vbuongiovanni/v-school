@@ -1,6 +1,10 @@
 "use strict";
 
+// create js representation of Form:
+
 const form = document["add-item"];
+
+// initialize storage key, which will acts as prim key for localStorage
 
 let storageKey;
 
@@ -13,7 +17,7 @@ form.addEventListener("submit", e => {
 })
 
 // function to create new li (with <button> element), given a string name
-let createListItem = (itemName, storageKey) => {
+const createListItem = (itemName, storageKey) => {
     let listItem = document.createElement("li");
     let listItemName = document.createElement("div");
     listItemName.textContent = itemName;
@@ -24,6 +28,7 @@ let createListItem = (itemName, storageKey) => {
     })
     let editButton = document.createElement("button");
     editButton.textContent = "Edit";
+    editButton.setAttribute("class", "shopping-button");
     editButton.addEventListener("click", e => {
         editListItem(e)
     })
@@ -34,26 +39,15 @@ let createListItem = (itemName, storageKey) => {
 }
 
 // function to delete parent li (will be used by deleteButton)
-let deleteListItem = (e) => {
+const deleteListItem = (e) => {
     if(confirm("You are about to delete " + e.target.parentElement.childNodes[0].textContent)){
         delete localStorage[e.target.parentElement.attributes.id.nodeValue];
         e.target.parentElement.remove();
     }
 }
 
-// function to edit textContent using popup
-let editListItemPopup = (e) => {
-    let newItemName = "";
-    while (newItemName.length === 0) {
-        newItemName = prompt("New item name (entry cannot be blank):", e.target.parentElement.childNodes[0].textContent);
-    }
-    if (!(newItemName === null)){
-        e.target.parentElement.childNodes[0].textContent = newItemName;
-    }
-}
-
-// functions to edit textContent not using popup
-let editListItem = (e) => {
+// function to edit textContent, without using popup
+const editListItem = (e) => {
     let editInputField = document.createElement("input");
     let saveButton = document.createElement("button");
     saveButton.textContent = "Save";
@@ -68,8 +62,8 @@ let editListItem = (e) => {
     listNode.prepend(editInputField);
 }
 
-// functions to edit textContent not using popup
-let saveEdits = (e) => {
+// function to save/cancel changes
+const saveEdits = (e) => {
     let inputName = document.createElement("div");
     let editButton = document.createElement("button");
     editButton.textContent = "Edit";
@@ -84,13 +78,12 @@ let saveEdits = (e) => {
     }
 }
 
-// function to add field value to localStorage and increment storage key
-
+// function to add field value to localStorage, based on storageKey value
 const addEntryToStorage = (storageKey, itemName) => {
     localStorage[storageKey + ""] = itemName;
 }
 
-// function to get max storageKey value to initialize value for new sessions:
+// function to get next available storageKey value:
 const getStorageKey = (storageKey) =>  {
     for (let key in localStorage) {
         storageKey = key > storageKey ? parseInt(key) : storageKey;
@@ -114,7 +107,7 @@ const fillFromLocalStorage = () => {
 
 fillFromLocalStorage();
 
-// clear localStorage 
+// clear localStorage function
 
 const clearLocalStorage = () =>  {
     for (let key in localStorage) {
@@ -122,12 +115,11 @@ const clearLocalStorage = () =>  {
     }
 }
 
-let clearStorageButton = document.getElementById("clear-storage");
+// declare button object from DOM, then implement clearLocalStorage() function:
 
-clearStorageButton.addEventListener("click", ()=>{
+const clearStorageButton = document.getElementById("clear-storage");
+
+clearStorageButton.addEventListener("click", () => {
     clearLocalStorage();
     location.reload();
 })
-
-
-
