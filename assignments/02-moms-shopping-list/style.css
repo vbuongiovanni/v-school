@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+.sub {
+    border-bottom: .5px lightslategray dashed;
+}
+
 .main {
     border: 1px solid black;
     width: 50%;
@@ -41,3 +45,9 @@
 .edit-button {
     margin: 10px;
 }
+
+#clear-storage {
+    float: right;
+    margin-left:10px;
+}
+
