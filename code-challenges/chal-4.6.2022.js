@@ -21,7 +21,17 @@ const doubleChar = stringInput => {
     return output;
 }
 
+// better solution shown during meeting (not my work):
+function doubleCharBetter(string) {
+    // spread operator - ...string - converts string into array
+    return [...string].map(ch => ch + ch).join(""); 
+}
+
+
+
 // Testing:
+
+console.log(doubleChar("hello world"));
 
 let testCases = ["String", "Hello World!", "1234!_ "];
 let testCaseResults = ["SSttrriinngg", "HHeelllloo  WWoorrlldd!!", "11223344!!__  "];
