@@ -13,6 +13,7 @@ form.addEventListener("submit", e => {
     let newListItem = form["item-input"].value;
     storageKey = getStorageKey(0);
     createListItem(newListItem, storageKey);
+    console.log(newListItem);
     form["item-input"].value = "";
 })
 
@@ -28,7 +29,7 @@ const createListItem = (itemName, storageKey) => {
     })
     let editButton = document.createElement("button");
     editButton.textContent = "Edit";
-    editButton.setAttribute("class", "shopping-button");
+    editButton.setAttribute("class", "edit-button");
     editButton.addEventListener("click", e => {
         editListItem(e)
     })
@@ -51,6 +52,7 @@ const editListItem = (e) => {
     let editInputField = document.createElement("input");
     let saveButton = document.createElement("button");
     saveButton.textContent = "Save";
+    saveButton.setAttribute("class", "edit-button");
     saveButton.addEventListener("click", e => {
         saveEdits(e);
     })
@@ -67,6 +69,7 @@ const saveEdits = (e) => {
     let inputName = document.createElement("div");
     let editButton = document.createElement("button");
     editButton.textContent = "Edit";
+    editButton.setAttribute("class", "edit-button");
     let listNode = e.target.parentNode;
     let newItemName = e.target.parentElement.childNodes[0].value;
     if (!(newItemName === null) && newItemName.length > 0){

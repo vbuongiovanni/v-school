@@ -6,6 +6,7 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
 .code-output {
     font-family: monospace;
     background-color: slategray;
@@ -15,6 +16,20 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
+.code-input {
+    font-family: monospace;
+    background-color: slategray;
+    color: yellowgreen;
+    font-weight: bold;
+    margin-left: 25px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 .key-concept {
     font-weight: bold;
+}
+
+li {
+    margin-left: 25px;
 }

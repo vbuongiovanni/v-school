@@ -10,23 +10,23 @@
         <ul>
             <li><b>Polya's Process</b>: Method for solving problems developed by George Polya</li>
             <ol>
-                <li>Understand the Problem:  </li>
+                <li class="key-concept">Understand the Problem:  </li>
                     <ul>
                         <li>Re-read, research, or self-explain the problem until it is understood</li>
                         <li>Determine unknowns (facts or data) and knowns (available data)</li>
                         <li>Determine if available data is sufficient to solve unknowns</li>
                     </ul>
-                <li>Make a Plan: </li>
+                <li class="key-concept">Make a Plan: </li>
                     <ul>
                         <li>Consider if a similar problem has been previously addressed or if there is an existing framework</li>
                         <li>Break problem down into smaller pieces that can be solved independently (pseudo-code)</li>
                     </ul>
-                <li>Carry out the Plan:</li>
+                <li class="key-concept">Carry out the Plan:</li>
                     <ul>
                         <li>Execute plan by solving smaller pieces. Evaluate results against what was expected</li>
                         <li>Debug often to avoid catastrophic outcome when consolidating results.</li>
                     </ul>
-                <li>Looking back:</li>
+                <li class="key-concept">Looking back:</li>
                     <ul>
                         <li>If possible, check-fig or prove result is correct</li>
                         <li>Optimize and generalize the completed answer,</li>
@@ -107,7 +107,7 @@
 
     <h2>Naming Conventions and General on Syntax</h2>
         <ul>
-            <li>JavaScript</li>
+            <li class="key-concept">JavaScript</li>
             <ul>
                 <li>camelCase for all variable and function names. Exception - constructor functions</li>
                 <li>Use 4-spaces to ident code. 2-space is also common</li>
@@ -122,7 +122,102 @@
                     <li>Objects should be given singular names</li>
                 </ul>
                 <li>Line comments should be used more often than block comments. Generally, you should reserved block comments for extensive documentation.</li> 
-                <li>Special Loops</li>
+                <li>Special Datatype Method</li>
+                <ul>
+                    <li>Methods that are specific to every string - these are prebuilt functionality that are native to JS</li>
+                    <li class="key-concept">Array Methods</li>
+                        <ul>
+                            <li>Methods that modify the original array in place:</li>
+                            <ul>
+                                <li><span class="code">arrayVariable.push()</span>: <b>adds</b> new element to end of array. Returns the new length of the array.</li>
+                                <li><span class="code">arrayVariable.pop()</span>: 'pops-off' and element - it <b>removes</b> final element from end of array. Returns removed element</li>
+                                <li><span class="code">arrayVariable.unshift()</span>: <b>adds</b> new element to beginning of array.</li>
+                                <li><span class="code">arrayVariable.shift()</span>: <b>removes</b> first element from beginning of array.</li>
+                                <li><span class="code">arrayVariable.splice(startIndex, endIndex, "optionalElementToAddToArray", "otherElement", ..., "otherElementN")</span>: Allows you to 1.) cut out elements in array, and 2.) add new elements. Modifies array starting at startIndex (inclusive) and ending at endIndex (exclusive). When cutting out elements, the elements that are being removed are returned.</li>
+                            </ul>
+                            <li>Methods that do NOT modify the original array in place:</li>
+                            <ul>
+                                <li><span class="code">arrayVariable.concat(OtherArray)</span>: Combines two arrays into one - returns a new array</li>
+                                <li><span class="code">arrayVariable.indexOf("elementInArray")</span>: Returns index of matching argument. Returns -1 if element if there isn't a match.</li>
+                                <li><span class="code">arrayVariable.slice(startIndex, endIndex)</span>: Creates a new array starting at startIndex (inclusive) and ending at endIndex (exclusive). The second variable is optional - if left out, slice() will default to the final index + 1.</li>
+                                <li><span class="code">arrayVariable.join("optionalSeperator")</span>: Turns an array into a string by concatenating all elements. Argument is a string that will separate each element in the original array. Default is ","</li>
+                                <li><span class="code">arrayVariable.reverse()</span>: returns array in reverse order.</li>
+                            </ul>
+                            <li>Examples:</li>
+                            <ul>
+                                <span class="code">let arrOfFoods = ["pancakes", "egg", "ice cream", "pizza", "hamburger"];</span> <br />
+                                <span class="code">console.log(arrOfFoods);</span>
+                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <span class="code">arrOfFoods.push("tacos");</span>
+                                <p class="code-output">6</p>  
+                                <span class="code">console.log(arrOfFoods);</span>
+                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
+                                <span class="code">arrOfFoods.pop();</span>
+                                <p class="code-output">'tacos'</p>  
+                                <span class="code">console.log(arrOfFoods);</span>
+                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <span class="code">arrOfFoods.unshift("tacos");</span>
+                                <p class="code-output">6</p>  
+                                <span class="code">console.log(arrOfFoods);</span>
+                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
+                                <span class="code">arrOfFoods.shift();</span>
+                                <p class="code-output">'tacos'</p>  
+                                <span class="code">console.log(arrOfFoods);</span>
+                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <span class="code">let arrOfDrinks = ["coffee", "whiskey", "water", "beer"];</span> <br />
+                                <span class="code">const foodsAndDrinks = arrOfFoods.concat(arrOfDrinks);</span> <br />
+                                <span class="code">console.log(foodsAndDrinks);</span>
+                                <p class="code-output">['pancakes',  'egg', 'ice cream', 'pizza', 'hamburger', 'coffee', 'whiskey', 'water', 'beer']</p>  
+                                <span class="code">console.log(foodsAndDrinks.indexOf("pizza"));</span>
+                                <p class="code-output">3</p>  
+                                <span class="code">console.log(foodsAndDrinks.indexOf("milkshakes"));</span>
+                                <p class="code-output">-1</p>  
+                                <span class="code">console.log(foodsAndDrinks.slice(0, 3));</span>
+                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream' ]</p>  
+                                <span class="code">console.log("I like :" + foodsAndDrinks.join(", "));</span>
+                                <p class="code-output">I like :pancakes, egg, ice cream, pizza, hamburger, coffee, whiskey, water, beer</p>  
+                                <span class="code">console.log(arrOfFoods.reverse());</span>
+                                <p class="code-output">[ 'hamburger', 'pizza', 'ice cream', 'egg', 'pancakes' ]</p>  
+                                <span class="code">foodsAndDrinks.splice(0, 1, "steak", "potatoes");</span>
+                                <p class="code-output">['pancakes']</p>  
+                                <span class="code">console.log("Anytime Food & Drinks:" + foodsAndDrinks);</span>
+                                <p class="code-output">Anytime Food & Drinks:steak,potatoes,egg,ice cream,pizza,hamburger,coffee,whiskey,water,beer</p> 
+                            </ul>
+                            <li>For a comprehensive list, see https://www.w3schools.com/jsref/jsref_obj_array.asp</li>
+                        </ul>
+                    <li class="key-concept">String Methods</li>
+                        <ul>
+                            <li>Note that, generally, these do not change the original variable. Rather, they return a new value:</li>
+                            <ul>
+                                <li><span class="code">stringVariable.toUpperCase()</span> and <span class="code">stringVariable.toLowerCase()</span>: returns the string in either upper or lower case.</li>
+                                <li><span class="code">stringVariable.concat("string To Concat")</span>: returns the string with the argument concatenated on the back.</li>
+                                <li><span class="code">stringVariable.split("deliminatingString")</span>: returns an array that is seperated by the parameter. Note that the splitting character is removed.</li>
+                                <li><span class="code">stringVariable.slice(startIndex, endIndex)</span>: Cuts segment of string starting at startIndex (inclusive) and ending at endIndex (exclusive). The second variable is optional - if left out, slice() will default to the final index + 1.</li>
+                                <li><span class="code">stringVariable.index()</span>: used to see if, and where, a pattern is within a string. -1 indicates that the pattern was not located.</li>
+                            </ul>
+                            <li>Examples:</li>
+                            <ul>
+                                <span class="code">let employeeName = "John, Smith";</span> <br />
+                                <span class="code">let phoneNumber = "8091234567";</span> <br />
+                                <span class="code">employeeName.toUpperCase();</span>
+                                <p class="code-output">'JOHN, SMITH'</p>  
+                                <span class="code">employeeName.toLowerCase();</span> 
+                                <p class="code-output">'john, smith'</p>  
+                                <span class="code">employeeName.concat(" II");</span> 
+                                <p class="code-output">'John, Smith II'</p> 
+                                <span class="code">employeeName.split(",");</span>  
+                                <p class="code-output">[ 'John', ' Smith' ];</p>  
+                                <span class="code">phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6)</span>  
+                                <p class="code-output">'809-123-4567'</p>  
+                                <span class="code">employeeName.indexOf(" ");</span> 
+                                <p class="code-output">5</p> 
+                                <span class="code">employeeName.indexOf("z");</span> 
+                                <p class="code-output">-1</p> 
+                            </ul>
+                            <li>For a comprehensive list, see https://www.w3schools.com/jsref/jsref_obj_string.asp</li>
+                        </ul>
+                </ul>
+                <li class="key-concept">Special Loops</li>
                 <ul>
                     <li class="key-concept">'For-Of' Loop</li>
                     <ul>
@@ -193,15 +288,14 @@
                     
                 </ul>
             </ul>
-            <li>HTML</li>
+            <li class="key-concept">HTML</li>
             <ul>
                 <li>lower case all html element, attributes, tags etc. One exception - the DOCTYPE at the start of the page </li>
                 <li>Names should be broken up with a dash</li>
-
             </ul>
-            <li>CSS Selector Syntax</li>
+            <li class="key-concept">CSS Selector Syntax</li>
             <ul>
-                <li>Basic Selectors</li>
+                <li class="key-concept">Basic Selectors</li>
                 <ul>
                     <li>Select all HTML elements of a given tag: <span class="code">html.tag {background-color: white;}</span></li>
                     <ul>
@@ -216,7 +310,7 @@
                         <li>Example: select all elements (should only be one) with an ID name of 'earnings-input': <span class="code">#earnings-input {background-color: white;}</span></li>
                     </ul>
                 </ul>
-                <li>Combining Selectors</li>
+                <li class="key-concept">Combining Selectors</li>
                 <ul>
                     <li>Descendant Combinator - Select all X descendants of Y: <span class="code">Y X {background-color: white;}</span></li>
                     <ul>
@@ -263,7 +357,6 @@
                     <li>returns single element, regardless of how many instances exist (first match is returned)</li>
                     <li>All css selection syntax applies - "#id-name", ".class-name", "html-tag", "html-tag.class-name", "ol#favorite-things > li"</li>
                 </ul>
-                <li>Selecting Multiple Items</li>
             </ul>
             <li>Selecting Multiple DOM Objects</li>
             <ul>    
@@ -279,7 +372,6 @@
                     <li>All css selection syntax applies - "#id-name", ".class-name", "html-tag", "html-tag.class-name", "ol#favorite-things > li"</li>
                 </ul>
             </ul>
-
             
         <h3>Modifying HTML from JS</h3>
             
@@ -340,7 +432,8 @@
                         </ul>
                     </ul>
                 </ol>
-            <li>Creating New Elements in JS</li>
+
+        <h3>Creating New Elements in JS</h3>
             <ul>
                 <li>New elements can be added and modified via JS using the DOM. In general, there are 4 steps:</li>
                 <ol>
@@ -366,6 +459,142 @@
                     <li>Change <span class="code">newListItem.textContent</span> or <span class="code">newListItem.style</span> properties as you would any other DOM object (<em>this final step can really happen any time after step 1</em>)</li>
                 </ol>
             </ul>
+
+        <h3>Forms</h3>
+            <li>HTML form elements capture the typical form functionality, including inputs and buttons, with prebuilt interfaces. Forms, as well as child input elements, can be accessed directly from the DOM using either bracket or dot-notation.</li>
+            <li>All elements within a form are identified & referenced using the 'name' property. Additionally, it is a best practice to always form elements, such as inputs and buttons, in a containing form element.</li>
+            <ul>
+                <li><span class="code">document.userForm["first-name"].value</span></li>
+                <li><span class="code">document["userForm"].age.value</span></li>
+            </ul>
+
+            <li>Key Elements of interest</li>
+            <ul>
+                <li class="key-concept">input elements</li>
+                <ul>
+                    <li>Input Types (Not a comprehensive list):</li>
+                    <ul>
+                    <li><span class="code">type="text"</span> (default) </li>
+                    <ul>
+                        <li></li>
+                    </ul>
+                    <li><span class="code">type="number"</span></li>
+                    <ul>
+                        <li>Creates an numeric input box that exclusively accepts numbers.</li>
+                        <li>Can also min, max, and step counter.</li>
+                    </ul>
+                    <li><span class="code">type="tel"</span></li>
+                    <ul>
+                        <li>Practically, this is just a textbox but there are additional available nonstandard properties</li>
+                    </ul>
+                    <li><span class="code">type="password"</span></li>
+                    <ul>
+                        <li>Text input, with redacted values on the UI</li>
+                    </ul>
+                    <li><span class="code">type="date"</span></li>
+                    <ul>
+                        <li>Initializes a date selector HTML widget</li>
+                    </ul>
+                    <li><span class="code">type="color"</span></li>
+                    <ul>
+                        <li>Initializes a color selector HTML widget</li>
+                    </ul>
+                    <li><span class="code">type="radio"</span></li>
+                    <ul>
+                        <li>Used for 'either-or' selections, such as sex, martial status, etc.</li>
+                        <li>To implement, all possible options must be given the same <span class="code">name</span> property. Additionally, the values associated with each option are captured in the <span class="code">value</span> property.</li>
+                        <li> To access from the DOM, you can simply reference the <span class="code">document.formName.radioInputName.value</span> attribute.</li>
+                    </ul>
+                    <li><span class="code">type="checkbox"</span></li>
+                    <ul>
+                        <li>Used for multi-selection inputs, such as 'favorite foods' or 'desired vacation spots'</li>
+                        <li>To implement, all possible options must be given the same <span class="code">name</span> property. Additionally, the values associated with each option are captured in the <span class="code">value</span> property.</li>
+                        <li>To access from the DOM, you must navigate an 'RadioNodeList', where the <span class="code">.checked</span> property is a boolean showing whether or not the field is check, and .value shows the value itself.</li>
+                        <li>Example:</li>
+                        <ul>
+                            <span class="code">const myRadioNodeList = document.formName.checkboxInputName;</span> <br /> 
+                            <span class="code">for (let selection of myRadioNodeList) {</span> <br /> 
+                            <span class="code">&emsp;&emsp; if (selection.checked){</span> <br /> 
+                            <span class="code">&emsp; &emsp; &emsp; favoriteFoods += ", " + selection.value;</span> <br /> 
+                            <span class="code">&emsp; }</span> <br />
+                            <span class="code">}</span> <br />
+                                
+                        </ul>
+                        
+                    </ul>
+                    </ul>
+                </ul>
+                <li class="key-concept">select elements</li>
+                <ul>
+                    <li>Often used in conjunction with multiple <span class="code">option</span> elements to make a dropdown menu.</li>
+                    <li>To access from the DOM, you can simply reference the <span class="code">document.formName.selectName.value</span> attribute.</li>
+                </ul>
+                <li class="key-concept">button elements</li>
+                <ul>
+                    <li>Tethered to <span class="code">document.formName</span> by default using the "submit" event</li>
+                    <li>By default, the <span class="code">"submit"</span> event refreshed the page upon activation. This can be prevented by adding <span class="code">event.preventDefault();</span> to event's function.</li>
+                    <li>Not that a button can also be created by using type="button" within an input element. However, this creates other issues - for example, you can no longer submit the form by hitting the 'return' key. Thus, using button elements is preferred.</li>
+                </ul>
+            </ul>
+            <li>Other notable properties (also a comprehensive list):</li>
+            <ul>
+                <li><span class="code">required</span></li>
+                <ul>
+                    <li>Build in validation to require use to add some input before the form will be submitted.</li>
+                </ul>
+                <li><span class="code">placeholder="some text here"</span></li>
+                <ul>
+                    <li>Text that will appear by default, but does NOT count as an active string. 
+                        E.g., if 'placeholder' is used in conjunction with 'required', the user will need to add their own text for the form to be accepted</li>
+                </ul>
+                <li><span class="code">pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"</span></li>
+                <ul>
+                    <li>RegEx representation of required pattern of input</li>
+                    <li>Does not automatically put input in pattern form, rather the burden of matching the pattern is, by default, placed on the user.</li>
+                </ul>
+            </ul>
+        </ul>
+    <h2>Node.js</h2>
+        <ul>
+            <li>Intro</li>
+            <ul>
+                <li>In a nutshell, node.js allows JS to run the terminal enviroment, which creates an endless array of opprotunties</li>
+                <li>.JS files can be ran in CLI using <span class="code">node.js path/to/file/main.js</span></li>
+                <li>Limitations:</li>
+                <ul>
+                    <li>node does not access an HTML's DOM like a src=*.js script does.</li>
+                    <li>Can't add/modify/remove html elements in the same manner as the directly linked JS file</li>
+                    <li>Can't add/modify/remove html elements in the same manner as the directly linked JS file</li>
+                </ul>
+                <li>Capabilities - Node is built with existing APIs to perform many tasks that are required in a web server, including:</li>
+                <ul>
+                    <li> better ways to organize code in reusable pieces </li>
+                    <li> ways to deal with files </li>
+                    <li> ways to deal with databases </li>
+                    <li> ability to communicate over the internet </li>
+                    <li> ability to accept requests and send responses (in a consistent and standard way) </li>
+                    <li> way to deal with work that takes a long time (server side processing) </li>
+                </ul>
+            </ul>
+            <li>Node Package Manager (NPM)</li>
+            <li>NPM streamlines the process of leveraging third-party libraries.</li>
+            <ul>
+                <li>Initializing NPM and using third-party libraries</li>
+                <ol>
+                    <li>Navigate to project folder in terminal, then enter <span class="code">npm init -y</span></li>
+                    <ul>
+                        <li>This will create a <span class="code">package.json</span> file, which officially makes the project be a 'node module'. The JSON file contains meta information about the project, including what packages are used</li>
+                    </ul>
+                    <li>New packages can then be installed locally by running <span class="code">npm install [package-name]</span></li>
+                    <ul>
+                        <li>This will automatically add to the <span class="code">dependencies</span> section of the <span class="code">package.json</span></li>
+                        <li><a href="https://www.npmjs.com/">npmjs.com</a> is a website to find new libraries</li>
+                    </ul>
+                    <li>Finally, the add the new package to the .js enviroment, enter <span class="code">const somePackageThatSomeoneElseCreated = require("some-package-that-someone-else-created");</span></li>
+                </ol>
+            </ul>
+
+
         </ul>
 
 

@@ -2,7 +2,6 @@
     text-align: center;
 }
 
-
 .main {
     border: 1px solid black;
     width: 50%;
@@ -39,6 +38,6 @@
     display: inline-block;  
 }
 
-.shopping-button {
+.edit-button {
     margin: 10px;
 }
