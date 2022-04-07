@@ -133,7 +133,7 @@
                                 <li><span class="code">arrayVariable.pop()</span>: 'pops-off' and element - it <b>removes</b> final element from end of array. Returns removed element</li>
                                 <li><span class="code">arrayVariable.unshift()</span>: <b>adds</b> new element to beginning of array.</li>
                                 <li><span class="code">arrayVariable.shift()</span>: <b>removes</b> first element from beginning of array.</li>
-                                <li><span class="code">arrayVariable.splice(startIndex, endIndex, "optionalElementToAddToArray", "otherElement", ..., "otherElementN")</span>: Allows you to 1.) cut out elements in array, and 2.) add new elements. Modifies array starting at startIndex (inclusive) and ending at endIndex (exclusive). When cutting out elements, the elements that are being removed are returned.</li>
+                                <li><span class="code">arrayVariable.splice(startIndex, deleteCount, "optionalElementToAddToArray", "otherElement", ..., "otherElementN")</span>: Allows you to 1.) cut out elements in array and 2.) add new elements. Modifies array by removing <span class="code">deleteCount</span> number of elements from array, starting at <span class="code">startIndex</span>. The third variable is optional - if left out, no new elements will be added.</li>
                             </ul>
                             <li>Methods that do NOT modify the original array in place:</li>
                             <ul>
@@ -145,45 +145,55 @@
                             </ul>
                             <li>Examples:</li>
                             <ul>
-                                <span class="code">let arrOfFoods = ["pancakes", "egg", "ice cream", "pizza", "hamburger"];</span> <br />
-                                <span class="code">console.log(arrOfFoods);</span>
-                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
-                                <span class="code">arrOfFoods.push("tacos");</span>
-                                <p class="code-output">6</p>  
-                                <span class="code">console.log(arrOfFoods);</span>
-                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
-                                <span class="code">arrOfFoods.pop();</span>
-                                <p class="code-output">'tacos'</p>  
-                                <span class="code">console.log(arrOfFoods);</span>
-                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
-                                <span class="code">arrOfFoods.unshift("tacos");</span>
-                                <p class="code-output">6</p>  
-                                <span class="code">console.log(arrOfFoods);</span>
-                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
-                                <span class="code">arrOfFoods.shift();</span>
-                                <p class="code-output">'tacos'</p>  
-                                <span class="code">console.log(arrOfFoods);</span>
-                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
-                                <span class="code">let arrOfDrinks = ["coffee", "whiskey", "water", "beer"];</span> <br />
-                                <span class="code">const foodsAndDrinks = arrOfFoods.concat(arrOfDrinks);</span> <br />
-                                <span class="code">console.log(foodsAndDrinks);</span>
-                                <p class="code-output">['pancakes',  'egg', 'ice cream', 'pizza', 'hamburger', 'coffee', 'whiskey', 'water', 'beer']</p>  
-                                <span class="code">console.log(foodsAndDrinks.indexOf("pizza"));</span>
-                                <p class="code-output">3</p>  
-                                <span class="code">console.log(foodsAndDrinks.indexOf("milkshakes"));</span>
-                                <p class="code-output">-1</p>  
-                                <span class="code">console.log(foodsAndDrinks.slice(0, 3));</span>
-                                <p class="code-output">[ 'pancakes', 'egg', 'ice cream' ]</p>  
-                                <span class="code">console.log("I like :" + foodsAndDrinks.join(", "));</span>
-                                <p class="code-output">I like :pancakes, egg, ice cream, pizza, hamburger, coffee, whiskey, water, beer</p>  
-                                <span class="code">console.log(arrOfFoods.reverse());</span>
-                                <p class="code-output">[ 'hamburger', 'pizza', 'ice cream', 'egg', 'pancakes' ]</p>  
-                                <span class="code">foodsAndDrinks.splice(0, 1, "steak", "potatoes");</span>
-                                <p class="code-output">['pancakes']</p>  
-                                <span class="code">console.log("Anytime Food & Drinks:" + foodsAndDrinks);</span>
-                                <p class="code-output">Anytime Food & Drinks:steak,potatoes,egg,ice cream,pizza,hamburger,coffee,whiskey,water,beer</p> 
+                                <li class="key-concept">Set Up:</li>
+                                <p class="code input">let arrOfFoods = ["pancakes", "egg", "ice cream", "pizza", "hamburger"];</p>
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <li class="key-concept">push():</li>
+                                <p class="code input">arrOfFoods.push("tacos");</p>
+                                <p class="code output">6</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
+                                <li class="key-concept">pop():</li>
+                                <p class="code input">arrOfFoods.pop();</p>
+                                <p class="code output">'tacos'</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <li class="key-concept">Unshift():</li>
+                                <p class="code input">arrOfFoods.unshift("tacos");</p>
+                                <p class="code output">6</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
+                                <li class="key-concept">shift():</li>
+                                <p class="code input">arrOfFoods.shift();</p>
+                                <p class="code output">'tacos'</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <p class="code input">let arrOfDrinks = ["coffee", "whiskey", "water", "beer"];</p> 
+                                <p class="code input">const foodsAndDrinks = arrOfFoods.concat(arrOfDrinks);</p>
+                                <p class="code input">console.log(foodsAndDrinks);</p>
+                                <p class="code output">['pancakes',  'egg', 'ice cream', 'pizza', 'hamburger', 'coffee', 'whiskey', 'water', 'beer']</p>  
+                                <li class="key-concept">indexOf():</li>
+                                <p class="code input">console.log(foodsAndDrinks.indexOf("pizza"));</p>
+                                <p class="code output">3</p>  
+                                <p class="code input">console.log(foodsAndDrinks.indexOf("milkshakes"));</p>
+                                <p class="code output">-1</p>  
+                                <li class="key-concept">slice():</li>
+                                <p class="code input">console.log(foodsAndDrinks.slice(0, 3));</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream' ]</p>  
+                                <li class="key-concept">join():</li>
+                                <p class="code input">console.log("I like :" + foodsAndDrinks.join(", "));</p>
+                                <p class="code output">I like :pancakes, egg, ice cream, pizza, hamburger, coffee, whiskey, water, beer</p>  
+                                <li class="key-concept">reverse():</li>
+                                <p class="code input">console.log(arrOfFoods.reverse());</p>
+                                <p class="code output">[ 'hamburger', 'pizza', 'ice cream', 'egg', 'pancakes' ]</p>  
+                                <li class="key-concept">splice():</li>
+                                <p class="code input">foodsAndDrinks.splice(0, 1, "steak", "potatoes");</p>
+                                <p class="code output">['pancakes']</p>  
+                                <p class="code input">console.log("Anytime Food & Drinks:" + foodsAndDrinks);</p>
+                                <p class="code output">Anytime Food & Drinks:steak,potatoes,egg,ice cream,pizza,hamburger,coffee,whiskey,water,beer</p> 
                             </ul>
-                            <li>For a comprehensive list, see https://www.w3schools.com/jsref/jsref_obj_array.asp</li>
+                            <li>For a comprehensive list, see <a href="https://www.w3schools.com/jsref/jsref_obj_array.asp">W3 School Array Methods</a></li>
                         </ul>
                     <li class="key-concept">String Methods</li>
                         <ul>
@@ -197,24 +207,31 @@
                             </ul>
                             <li>Examples:</li>
                             <ul>
-                                <span class="code">let employeeName = "John, Smith";</span> <br />
-                                <span class="code">let phoneNumber = "8091234567";</span> <br />
-                                <span class="code">employeeName.toUpperCase();</span>
-                                <p class="code-output">'JOHN, SMITH'</p>  
-                                <span class="code">employeeName.toLowerCase();</span> 
-                                <p class="code-output">'john, smith'</p>  
-                                <span class="code">employeeName.concat(" II");</span> 
-                                <p class="code-output">'John, Smith II'</p> 
-                                <span class="code">employeeName.split(",");</span>  
-                                <p class="code-output">[ 'John', ' Smith' ];</p>  
-                                <span class="code">phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6)</span>  
-                                <p class="code-output">'809-123-4567'</p>  
-                                <span class="code">employeeName.indexOf(" ");</span> 
-                                <p class="code-output">5</p> 
-                                <span class="code">employeeName.indexOf("z");</span> 
-                                <p class="code-output">-1</p> 
+                                <li class="key-concept">Set up</li>
+                                <p class="code input">let employeeName = "John, Smith";</p> 
+                                <p class="code input">let phoneNumber = "8091234567";</p>
+                                <li class="key-concept">toUpperCase():</li>
+                                <p class="code input">employeeName.toUpperCase();</p>
+                                <p class="code output">'JOHN, SMITH'</p>  
+                                <li class="key-concept">toLowerCase():</li>
+                                <p class="code input">employeeName.toLowerCase();</p> 
+                                <p class="code output">'john, smith'</p>  
+                                <li class="key-concept">concat():</li>
+                                <p class="code input">employeeName.concat(" II");</p> 
+                                <p class="code output">'John, Smith II'</p> 
+                                <li class="key-concept">split():</li>
+                                <p class="code input">employeeName.split(",");</p>  
+                                <p class="code output">[ 'John', ' Smith' ];</p>  
+                                <li class="key-concept">slice():</li>
+                                <p class="code input">phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6)</p>  
+                                <p class="code output">'809-123-4567'</p>  
+                                <li class="key-concept">indexOf():</li>
+                                <p class="code input">employeeName.indexOf(" ");</p> 
+                                <p class="code output">5</p> 
+                                <p class="code input">employeeName.indexOf("z");</p> 
+                                <p class="code output">-1</p> 
                             </ul>
-                            <li>For a comprehensive list, see https://www.w3schools.com/jsref/jsref_obj_string.asp</li>
+                            <li>For a comprehensive list, see <a href="https://www.w3schools.com/jsref/jsref_obj_string.asp">W3 School String Methods</a></li>
                         </ul>
                 </ul>
                 <li class="key-concept">Special Loops</li>
@@ -224,14 +241,14 @@
                         <li>Can be used on any iterable object with an index, such as an array or string</li>
                         <li>Elements are visited in sequential order</li>
                         <li>Cannot be used on elements that don't have an ordinal index, such as an object</li>
-                        <li>Example:</span></li>
-                        <span class="code">const someIterable = [1, 2, 3, 4, 5];</span> <br />
-                        <span class="code">for (element of someIterable) {<br/>console.log(element)<br/>}</span>
-                        <p class="code-output">1</p>
-                        <p class="code-output">2</p>
-                        <p class="code-output">3</p>
-                        <p class="code-output">4</p>
-                        <p class="code-output">5</p>
+                        <li>Example:</li>
+                        <p class="code input">const someIterable = [1, 2, 3, 4, 5];</p> <br />
+                        <p class="code input">for (element of someIterable) {<br/>console.log(element)<br/>}</p>
+                        <p class="code output">1</p>
+                        <p class="code output">2</p>
+                        <p class="code output">3</p>
+                        <p class="code output">4</p>
+                        <p class="code output">5</p>
                         <li>Example: </li>
                     </ul>
                     <li class="key-concept">'For-In' Loop</li>
@@ -241,26 +258,26 @@
                         <li>Elements are visited in a nonsequential order based on implementation, so don't rely on a specific sequence.</li>
                         <li>Prototype properties and standard keys are included in loop, however, certain other elements are not.</li>
                         <li>Note that the 'For-In' loop can be used for arrays, but the resulting element is the index number:</li>
-                        <li>Examples - Objects:</span></li>
-                        <span class="code">const companyRoster = {EID1 : "Jack", EID2 : "Jill", EID3 : "Pete", EID4 : "Susan"}</span> <br />
-                        <span class="code">for (employee in companyRoster) {<br/>console.log(employee);<br/>}</span>
-                        <p class="code-output">EID1</p>
-                        <p class="code-output">EID2</p>
-                        <p class="code-output">EID3</p>
-                        <p class="code-output">EID4</p>
-                        <span class="code">for (employee in companyRoster) {<br/>console.log(companyRoster[employee]);<br/>}</span>
-                        <p class="code-output">Jack</p>
-                        <p class="code-output">Jill</p>
-                        <p class="code-output">Pete</p>
-                        <p class="code-output">Susan</p>
-                        <li>Example - Arrays:</span></li>
-                        <span class="code">const someIterable = [1, 2, 3, 4, 5];</span> <br />
-                        <span class="code">for (element in someIterable) {<br/>console.log(element);<br/>}</span>
-                        <p class="code-output">0</p>
-                        <p class="code-output">1</p>
-                        <p class="code-output">2</p>
-                        <p class="code-output">3</p>
-                        <p class="code-output">4</p>
+                        <li class="key-concept">Examples - Objects:</li>
+                        <p class="code input">const companyRoster = {EID1 : "Jack", EID2 : "Jill", EID3 : "Pete", EID4 : "Susan"}</p>
+                        <p class="code input">for (employee in companyRoster) {<br/>console.log(employee);<br/>}</p>
+                        <p class="code output">EID1</p>
+                        <p class="code output">EID2</p>
+                        <p class="code output">EID3</p>
+                        <p class="code output">EID4</p>
+                        <p class="code input">for (employee in companyRoster) {<br/>console.log(companyRoster[employee]);<br/>}</p>
+                        <p class="code output">Jack</p>
+                        <p class="code output">Jill</p>
+                        <p class="code output">Pete</p>
+                        <p class="code output">Susan</p>
+                        <li class="key-concept">Example - Arrays:</li>
+                        <p class="code input">const someIterable = [1, 2, 3, 4, 5];</p>
+                        <p class="code input">for (element in someIterable) {<br/>console.log(element);<br/>}</p>
+                        <p class="code output">0</p>
+                        <p class="code output">1</p>
+                        <p class="code output">2</p>
+                        <p class="code output">3</p>
+                        <p class="code output">4</p>
                     </ul>
                 </ul>
                 <li class="key-concept">The ES6 Arrow Function</li>

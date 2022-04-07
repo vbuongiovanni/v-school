@@ -3,27 +3,27 @@
     background-color: slategray;
     color: yellowgreen;
     font-weight: bold;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin: 0px;
 }
 
-.code-output {
+p.output {
     font-family: monospace;
     background-color: slategray;
     color: pink;
     font-weight: bold;
     margin-left: 25px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    padding: 5px;
 }
-.code-input {
+
+p.input {
     font-family: monospace;
     background-color: slategray;
-    color: yellowgreen;
     font-weight: bold;
     margin-left: 25px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+}
+
+.input::before {
+    content: "> ";
 }
 
 .key-concept {
@@ -32,4 +32,5 @@
 
 li {
     margin-left: 25px;
+    margin-top: 10px;
 }
