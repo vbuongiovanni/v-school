@@ -22,8 +22,18 @@ p.input {
     margin-left: 25px;
 }
 
+p.input-indent {
+    font-family: monospace;
+    background-color: slategray;
+    font-weight: bold;
+    margin-left: 25px;
+}
+
 .input::before {
     content: "> ";
+}
+.input-indent::before {
+    content: "... ";
 }
 
 .key-concept {
