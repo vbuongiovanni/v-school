@@ -381,30 +381,110 @@
                             <p class="code output">4</p>
                         </ul>
                     </ul>
-                <li class="key-concept">The ES6 Arrow Function</li>
+                <li class="key-concept">ES6 Syntax</li>
+                <ul>
+                    <li>JS is updated annually, but ES6 was a major update. ES6 was release in 2015.</li>
+                    <li class="key-concept">Bracket Scoping: From <span class="code">var</span> to <span class="code">const</span> and <span class="code">let</span></li>
                     <ul>
-                        <li>Best practice is to arrow functions in place of all standard anonymous functions, and most other standard functions.</li>
-                        <li>Basically, remove <span class="code">function</span> keyword and replace assignment operator with an arrow ("=>")</li>
-                        <li>If there is a single argument, the parentheses can be deleted</li>
-                        <li>If there is a single line with a return, the <span class="code">return</span> keyword can be deleted. This is known as an 'implicit return'</li>
-                        <li>Exmaples:</li>
+                        <li>ES6 Introducted 'Bracket' Scoping, which allowed variables to live within the nearest set of curly brackets:</li>
                         <ul>
-                            <li>Traditional Named Function:</li>
-                            <span class="code">function typicalNamedFunction(){return "Clicked!"}</span>
-                            <li>Named ES6 Arrow Function Equivalent, with implicit return:</li>
-                            <span class="code">let typicalNamedFunction = () => "Clicked!";</span>
-                            <li>Traditional Anonymous Function:</li>
-                            <span class="code">function(){return "Clicked!"}</span>
-                            <li>Anonymous ES6 Arrow Function Equivalent, with implicit return:</li>
-                            <span class="code">() => "Clicked!";</span>
-                            <li>Named ES6 Arrow Function with one argument:</li>
-                            <span class="code">let whoClicked = name => name + " clicked the element!";</span>
-                            <li>Named ES6 Arrow Function with two or more arguments:</li>
-                            <span class="code">let whoLikesClicking = (nameFirst, nameSecond) => nameFirst + " and " + nameSecond + " enjoy clicking elements!";</span>
+                            <li><span class="code">const</span> For 'constant' variables - cannot be overwritten (but CAN be updated if its an mutable object)</li>
+                            <li><span class="code">let</span> For all other variables - can be overwritten and updated.</li>
+                        </ul>
+                        <li>Before ES6, the only other scoping, aside from Global was Function scoping, where variables were scoped to the nearest function (or problem):</li>
+                        <ul>
+                            <li><span class="code">var</span> can be overwritten</li>
+                        </ul>
+                        <li>Bracket versus Function Scoping example:</li>
+                        <p class="code input">function scopingExample(){</p>
+                        <p class="code input-indent">if (true) {</p>
+                        <p class="code input-indent">let a = "i am defined by let within a function's if statement!";</p>    
+                        <p class="code input-indent">var b = "i am defined by var within a function's if statement!";</p>    
+                        <p class="code input-indent">}</p>                        
+                        <p class="code input-indent">typeof a == "undefined" ? console.log("a is undefined...") : console.log(a);</p>
+                        <p class="code input-indent">typeof b == "undefined" ? console.log("a is undefined...") : console.log(b);</p>
+                        <p class="code input">}</p>
+                        <p class="code input">scopingExample()</p>
+                        <p class="code output">a is undefined...</p>
+                        <p class="code output">i am defined by var within a function's if statement!</p>
+                    </ul>
+                    <li class="key-concept">Spread and Rest operators: <span class="code">...</span></li>
+                    <li>Same operator for both spread and rest</li>
+                    <li>Rest operator (practically speaking, the rest operator 'gathers' arguments)</li>
+                    <ul>
+                        <li>Combines arguments into a single array in function parameter</li>
+                        <li>Example:</li>
+                        <p class="code input">function() gatherNumbers(...nums){console.log(nums)}</p>
+                        <p class="code input">gatherNumbers(1, 235, 1245, 234);</p>
+                        <p class="code output">[ 1, 235, 1245, 234 ]</p>
+                    </ul>
+                    <li>Spread - Takes contents of an object or array, then copies contents</li>
+                    <ul>
+                        <li>Whenever <span class="code">...</span> appears outside of a function parameter, it is the Spread operator</li>
+                        <li>Directly copies array or object - since they are called by reference, this is a way to make an actual duplicate of an existing array or object.</li>
+                        <li>Example:</li>
+                        <p class="code input">const colors1 = ["red", "blue"];</p>
+                        <p class="code input">const colors2 = ["yellow", "green"];</p>
+                        <p class="code input">const allColors = [...colors1, ...colors2];</p>
+                        <p class="code input">console.log(allColors)</p>
+                        <p class="code output">[ 'red', 'blue', 'yellow', 'green' ]</p>
+                    </ul>
+                    <li><span class="code">import</span> and <span class="code">export</span></li>
+                    <ul>
+                        <li>Essentially, these are the equivalent to <span class="code">require()</span> and <span class="code">module.exports</span> used in node, however <span class="code">import</span> and <span class="code">export</span> are specific to native JS.</li>
+                    </ul>
+                    <li class="key-concept">The ES6 Fat Arrow Function</li>
+                        <ul>
+                            <li>Best practice is to arrow functions in place of all standard anonymous functions, and most other functions expressions.</li>
+                            <li>Basically, remove <span class="code">function</span> keyword and replace assignment operator with an arrow ("=>")</li>
+                            <li>If there is a single argument, the parentheses can be deleted</li>
+                            <li>If there is a single line with a return, the <span class="code">return</span> keyword can be deleted. This is known as an 'implicit return'</li>
+                            <li>Exmaples:</li>
+                            <ul>
+                                <li>Traditional Named Function:</li>
+                                <span class="code">function typicalNamedFunction(){return "Clicked!"}</span>
+                                <li>Named ES6 Arrow Function Equivalent, with implicit return:</li>
+                                <span class="code">let typicalNamedFunction = () => "Clicked!";</span>
+                                <li>Traditional Anonymous Function:</li>
+                                <span class="code">function(){return "Clicked!"}</span>
+                                <li>Anonymous ES6 Arrow Function Equivalent, with implicit return:</li>
+                                <span class="code">() => "Clicked!";</span>
+                                <li>Named ES6 Arrow Function with one argument:</li>
+                                <span class="code">let whoClicked = name => name + " clicked the element!";</span>
+                                <li>Named ES6 Arrow Function with two or more arguments:</li>
+                                <span class="code">let whoLikesClicking = (nameFirst, nameSecond) => nameFirst + " and " + nameSecond + " enjoy clicking elements!";</span>
+                                
+                            </ul>
                             
                         </ul>
-                        
-                    </ul>
+                    <li class="key-concept">Object Literals</li>
+                        <ul>
+                            <li>Object literals allow you to add elements to an object that have the same name for both the value and key by simply adding it within the curly brackets based on an existing variable (e.g., instead of <span class="code">Red : "Red"</span>, you can simply type <span class="code">Red</span></li>
+                        </ul>
+                    <li class="key-concept">Object Destructuring</li>
+                        <ul>
+                            <li>Mitigates the redundant calling of child nodes that are located deep within a nested object</li>
+                            <li>Object Destructuring syntax goes <span class="code">const {keyName1, keyName2, ..., keyNameN} = someObject</span></li>
+                            <li>Array Destructuring syntax goes <span class="code">const [element1, element2, ..., elementN] = someArray</span>. Note that for Array destructuring, you can name the elements whatever you want.</li>
+                            <li>Example</li>
+                            <p class="code input">const user =  {</p>
+                            <p class="code input-indent">userName: "petemiller1934", </p>
+                            <p class="code input-indent">age: 20, </p>
+                            <p class="code input-indent">_id: "asfasgfsjdhgjwgdsdf" </p>
+                            <p class="code input">}</p>
+                            <p class="code input">const {_id, userName, age} = user;</p>
+                            <p class="code input">console.log(_id)</p>
+                            <p class="code output">asfasgfsjdhgjwgdsdf</p>
+                            <p class="code input">console.log(userName)</p>
+                            <p class="code output">petemiller1934</p>
+                            <p class="code input">console.log(age)</p>
+                            <p class="code output">20</p>
+                        </ul>
+                    <li class="key-concept">Default parameters</li>
+                        <ul>
+                            <li>ES6 brought on default parameters... it works exactly like anybody would expect.</li>
+                        </ul>
+                </ul>
             </ul>
             <li class="key-concept">HTML</li>
             <ul>
