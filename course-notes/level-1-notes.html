@@ -493,46 +493,137 @@
             </ul>
             <li class="key-concept">CSS Selector Syntax</li>
             <ul>
+                <li class="key-concept">Box Model</li>
+                    <ul>
+                        <li>Elements of the Box Model</li>
+                        <ul>
+                            <li class="key-concept">Content</li>
+                            <ul>
+                                <li>Area where the text or content resides</li>
+                                <li>Determined by height and width</li>
+                                <li>If there aren't any elements (e.g., text, pictures, etc.), then height will equal 0</li>
+                            </ul>
+                            <li class="key-concept">Padding</li>
+                            <ul>
+                                <li>Blank space around content - inherents the same background color as content element</li>
+                                <li>Still considered to be part of the element itself. If padding is increased, the element's size will increase</li>
+                            </ul>
+                            <li class="key-concept">Border</li>
+                            <ul>
+                                <li>Akin to the plastic walls of someone wearing a bubble suit - it is the final boundary between the enclosed element and the outside world</li>
+                                <li>Note that even if border is '0px', if there is a linear border, it will count as a percent of the screen. You can override this by defining <span class="css-code">* {box-sizing: border-box;}</span> </li>
+                            </ul>
+                            <li class="key-concept">Margin</li>
+                            <ul>
+                                <li>Spacer between elements - not that increasing margin does NOT change the size of the object, just the empty space around the object</li>
+                            </ul>
+                        </ul>
+                        <li>Defining Properties - Shortcuts:</li>
+                        <ul>
+                            <li>Single Value: applies size to all sides - <span class="css-code">margin: 10px;</span></li>
+                            <li>Two Values: applies first value to Top and Bottom, and second value to Left and Right <span class="css-code">margin: 10px 20px;</span></li>
+                            <li>Three Values: applies first value to Top, second value to Bottom, and third value to both Left and Right <span class="css-code">margin: 10px 20px 30px;</span></li>
+                            <li>Four Values: defines Top, Right, Bottom, and Left <span class="css-code">margin: 10px 20px 30px 40px</span></li>
+                        </ul>
+                    </ul>
+                <li class="key-concept">Positioning</li>
+                    <ul>
+                        
+                        <li class="key-concept">static</li>
+                        <ul>
+                            <li>Default position of elements</li>
+                        </ul>
+                        <li>By defining these, we gain access to the top, bottom, left, and right properties</li>
+                        <li class="key-concept">Relative</li>
+                        <ul>
+                            <li>leaves elements where they fall naturally, unless they are then further specified by the top, bottom, left, and right properties</li>
+                        </ul>
+                        <li class="key-concept">Absolute</li>
+                        <ul>
+                            <li>positions element with respect to window.</li>
+                            <li>Other elements will push to fill in the place of the original element as if it doesn't exists</li>
+                        </ul>
+                        <li class="key-concept">Fixed</li>
+                        <ul>
+                            <li>Look exactly like absolute except that it will remain in the same place regardless of scrolling.</li>
+                            <li>This is how you create a sticky navbar or sticky header</li>
+                        </ul>
+                    </ul>
+                <li class="key-concept">Responsive Styling Design</li>
+                    <ul>
+                        <li>Intuition of responsive design is that the screen should be able to work on any sized screen.</li>
+                        <li>Design practice of <b>Mobile First</b>, which means that we design web apps for mobile-sized screens first, then design larger screens next.</li>
+                        <li>Responsive styling is originated by adding <span code="css-code">@media</span> to the beginning of a CSS statement</li>
+                        <li>Since some older browsers do not support dynamic styling, the <span code="css-code">only</span> keyword can be added after <span code="css-code">@media</span>. This will negate the responsive design, rather than breaking the styling sheet, if the browser doesn't support responsive design.</li>
+                        <li>The <b>media type</b> also be specified to apply styling to either <span class="css-code">print</span>, <span class="css-code">screen</span>, or <span class="css-code">all</span> (implied by default). The media type is defined immediately after the <span code="css-code">only</span></li>
+                        <li>Multiple conditions can be added with the <span code="css-code">and</span> operator </li>
+                        <li>Example:</li>
+                        <p class="css-code">@media only screen and (max-width: 599px) {</p>
+                        <p class="css-code css-level-1">div {</p>
+                        <p class="css-code css-level-2">background-color: green;</p>
+                        <p class="css-code css-level-1">}</p>
+                        <p class="css-code">}</p>
+                        <p class="css-code">@media only screen and (min-width: 600px) and (max-width: 649px) {</p>
+                        <p class="css-code css-level-1">div {</p>
+                        <p class="css-code css-level-2">background-color: firebrick;</p>
+                        <p class="css-code css-level-1">}</p>
+                        <p class="css-code">}</p>
+                        <p class="css-code">@media only screen and (min-width: 650px) and (max-width: 850px) {</p>
+                        <p class="css-code css-level-1">div {</p>
+                        <p class="css-code css-level-2">background-color: cornflowerblue;</p>
+                        <p class="css-code css-level-1">}</p>
+                        <p class="css-code">}</p>
+                        <p class="css-code">@media only screen and (min-width: 851px) {</p>
+                        <p class="css-code css-level-1">div {</p>
+                        <p class="css-code css-level-2">background-color: purple;</p>
+                        <p class="css-code css-level-1">}</p>
+                        <p class="css-code">}</p>
+                        <div id="responsive-design-box-dont-delete">
+                            <p></p>
+                        </div>
+
+                        
+                    </ul>
                 <li class="key-concept">Basic Selectors</li>
                 <ul>
-                    <li>Select all HTML elements of a given tag: <span class="code">html.tag {background-color: white;}</span></li>
+                    <li>Select all HTML elements of a given tag: <span class="css-code">html.tag {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: div elements: <span class="code">div {background-color: white;}</span></li>
+                        <li>Example: div elements: <span class="css-code">div {background-color: white;}</span></li>
                     </ul>
-                    <li>Select all elements with a given class: <span class="code">.html-class-name {background-color: white;}</span></li>
+                    <li>Select all elements with a given class: <span class="css-code">.html-class-name {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: select all elements with a class name of 'important-list-items': <span class="code">.important-list-items {background-color: white;}</span></li>
+                        <li>Example: select all elements with a class name of 'important-list-items': <span class="css-code">.important-list-items {background-color: white;}</span></li>
                     </ul>
-                    <li>Select all elements with a given html ID: <span class="code">#html-id-name {background-color: white;}</span></li>
+                    <li>Select all elements with a given html ID: <span class="css-code">#html-id-name {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: select all elements (should only be one) with an ID name of 'earnings-input': <span class="code">#earnings-input {background-color: white;}</span></li>
+                        <li>Example: select all elements (should only be one) with an ID name of 'earnings': <span class="css-code">#earnings-input {background-color: white;}</span></li>
                     </ul>
                 </ul>
                 <li class="key-concept">Combining Selectors</li>
                 <ul>
-                    <li>Descendant Combinator - Select all X descendants of Y: <span class="code">Y X {background-color: white;}</span></li>
+                    <li>Descendant Combinator - Select all X descendants of Y: <span class="css-code">Y X {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: this will select all li elements that exist within the ul elements: <span class="code">ul li {background-color: white;}</span></li>
+                        <li>Example: this will select all li elements that exist within the ul elements: <span class="css-code">ul li {background-color: white;}</span></li>
                     </ul>
-                    <li>Wildcare Descendant Combinator - Select all elements that are descendants of Y: <span class="code">Y * {background-color: white;}</span></li>
+                    <li>Wildcare Descendant Combinator - Select all elements that are descendants of Y: <span class="css-code">Y * {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: this will select all elements that exist within the ul elements on the page: <span class="code">ul * {background-color: white;}</span></li>
+                        <li>Example: this will select all elements that exist within the ul elements on the page: <span class="css-code">ul * {background-color: white;}</span></li>
                     </ul>
-                    <li>Difference Combinator - Select only direct elements of X that are descendants of Y: <span class="code">Y > X {background-color: white;}</span></li>
+                    <li>Difference Combinator - Select only direct elements of X that are descendants of Y: <span class="css-code">Y > X {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: this will select all li elements that exist within the ul elements on the page (sub elements will be ignored): <span class="code">ul > li {background-color: white;}</span></li>
+                        <li>Example: this will select all li elements that exist within the ul elements on the page (sub elements will be ignored): <span class="css-code">ul > li {background-color: white;}</span></li>
                     </ul>
-                    <li>Adjacent Combinator - Selects element that is immediately preceded by former, or the first X with each Y: <span class="code">Y + X {background-color: white;}</span></li>
+                    <li>Adjacent Combinator - Selects element that is immediately preceded by former, or the first X with each Y: <span class="css-code">Y + X {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: this will select the first li element within each ul element on the page: <span class="code">ul + li {background-color: white;}</span></li>
+                        <li>Example: this will select the first li element within each ul element on the page: <span class="css-code">ul + li {background-color: white;}</span></li>
                     </ul>
-                    <li>Multi Selection - Selects all X and Y elements. Can be chained as long as needed: <span class="code">Y, X {background-color: white;}</span></li>
+                    <li>Multi Selection - Selects all X and Y elements. Can be chained as long as needed: <span class="css-code">Y, X {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: this will select all ul and ol elements: <span class="code">ul, li {background-color: white;}</span></li>
+                        <li>Example: this will select all ul and ol elements: <span class="css-code">ul, li {background-color: white;}</span></li>
                     </ul>
-                    <li>Sibling Selector - Selects all X element, but only if it is immediately contained within a Y element. <span class="code">Y ~ X {background-color: white;}</span></li>
+                    <li>Sibling Selector - Selects all X element, but only if it is immediately contained within a Y element. <span class="css-code">Y ~ X {background-color: white;}</span></li>
                     <ul>
-                        <li>Example: this will select all p elements, but only if it is contained directly within a div element: <span class="code">div ~ p {background-color: white;}</span></li>
+                        <li>Example: this will select all p elements, but only if it is contained directly within a div element: <span class="css-code">div ~ p {background-color: white;}</span></li>
                     </ul>
                 </ul>
     

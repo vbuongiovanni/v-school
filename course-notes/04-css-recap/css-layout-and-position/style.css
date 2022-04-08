@@ -9,8 +9,7 @@ CSS positioning-  gives you access to the top, bottom, left, and right propertie
     static - default    
     relative - leaves elements where they fall naturally, unless they are then further specified (t, b, l, r)
     absolute - positions element with respect to window. Other elements will push to fill in its palce
-    fixed - Look exactly like absolute, except that it will remain in the same place regardless of scrolling.
-        Note that this is how you create a sticky navbar or sticky header
+    fixed - Look exactly like absolute, except that it will remain in the same place regardless of scrolling. (Note that this is how you create a sticky navbar or sticky header)
 */
 
 .coffee {
