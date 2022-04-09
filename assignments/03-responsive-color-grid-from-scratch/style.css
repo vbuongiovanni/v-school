@@ -1,33 +1,33 @@
-* {
-    box-sizing: border-box;
-}
 body {
     max-height: 500px;
     max-width: 1000px;
+}
+.row {
+    display: flex;
 }
 .box {
     height: 25%;
     min-height: 50px;
     display: inline-block;
+    margin: 2px;
 }
 .row1 .box {
     width: 100%;
     background-color: #F5C6D6;
 }
 .row2 .box {
-    /* width: calc(25% - .3%); */
     width: 25%;
     background-color: #EE2E84;
 }
 .row3 .box {
-    width: calc(50% - .2%);
+    width: 50%;
     background-color: #85CFD8;
 }
 .row4 .box1 {
-    width: calc(75% - .2%);
+    width: 75%;
     background-color: #8DC63F;
 }
 .row4 .box2 {
-    width: calc(25% - .2%); 
+    width: 25%; 
     background-color: #E76E34;
 }

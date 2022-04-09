@@ -1,0 +1,76 @@
+/*
+
+Similiar to flexbox, except that grid for placing the layout of major sections
+
+
+*/
+
+
+/*Step 1 - give general formatting/styling of main elements. do NOT define sizes...*/
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+
+/*
+Step 2 - define parent element: set display 'display: grid;' and define grid 'grid-template-nnn:' 
+By default, rows and columns will enlarge to accomodate the largest sized element
+*/
+
+#grid-container {
+    display: grid;
+    /* grid-template-columns: column-1-size column-2-size ... column-n-size;
+        grid-template-columns: 100px 100px 100px;    
+        // 'auto' will automatically grow to size needed to fill in page. this is the same as 1fr, or 1 fractional
+        grid-template-columns: 100px auto 100px;
+        // you can define all as [.001-inf]fr, which allows for proportional placement of elements
+        grid-template-columns: 1fr 1fr 1fr;
+    */
+    grid-template-columns: repeat(12, 1fr);
+}
+
+/*
+Step 3 - declare placement
+*/
+
+header {
+    font-size: 22px;
+    background-color: dodgerblue;
+    text-align: center;
+    
+    /*
+        how to assign elements to different grid positioning? using grid-column / grid-row declarations!
+        syntax is first-grid-LINE-number to final-grid-LINE-number.
+        since it is to grid-line, we will set the header to end on the fourth LINE
+        you can also use -1 to represent the final line:
+    */
+    grid-column: 1 / -1;
+}
+
+nav {
+    background-color: darkorchid;
+    grid-column: 6 / 13;
+}
+
+nav > div {
+    border: 1px solid black;
+    border-radius: 3px;
+    text-align: center;
+}
+
+main {
+    background-color: darkgreen;
+    grid-column: 1 / 6; /*span through 12 columns*/
+    grid-row: 2 / 3;
+
+}
+
+footer {
+    font-size: 20px;
+    background-color: darkslateblue;
+    text-align: center;
+    grid-column: 1   / -1; /*-1 represents the final line*/
+}
+

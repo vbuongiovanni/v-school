@@ -1,0 +1,36 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+
+/*together, these two changing will make the page very responsive:*/
+    /*number of columns: 'auto-fit' - creates new columns and rows as needed to fill in the screen without changing the size of the boxes:*/ 
+    /*size of columns: 'minmax(100px, 1fr)' - minimum and maximum size of columns, based on width.*/
+/*In essence, the containers will go, but only to the max set in minmax(), then break into a new page*/
+
+#grid-container {
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-rows: repeat(4, 100px);
+}
+
+/* Styling for the 12 divs */
+#grid-container > div {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+}
+
+#grid-container > div:nth-child(even){
+    background-color: dodgerblue;
+}
+
+#grid-container > div:nth-child(odd){
+    background-color: firebrick;
+}

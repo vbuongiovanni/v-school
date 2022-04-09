@@ -1,0 +1,66 @@
+/*
+for aligning/assembling items within a containing element
+    the container is a parent to all contained in it
+    the children would then inherent the the positioning
+    This makes arranging elements in a consistent manner a breeze.
+    great for alignment and placement of elements
+
+To make an element a flexbox, set display: flex;
+    /two axis - left/right (row) and up/down (column)
+*/
+
+#flex-container {
+    display: flex; /* turns element into flexbox, creates new tools, such as flex-direction, justify-content, and align-items*/
+    border: 1px solid black;    
+    height: 200px;
+    /*
+    #flex-direction: row (default):
+        - justify-content: left to right
+        - align-items: top to bottom
+    
+    #flex-direction: column
+        - justify-content: top to bottom
+        - align-items: left to right
+    */
+
+    /* flex-direction:
+    row (default): horizontal - justified left to right and aligned top to bottom
+    row-reverse: horizontal - justified right to left and aligned top to bottom
+    column: vertical - justified top to bottom and aligned left to right
+    column-reverse: vertical - justified bottom to top and aligned left to right
+    */
+    flex-direction:column;
+    
+    /* justify-content:
+    flex-start (default): pushes content to start of flexbox
+    flex-end: pushes content to end of flexbox
+    space-between: even space between the elements
+    space-evenly: even space between the sides of all elements, including those at the start and end 
+    */
+    justify-content: space-evenly; 
+
+    /* align-items:
+    flex-start : pushes content to start of flexbox
+    flex-end : pushes content to end of flexbox
+    baseline : default?
+    center : centers alignment with respect to non-directional axis (e.g., if 'flex-direction: row', then align-items would center vertically)
+    stretch : forces elements to fill in unused space (non-directional axis) 
+    */
+    align-items: stretch;
+
+    padding: 10px;
+    
+}
+
+#flex-container > div:nth-child(1) {
+    background-color: dodgerblue;
+    height: 30px;
+}
+#flex-container > div:nth-child(2) {
+    background-color: firebrick;
+    height: 30px;
+}
+#flex-container > div:nth-child(3) {
+    background-color: violet;
+    height: 30px;
+}
