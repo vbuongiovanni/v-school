@@ -1,0 +1,139 @@
+* {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: whitesmoke;
+    margin: 0px;
+}
+
+
+#page-content {
+    display: grid;
+}
+header, header *, footer, footer * {
+    background-color: #c6d3e9;
+    margin: 0px;
+}
+nav, nav * {
+    background-color:#246be2;
+}
+nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+nav a {
+    font-size: 15px;
+    padding: 1px;
+    color: whitesmoke;
+    font-weight:500;
+}
+nav a:hover {
+    font-size: 15px;
+    font-weight:900;
+    color: white;
+}
+
+
+main div {
+    margin: 10px;
+}
+main h2 {
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+ul li {
+    margin-top: 5px;
+}
+
+/*following the mobile-first principle - defining grid of mobile phone (screen widths of 375px through 667px, inclusive)*/
+@media only screen and (min-width: 375px) and (max-width: 667px) {    
+    #page-content {
+        grid-template-columns: 1 1fr;
+    }
+    header, nav, footer {
+        grid-column: 1 / -1;
+    }
+    main {
+        grid-row: 3/4;
+    }
+    header, header *, footer, footer * {
+        padding: 5px 1px;
+    }
+    #optional-image {
+        float: right;
+        width: 0px;
+    }
+}
+
+/*tablet layout, 668px through 1024px)*/
+@media only screen and (min-width: 668px) and (max-width: 1024px) {    
+    #page-content {
+        grid-template-columns: repeat(10, 1fr);
+    }
+    header, footer {
+        grid-column: 1 / -1;
+    }
+    header {
+        grid-row: 1 / 2;
+    }
+    footer {
+        grid-row: 3 / 4;
+    }
+    nav {
+        grid-column: 1 / 3;
+        flex-direction: column;
+        align-items: center;
+    }
+    main {
+        grid-column: 3 / -1;
+    }
+
+    nav, main {
+        grid-row: 2 / 3;
+    }
+    header, header *, footer, footer * {
+        padding: 10px 5px;
+    }
+    #optional-image {
+        float: right;
+        width: 250px;
+    }
+}
+
+/*laptop layout, 1025px and greater)*/
+@media only screen and (min-width: 1025px) {    
+    #page-content {
+        grid-template-columns: repeat(10, 1fr);
+    }
+    header, footer {
+        grid-column: 1 / -1;
+    }
+    header {
+        grid-row: 1 / 2;
+    }
+    footer {
+        grid-row: 3 / 4;
+    }
+    nav {
+        grid-column: 1 / 2;
+        flex-direction: column;
+        align-items: center;
+    }
+    main {
+        grid-column: 2 / -1;
+    }
+    nav, main {
+        grid-row: 2 / 3;
+    }
+    header, header *, footer, footer * {
+        padding: 10px 5px;
+    }
+    #optional-image {
+        float: right;
+        width: 500px;
+    }
+}
+
+
+
+
+
+
