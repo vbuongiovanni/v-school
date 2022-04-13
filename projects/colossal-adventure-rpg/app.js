@@ -82,14 +82,14 @@ const readlineSync = require("readline-sync");
 
     const level1Armor = new Item("Rusty Armor", "Armor", "Low");
     const level1Shield = new Item("Rusty Shield", "Shield", "Low");
-    const level1Shoes = new Item("Torn cloth shoes", "Shoes", "Low");
+    const level1Shoes = new Item("Torn Cloth Shoes", "Shoes", "Low");
     const level1Sword = new Item("Rusty Sword", "Sword", "Low");
 
     const lowLoot = [level1Armor, level1Shield, level1Shoes, level1Sword];
 
     const level2Armor = new Item("Iron Armor", "Armor", "Medium");
     const level2Shield = new Item("Iron Shield", "Shield", "Medium");
-    const level2Shoes = new Item("Cloth shoes", "Shoes", "Medium");
+    const level2Shoes = new Item("Cloth Shoes", "Shoes", "Medium");
     const level2Sword = new Item("Iron Sword", "Sword", "Medium");
 
     const mediumLoot = [level2Armor, level2Shield, level2Shoes, level2Sword];
@@ -148,7 +148,7 @@ const attack = function(attacker, opponent, returnResult = false){
     switch(attackQuality) {
         case "Low": 
             attackFactor = 1;
-            attackMin = 5;
+            attackMin = 10;
             attackMax = 25;
             break;
         case "Medium": 
@@ -196,15 +196,15 @@ const attack = function(attacker, opponent, returnResult = false){
     } 
 
     let attackValue = randomBetween(attackMin, attackMax);
-    attackValue = Math.round(attackValue * (attackFactor / defendFactor), 0);
+    attackValue = Math.round((attackValue * (attackFactor / defendFactor)));
 
     if (attacker.name === player.name) {
-        attackValue = attackValue * 2;
+        attackValue = attackValue * 1.5;
     } else {
-        attackValue = attackValue / 2;
+        attackValue = attackValue * .75;
     }
 
-    opponent.currentLifePoints = opponent.currentLifePoints - attackValue;
+    opponent.currentLifePoints = Math.round(opponent.currentLifePoints - attackValue);
     console.log(`${opponent.name} took a ${attackValue} point hit, leaving ${Math.max(0, opponent.currentLifePoints)} out of ${opponent.maxLifePoints}!`);
 
     if (opponent.currentLifePoints <= 0){
@@ -218,8 +218,6 @@ const attack = function(attacker, opponent, returnResult = false){
         return attackValue;
     }
 }
-
-
 
 // function will return 'false' if escaped or 'true' if escape failed. Also will produce applicable dialogue
     const run = function(attacker, opponent){
@@ -324,13 +322,20 @@ const attack = function(attacker, opponent, returnResult = false){
         let inInventory = true;
         let userInput;
         let selectedItem;
-        let itemNumber = 1;
+        let itemNumber;
         while(inInventory) {
+
+            if (player.inventory.length === 0) {
+                inInventory = false;
+                console.log("You don't have anything in your inventory!");
+                continue;
+            }
+
             console.log("\n**Inventory**")
             console.log("\nEnter a number to use an item, or enter 'e' to exit the inventory:")
-            
-            for (let item of player.inventory){
-                console.log(`[${itemNumber}]: ${item}`)
+            itemNumber = 1;
+            for (let i = 0; i < player.inventory.length; i++) {
+                console.log(`[${itemNumber}]: ${player.inventory[i]}`)
                 itemNumber++
             }
 
