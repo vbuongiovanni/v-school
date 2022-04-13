@@ -27,40 +27,40 @@ const readlineSync = require("readline-sync");
         // 1) that will add the enemy to a given array if it isAlive is true
         addIfAlive(enemies) {
             if(this.isAlive){
-                enemies.push(this)
+                enemies.push(this);
             }
         }
     }
 
     Enemy.prototype = EnemyPrototype;
 
-// initializing named enemies - defined as env objects since they can only be killed once:
+// Instantiation named enemies - defined as env objects since they can only be killed once:
 
-    const giant = new Enemy("The Giant", "Low", "Epic", "High", "Very High", "Medium", 750)
-    const madWizard = new Enemy("Mad Wizard", "High", "Medium", "High", "Very High", "High", 250)
-    const medusa = new Enemy("Medusa", "High", "High", "Very High", "High", "Very High", 500)
-    const death = new Enemy("Death", "Low", "High", "Very High", "Very High", "Very High", 750)
-    const hades = new Enemy("Hades", "Very High", "Epic", "Very High", "Very High", "Very High", 1000)
+    const giant = new Enemy("The Giant", "Low", "Epic", "High", "Very High", "Medium", 750);
+    const madWizard = new Enemy("Mad Wizard", "High", "Medium", "High", "Very High", "High", 250);
+    const medusa = new Enemy("Medusa", "High", "High", "Very High", "High", "Very High", 500);
+    const death = new Enemy("Death", "Low", "High", "Very High", "Very High", "Very High", 750);
+    const hades = new Enemy("Hades", "Very High", "Epic", "Very High", "Very High", "Very High", 1000);
 
-// creating functions to expedite generation of unnamed enemies
+// creating functions to expedite Instantiation of unnamed enemies
 
     const initializeUnnamedEnemy = function(enemyName) {
         let enemy;
         switch(enemyName){
             case "Street Thug":
-                enemy = new Enemy("Street Thug", "Low", "Low", "Medium", "Low", "Zero", 250)
+                enemy = new Enemy("Street Thug", "Low", "Low", "Medium", "Low", "Zero", 250);
                 break;
             case "Corrupt Guard":
-                enemy = new Enemy("Corrupt Guard", "Medium", "Low", "Medium", "Medium", "Zero", 400)
+                enemy = new Enemy("Corrupt Guard", "Medium", "Low", "Medium", "Medium", "Zero", 400);
                 break;
             case "Dragon":
-                enemy = new Enemy("Dragon", "High", "Low", "High", "Medium", "Low", 500)
+                enemy = new Enemy("Dragon", "High", "Low", "High", "Medium", "Low", 500);
                 break;
             case "Evil Minion":
-                enemy = new Enemy("Evil Minion", "Medium", "Medium", "High", "High", "Low", 500)
+                enemy = new Enemy("Evil Minion", "Medium", "Medium", "High", "High", "Low", 500);
                 break;
             case "Evil Ghoul":
-                enemy = new Enemy("Evil Ghoul", "Low", "Medium", "High", "High", "Low", 500)
+                enemy = new Enemy("Evil Ghoul", "Low", "Medium", "High", "High", "Low", 500);
                 break;
             default:
                 console.log("UNKNOWN INPUT GIVEN TO SWITCH STATEMENT, CHECK initializeUnnamedEnemy FUNCTION");
@@ -78,7 +78,7 @@ const readlineSync = require("readline-sync");
         return enemies;
     }
 
-// initializing non-consumable items:
+// Instantiation non-consumable items:
 
     const level1Armor = new Item("Rusty Armor", "Armor", "Low");
     const level1Shield = new Item("Rusty Shield", "Shield", "Low");
@@ -115,109 +115,107 @@ const readlineSync = require("readline-sync");
 
     const epicLoot = [epicArmor, epicShield, epicShoes, epicSword];
 
-// Initializing Env variables:
+// Instantiate/initialize Env variables:
 
     // player object
-
-    const player = {
-        name : "Player",
-        defend : level1Armor,
-        parry : level1Shield,
-        run : level1Shoes,
-        attack : level1Sword,
-        currentLifePoints : 1000,
-        maxLifePoints : 1000,
-        isAlive : true,
-        location: 0,
-        inventory : ["Small Health Potion", "Small Health Potion"]
-    }
+        const player = {
+            name : "Player",
+            defend : level1Armor,
+            parry : level1Shield,
+            run : level1Shoes,
+            attack : level1Sword,
+            currentLifePoints : 1000,
+            maxLifePoints : 1000,
+            isAlive : true,
+            location: 0,
+            inventory : ["Small Health Potion", "Small Health Potion"]
+        }
 
     // current location name
-
-    let locationName = "Town";
+        let locationName = "Town";
 
 // function will reduce opponent's currentLifePoints by computed amount and produce applicable dialogue.
-const attack = function(attacker, opponent, returnResult = false){
-    let attackQuality = attacker.attack.quality;
-    let defendQuality = opponent.defend.quality;
-    let attackMin = 0;
-    let attackMax = 0;
-    let attackFactor = 1;
-    let defendFactor = 1;
+    const attack = function(attacker, opponent, returnResult = false){
+        let attackQuality = attacker.attack.quality;
+        let defendQuality = opponent.defend.quality;
+        let attackMin = 0;
+        let attackMax = 0;
+        let attackFactor = 1;
+        let defendFactor = 1;
 
-    switch(attackQuality) {
-        case "Low": 
-            attackFactor = 1;
-            attackMin = 10;
-            attackMax = 25;
-            break;
-        case "Medium": 
-            attackFactor = 1.5;
-            attackMin = 15;
-            attackMax = 50;
-            break;
-        case "High": 
-            attackFactor = 2;
-            attackMin = 60;
-            attackMax = 100;
-            break;
-        case "Very High": 
-            attackFactor = 3;
-            attackMin = 90;
-            attackMax = 150;
-            break;
-        case "Epic": 
-            attackFactor = 4;
-            attackMin = 100;
-            attackMax = 250;
-            break;
-        default:
-            console.log(`UNKNOWN INPUT (${attackQuality}) IN SWITCH STATEMENT, CHECK attack FUNCTION`);
-    } 
+        switch(attackQuality) {
+            case "Low": 
+                attackFactor = 1;
+                attackMin = 10;
+                attackMax = 25;
+                break;
+            case "Medium": 
+                attackFactor = 1.5;
+                attackMin = 15;
+                attackMax = 50;
+                break;
+            case "High": 
+                attackFactor = 2;
+                attackMin = 60;
+                attackMax = 100;
+                break;
+            case "Very High": 
+                attackFactor = 3;
+                attackMin = 90;
+                attackMax = 150;
+                break;
+            case "Epic": 
+                attackFactor = 4;
+                attackMin = 100;
+                attackMax = 250;
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${attackQuality}) IN SWITCH STATEMENT, CHECK attack FUNCTION`);
+        } 
 
-    switch(defendQuality) {
-        case "Low": 
-            defendFactor = .5;
-            break;
-        case "Medium": 
-            defendFactor = 1.5;
-            break;
-        case "High": 
-            defendFactor = 2;
-            break;
-        case "Very High": 
-            defendFactor = 3;
-            break;
-        case "Epic": 
-            defendFactor = 4;
-            break;
-        default:
-            console.log(`UNKNOWN INPUT (${defendQuality}) IN SWITCH STATEMENT, CHECK attack FUNCTION`);
-    } 
+        switch(defendQuality) {
+            case "Low": 
+                defendFactor = .5;
+                break;
+            case "Medium": 
+                defendFactor = 1.5;
+                break;
+            case "High": 
+                defendFactor = 2;
+                break;
+            case "Very High": 
+                defendFactor = 3;
+                break;
+            case "Epic": 
+                defendFactor = 4;
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${defendQuality}) IN SWITCH STATEMENT, CHECK attack FUNCTION`);
+        } 
 
-    let attackValue = randomBetween(attackMin, attackMax);
-    attackValue = Math.round((attackValue * (attackFactor / defendFactor)));
+        let attackValue = randomBetween(attackMin, attackMax);
+        attackValue = Math.round((attackValue * (attackFactor / defendFactor)));
 
-    if (attacker.name === player.name) {
-        attackValue = attackValue * 1.5;
-    } else {
-        attackValue = attackValue * .75;
+        if (attacker.name === player.name) {
+            attackValue = attackValue * 1.5;
+        } else {
+            attackValue = attackValue * .75;
+        }
+
+        opponent.currentLifePoints = Math.round(opponent.currentLifePoints - attackValue);
+        console.log(`${opponent.name} took a ${attackValue} point hit, leaving ${Math.max(0, opponent.currentLifePoints)} out of ${opponent.maxLifePoints}!`);
+
+        if (opponent.currentLifePoints <= 0){
+            opponent.isAlive = false;
+            console.log(opponent.name + " is dead.")
+        }
+
+        // return result - for testing purposes only
+
+        if (returnResult === true) {
+            return attackValue;
+        }
     }
-
-    opponent.currentLifePoints = Math.round(opponent.currentLifePoints - attackValue);
-    console.log(`${opponent.name} took a ${attackValue} point hit, leaving ${Math.max(0, opponent.currentLifePoints)} out of ${opponent.maxLifePoints}!`);
-
-    if (opponent.currentLifePoints <= 0){
-        opponent.isAlive = false;
-        console.log(opponent.name + " is dead.")
-    }
-
-    // return result - for testing purposes only
-
-    if (returnResult === true) {
-        return attackValue;
-    }
-}
 
 // function will return 'false' if escaped or 'true' if escape failed. Also will produce applicable dialogue
     const run = function(attacker, opponent){
@@ -374,164 +372,163 @@ const attack = function(attacker, opponent, returnResult = false){
 
 // supporting function = will generate a random number between min and max. shouldFloor is an optional argument that will perform Math.floor before returning
 // TO DO - MOVE THIS FUNCTION TO BOTTOM, SHOULDN'T HURT ANYHTING
-function randomBetween(min, max, shouldFloor = false) {
-    let output = Math.random() *  ((max - min + 1) + min);
-    if (shouldFloor === true) {
-        return Math.floor(output);
-    } else {
-        return output;
+    function randomBetween(min, max, shouldFloor = false) {
+        let output = Math.random() *  ((max - min + 1) + min);
+        if (shouldFloor === true) {
+            return Math.floor(output);
+        } else {
+            return output;
+        }
     }
-}
 
 // Draw Loot Items - given a defeated opponent, this function will equip new items to player (assuming loot item is better than existing item)
-const retrieveLootItems = function(opponent){
+    const retrieveLootItems = function(opponent){
 
-    let standardLootRandNumber = Math.random();
-    let epicLootRandNumber = Math.random();
-    let getEpicLoot = false;
-    let awardedStandardLoot;
-    let awardedLoot = [];
+        let standardLootRandNumber = Math.random();
+        let epicLootRandNumber = Math.random();
+        let getEpicLoot = false;
+        let awardedStandardLoot;
+        let awardedLoot = [];
 
-    // draw Epic Loot outcome:
+        // draw Epic Loot outcome:
 
-    switch(opponent.lootEpicProb) {
-        case "Zero": 
-            getEpicLoot = false;
-            break;
-        case "Low": 
-            getEpicLoot = epicLootRandNumber >= .95 ? true : false;
-            break;
-        case "Medium": 
-            getEpicLoot = epicLootRandNumber >= .80 ? true : false;
-            break;
-        case "High": 
-            getEpicLoot = epicLootRandNumber >= .25 ? true : false;
-            break;
-        case "Very High": 
-            getEpicLoot = epicLootRandNumber >= .00 ? true : false;
-            break;
-        default:
-            console.log(`UNKNOWN INPUT (${opponent.lootEpicProb}) IN SWITCH STATEMENT, CHECK retrieveLootItems FUNCTION`);
-    } 
-
-    if (getEpicLoot === true & epicLoot.length > 0){
-        awardedLoot.push(epicLoot.splice(
-            randomBetween(0, (epicLoot.length - 1), true),
-            1
-        )[0]);
-    } 
-
-    // draw standard Loot outcome:
-
-    switch(opponent.lootStandardProb) {
-        case "Low": 
-            if (standardLootRandNumber >= .7) {
-                awardedStandardLoot = lowLoot.splice(
-                    randomBetween(0, (lowLoot.length - 1), true), 1
-                    )[0];
-                awardedLoot.push(awardedStandardLoot)
-            }
-
-            if (standardLootRandNumber >= .3) {
-                awardedStandardLoot = mediumLoot.splice(
-                    randomBetween(0, (mediumLoot.length - 1), true), 1
-                    )[0];
-                awardedLoot.push(awardedStandardLoot)
-            }
-            
-            break;
-        case "Medium": 
-            if (standardLootRandNumber >= .2) {
-                awardedStandardLoot = mediumLoot.splice(
-                    randomBetween(0, (mediumLoot.length - 1), true), 1
-                    )[0];
-                awardedLoot.push(awardedStandardLoot)
-            }
-            
-            break;
-        case "High": 
-            if(standardLootRandNumber >= .1) {
-                awardedStandardLoot = highLoot.splice(
-                    randomBetween(0, (highLoot.length - 1), true), 1
-                    )[0];
-                awardedLoot.push(awardedStandardLoot)
-            }
-            
-            break;
-        case "Very High": 
-            if(standardLootRandNumber >= .05) {
-                awardedStandardLoot = veryHighLoot.splice(
-                    randomBetween(0, (veryHighLoot.length - 1), true), 1
-                    )[0];
-                awardedLoot.push(awardedStandardLoot)
-            }
-            break;
-        default:
-            console.log(`UNKNOWN INPUT (${opponent.lootStandardProb}) IN SWITCH STATEMENT, CHECK retrieveLootItems FUNCTION`);
-
-    } 
-
-    if (awardedLoot.length === 0 | awardedLoot[0] === undefined) {
-        console.log(`\nYou dig through ${opponent.name}'s belongings, but there isn't anything of value.`)
-    } else {
-        console.log(`\nYou dig through ${opponent.name}'s belongings for loot and find:`)
-        
-        for (let item of awardedLoot){
-            if (item === undefined) {
-                continue;
-            } else {
-                if (item.quality === "Epic"){
-                    console.log(`${item.name}, ${item.type} of ${item.quality} quality!`);
-                } else {
-                    console.log(`A ${item.name} of ${item.quality} quality.`);
-                }
-                equipItem(item);
-            }
-        }
-    }
-
-}
-
-    // sub function of retrieveLootItems - will equip new items if they are of higher quality than what the player is currently using. Old equipment is discarded.
-
-    function equipItem(item){
-        let itemType = item.type;
-        let itemQuality = item.quality;
-        let itemClass;
-        let currentItem;
-        let currentQuality;
-
-        switch (itemType) {
-            case "Sword": 
-                itemClass = "attack";
+        switch(opponent.lootEpicProb) {
+            case "Zero": 
+                getEpicLoot = false;
                 break;
-            case "Shield": 
-                itemClass = "parry";
+            case "Low": 
+                getEpicLoot = epicLootRandNumber >= .95 ? true : false;
                 break;
-            case "Shoes": 
-                itemClass = "run";
+            case "Medium": 
+                getEpicLoot = epicLootRandNumber >= .80 ? true : false;
                 break;
-            case "Armor": 
-                itemClass = "defend";
+            case "High": 
+                getEpicLoot = epicLootRandNumber >= .25 ? true : false;
+                break;
+            case "Very High": 
+                getEpicLoot = epicLootRandNumber >= .00 ? true : false;
                 break;
             default:
-                console.log(`UNKNOWN INPUT (${itemType}) IN SWITCH STATEMENT, CHECK equipItem FUNCTION`);
-        }
-        currentItem = player[itemClass];
-        currentQuality = currentItem.quality;
+                console.log(`UNKNOWN INPUT (${opponent.lootEpicProb}) IN SWITCH STATEMENT, CHECK retrieveLootItems FUNCTION`);
+        } 
 
-        let isHigherQualityEpic = itemQuality === "Epic" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High" | currentQuality === "Very High");
-        let isHigherQualityVeryHigh = itemQuality === "Very High" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High");
-        let isHigherQualityHigh = itemQuality === "High" & (currentQuality === "Low" | currentQuality === "Medium"); 
-        let isHigherQualityMedium = itemQuality === "Medium" & (currentQuality === "Low");
+        if (getEpicLoot === true & epicLoot.length > 0){
+            awardedLoot.push(epicLoot.splice(
+                randomBetween(0, (epicLoot.length - 1), true),
+                1
+            )[0]);
+        } 
 
-        if (isHigherQualityEpic | isHigherQualityVeryHigh | isHigherQualityHigh | isHigherQualityMedium) {
-            player[itemClass] = item;
-            console.log(`${player.name} equipped the ${player[itemClass].name}! To reserve your energy, you discard your old ${currentItem.name}`)
+        // draw standard Loot outcome:
+
+        switch(opponent.lootStandardProb) {
+            case "Low": 
+                if (standardLootRandNumber >= .7) {
+                    awardedStandardLoot = lowLoot.splice(
+                        randomBetween(0, (lowLoot.length - 1), true), 1
+                        )[0];
+                    awardedLoot.push(awardedStandardLoot)
+                }
+
+                if (standardLootRandNumber >= .3) {
+                    awardedStandardLoot = mediumLoot.splice(
+                        randomBetween(0, (mediumLoot.length - 1), true), 1
+                        )[0];
+                    awardedLoot.push(awardedStandardLoot)
+                }
+                
+                break;
+            case "Medium": 
+                if (standardLootRandNumber >= .2) {
+                    awardedStandardLoot = mediumLoot.splice(
+                        randomBetween(0, (mediumLoot.length - 1), true), 1
+                        )[0];
+                    awardedLoot.push(awardedStandardLoot)
+                }
+                
+                break;
+            case "High": 
+                if(standardLootRandNumber >= .1) {
+                    awardedStandardLoot = highLoot.splice(
+                        randomBetween(0, (highLoot.length - 1), true), 1
+                        )[0];
+                    awardedLoot.push(awardedStandardLoot)
+                }
+                
+                break;
+            case "Very High": 
+                if(standardLootRandNumber >= .05) {
+                    awardedStandardLoot = veryHighLoot.splice(
+                        randomBetween(0, (veryHighLoot.length - 1), true), 1
+                        )[0];
+                    awardedLoot.push(awardedStandardLoot)
+                }
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${opponent.lootStandardProb}) IN SWITCH STATEMENT, CHECK retrieveLootItems FUNCTION`);
+
+        } 
+
+        if (awardedLoot.length === 0 | awardedLoot[0] === undefined) {
+            console.log(`\nYou dig through ${opponent.name}'s belongings, but there isn't anything of value.`)
         } else {
-            console.log(`${item.name} is of lesser quality than ${player[itemClass].name}. The item will not be equiped.`)
+            console.log(`\nYou dig through ${opponent.name}'s belongings for loot and find:`)
+            
+            for (let item of awardedLoot){
+                if (item === undefined) {
+                    continue;
+                } else {
+                    if (item.quality === "Epic"){
+                        console.log(`${item.name}, ${item.type} of ${item.quality} quality!`);
+                    } else {
+                        console.log(`A ${item.name} of ${item.quality} quality.`);
+                    }
+                    equipItem(item);
+                }
+            }
         }
+
     }
+
+        // sub function of retrieveLootItems - will equip new items if they are of higher quality than what the player is currently using. Old equipment is discarded.
+        function equipItem(item){
+            let itemType = item.type;
+            let itemQuality = item.quality;
+            let itemClass;
+            let currentItem;
+            let currentQuality;
+
+            switch (itemType) {
+                case "Sword": 
+                    itemClass = "attack";
+                    break;
+                case "Shield": 
+                    itemClass = "parry";
+                    break;
+                case "Shoes": 
+                    itemClass = "run";
+                    break;
+                case "Armor": 
+                    itemClass = "defend";
+                    break;
+                default:
+                    console.log(`UNKNOWN INPUT (${itemType}) IN SWITCH STATEMENT, CHECK equipItem FUNCTION`);
+            }
+            currentItem = player[itemClass];
+            currentQuality = currentItem.quality;
+
+            let isHigherQualityEpic = itemQuality === "Epic" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High" | currentQuality === "Very High");
+            let isHigherQualityVeryHigh = itemQuality === "Very High" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High");
+            let isHigherQualityHigh = itemQuality === "High" & (currentQuality === "Low" | currentQuality === "Medium"); 
+            let isHigherQualityMedium = itemQuality === "Medium" & (currentQuality === "Low");
+
+            if (isHigherQualityEpic | isHigherQualityVeryHigh | isHigherQualityHigh | isHigherQualityMedium) {
+                player[itemClass] = item;
+                console.log(`${player.name} equipped the ${player[itemClass].name}! To reserve your energy, you discard your old ${currentItem.name}`)
+            } else {
+                console.log(`${item.name} is of lesser quality than ${player[itemClass].name}. The item will not be equiped.`)
+            }
+        }
 
 // Draw consumable items (health potions) - given a defeated opponent, this function will add items to players inventory
     const retrieveConsumableItems = function(opponent){
@@ -598,9 +595,9 @@ const retrieveLootItems = function(opponent){
         console.log(`\nYou: '"Invaluable treasures" you say... Alright. I'm in.'`);
         console.log(`You: 'My name is ${player.name} - get to work on my monuments because I am going to defeat the evil, save the town, and get that treasure!`); 
         console.log(`\nTown Citizen: 'Excellent - bless you, ${player.name}! I will notify the monument team..... after you depart town...'`);
-        console.log("\nTown Citizen: 'You will need to travel from our humble town, through the forests, into the cave of despair. Vanquish Hades and his two friends - Death and Medusa. Ohhh and while you are at it, can you whack the Mad Wizard and The Giant?'");
+        console.log("\nTown Citizen: 'You will need to travel from our humble town, through the forests, into the cave of despair. Vanquish Hades and his two friends - Death and Medusa. Ohhh and while you are at it, whack the Mad Wizard and The Giant.'");
         console.log("\nYou: 'Sure, whatever. Your monument people use marble, right?'");
-        console.log("\nTown Citizen: 'Uhh..... yes...'");
+        console.log("\nTown Citizen: 'Uhh..... yes...?'");
     }
 
 // draw enemy function - based on player's location, will determine 1.) if an enemy is present and 2.) which enemy it is. 
@@ -815,27 +812,29 @@ const retrieveLootItems = function(opponent){
 
 // main function - startDialog() and orchestrates the battle() and walk() functions
 
-const launchGame = function(){
-    startDialog()
-    while (player.isAlive){
-        console.log("\n\nHow would you like to proceed?");
-        let userInput = readlineSync.question(`\nEnter an option:\nWalk: 'w'\nView Inventory: 'i'\nSee Info: 'p'\n`);
-        let command;
-        if (userInput === "Print") {
-            printInfo();
-        } else if (userInput === "i" | userInput === "p" | userInput === "w") {
-            command = nonBattleCommands[userInput];
-            command();
-        } else if (userInput === ".exit") {
-            break;
+    const launchGame = function(){
+        startDialog()
+        while (player.isAlive){
+            console.log("\n\nHow would you like to proceed?");
+            let userInput = readlineSync.question(`\nEnter an option:\nWalk: 'w'\nView Inventory: 'i'\nSee Info: 'p'\n`);
+            let command;
+            if (userInput === "Print") {
+                printInfo();
+            } else if (userInput === "i" | userInput === "p" | userInput === "w") {
+                command = nonBattleCommands[userInput];
+                command();
+            } else if (userInput === ".exit") {
+                break;
+            }
+        }
+
+        if (player.isAlive === false) {
+            console.log(`Our hero, ${player.name} has died.`);
         }
     }
 
-    if (player.isAlive === false) {
-        console.log(`Our hero, ${player.name} has died.`);
-    }
-}
 
+// launch game: 
 // player.currentLifePoints = Infinity;
 launchGame();
 
