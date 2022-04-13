@@ -1,9 +1,5 @@
-
-// to do:
-// walk function
-// a solid refactor, because some of this is prob. absolute mess
-    'use strict'
-    const readlineSync = require("readline-sync");
+'use strict'
+const readlineSync = require("readline-sync");
 
 // Constructors functions
 
@@ -46,14 +42,10 @@
     const death = new Enemy("Death", "Low", "High", "Very High", "Very High", "Very High", 750)
     const hades = new Enemy("Hades", "Very High", "Epic", "Very High", "Very High", "Very High", 1000)
 
-    
-
 // creating functions to expedite generation of unnamed enemies
 
     const initializeUnnamedEnemy = function(enemyName) {
-
         let enemy;
-
         switch(enemyName){
             case "Street Thug":
                 enemy = new Enemy("Street Thug", "Low", "Low", "Medium", "Low", "Zero", 250)
@@ -75,7 +67,6 @@
             }
         
         return enemy;
-
     }
 
     const repeatEnemyInitialization = function(enemyName, numberEnemies){
@@ -83,6 +74,7 @@
         for(let i = 0; i < numberEnemies; i++){
             enemies.push(initializeUnnamedEnemy(enemyName));
         }
+
         return enemies;
     }
 
@@ -146,7 +138,6 @@
 
 // function will reduce opponent's currentLifePoints by computed amount and produce applicable dialogue.
 const attack = function(attacker, opponent, returnResult = false){
-
     let attackQuality = attacker.attack.quality;
     let defendQuality = opponent.defend.quality;
     let attackMin = 0;
@@ -170,6 +161,11 @@ const attack = function(attacker, opponent, returnResult = false){
             attackMin = 60;
             attackMax = 100;
             break;
+        case "Very High": 
+            attackFactor = 3;
+            attackMin = 90;
+            attackMax = 150;
+            break;
         case "Epic": 
             attackFactor = 4;
             attackMin = 100;
@@ -189,13 +185,15 @@ const attack = function(attacker, opponent, returnResult = false){
         case "High": 
             defendFactor = 2;
             break;
+        case "Very High": 
+            defendFactor = 3;
+            break;
         case "Epic": 
             defendFactor = 4;
             break;
         default:
             console.log(`UNKNOWN INPUT (${defendQuality}) IN SWITCH STATEMENT, CHECK attack FUNCTION`);
     } 
-
 
     let attackValue = randomBetween(attackMin, attackMax);
     attackValue = Math.round(attackValue * (attackFactor / defendFactor), 0);
@@ -207,48 +205,48 @@ const attack = function(attacker, opponent, returnResult = false){
     }
 
     opponent.currentLifePoints = opponent.currentLifePoints - attackValue;
-    console.log(`${opponent.name} took a ${attackValue} point hit, leaving ${Math.max(0, opponent.currentLifePoints)} out of ${opponent.maxLifePoints} remaining!`);
+    console.log(`${opponent.name} took a ${attackValue} point hit, leaving ${Math.max(0, opponent.currentLifePoints)} out of ${opponent.maxLifePoints}!`);
 
     if (opponent.currentLifePoints <= 0){
-
         opponent.isAlive = false;
         console.log(opponent.name + " is dead.")
-
     }
 
     // return result - for testing purposes only
 
     if (returnResult === true) {
-
         return attackValue;
-
     }
 }
+
+
 
 // function will return 'false' if escaped or 'true' if escape failed. Also will produce applicable dialogue
     const run = function(attacker, opponent){
         let runQuality = attacker.run.quality;
         let randomProb = Math.random();
+
         switch(runQuality) {
             case "Low": 
                 randomProb = randomProb + .025;
                 break;
             case "Medium": 
-                randomProb = randomProb + .10;
-                break;
-            case "High": 
                 randomProb = randomProb + .05;
                 break;
+            case "High": 
+                randomProb = randomProb + .125;
+                break;
             case "Very High": 
-                randomProb = randomProb + .75;
+                randomProb = randomProb + .25;
+                break;
             case "Epic": 
-                randomProb = randomProb + 1;
+                randomProb = randomProb + .49;
                 break;
             default:
                 console.log(`UNKNOWN INPUT (${runQuality}) IN SWITCH STATEMENT, CHECK run FUNCTION`);
         } 
         
-        if (randomProb > .25) {
+        if (randomProb > .5) {
             console.log("That was close, but you managed to escape the battle.. However, " + opponent.name + " managed to get one last hit on you while fleeing...");
             return false;
         } else {
@@ -257,11 +255,10 @@ const attack = function(attacker, opponent, returnResult = false){
         }
     }
 
-
 // will either attack twice, if successful, or nothing.
     const parry = function(attacker, opponent, returnResult = false){
         let parryQuality = attacker.parry.quality;
-        let defendQuality = opponent.attack.quality;
+        let defendQuality = opponent.defend.quality;
         let parryFactor;
         let defendFactor;
 
@@ -273,10 +270,13 @@ const attack = function(attacker, opponent, returnResult = false){
                 parryFactor = 1.5;
                 break;
             case "High": 
-                parryFactor = 2;
+                parryFactor = 3;
+                break;
+            case "Very High": 
+                parryFactor = 6;
                 break;
             case "Epic": 
-                parryFactor = 4;
+                parryFactor = 9;
                 break;
             default:
                 console.log(`UNKNOWN INPUT (${parryQuality}) IN SWITCH STATEMENT, CHECK parry FUNCTION`);
@@ -284,13 +284,16 @@ const attack = function(attacker, opponent, returnResult = false){
 
         switch(defendQuality) {
             case "Low": 
-                defendFactor = .5;
-                break;
-            case "Medium": 
                 defendFactor = .75;
                 break;
+            case "Medium": 
+                defendFactor = 1;
+                break;
             case "High": 
-                defendFactor = 2;
+                defendFactor = 1.5;
+                break;
+            case "Very High": 
+                defendFactor = 1.75;
                 break;
             case "Epic": 
                 defendFactor = 2;
@@ -312,9 +315,7 @@ const attack = function(attacker, opponent, returnResult = false){
         // return result - for testing purposes only
 
         if (returnResult === true) {
-
             return randomProb > .5;
-
         }
     }
 
@@ -323,27 +324,25 @@ const attack = function(attacker, opponent, returnResult = false){
         let inInventory = true;
         let userInput;
         let selectedItem;
+        let itemNumber = 1;
         while(inInventory) {
             console.log("\n**Inventory**")
             console.log("\nEnter a number to use an item, or enter 'e' to exit the inventory:")
             
-            let itemNumber = 1;
             for (let item of player.inventory){
                 console.log(`[${itemNumber}]: ${item}`)
                 itemNumber++
             }
-            userInput = readlineSync.question(``);
 
+            userInput = readlineSync.question(``);
             if (userInput === "e") {
                 inInventory = false;
                 break
             }
 
             if (isFinite(userInput) & userInput > 0) {
-
                 selectedItem = player.inventory[parseInt(userInput) - 1];
                 player.inventory.splice(player.inventory.indexOf(selectedItem), 1);
-                
                 switch (selectedItem){
                     case "Small Health Potion":
                         player.currentLifePoints += 100;
@@ -360,9 +359,9 @@ const attack = function(attacker, opponent, returnResult = false){
                     default:
                         console.log(`UNKNOWN INPUT (${selectedItem}) IN SWITCH STATEMENT, CHECK inventory FUNCTION`);
                 }
-    
-                console.log(`${player.name}'s health is now ${player.currentLifePoints}.`)
 
+                player.currentLifePoints = Math.min(player.currentLifePoints, player.maxLifePoints);
+                console.log(`${player.name}'s health is now ${player.currentLifePoints}.`)
             }
 
         }
@@ -467,18 +466,22 @@ const retrieveLootItems = function(opponent){
 
     } 
 
-    if (awardedLoot.length === 0) {
+    if (awardedLoot.length === 0 | awardedLoot[0] === undefined) {
         console.log(`\nYou dig through ${opponent.name}'s belongings, but there isn't anything of value.`)
     } else {
         console.log(`\nYou dig through ${opponent.name}'s belongings for loot and find:`)
         
         for (let item of awardedLoot){
-            if (item.quality === "Epic"){
-                console.log(`${item.name}, ${item.type} of ${item.quality} quality!`);
+            if (item === undefined) {
+                continue;
             } else {
-                console.log(`A ${item.name} of ${item.quality} quality.`);
+                if (item.quality === "Epic"){
+                    console.log(`${item.name}, ${item.type} of ${item.quality} quality!`);
+                } else {
+                    console.log(`A ${item.name} of ${item.quality} quality.`);
+                }
+                equipItem(item);
             }
-            equipItem(item);
         }
     }
 
@@ -586,13 +589,13 @@ const retrieveLootItems = function(opponent){
         console.log("Town Citizen: 'Ohh traveler, You must be lost - nobody in their right mind would come to these parts... Our lands are plagued by an unholy evil.'");
         console.log("\nYou: 'Have you ever considered just moving away? I heard Fiji is nice this time of the year.'");
         console.log("\nTown Citizen: 'We could... but I have another idea - what if you vanquish the evil? If you are victorious, there will sure be invaluable treasures, fame, and notoriety. What is it you said your name was again?'");
-        player.name = readlineSync.question("Enter Your Name:");
+        player.name = readlineSync.question("Enter Your Name:\n");
         console.log(`\nYou: '"Invaluable treasures" you say... Alright. I'm in.'`);
-        console.log(`You: 'My name is ${player.name} - start working on my monuments because I will save defeat the evil and save the town!`); 
-        console.log(`\nTown Citizen: 'Excellent - bless you, ${player.name}! I will notify the monument team..... after you depart town?'`);
-        console.log("\nTown Citizen: 'You will need to travel from town, through the forests, into the cave of despair. Vanquish Hades, his two friends Death and Medusa. Ohhh and while you are at it, can you whack the Mad Wizard and The Giant?'");
+        console.log(`You: 'My name is ${player.name} - get to work on my monuments because I am going to defeat the evil, save the town, and get that treasure!`); 
+        console.log(`\nTown Citizen: 'Excellent - bless you, ${player.name}! I will notify the monument team..... after you depart town...'`);
+        console.log("\nTown Citizen: 'You will need to travel from our humble town, through the forests, into the cave of despair. Vanquish Hades and his two friends - Death and Medusa. Ohhh and while you are at it, can you whack the Mad Wizard and The Giant?'");
         console.log("\nYou: 'Sure, whatever. Your monument people use marble, right?'");
-        console.log("\nTown Citizen: 'Uhh..... Yeah... sure?'");
+        console.log("\nTown Citizen: 'Uhh..... yes...'");
     }
 
 // draw enemy function - based on player's location, will determine 1.) if an enemy is present and 2.) which enemy it is. 
@@ -805,6 +808,8 @@ const retrieveLootItems = function(opponent){
         }
     }
 
+// main function - startDialog() and orchestrates the battle() and walk() functions
+
 const launchGame = function(){
     startDialog()
     while (player.isAlive){
@@ -824,81 +829,121 @@ const launchGame = function(){
     if (player.isAlive === false) {
         console.log(`Our hero, ${player.name} has died.`);
     }
-    
 }
 
 // player.currentLifePoints = Infinity;
 launchGame();
 
 
+
+
+
+
+
+/*  
+// testing:
+// testing:
 // testing:
 
-// launchGame();
+    player.name = "A REAL NAME"
+    player.currentLifePoints = Infinity;
 
-// const allEnemies = [hades, death, medusa, giant, madWizard,
-//     initializeUnnamedEnemy("Street Thug"),
-//     initializeUnnamedEnemy("Corrupt Guard"),
-//     initializeUnnamedEnemy("Dragon"),
-//     initializeUnnamedEnemy("Evil Minion"),
-//     initializeUnnamedEnemy("Evil Ghoul"),
-// ];
+    const allEnemies = [hades, death, medusa, giant, madWizard,
+        initializeUnnamedEnemy("Street Thug"),
+        initializeUnnamedEnemy("Corrupt Guard"),
+        initializeUnnamedEnemy("Dragon"),
+        initializeUnnamedEnemy("Evil Minion"),
+        initializeUnnamedEnemy("Evil Ghoul"),
+    ];
 
-// const allItems = lowLoot.concat(mediumLoot).concat(highLoot).concat(veryHighLoot).concat(epicLoot)
+    const allItems = lowLoot.concat(mediumLoot).concat(highLoot).concat(veryHighLoot).concat(epicLoot)
+    const shoes = [level1Shoes, level2Shoes, level3Shoes, level4Shoes, epicShoes];
+    const shields = [level1Shield, level2Shield, level3Shield, level4Shield, epicShield];
 
+// confirm that all enemy loot settings are valid:
 
-// // confirm that all enemy loot settings are valid:
-// for (let enemy of allEnemies) {
-//     retrieveLootItems(enemy);
-//     retrieveConsumableItems(enemy);
-// }
-
-// player.name = "A REAL NAME"
-// player.currentLifePoints = Infinity;
+    for (let i = 0; i < 100; i++){
+        for (let enemy of allEnemies) {
+            retrieveLootItems(enemy);
+            retrieveConsumableItems(enemy);
+        }
+    }
 
 // confirm all items can be equipped and used
-// also record damage to/from player, along with prob. of running away and deflecting, given each enemy:
 
-// let logItemType = [];
-// let logItemQuality = [];
-// let logPlayerAttackValue = [];
-// let logEnemyAttackValue = [];
-// let logPlayerDeflectSuccessValue = [];
-// let logEnemyDefendQuality = [];
-// let logEnemyAttackQuality = [];
-// let logPlayerRunSuccessValue = [];
+    for (item of allItems) {
+        equipItem(item);
+    }
 
-// for (let i = 0; i < 5; i++){
-//     for (let item of allItems) {
-//         logItemQuality.push(item.quality);
-//         logItemType.push(item.type);
-//         equipItem(item)
-//         for (let enemy of allEnemies) {
-//             logEnemyDefendQuality.push(enemy.defend.quality);
-//             logEnemyAttackQuality.push(enemy.attack.quality);
-//             logPlayerAttackValue.push(attack(player, enemy, true));
-//             logEnemyAttackValue.push(attack(enemy, player, true));
-//             logPlayerDeflectSuccessValue.push(parry(player, enemy, true));
-//             logPlayerRunSuccessValue.push(run(player, enemy));
-//         }
+// Record outcomes of all shoes and shields items:
 
-//         player.attack = level1Sword;
-//         player.defend = level1Armor;
-//         player.run = level1Shoes;
-//         player.parry = level1Shield;
-//     }
-// }
+    // disable console.log():
+    const backupConsoleLog = console.log;
+    console.log = function(){};
 
-// for (let i = 0; i < logItemType.length; i++){
-//     console.log(`
-//     Item Type: ${logItemType[i]}
-//     Item Quality: ${logItemQuality[i]}
-//     Player Attack: ${logPlayerAttackValue[i]}
-//     Enemy Attack: ${logEnemyAttackValue[i]}
-//     Defend Quality: ${logEnemyDefendQuality[i]}
-//     Attack Quality: ${logEnemyAttackQuality[i]}
-//     Deflect Success: ${logPlayerDeflectSuccessValue[i]}
-//     Run Success: ${logPlayerRunSuccessValue[i]}`)
-// }
+    let logShoeQuality = [];
+    let logShoeOutcome = [];
+
+    let logShieldEnemyDefense = [];
+    let logShieldQuality = [];
+    let logShieldOutcome = [];
+
+    for (let i = 0; i < 10000; i++){
+        for (let shoe of shoes) {
+            logShoeQuality.push(shoe.quality);
+            player.run = shoe;
+            logShoeOutcome.push(run(player, allEnemies[0]));
+        }
+
+        for (let shield of shields) {
+            player.parry = shield;
+            for (let enemy of allEnemies) {
+                logShieldQuality.push(shield.quality);
+                logShieldEnemyDefense.push(enemy.defend.quality)
+                logShieldOutcome.push(parry(player, enemy, true));   
+            }
+        }
+    }
+    console.log = backupConsoleLog;
+
+    for (let i = 0; i < logShoeOutcome.length; i++){
+        console.log(`${logShoeQuality[i]},${logShoeOutcome[i]}`)
+    }
+    // Shoe Quality	Success Instances	Prob. of Successful run:
+    // Low	        5210	10000	    52.10%
+    // Medium	    5503	10000	    55.03%
+    // High	        6222	10000	    62.22%
+    // Very High	7458	10000	    74.58%
+    // Epic	        9921	10000	    99.21%
+
+    for (let i = 0; i < logShieldOutcome.length; i++){
+        console.log(`${logShieldQuality[i]},${logShieldEnemyDefense[i]},${logShieldOutcome[i]}`)
+    }
+
+    // Shield Quality	Enemy Defense Quality	Prob of Successful Deflect
+    // Epic             Low                     95.85%
+    // Epic	            Epic	                88.68%
+    // Epic	            High	                91.49%
+    // Epic	            Medium	                94.50%
+    // Very High	    Low	                    93.76%
+    // Very High	    Epic	                83.27%
+    // Very High	    High	                87.61%
+    // Very High	    Medium	                91.62%
+    // High	            Epic	                67.10%
+    // High	            Medium	                83.22%
+    // High	            High	                75.07%
+    // High	            Low	                    87.56%
+    // Medium	        High	                50.26%
+    // Medium	        Low	                    75.20%
+    // Medium           Medium	                66.90%
+    // Medium           Epic	                33.15%
+    // Low	            High	                25.00%
+    // Low	            Low	                    62.60%
+    // Low	            Epic	                0.00%
+    // Low	            Medium	                49.92%
+ */
+
+
 
 
 
