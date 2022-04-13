@@ -1,37 +1,54 @@
-'use strict'
-// 
 
-const readlineSync = require("readline-sync");
+// to do:
+// walk function
+// a solid refactor, because some of this is prob. absolute mess
+    'use strict'
+    const readlineSync = require("readline-sync");
 
-// Constructors:
+// Constructors functions
 
-const GenerateEnemy = function(name, attack, defense, lootConsumableProb, lootStandardProb, lootEpicProb, currentLifePoints) {
-    this.name = name;
-    this.attack = {quality : attack};
-    this.defend = {quality : defense};
-    this.lootConsumableProb = lootConsumableProb;
-    this.lootStandardProb = lootStandardProb;
-    this.lootEpicProb = lootEpicProb;
-    this.isAlive = true;
-    this.currentLifePoints = currentLifePoints;
-    this.maxLifePoints = currentLifePoints;
-}
+    const Enemy = function(name, attack, defense, lootConsumableProb, lootStandardProb, lootEpicProb, currentLifePoints) {
+        this.name = name;
+        this.attack = {quality : attack};
+        this.defend = {quality : defense};
+        this.lootConsumableProb = lootConsumableProb;
+        this.lootStandardProb = lootStandardProb;
+        this.lootEpicProb = lootEpicProb;
+        this.isAlive = true;
+        this.currentLifePoints = currentLifePoints;
+        this.maxLifePoints = currentLifePoints;
+    }
 
-const lootItem = function(name, type, quality) {
-    this.name = name;
-    this.type = type;
-    this.quality = quality;
-}
+    const Item = function(name, type, quality) {
+        this.name = name;
+        this.type = type;
+        this.quality = quality;
+    }
 
-// initializing namedEnemies - defined as definitive objects, since they can only be found/killed once.
+// declaring prototype for Enemy constructor:
 
-    const giant = new GenerateEnemy("The Giant", "Low", "Epic", "High", "Very High", "Moderate", 750)
-    const madWizard = new GenerateEnemy("Mad Wizard", "High", "Medium", "High", "Very High", "High", 250)
-    const medusa = new GenerateEnemy("Medusa", "High", "High", "Very High", "High", "Very High", 500)
-    const death = new GenerateEnemy("Death", "Low", "High", "Very High", "Very High", "Very High", 750)
-    const hades = new GenerateEnemy("Hades", "Very High", "Epic", "Very High", "Very High", "Very High", 1000)
+    const EnemyPrototype = {
+        // 1) that will add the enemy to a given array if it isAlive is true
+        addIfAlive(enemies) {
+            if(this.isAlive){
+                enemies.push(this)
+            }
+        }
+    }
 
-// initializing function to generate new unnamed enemies, since they are instance variables.
+    Enemy.prototype = EnemyPrototype;
+
+// initializing named enemies - defined as env objects since they can only be killed once:
+
+    const giant = new Enemy("The Giant", "Low", "Epic", "High", "Very High", "Medium", 750)
+    const madWizard = new Enemy("Mad Wizard", "High", "Medium", "High", "Very High", "High", 250)
+    const medusa = new Enemy("Medusa", "High", "High", "Very High", "High", "Very High", 500)
+    const death = new Enemy("Death", "Low", "High", "Very High", "Very High", "Very High", 750)
+    const hades = new Enemy("Hades", "Very High", "Epic", "Very High", "Very High", "Very High", 1000)
+
+    
+
+// creating functions to expedite generation of unnamed enemies
 
     const initializeUnnamedEnemy = function(enemyName) {
 
@@ -39,81 +56,96 @@ const lootItem = function(name, type, quality) {
 
         switch(enemyName){
             case "Street Thug":
-                enemy = new GenerateEnemy("Street Thug", "Low", "Low", "Medium", "Low", "", 250)
+                enemy = new Enemy("Street Thug", "Low", "Low", "Medium", "Low", "Zero", 250)
                 break;
-            case "Street Thug":
-                enemy = new GenerateEnemy("Corrupt Guard", "Medium", "High", "Medium", "Medium", "", 400)
+            case "Corrupt Guard":
+                enemy = new Enemy("Corrupt Guard", "Medium", "Low", "Medium", "Medium", "Zero", 400)
                 break;
-            case "Street Thug":
-                enemy = new GenerateEnemy("Dragon", "Medium", "Low", "High", "Medium", "Low", 500)
+            case "Dragon":
+                enemy = new Enemy("Dragon", "High", "Low", "High", "Medium", "Low", 500)
                 break;
-            case "Street Thug":
-                enemy = new GenerateEnemy("Evil Minion", "Medium", "Medium", "High", "High", "Low", 500)
+            case "Evil Minion":
+                enemy = new Enemy("Evil Minion", "Medium", "Medium", "High", "High", "Low", 500)
                 break;
-            case "Street Thug":
-                enemy = new GenerateEnemy("Evil Ghoul", "Low", "Medium", "High", "High", "Low", 500)
+            case "Evil Ghoul":
+                enemy = new Enemy("Evil Ghoul", "Low", "Medium", "High", "High", "Low", 500)
                 break;
+            default:
+                console.log("UNKNOWN INPUT GIVEN TO SWITCH STATEMENT, CHECK initializeUnnamedEnemy FUNCTION");
             }
         
         return enemy;
 
     }
 
-// initializing items:
+    const repeatEnemyInitialization = function(enemyName, numberEnemies){
+        let enemies = [];
+        for(let i = 0; i < numberEnemies; i++){
+            enemies.push(initializeUnnamedEnemy(enemyName));
+        }
+        return enemies;
+    }
 
-    const level1Armor = new lootItem("Rusty Armor", "Armor", "Low");
-    const level1Shield = new lootItem("Rusty Shield", "Shield", "Low");
-    const level1Shoes = new lootItem("Torn cloth shoes", "Shoes", "Low");
-    const level1Sword = new lootItem("Rusty Sword", "Sword", "Low");
+// initializing non-consumable items:
+
+    const level1Armor = new Item("Rusty Armor", "Armor", "Low");
+    const level1Shield = new Item("Rusty Shield", "Shield", "Low");
+    const level1Shoes = new Item("Torn cloth shoes", "Shoes", "Low");
+    const level1Sword = new Item("Rusty Sword", "Sword", "Low");
 
     const lowLoot = [level1Armor, level1Shield, level1Shoes, level1Sword];
 
-    const level2Armor = new lootItem("Iron Armor", "Armor", "Medium");
-    const level2Shield = new lootItem("Iron Shield", "Shield", "Medium");
-    const level2Shoes = new lootItem("Cloth shoes", "Shoes", "Medium");
-    const level2Sword = new lootItem("Iron Sword", "Sword", "Medium");
+    const level2Armor = new Item("Iron Armor", "Armor", "Medium");
+    const level2Shield = new Item("Iron Shield", "Shield", "Medium");
+    const level2Shoes = new Item("Cloth shoes", "Shoes", "Medium");
+    const level2Sword = new Item("Iron Sword", "Sword", "Medium");
 
     const mediumLoot = [level2Armor, level2Shield, level2Shoes, level2Sword];
 
-    const level3Armor = new lootItem("Steel Armor", "Armor", "High");
-    const level3Shield = new lootItem("Steel Shield", "Shield", "High");
-    const level3Shoes = new lootItem("Leather Sandals", "Shoes", "High");
-    const level3Sword = new lootItem("Steel Sword", "Sword", "High");
+    const level3Armor = new Item("Steel Armor", "Armor", "High");
+    const level3Shield = new Item("Steel Shield", "Shield", "High");
+    const level3Shoes = new Item("Leather Sandals", "Shoes", "High");
+    const level3Sword = new Item("Steel Sword", "Sword", "High");
 
     const highLoot = [level3Armor, level3Shield, level3Shoes, level3Sword];
 
-    const level4Armor = new lootItem("Titanium Armor", "Armor", "Very High");
-    const level4Shield = new lootItem("Titanium Shield", "Shield", "Very High");
-    const level4Shoes = new lootItem("Gladiator's Sandals", "Shoes", "Very High");
-    const level4Sword = new lootItem("Titanium Sword", "Sword", "Very High");
+    const level4Armor = new Item("Titanium Armor", "Armor", "Very High");
+    const level4Shield = new Item("Titanium Shield", "Shield", "Very High");
+    const level4Shoes = new Item("Gladiator's Sandals", "Shoes", "Very High");
+    const level4Sword = new Item("Titanium Sword", "Sword", "Very High");
 
     const veryHighLoot = [level4Armor, level4Shield, level4Shoes, level4Sword];
 
-    const epicArmor = new lootItem("Achilles' Armor", "Armor", "Epic");
-    const epicShield = new lootItem("Aegis", "Shield", "Epic");
-    const epicShoes = new lootItem("The Talaria of Mercury", "Shoes", "Epic");
-    const epicSword = new lootItem("King Leonidas' Sword", "Sword", "Epic");
+    const epicArmor = new Item("Achilles' Armor", "Armor", "Epic");
+    const epicShield = new Item("Aegis", "Shield", "Epic");
+    const epicShoes = new Item("The Talaria of Mercury", "Shoes", "Epic");
+    const epicSword = new Item("King Leonidas' Sword", "Sword", "Epic");
 
     const epicLoot = [epicArmor, epicShield, epicShoes, epicSword];
 
-// Initializing player object
+// Initializing Env variables:
 
-const player = {
-    name : "Player",
-    defend : level1Armor,
-    parry : level1Shield,
-    run : level1Shoes,
-    attack : level1Sword,
-    currentLifePoints : 500,
-    maxLifePoints : 500,
-    inventory : ["Small Health Potion"]
-}
+    // player object
 
-const opponent = initializeUnnamedEnemy("Street Thug");
-const attacker = player;
+    const player = {
+        name : "Player",
+        defend : level1Armor,
+        parry : level1Shield,
+        run : level1Shoes,
+        attack : level1Sword,
+        currentLifePoints : 1000,
+        maxLifePoints : 1000,
+        isAlive : true,
+        location: 0,
+        inventory : ["Small Health Potion", "Small Health Potion"]
+    }
+
+    // current location name
+
+    let locationName = "Town";
 
 // function will reduce opponent's currentLifePoints by computed amount and produce applicable dialogue.
-const attack = function(attacker, opponent){
+const attack = function(attacker, opponent, returnResult = false){
 
     let attackQuality = attacker.attack.quality;
     let defendQuality = opponent.defend.quality;
@@ -143,6 +175,8 @@ const attack = function(attacker, opponent){
             attackMin = 100;
             attackMax = 250;
             break;
+        default:
+            console.log(`UNKNOWN INPUT (${attackQuality}) IN SWITCH STATEMENT, CHECK attack FUNCTION`);
     } 
 
     switch(defendQuality) {
@@ -158,140 +192,184 @@ const attack = function(attacker, opponent){
         case "Epic": 
             defendFactor = 4;
             break;
+        default:
+            console.log(`UNKNOWN INPUT (${defendQuality}) IN SWITCH STATEMENT, CHECK attack FUNCTION`);
     } 
 
-    
+
     let attackValue = randomBetween(attackMin, attackMax);
     attackValue = Math.round(attackValue * (attackFactor / defendFactor), 0);
+
+    if (attacker.name === player.name) {
+        attackValue = attackValue * 2;
+    } else {
+        attackValue = attackValue / 2;
+    }
+
     opponent.currentLifePoints = opponent.currentLifePoints - attackValue;
     console.log(`${opponent.name} took a ${attackValue} point hit, leaving ${Math.max(0, opponent.currentLifePoints)} out of ${opponent.maxLifePoints} remaining!`);
+
     if (opponent.currentLifePoints <= 0){
+
         opponent.isAlive = false;
         console.log(opponent.name + " is dead.")
+
+    }
+
+    // return result - for testing purposes only
+
+    if (returnResult === true) {
+
+        return attackValue;
+
     }
 }
 
 // function will return 'false' if escaped or 'true' if escape failed. Also will produce applicable dialogue
-const run = function(attacker, opponent){
-    let runQuality = attacker.run.quality;
-    let randomProb = Math.random();
-    switch(runQuality) {
-        case "Low": 
-            randomProb += .025;
-            break;
-        case "Medium": 
-            randomProb += .10;
-            break;
-        case "High": 
-            randomProb += .05;
-            break;
-        case "Epic": 
-            randomProb += .75;
-            break;
-    } 
-    
-    if (randomProb > .5) {
-        console.log("That was close, but you managed to escape the battle, but not before the " + opponent.name + " could get one last hit...");
-        return false;
-    } else {
-        "Damn! You were too slow to escape. If only you had some better shoes..."
-        return true;
+    const run = function(attacker, opponent){
+        let runQuality = attacker.run.quality;
+        let randomProb = Math.random();
+        switch(runQuality) {
+            case "Low": 
+                randomProb = randomProb + .025;
+                break;
+            case "Medium": 
+                randomProb = randomProb + .10;
+                break;
+            case "High": 
+                randomProb = randomProb + .05;
+                break;
+            case "Very High": 
+                randomProb = randomProb + .75;
+            case "Epic": 
+                randomProb = randomProb + 1;
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${runQuality}) IN SWITCH STATEMENT, CHECK run FUNCTION`);
+        } 
+        
+        if (randomProb > .25) {
+            console.log("That was close, but you managed to escape the battle.. However, " + opponent.name + " managed to get one last hit on you while fleeing...");
+            return false;
+        } else {
+            console.log("Damn! You were too slow to escape. If only you had some better shoes...")
+            return true;
+        }
     }
-}
+
 
 // will either attack twice, if successful, or nothing.
-const parry = function(attacker, opponent){
-    let parryQuality = attacker.parry.quality;
-    let defendQuality = opponent.attack.quality;
-    let parryFactor = 1;
-    let defendFactor = 1;
+    const parry = function(attacker, opponent, returnResult = false){
+        let parryQuality = attacker.parry.quality;
+        let defendQuality = opponent.attack.quality;
+        let parryFactor;
+        let defendFactor;
 
-    switch(parryQuality) {
-        case "Low": 
-            parryFactor = 1;
-            break;
-        case "Medium": 
-            parryFactor = 1.5;
-            break;
-        case "High": 
-            parryFactor = 2;
-            break;
-        case "Epic": 
-            parryFactor = 4;
-            break;
-    } 
+        switch(parryQuality) {
+            case "Low": 
+                parryFactor = 1;
+                break;
+            case "Medium": 
+                parryFactor = 1.5;
+                break;
+            case "High": 
+                parryFactor = 2;
+                break;
+            case "Epic": 
+                parryFactor = 4;
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${parryQuality}) IN SWITCH STATEMENT, CHECK parry FUNCTION`);
+        } 
 
-    switch(defendQuality) {
-        case "Low": 
-            defendFactor = 1;
-            break;
-        case "Medium": 
-            defendFactor = 1.5;
-            break;
-        case "High": 
-            defendFactor = 2;
-            break;
-        case "Epic": 
-            defendFactor = 4;
-            break;
-    } 
+        switch(defendQuality) {
+            case "Low": 
+                defendFactor = .5;
+                break;
+            case "Medium": 
+                defendFactor = .75;
+                break;
+            case "High": 
+                defendFactor = 2;
+                break;
+            case "Epic": 
+                defendFactor = 2;
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${defendQuality}) IN SWITCH STATEMENT, CHECK parry FUNCTION`);
+        } 
 
-    let randomProb = Math.random() * (parryQuality / defendQuality);
+        let randomProb = Math.random() * (parryFactor / defendFactor);
 
-    if (randomProb > .5) {
-        console.log(`${attacker.name} deflected ${opponent.name}'s strike and bashed them with their shield leaving ${opponent.name} reeling and disoriented. ${attacker.name} attacks twice!`)
-        attack(attacker, opponent)
-        attack(attacker, opponent)
-    } else {
-        console.log(`${attacker.name} failed to deflect ${opponent.name}'s strike.`)
+        if (randomProb > .5) {
+            console.log(`${attacker.name} deflected ${opponent.name}'s strike leaving them reeling and disoriented. ${attacker.name} attacks twice!`)
+            attack(attacker, opponent)
+            attack(attacker, opponent)
+        } else {
+            console.log(`${attacker.name} failed to deflect the strike from ${opponent.name}.`)
+        }
+
+        // return result - for testing purposes only
+
+        if (returnResult === true) {
+
+            return randomProb > .5;
+
+        }
     }
-}
 
 // Allows items in inventory to be used.
-const inventory = function(){
-    let inInventory = true;
-    let userInput;
-    let selectedItem;
-    while(inInventory) {
-        console.log("\n**Inventory**")
-        console.log("\nEnter a number to use an item, or enter 'e' to exit the inventory:")
-        
-        let itemNumber = 1;
-        for (let item of player.inventory){
-            console.log(`[${itemNumber}]: ${item}`)
-            itemNumber++
-        }
-        userInput = readlineSync.question(``);
+    const inventory = function(){
+        let inInventory = true;
+        let userInput;
+        let selectedItem;
+        while(inInventory) {
+            console.log("\n**Inventory**")
+            console.log("\nEnter a number to use an item, or enter 'e' to exit the inventory:")
+            
+            let itemNumber = 1;
+            for (let item of player.inventory){
+                console.log(`[${itemNumber}]: ${item}`)
+                itemNumber++
+            }
+            userInput = readlineSync.question(``);
 
-        if (userInput === "e") {
-            inInventory = false;
-            break
-        }
+            if (userInput === "e") {
+                inInventory = false;
+                break
+            }
 
-        selectedItem = player.inventory[parseInt(userInput) - 1];
-        player.inventory.splice(player.inventory.indexOf(selectedItem), 1);
-        
-        switch (selectedItem){
-            case "Small Health Potion":
-                player.currentLifePoints += 25;
-                break;
-            case "Medium Health Potion":
-                player.currentLifePoints += 50;
-                break;
-            case "Large Health Potion":
-                player.currentLifePoints += 200;
-                break;
-            case "A 'Liter of' Health Potion":
-                player.currentLifePoints == player.maxLifePoints;
-                break;
-        }
+            if (isFinite(userInput) & userInput > 0) {
 
-        console.log(`${player.name}'s health is now ${player.currentLifePoints}.`)
+                selectedItem = player.inventory[parseInt(userInput) - 1];
+                player.inventory.splice(player.inventory.indexOf(selectedItem), 1);
+                
+                switch (selectedItem){
+                    case "Small Health Potion":
+                        player.currentLifePoints += 100;
+                        break;
+                    case "Medium Health Potion":
+                        player.currentLifePoints += 250;
+                        break;
+                    case "Large Health Potion":
+                        player.currentLifePoints += 500;
+                        break;
+                    case "A 'Liter of' Health Potion":
+                        player.currentLifePoints == player.maxLifePoints;
+                        break;
+                    default:
+                        console.log(`UNKNOWN INPUT (${selectedItem}) IN SWITCH STATEMENT, CHECK inventory FUNCTION`);
+                }
+    
+                console.log(`${player.name}'s health is now ${player.currentLifePoints}.`)
+
+            }
+
+        }
     }
-}
 
 // supporting function = will generate a random number between min and max. shouldFloor is an optional argument that will perform Math.floor before returning
-
+// TO DO - MOVE THIS FUNCTION TO BOTTOM, SHOULDN'T HURT ANYHTING
 function randomBetween(min, max, shouldFloor = false) {
     let output = Math.random() *  ((max - min + 1) + min);
     if (shouldFloor === true) {
@@ -301,7 +379,7 @@ function randomBetween(min, max, shouldFloor = false) {
     }
 }
 
-// Draw Loot Items - given a defeated opponent, this function will equip items to player (assuming loot item is better than existing item)
+// Draw Loot Items - given a defeated opponent, this function will equip new items to player (assuming loot item is better than existing item)
 const retrieveLootItems = function(opponent){
 
     let standardLootRandNumber = Math.random();
@@ -313,6 +391,9 @@ const retrieveLootItems = function(opponent){
     // draw Epic Loot outcome:
 
     switch(opponent.lootEpicProb) {
+        case "Zero": 
+            getEpicLoot = false;
+            break;
         case "Low": 
             getEpicLoot = epicLootRandNumber >= .95 ? true : false;
             break;
@@ -325,9 +406,11 @@ const retrieveLootItems = function(opponent){
         case "Very High": 
             getEpicLoot = epicLootRandNumber >= .00 ? true : false;
             break;
+        default:
+            console.log(`UNKNOWN INPUT (${opponent.lootEpicProb}) IN SWITCH STATEMENT, CHECK retrieveLootItems FUNCTION`);
     } 
 
-    if (getEpicLoot == true){
+    if (getEpicLoot === true & epicLoot.length > 0){
         awardedLoot.push(epicLoot.splice(
             randomBetween(0, (epicLoot.length - 1), true),
             1
@@ -338,16 +421,23 @@ const retrieveLootItems = function(opponent){
 
     switch(opponent.lootStandardProb) {
         case "Low": 
-            if (standardLootRandNumber >= .80) {
+            if (standardLootRandNumber >= .7) {
                 awardedStandardLoot = lowLoot.splice(
                     randomBetween(0, (lowLoot.length - 1), true), 1
+                    )[0];
+                awardedLoot.push(awardedStandardLoot)
+            }
+
+            if (standardLootRandNumber >= .3) {
+                awardedStandardLoot = mediumLoot.splice(
+                    randomBetween(0, (mediumLoot.length - 1), true), 1
                     )[0];
                 awardedLoot.push(awardedStandardLoot)
             }
             
             break;
         case "Medium": 
-            if (standardLootRandNumber >= .65) {
+            if (standardLootRandNumber >= .2) {
                 awardedStandardLoot = mediumLoot.splice(
                     randomBetween(0, (mediumLoot.length - 1), true), 1
                     )[0];
@@ -356,7 +446,7 @@ const retrieveLootItems = function(opponent){
             
             break;
         case "High": 
-            if(standardLootRandNumber >= .5) {
+            if(standardLootRandNumber >= .1) {
                 awardedStandardLoot = highLoot.splice(
                     randomBetween(0, (highLoot.length - 1), true), 1
                     )[0];
@@ -365,21 +455,22 @@ const retrieveLootItems = function(opponent){
             
             break;
         case "Very High": 
-            if(standardLootRandNumber >= .5) {
+            if(standardLootRandNumber >= .05) {
                 awardedStandardLoot = veryHighLoot.splice(
                     randomBetween(0, (veryHighLoot.length - 1), true), 1
                     )[0];
                 awardedLoot.push(awardedStandardLoot)
             }
-            
             break;
+        default:
+            console.log(`UNKNOWN INPUT (${opponent.lootStandardProb}) IN SWITCH STATEMENT, CHECK retrieveLootItems FUNCTION`);
 
     } 
 
     if (awardedLoot.length === 0) {
-        console.log(`You dig through ${opponent.name}'s belongings, but there isn't anything of value.`)
+        console.log(`\nYou dig through ${opponent.name}'s belongings, but there isn't anything of value.`)
     } else {
-        console.log(`You dig through ${opponent.name}'s belongings for loot and find:`)
+        console.log(`\nYou dig through ${opponent.name}'s belongings for loot and find:`)
         
         for (let item of awardedLoot){
             if (item.quality === "Epic"){
@@ -393,187 +484,422 @@ const retrieveLootItems = function(opponent){
 
 }
 
-// Draw consumable items (health potions) - given a defeated opponent, this function will add items to players inventory
-const retrieveConsumableItems = function(opponent){
+    // sub function of retrieveLootItems - will equip new items if they are of higher quality than what the player is currently using. Old equipment is discarded.
 
-    let RandNumber = Math.random();
-    let willGetConsumable = false;
-    let awardedStandardLoot;
-    let availableLoot = [];
-    let awardedLoot = [];
+    function equipItem(item){
+        let itemType = item.type;
+        let itemQuality = item.quality;
+        let itemClass;
+        let currentItem;
+        let currentQuality;
 
-    // draw consumable  Loot outcome:
-    
-    switch(opponent.lootConsumableProb) {
-        case "Low": 
-            willGetConsumable = RandNumber >= .50 ? true : false;
-            availableLoot = ["Small Health Potion", "Small Health Potion", "Small Health Potion", "Small Health Potion", "Medium Health Potion"]
-            break;
-        case "Medium": 
-            willGetConsumable = RandNumber >= .60 ? true : false;
-            availableLoot = ["Small Health Potion", "Small Health Potion", "Medium Health Potion", "Medium Health Potion", "Medium Health Potion"]
-            break;
-        case "High": 
-            willGetConsumable = RandNumber >= .70 ? true : false;
-            availableLoot = ["Medium Health Potion", "Medium Health Potion", "Medium Health Potion", "Large Health Potion", "Large Health Potion",
-                            "Small Health Potion", "Small Health Potion", "Medium Health Potion", "Medium Health Potion", "Medium Health Potion"]
-            break;
-        case "Very High": 
-            willGetConsumable = RandNumber >= .80 ? true : false;
-            availableLoot = ["Large Health Potion", "Large Health Potion", "Large Health Potion", "Liter Health Potion", "Liter of Health Potion",
-                            "Medium Health Potion", "Medium Health Potion", "Medium Health Potion", "Large Health Potion", "Large Health Potion"]
-            break;
-        default:
-            console.log("INVALID SWITCH ARGUMENT, SEE retrieveConsumableItems FUNCTION.");
-    } 
-
-    if (willGetConsumable == true){
-        awardedLoot.push(availableLoot.splice(
-            randomBetween(0, (availableLoot.length - 1), true),
-            1
-        )[0]);
-        awardedLoot.push(availableLoot.splice(
-            randomBetween(0, (availableLoot.length - 1), true),
-            1
-        )[0]);
-    } 
- 
-    if (awardedLoot.length > 0) {
-        console.log(`${opponent.name} dropped some consumable items!\nThe following have been added to your inventory:`)
-        for (let consumable of awardedLoot){
-            console.log(consumable);
-            player.inventory.push(consumable);
+        switch (itemType) {
+            case "Sword": 
+                itemClass = "attack";
+                break;
+            case "Shield": 
+                itemClass = "parry";
+                break;
+            case "Shoes": 
+                itemClass = "run";
+                break;
+            case "Armor": 
+                itemClass = "defend";
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${itemType}) IN SWITCH STATEMENT, CHECK equipItem FUNCTION`);
         }
+        currentItem = player[itemClass];
+        currentQuality = currentItem.quality;
+
+        let isHigherQualityEpic = itemQuality === "Epic" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High" | currentQuality === "Very High");
+        let isHigherQualityVeryHigh = itemQuality === "Very High" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High");
+        let isHigherQualityHigh = itemQuality === "High" & (currentQuality === "Low" | currentQuality === "Medium"); 
+        let isHigherQualityMedium = itemQuality === "Medium" & (currentQuality === "Low");
+
+        if (isHigherQualityEpic | isHigherQualityVeryHigh | isHigherQualityHigh | isHigherQualityMedium) {
+            player[itemClass] = item;
+            console.log(`${player.name} equipped the ${player[itemClass].name}! To reserve your energy, you discard your old ${currentItem.name}`)
+        } else {
+            console.log(`${item.name} is of lesser quality than ${player[itemClass].name}. The item will not be equiped.`)
+        }
+    }
+
+// Draw consumable items (health potions) - given a defeated opponent, this function will add items to players inventory
+    const retrieveConsumableItems = function(opponent){
+
+        let RandNumber = Math.random();
+        let willGetConsumable = false;
+        let awardedStandardLoot;
+        let availableLoot = [];
+        let awardedLoot = [];
+
+        // draw consumable  Loot outcome:
         
+        switch(opponent.lootConsumableProb) {
+            case "Low": 
+                willGetConsumable = RandNumber <= .50 ? true : false;
+                availableLoot = ["Small Health Potion", "Small Health Potion", "Small Health Potion", "Small Health Potion", "Medium Health Potion"]
+                break;
+            case "Medium": 
+                willGetConsumable = RandNumber <= .60 ? true : false;
+                availableLoot = ["Small Health Potion", "Small Health Potion", "Medium Health Potion", "Medium Health Potion", "Medium Health Potion"]
+                break;
+            case "High": 
+                willGetConsumable = RandNumber <= .70 ? true : false;
+                availableLoot = ["Medium Health Potion", "Medium Health Potion", "Medium Health Potion", "Large Health Potion", "Large Health Potion",
+                                "Small Health Potion", "Small Health Potion", "Medium Health Potion", "Medium Health Potion", "Medium Health Potion"]
+                break;
+            case "Very High": 
+                willGetConsumable = RandNumber <= .80 ? true : false;
+                availableLoot = ["Large Health Potion", "Large Health Potion", "Large Health Potion", "Liter Health Potion", "Liter of Health Potion",
+                                "Medium Health Potion", "Medium Health Potion", "Medium Health Potion", "Large Health Potion", "Large Health Potion"]
+                break;
+            default:
+                console.log(`UNKNOWN INPUT (${opponent.lootConsumableProb}) IN SWITCH STATEMENT, CHECK retrieveConsumableItems FUNCTION`);
+        } 
+
+        if (willGetConsumable == true){
+            awardedLoot.push(availableLoot.splice(
+                randomBetween(0, (availableLoot.length - 1), true),
+                1
+            )[0]);
+            awardedLoot.push(availableLoot.splice(
+                randomBetween(0, (availableLoot.length - 1), true),
+                1
+            )[0]);
+        } 
+    
+        if (awardedLoot.length > 0) {
+            console.log(`\n${opponent.name} dropped some consumable items!\nThe following have been added to your inventory:`)
+            for (let consumable of awardedLoot){
+                console.log(consumable);
+                player.inventory.push(consumable);
+            }
+            
+        }
+
     }
 
-}
-
-// sub function of retrieveLootItems - will equip new items if they are of higher quality than what the player is currently using. Old equipment is discarded.
-
-function equipItem(item){
-    let itemType = item.type;
-    let itemQuality = item.quality;
-    let itemClass;
-    let currentItem;
-    let currentQuality;
-
-    switch (itemType) {
-        case "Sword": 
-            itemClass = "attack";
-            break;
-        case "Shield": 
-            itemClass = "parry";
-            break;
-        case "Shoes": 
-            itemClass = "run";
-            break;
-        case "Armor": 
-            itemClass = "defend";
-            break;
-        default:
-            console.log("UNKNOWN EQUIPMENT TYPE, CHECK equipItem FUNCTION");
+// startDialog function - prints intro, allows player to name themselves
+    const startDialog = function(){
+        console.log("Town Citizen: 'Ohh traveler, You must be lost - nobody in their right mind would come to these parts... Our lands are plagued by an unholy evil.'");
+        console.log("\nYou: 'Have you ever considered just moving away? I heard Fiji is nice this time of the year.'");
+        console.log("\nTown Citizen: 'We could... but I have another idea - what if you vanquish the evil? If you are victorious, there will sure be invaluable treasures, fame, and notoriety. What is it you said your name was again?'");
+        player.name = readlineSync.question("Enter Your Name:");
+        console.log(`\nYou: '"Invaluable treasures" you say... Alright. I'm in.'`);
+        console.log(`You: 'My name is ${player.name} - start working on my monuments because I will save defeat the evil and save the town!`); 
+        console.log(`\nTown Citizen: 'Excellent - bless you, ${player.name}! I will notify the monument team..... after you depart town?'`);
+        console.log("\nTown Citizen: 'You will need to travel from town, through the forests, into the cave of despair. Vanquish Hades, his two friends Death and Medusa. Ohhh and while you are at it, can you whack the Mad Wizard and The Giant?'");
+        console.log("\nYou: 'Sure, whatever. Your monument people use marble, right?'");
+        console.log("\nTown Citizen: 'Uhh..... Yeah... sure?'");
     }
-    currentItem = player[itemClass];
-    currentQuality = currentItem.quality;
 
-    let isHigherQualityEpic = itemQuality === "Epic" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High" | currentQuality === "Very High");
-    let isHigherQualityVeryHigh = itemQuality === "Very High" & (currentQuality === "Low" | currentQuality === "Medium" | currentQuality === "High");
-    let isHigherQualityHigh = itemQuality === "High" & (currentQuality === "Low" | currentQuality === "Medium"); 
-    let isHigherQualityMedium = itemQuality === "Medium" & (currentQuality === "Low");
+// draw enemy function - based on player's location, will determine 1.) if an enemy is present and 2.) which enemy it is. 
+// If present, the drawn enemy from the enemyPool will be returned
+    const drawEnemy = function(playerLocation){
 
-    if (isHigherQualityEpic | isHigherQualityVeryHigh | isHigherQualityHigh | isHigherQualityMedium) {
-        player[itemClass] = item;
-        console.log(`${player.name} equipped the ${player[itemClass].name}! To reserve your energy, you discard your old ${currentItem.name}`)
-    } else {
-        console.log(`${item.name} is of lesser quality than ${player[itemClass].name}. The item will not be equiped.`)
+        let enemyPool = [];
+        let output;
+        let randomNumber = Math.random();
+        let isEnemyPresent;
+
+        if (playerLocation < 4) {
+
+            locationName = "Town";
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Street Thug", 3));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Corrupt Guard", 1));
+            isEnemyPresent = randomNumber > .5 ? true : false;
+
+        } else if (playerLocation < 8) {
+
+            locationName = "Outskirts of Town";
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Street Thug", 2));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Corrupt Guard", 2));
+            isEnemyPresent = randomNumber > .4 ? true : false;
+
+        } else if (playerLocation < 12) {
+
+            locationName = "Goodish Forest";
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Street Thug", 1));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Corrupt Guard", 5));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Dragon", 1));
+            isEnemyPresent = randomNumber > .35 ? true : false;
+
+        } else if (playerLocation < 20) {
+
+            locationName = "Dark Forest";
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Dragon", 1));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Evil Minion", 3));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Evil Ghoul", 3));
+            giant.addIfAlive(enemyPool);
+            madWizard.addIfAlive(enemyPool);
+            isEnemyPresent = randomNumber > .3 ? true : false;
+
+        } else if (playerLocation < 25) {
+
+            locationName = "Cave of Despair";
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Dragon", 1));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Evil Minion", 2));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Evil Ghoul", 2));
+            giant.addIfAlive(enemyPool);
+            madWizard.addIfAlive(enemyPool);
+            medusa.addIfAlive(enemyPool);
+            death.addIfAlive(enemyPool);
+            isEnemyPresent = randomNumber > .2 ? true : false;
+
+        } else {
+
+            locationName = "Hades' Crib";
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Evil Minion", 1));
+            enemyPool = enemyPool.concat(repeatEnemyInitialization("Evil Ghoul", 1));
+            giant.addIfAlive(enemyPool);
+            madWizard.addIfAlive(enemyPool);
+            medusa.addIfAlive(enemyPool);
+            hades.addIfAlive(enemyPool);
+            isEnemyPresent = randomNumber > .10 ? true : false;
+
+        }
+
+        if (isEnemyPresent) {
+        
+            output = enemyPool[randomBetween(0, (enemyPool.length - 1), true)];
+
+        } else {
+
+            output = "What a wonderful and uneventful walk!";
+
+        }
+
+        return output;
     }
-}
 
+// walk function - increment location, set name if applicable, and run drawEnemy function.
+    const walk = function(){
+        let walkOutcome;
+        console.log("\n\n****Beginning Journey****\n");
+        player.location += 1;
 
+        if (player.location == 4) {
 
-// walk function
-const walk = function(){
+            console.log("You have entered the outskirts of town... It's kind of a rough neighborhood.\n")
+        
+        } else if (player.location == 8) {
 
-}
+            console.log("You have entered the Goodish Forest.\n")
+        
+        } else if (player.location == 12) {
+
+            console.log("You have entered the Dark Forest.\n")
+        
+        } else if (player.location == 20) {
+
+            console.log("You have entered the Cave of Despair.\n")
+        
+        } else if (player.location == 25) {
+
+            console.log("You have entered the Hades' Crib.\n")
+        
+        }
+        player.location = Math.min(player.location, 26);
+
+        walkOutcome = drawEnemy(player.location);
+
+        if (typeof walkOutcome === "string") {
+
+            console.log(walkOutcome);
+        
+        } else {
+
+            battle(player, walkOutcome);
+        
+        }
+
+        console.log("\n\n");
+    }
 
 // printInfo Function - prints players name, HP, and all items in their inventory
-
-const printInfo = function(){
-    console.log(`
-    Player Name: ${player.name}
-    Health:      ${player.currentLifePoints} / ${player.maxLifePoints}
-    Armor:       ${player.defend.name}
-    Sword:       ${player.attack.name}
-    Shield:      ${player.parry.name}
-    Shoes:       ${player.run.name}
-        `)
-    console.log("    **Inventory**") 
-    let itemNumber = 1;
-    for (let item of player.inventory){
-        console.log(`    [${itemNumber}]: ${item}`)
-        itemNumber++
+    const printInfo = function(){
+        console.log(`
+        Player Name: ${player.name}
+        Health:      ${player.currentLifePoints} / ${player.maxLifePoints}
+        Armor:       ${player.defend.name}
+        Sword:       ${player.attack.name}
+        Shield:      ${player.parry.name}
+        Shoes:       ${player.run.name}
+        \n
+        Current Location: ${locationName}
+            `)
+        console.log("    **Inventory**") 
+        for (let item of player.inventory){
+            console.log(`    ${item}`)
+        }
+        console.log("\n")
     }
-}
 
 // object containing commands for design pattern. Note that battleCommands require two arguments (attacker, opponent)
 // while nonBattleCommands does not.
 
-const battleCommands = {
-    a : attack,
-    d : parry,
-    r : run
-}
+    const battleCommands = {
+        a : attack,
+        d : parry,
+        r : run
+    }
 
-const nonBattleCommands = {
-    w : walk,
-    i : inventory,
-    p : printInfo
-}
+    const nonBattleCommands = {
+        w : walk,
+        i : inventory,
+        p : printInfo
+    }
 
-const battle = function(attacker, opponent) {
+// implementation of battle functionality - will look until either character dies or if player runs away
 
-    console.log("You're in battle with " + opponent.name + "!");
-    let inBattle = true;
-    let userInput;
-    let commandResult;
+    const battle = function(attacker, opponent) {
 
-    while(inBattle) {
-        
-        userInput = readlineSync.question(`\nSelect and option:\nAttack: 'a'\nDeflect and Counter-Attack: 'd'\nRun away: 'r'\nInventory: 'i'\n`);
-        if (userInput === "p" | userInput === "Print") {
-            printInfo();
-        } else if (userInput === "i") {
-            inventory();
-        } else {
-            let command = battleCommands[userInput];
-            commandResult = command(attacker, opponent);
-            if (attacker.isAlive === false | opponent.isAlive === false) {
+        console.log("You're in battle with " + opponent.name + "!");
+        let inBattle = true;
+        let userInput;
+        let commandResult;
+
+        while(inBattle) {
+            userInput = readlineSync.question(`\nEnter an option:\nAttack: 'a'\nDeflect and Counter-Attack: 'd'\nRun away: 'r'\nSee Info: 'p'\nInventory: 'i'\n`);
+            if (userInput === "p" | userInput === "Print") {
+
+                printInfo();
+
+            } else if (userInput === "i") {
+
+                inventory();
+
+            } else if (userInput === "a" | userInput === "r" | userInput === "d") {
+
+                let command = battleCommands[userInput];
+                commandResult = command(attacker, opponent);
+
+                if (attacker.isAlive === false | opponent.isAlive === false) {
+                    inBattle = false
+                    break;
+                }
+                attack(opponent, attacker)
+                if (attacker.isAlive === false | opponent.isAlive === false) {
+                    inBattle = false
+                    break;
+                }
+                // if player successfully runs away, command() will return 'false'. In order to not break encapsulation, this is checked here:
+                if (commandResult === false) {
+                    inBattle = false;
+                }
+
+            } else if (userInput === ".exit") {
+
                 break;
+
             }
-            attack(opponent, attacker)
-            if (attacker.isAlive === false | opponent.isAlive === false) {
-                inBattle = false
-                break;
-            }
-            // if player successfully runs away, command() will return 'false'. In order to not break encapsulation, this is checked here:
-            if (commandResult === false) {
-                inBattle = false;
-            }
+        }
+
+        // if battle is over and opponent is dead, then run drawLootItem() function:
+        if (inBattle === false & opponent.isAlive === false){
+            console.log("\n\nThe battle is over! You have won.");
+            retrieveLootItems(opponent);
+            retrieveConsumableItems(opponent);
         }
     }
 
-    // if battle is over and opponent is dead, then run drawLootItem() function:
-    if (inBattle === false & opponent.isAlive === false){
-        console.log("The battle is over! You have won.");
-        retrieveLootItems(opponent)
+const launchGame = function(){
+    startDialog()
+    while (player.isAlive){
+        console.log("\n\nHow would you like to proceed?");
+        let userInput = readlineSync.question(`\nEnter an option:\nWalk: 'w'\nView Inventory: 'i'\nSee Info: 'p'\n`);
+        let command;
+        if (userInput === "Print") {
+            printInfo();
+        } else if (userInput === "i" | userInput === "p" | userInput === "w") {
+            command = nonBattleCommands[userInput];
+            command();
+        } else if (userInput === ".exit") {
+            break;
+        }
     }
+
+    if (player.isAlive === false) {
+        console.log(`Our hero, ${player.name} has died.`);
+    }
+    
 }
 
+// player.currentLifePoints = Infinity;
+launchGame();
 
 
-printInfo()
-retrieveConsumableItems(medusa);
-retrieveConsumableItems(medusa);
-printInfo()
+// testing:
+
+// launchGame();
+
+// const allEnemies = [hades, death, medusa, giant, madWizard,
+//     initializeUnnamedEnemy("Street Thug"),
+//     initializeUnnamedEnemy("Corrupt Guard"),
+//     initializeUnnamedEnemy("Dragon"),
+//     initializeUnnamedEnemy("Evil Minion"),
+//     initializeUnnamedEnemy("Evil Ghoul"),
+// ];
+
+// const allItems = lowLoot.concat(mediumLoot).concat(highLoot).concat(veryHighLoot).concat(epicLoot)
+
+
+// // confirm that all enemy loot settings are valid:
+// for (let enemy of allEnemies) {
+//     retrieveLootItems(enemy);
+//     retrieveConsumableItems(enemy);
+// }
+
+// player.name = "A REAL NAME"
+// player.currentLifePoints = Infinity;
+
+// confirm all items can be equipped and used
+// also record damage to/from player, along with prob. of running away and deflecting, given each enemy:
+
+// let logItemType = [];
+// let logItemQuality = [];
+// let logPlayerAttackValue = [];
+// let logEnemyAttackValue = [];
+// let logPlayerDeflectSuccessValue = [];
+// let logEnemyDefendQuality = [];
+// let logEnemyAttackQuality = [];
+// let logPlayerRunSuccessValue = [];
+
+// for (let i = 0; i < 5; i++){
+//     for (let item of allItems) {
+//         logItemQuality.push(item.quality);
+//         logItemType.push(item.type);
+//         equipItem(item)
+//         for (let enemy of allEnemies) {
+//             logEnemyDefendQuality.push(enemy.defend.quality);
+//             logEnemyAttackQuality.push(enemy.attack.quality);
+//             logPlayerAttackValue.push(attack(player, enemy, true));
+//             logEnemyAttackValue.push(attack(enemy, player, true));
+//             logPlayerDeflectSuccessValue.push(parry(player, enemy, true));
+//             logPlayerRunSuccessValue.push(run(player, enemy));
+//         }
+
+//         player.attack = level1Sword;
+//         player.defend = level1Armor;
+//         player.run = level1Shoes;
+//         player.parry = level1Shield;
+//     }
+// }
+
+// for (let i = 0; i < logItemType.length; i++){
+//     console.log(`
+//     Item Type: ${logItemType[i]}
+//     Item Quality: ${logItemQuality[i]}
+//     Player Attack: ${logPlayerAttackValue[i]}
+//     Enemy Attack: ${logEnemyAttackValue[i]}
+//     Defend Quality: ${logEnemyDefendQuality[i]}
+//     Attack Quality: ${logEnemyAttackQuality[i]}
+//     Deflect Success: ${logPlayerDeflectSuccessValue[i]}
+//     Run Success: ${logPlayerRunSuccessValue[i]}`)
+// }
+
+
+
 
