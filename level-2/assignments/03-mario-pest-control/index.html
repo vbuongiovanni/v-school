@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+
+        <header><h1>Mario Pest Control</h1></header>
+
+        <main>
+            <form name="price-form">
+                <ol>
+                    <li><div class="line-item">
+                        <div class="image-div"><img src="resources/goomba.png"/></div>
+                        <p>Name: Goomba</p>
+                        <p>Price: 5 Coins</p>
+                        <label for="goomba-count">Total Goombas Exterminated:</label>
+                        <input type="number" name="goomba-count" id="goomba-count" min="0" value="0">
+                    </div></li>
+                    <li><div class="line-item">
+                        <div class="image-div"><img src="resources/cheep-cheep.png" /></div>
+                        <p>Name: Cheep-Cheep</p>
+                        <p>Price: 11 Coins</p>
+                        <label for="cheep-cheep-count">Total Cheep-Cheeps Exterminated:</label>
+                        <input type="number" name="cheep-cheep-count" id="cheep-cheep-count" min="0" value="0">
+                    </div></li>
+                    <li><div class="line-item">
+                        <div class="image-div"><img src="resources/bomb-omb.png" /></div>
+                        <p>Name: Bob-omb</p>
+                        <p>Price: 7 Coins</p>
+                        <label for="bob-omb-count">Total Bob-Ombs Exterminated:</label>
+                        <input type="number" name="bob-omb-count" id="bob-omb-count" min="0" value="0">
+                    </div></li>
+                    <div class="submit-content">
+                        <button>Calculate Total</button>
+                    </div>
+                </ol>
+                
+                <div class="total-line">
+                    <span>Total Amount Due For Services: </span>
+                    <span id="total-cost">9999</span>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <div>
+                <p>Mario@Nintendo.com</p>
+                <p>Killinbaddies.com</p>
+                <p>1234 Fake Street</p>
+                <p>Fake Town, Marioland 9999</p>
+            </div>
+        </footer>
+        
+        
+
+
+
+        <script src="script.js"></script>
+    </body>
+</html>

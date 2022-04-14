@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+
+        <form name="flight-info">
+            <h2>Passenger Detail Form</h2>
+            
+            <div class="text-input">
+                <label for="first-name">First Name:</label>
+                <input type="text" name="first-name" placeholder="John">
+            </div>
+            <div class="text-input">
+                <label for="last-name">Last Name:</label>
+                <input type="text" name="last-name" placeholder="Smith">
+            </div>
+            <div class="text-input">
+                <label for="age">Age:</label>
+                <input type="number" min="0" name="age" placeholder="33">
+            </div>
+            <div class="multi-option">
+                <label for="gender">Gender:</label><br>
+                <span>Male</span>
+                <input type="radio" name="gender" value="male">
+                <span>Female</span>
+                <input type="radio" name="gender" value="female">
+                <span>Other</span>
+                <input type="radio" name="gender" value="other">
+            </div>
+            <div class="drop-down">
+                <label for="location">Location:</label>
+                <select name="location">
+                    <option value="Cayman Islands">Cayman Islands</option>
+                    <option value="Burmuda">Burmuda</option>
+                    <option value="Florida">Florida</option>
+                </select>
+            </div>
+            <div class="multi-option">
+                <label for="dietary-restrictions">Dietary Restrictions</label><br>
+                <span>Vegan</span>
+                <input type="checkbox" name="dietary-restrictions" value="Vegan">
+                <span>Kosher</span>
+                <input type="checkbox" name="dietary-restrictions" value="Kosher">
+                <span>Lactose Free</span>
+                <input type="checkbox" name="dietary-restrictions" value="Lactose-Free">
+            </div>
+            <button>Submit</button>
+        </form>
+
+        <script src="script.js"></script>
+    </body>
+</html>
