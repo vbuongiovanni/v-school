@@ -628,6 +628,7 @@
                 </ul>
     
             </ul>
+
         </ul>
 
     <h2>The Document Object Model (DOM)</h2>
@@ -885,7 +886,103 @@
 
 
         </ul>
+    <h2>Advanced JS Concepts</h2>
+        <ul>
+            <li class="key-concept">Web Storage</li>
+            <ul>
+                <li>Methods of implementing persistent data in a web browser</li>
+                <ul>
+                    <li>Cookies: Typically meant to store information about HTTP requests - they are sent in the headers HTTP requests. Limited to 4kb, but one advantage is that they can have a set expiration so they will die at a specified date/time</li>
+                    <li>Database: Most robust option, but there is a lot more overhead with respect to set-up/maintenance (have to set up a separate server and obviously a database). Ideal for large scale/production applications, but could be overkill for smaller projects</li>
+                    <li>Local Storage: Browser is able to store basic Key-Value pairs to local hard drive. Can hold basically as much data as you want to put in it and will continue to persist until it is manually cleared out. This is ideal for saving user's customized settings.</li>
+                    <li>Session Storage: Identical to Local Storage except that data will be removed once the browser is (since data is specific to the session). However, this might be useful because a user can have more than one window open and still have data shared between them.</li>
+                </ul>
+                <li>Using <span class="code">localStorage</span> and <span class="code">sessionStorage</span> - Save, Access, and Removing something:</li>
+                    <p class="input code">localStorage.setItem("keyName", "valueToSaveToLocalStorage");</p>
+                    <p class="input code">sessionStorage.setItem("keyName", "valueToSaveToSessionStorage");</p>
+                    <p class="input code">console.log(localStorage.getItem("keyName"));</p>
+                    <p class="output code">valueToSaveToLocalStorage</p>
+                    <p class="input code">console.log(sessionStorage.getItem("keyName"));</p>
+                    <p class="output code">valueToSaveToSessionStorage</p>
+                    <p class="input code">sessionStorage.removeItem("keyName");</p>
+                    <p class="input code">// Alternatively, you can access, modify, and delete the values the same way you would with any JS object:</p>
+                    <p class="input code">localStorage.keyName = "Updated value string";</p>
+                    <p class="input code">console.log(localStorage.keyName);</p>
+                    <p class="output code">Updated value string</p>
+                    <p class="input code">delete localStorage.keyName;</p>
+                <li>The getter and setter methods return <span class="code">null</span> if object is not defined, whereas the other methods return <span class="code">undefined</span>, which is harder to handle. With that, it is best to use the getter and setter methods.</li>
+                <li>Note <span class="code">localStorage</span> and <span class="code">sessionStorage</span> are limited to primitive data types. If needed, you can use <span class="code">JSON.stringify()</span> and <span class="code">JSON.parse()</span> to transform arrays & objects to/from JSON</li>
+                    <p class="input code">const anObject = {name : "Pete", age : 18};</p>
+                    <p class="input code">sessionStorage.setItem("friend", JSON.stringify(anObject));</p>
+                    <p class="input code">console.log(JSON.parse(sessionStorage.friend));</p>
+                    <p class="output code">{name: 'Pete', age: 18}</p>
+            </ul>
+            <li><span class="key-concept">Higher Order Functions</span> Functions functions that either takes a function as an argument and/or returns a functions.</li>
+            <ul>
+                <li>Higher Order Functions will often use a <span class="key-concept">callback</span>, or a function that will implement the logic. Think Command Pattern.</li>
+                <li><span class="code">setTimeout</span> and <span class="code">setInterval</span></li>
+                <ul>
+                    <li>Provide a means to program delays - e.g., wait 10 seconds before running a given function. Note that the <span class="code">time</span> argument is in milliseconds</li>
+                    <li><span class="code">setTimeout</span> - ideal for delaying the execution of a function once (e.g., function will 1 time, but will wait 60 seconds before executing).</li>
+                    <li><span class="code">setInterval</span> - ideal for delaying the execution of a function multiple times (e.g., function will run 100 times, every 60 seconds).</li>
+                </ul>
+                <li>Higher Order Array Methods:</li>
+                <ul>
+                    <li><span class="code">.map()</span></li>
+                    <ul>
+                        <li>Purpose: allows you to apply a function to each element within a given array - in essence, it is a shorter syntax for a for-loop</li>
+                        <li>Returns: an array of equal length to the original array</li>
+                        <p class="input code">const arr = [1, 2, 3, 4, 5];</p>
+                        <p class="input code">console.log(arr.map(num => num + 10))</p>
+                        <p class="output code">[ 11, 12, 13, 14, 15 ]</p>
+                        <p class="input code">const users = [{name : "john"}, {name : "pete"}];</p>
+                        <p class="input code">console.log(users.map(user => user.name));</p>
+                        <p class="output code">[ 'john', 'pete' ]</p>
+                    </ul>
+                    <li><span class="code">.filter()</span></li>
+                    <ul>
+                        <li>Purpose: Reducing an existing data set into a subset. Note that the callback function needs to return true or false</li>
+                        <li>Returns: A new array with only the filtered items</li>
+                        <p class="input code">const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];</p>
+                        <p class="input code">console.log(arr.filter(num => (num % 2) === 0));</p>
+                        <p class="output code">[ 2, 4, 6, 8, 10 ]</p>
+                        <p class="input code">const movies = [</p>
+                        <p class="input-indent code">{ name: "movie1", genre: "horror" },</p>
+                        <p class="input-indent code">{ name: "movie2", genre: "action" },</p>
+                        <p class="input-indent code">{ name: "movie3", genre: "action" },</p>
+                        <p class="input-indent code">{ name: "movie4", genre: "fantasy" }</p>
+                        <p class="input code">];</p>
+                        <p class="input code">console.log(movies.filter(movie => movie.genre === "action"));</p>
+                        <p class="output code">[{ name: 'movie2', genre: 'action' }, { name: 'movie3', genre: 'action' }]</p>
+                    </ul>
+                    <li><span class="code">.ForEach()</span>, <span class="code">.Find()</span>, <span class="code">.FindIndex()</span></li>
+                    <ul>
+                        <li>Purpose: </li>
+                        <li>Returns: </li>
+                        <p class="input code"></p>
+                        <p class="input code"></p>
+                        <p class="output code"></p>
+                        <p class="input code"></p>
+                        <p class="input code"></p>
+                        <p class="output code"></p>
+                    </ul>
+                    <li><span class="code">.reduce()</span></li>
+                    <ul>
+                        <li>Purpose: </li>
+                        <li>Returns: </li>
+                        <p class="input code"></p>
+                        <p class="input code"></p>
+                        <p class="output code"></p>
+                        <p class="input code"></p>
+                        <p class="input code"></p>
+                        <p class="output code"></p>
+                    </ul>
 
+                </ul>
+                
+            </ul>
+            
+        </ul>
 
     </body>
 </html>
