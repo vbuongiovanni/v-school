@@ -955,16 +955,70 @@
                         <p class="input code">console.log(movies.filter(movie => movie.genre === "action"));</p>
                         <p class="output code">[{ name: 'movie2', genre: 'action' }, { name: 'movie3', genre: 'action' }]</p>
                     </ul>
-                    <li><span class="code">.ForEach()</span>, <span class="code">.Find()</span>, <span class="code">.FindIndex()</span></li>
+                    <li><span class="code">.ForEach()</span></li>
                     <ul>
-                        <li>Purpose: </li>
-                        <li>Returns: </li>
-                        <p class="input code"></p>
-                        <p class="input code"></p>
-                        <p class="output code"></p>
-                        <p class="input code"></p>
-                        <p class="input code"></p>
-                        <p class="output code"></p>
+                        <li>Purpose: Similar to map except that it does NOT return a new array. Is used in place of a for-loop - </li>
+                        <li>Returns: <span class="code">undefined</span></li>
+                        <p class="input code">const arr = [1, 2, 3, 4, 5, 6, 7, 8]</p>
+                        <p class="input code">const newArr = [];</p>
+                        <p class="input code">arr.forEach(num => (num % 2) === 0 && newArr.push(num))</p>
+                        <p class="input code">console.log(newArr);</p>
+                        <p class="output code">[ 2, 4, 6, 8 ]</p>
+                    </ul>
+                    <li><span class="code">.find()</span></li>
+                    <ul>
+                        <li>Purpose: Finding an item within an array</li>
+                        <li>Returns: The first match that is found within the array</li>
+                        <p class="input code">const users = [</p>
+                        <p class="input-indent code">{ name: "joe"},</p>
+                        <p class="input-indent code">{ name: "julie"},</p>
+                        <p class="input-indent code">{ name: "rick"}</p>
+                        <p class="input code">];</p>
+                        <p class="input code">console.log(users.find(user => user.name[0] === "j"))</p>
+                        <p class="output code">{ name: 'joe' }</p>
+                    </ul>
+                    <li><span class="code">.findIndex()</span></li>
+                    <ul>
+                        <li>Purpose: Finding an index number of a given element within an array</li>
+                        <li>Returns: the index number of the matching element</li>
+                        <p class="input code">const users = [</p>
+                        <p class="input-indent code">{ name: "joe"},</p>
+                        <p class="input-indent code">{ name: "julie"},</p>
+                        <p class="input-indent code">{ name: "rick"}</p>
+                        <p class="input code">];</p>
+                        <p class="input code">console.log(users.find(user => user.name[0] === "j"))</p>
+                        <p class="output code">0</p>
+                    </ul>
+                    <li><span class="code">.every()</span></li>
+                    <ul>
+                        <li>Purpose: Test to see if something exists within an array. Continues to loop through array until a failure is found.</li>
+                        <li>Returns: Returns <span class="code">true</span> if at least item in array matches criteria.  </li>
+                        <p class="input code">const names = ["Jack", "John", "Jill", "Joseph", "Jackie", "Steve"];</p>
+                        <p class="input code">const namesNoSteve = ["Jack", "John", "Jill", "Joseph", "Jackie"];</p>
+                        <p class="input code">console.log(names.some(name => name[0] === "J"));</p>
+                        <p class="output code">false</p>
+                        <p class="input code">console.log(namesNoSteve.some(name => name[0] === "J"));</p>
+                        <p class="output code">true</p>
+                    </ul>
+                    <li><span class="code">.some()</span></li>
+                    <ul>
+                        <li>Purpose: Test contents of array for complete match</li>
+                        <li>Returns: Returns <span class="code">true</span> if EVERY item in array matches criteria.  </li>
+                        <p class="input code">const names = ["Jack", "John", "Jill", "Joseph", "Jackie", "Steve"];</p>
+                        <p class="input code">console.log(names.some(name => name[0] === "S"));</p>
+                        <p class="output code">true</p>
+                    </ul>
+                    <li><span class="code">.sort()</span></li>
+                    <ul>
+                        <li>Purpose: To sort an unsorted array</li>
+                        <li>Returns: The array but sorted... But it also mutates the original array in place. Capturing the value isn't entirely important. Sort algorithm is browser dependent. The syntax is a little weird, so you may have to play around with it.</li>
+                        <p class="input code">const arr = [34, 6, 22, 1, 6, 44, 3, 64, 234, 5];</p>
+                        <p class="input code">arr.sort((a, b) => b - a);</p>
+                        <p class="input code">console.log(arr);</p>
+                        <p class="output code">[234, 64, 44, 34, 22, 6,  6,  5,  3,  1]</p>
+                        <p class="input code">arr.sort((a, b) => a - b);</p>
+                        <p class="input code">console.log(arr)</p>
+                        <p class="output code">[1, 3, 5, 6, 6, 22, 34, 44, 64, 234 ]</p>
                     </ul>
                     <li><span class="code">.reduce()</span></li>
                     <ul>
