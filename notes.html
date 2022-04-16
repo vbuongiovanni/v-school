@@ -896,7 +896,6 @@
                     <li>Database: Most robust option, but there is a lot more overhead with respect to set-up/maintenance (have to set up a separate server and obviously a database). Ideal for large scale/production applications, but could be overkill for smaller projects</li>
                     <li>Local Storage: Browser is able to store basic Key-Value pairs to local hard drive. Can hold basically as much data as you want to put in it and will continue to persist until it is manually cleared out. This is ideal for saving user's customized settings.</li>
                     <li>Session Storage: Identical to Local Storage except that data will be removed once the browser is (since data is specific to the session). However, this might be useful because a user can have more than one window open and still have data shared between them.</li>
-                </ul>
                 <li>Using <span class="code">localStorage</span> and <span class="code">sessionStorage</span> - Save, Access, and Removing something:</li>
                     <p class="input code">localStorage.setItem("keyName", "valueToSaveToLocalStorage");</p>
                     <p class="input code">sessionStorage.setItem("keyName", "valueToSaveToSessionStorage");</p>
@@ -916,6 +915,7 @@
                     <p class="input code">sessionStorage.setItem("friend", JSON.stringify(anObject));</p>
                     <p class="input code">console.log(JSON.parse(sessionStorage.friend));</p>
                     <p class="output code">{name: 'Pete', age: 18}</p>
+                </ul>
             </ul>
             <li><span class="key-concept">Higher Order Functions</span> Functions functions that either takes a function as an argument and/or returns a functions.</li>
             <ul>
@@ -923,8 +923,15 @@
                 <li><span class="code">setTimeout</span> and <span class="code">setInterval</span></li>
                 <ul>
                     <li>Provide a means to program delays - e.g., wait 10 seconds before running a given function. Note that the <span class="code">time</span> argument is in milliseconds</li>
-                    <li><span class="code">setTimeout</span> - ideal for delaying the execution of a function once (e.g., function will 1 time, but will wait 60 seconds before executing).</li>
-                    <li><span class="code">setInterval</span> - ideal for delaying the execution of a function multiple times (e.g., function will run 100 times, every 60 seconds).</li>
+                    <li><span class="code">setTimeout</span> - Calls a function after a certain amount of time</li>
+                    <ul>
+                        <li>Ideal for delaying the execution of a function once (e.g., function will 1 time, but will wait 60 seconds before executing).</li>
+                    </ul>
+                    <li><span class="code">setInterval</span> - Calls a function on a repeated basis</li>
+                    <ul>
+                        <li>Ideal for delaying the execution of a function multiple times (e.g., function will run 100 times, every 60 seconds).</li>
+                    </ul>
+                    <li>Both functions return an ID, which can be used to stop the timers - <span class="code">clearInterval</span> and <span class="code">clearTimeout</span></li>
                 </ul>
                 <li>Higher Order Array Methods:</li>
                 <ul>
@@ -1020,22 +1027,108 @@
                         <p class="input code">console.log(arr)</p>
                         <p class="output code">[1, 3, 5, 6, 6, 22, 34, 44, 64, 234 ]</p>
                     </ul>
-                    <li><span class="code">.reduce()</span></li>
+                    <li><span class="code">.reduce(function(final, current){}, initialValueOfFinal)</span> - initial value is optional</li>
                     <ul>
-                        <li>Purpose: </li>
-                        <li>Returns: </li>
-                        <p class="input code"></p>
-                        <p class="input code"></p>
-                        <p class="output code"></p>
-                        <p class="input code"></p>
-                        <p class="input code"></p>
-                        <p class="output code"></p>
+                        <li>Purpose: Takes an array of data and reduces it into a smaller or completely different data set.</li>
+                        <li>Returns: Can return virtually anything depending on how it is used</li>
+                        <li>Common naming convention - 'final' is what is returned from .reduce() while 'current' represents each individual element. 'current' should be changed to a meaningful name</li>
+                        <li>Second argument is optional. if left as default or not specified, 'final' is initialized as the data type of the first element in the array.</li>
+                        <li>Whatever is returned at the end of each element's iteration becomes the new value of 'final' for the next iteration. If there aren't any other iterations, the value is returned.</li>
+                        <p class="input code">const arr = [1, 2, 3, 4, 5];</p>
+                        <p class="input code">const result1 = arr.reduce((final, current) => final += current, 0)</p>
+                        <p class="input code">console.log(result1)</p>
+                        <p class="output code">15</p>
+                        <p class="input code">arr.reduce((final, current) => {</p>
+                        <p class="input-indent code">console.log(`Starting final value: ${final}`);</p>
+                        <p class="input-indent code">final += current;</p>
+                        <p class="input-indent code">console.log(`current: ${current}`);</p>
+                        <p class="input-indent code">console.log(`Ending final value: ${final}`);</p>
+                        <p class="input-indent code">return final;</p>
+                        <p class="input-indent code">}) // no value of final was initialized, so it will be 0 on the first iteration.</p>
+                        <p class="output code">Starting final value: 0</p>
+                        <p class="output code">current: 1</p>
+                        <p class="output code">Ending final value: 1</p>
+                        <p class="output code">Starting final value: 1</p>
+                        <p class="output code">current: 2</p>
+                        <p class="output code">Ending final value: 3</p>
+                        <p class="output code">Starting final value: 3</p>
+                        <p class="output code">current: 3</p>
+                        <p class="output code">Ending final value: 6</p>
+                        <p class="output code">Starting final value: 6</p>
+                        <p class="output code">current: 4</p>
+                        <p class="output code">Ending final value: 10</p>
+                        <p class="output code">Starting final value: 10</p>
+                        <p class="output code">current: 5</p>
+                        <p class="output code">Ending final value: 15</p>
+                        <p class="input code">const voters = [</p>
+                        <p class="input-indent code">{ name: "steve", voted: true },</p>
+                        <p class="input-indent code">{ name: "janet", voted: true },</p>
+                        <p class="input-indent code">{ name: "rebecca", voted: false },</p>
+                        <p class="input-indent code">{ name: "harvey", voted: true },</p>
+                        <p class="input-indent code">]</p>
+                        <p class="input code">const result4 = voters.reduce((final, voter) => {</p>
+                        <p class="input-indent code">if (voter.voted === true) {</p>
+                        <p class="input-indent code">final.didVote += 1;</p>
+                        <p class="input-indent code">} else {</p>
+                        <p class="input-indent code">final.didntVote += 1;</p>
+                        <p class="input-indent code">}</p>
+                        <p class="input-indent code">return final;</p>
+                        <p class="input-indent code">},</p>
+                        <p class="input-indent code">{didVote : 0, didntVote : 0}) // initalizing the value of 'final'</p>
+                        <p class="input code">console.log(result4);</p>
+                        <p class="output code">{ didVote: 3, didntVote: 1 }</p>
                     </ul>
 
                 </ul>
                 
             </ul>
-            
+            <li class="key-concept">Error Handling</li>
+            <ul>
+                <li>Error handling works exactly the same as in Java.. and very similar to R.</li>
+                <li>Overview</li>
+                <ul>
+                    <li><span class="code">try{}</span> Default code block that will be run</li>
+                    <li><span class="code">catch{}</span> Code block that will be run in the event of a thrown error</li>
+                    <li><span class="code">finally{}</span> Code block that will run regardless of whether or not an error was throw</li>
+                    <li><span>throw</span> Keyword that precedes the throwing of a new error. Can be placed before a string or an instantiated error.</li>
+                    <li><span>new Error()</span> constructor to instantiate new error obect</li>
+                </ul>
+                <li>List of error types native to JS - see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors">here</a> for full list.</li>
+                <ul>
+                    <li><span class="code">Error</span></li>
+                    <li><span class="code">InternalError</span></li>
+                    <li><span class="code">RangeError</span></li>
+                    <li><span class="code">ReferenceError</span></li>
+                    <li><span class="code">SyntaxError</span></li>
+                    <li><span class="code">TypeError</span></li>
+                    <li><span class="code">URIError</span></li>
+                    <li><span class="code">Warning</span></li>
+                </ul>
+            </ul>
+            <li class="key-concept">Unit Testing</li>
+            <ul>
+                <li>Practice of testing the smallest unit possible (e.g., function) by evaluating the input/expected output.</li>
+                <li>Benefits of Unit Testing</li>
+                <ul>
+                    <li>Approaching a program with testing in mind creates an stronger overall program as you are approaching each individual section with tests.</li>
+                    <li>Catch bugs earlier on.</li>
+                    <li>Forces you to write out expected output, thereby making code easier to understand</li>
+                    <li>Streamlines the addition of new features/refactoring since you can further encapsulate expected results at the smallest level possible.</li>
+                    <li>Protects code against other developers through changes - everyone can see right away if something breaks after someone makes a change.</li>
+                </ul>
+                <li>Test Driven Development, or Red/Green Testing</li>
+                <ul>
+                    <li>TDD is a method that requires a test to be written before the function is created</li>
+                    <li>At first, test will fail, thereby producing a 'red' in the console</li>
+                    <li>As time goes on, the results turn green which shows everything is working as expected/desired.</li>
+                </ul>
+                <li>Frameworks - There are many available, but V School uses <span class="key-concept">Mocha</span> and <span class="key-concept">Chai</span></li>
+                <ul>
+                    <li>Mocha - Test runner, shows how many passed and which ones failed.</li>
+                    <li>Chai - Assertion library including <span class="code">assert</span>, <span class="code">expect</span>, and <span class="code">should</span></li>
+                </ul>
+            </ul>
+
         </ul>
 
     </body>
