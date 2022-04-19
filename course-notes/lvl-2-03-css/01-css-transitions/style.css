@@ -1,0 +1,24 @@
+#box {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: cornflowerblue;
+
+    /*
+    Long Hand:
+    transition-property: background-color;
+    transition-duration: 1s;
+    transition-timing-function: linear;
+    transition-delay: 1s; 
+    */
+
+    /*
+    Shorthand
+    transition: transition-property transition-duration transition-timing-function transition-delay
+     */
+    transition: background-color 1s linear 1s;
+}
+#box:hover {
+    background-color: firebrick;
+    border: 2px solid black;
+}

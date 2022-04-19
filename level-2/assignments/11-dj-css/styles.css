@@ -1,0 +1,55 @@
+body {
+    display: flex;
+    justify-content: center;
+
+}
+main {
+    display: grid;
+    grid-template-columns: repeat(2, 300px);
+}
+main * {
+    margin: 0px;
+    padding: 0px
+}
+.box {
+    width: 200px;
+    height: 200px;
+    transition: all 100ms linear 0s;
+}
+.odd {
+    grid-column: 1/2;
+}
+.even {
+    grid-column: 2/3;
+}
+#box-1, #box-4 {
+    background-color: red;
+    border: 3px solid red;
+}
+#box-2, #box-5 {
+    background-color: blue;
+    border: 3px solid blue;
+}
+#box-3, #box-6 {
+    background-color: green;
+    border: 3px solid green;
+}
+#box-1:hover, #box-4:hover {
+    background-color: blue;
+    border: 3px solid green;
+}
+#box-2:hover, #box-5:hover {
+    background-color: green;
+    border: 3px solid red;
+}
+#box-3:hover, #box-6:hover {
+    background-color: green;
+    border: 3px solid blue;
+}
+.odd:hover {
+    height: 250px;
+}
+.even:hover {
+    height: 250px;
+}
+

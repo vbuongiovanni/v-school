@@ -105,529 +105,203 @@
             </ol>
         </ul>
 
-    <h2>General</h2>
+    <h2 class="key-concept">HTML</h2>
         <ul>
-            <li class="key-concept">JavaScript</li>
-            <ul>
-                <li class="key-concept">Naming Convention</li>
-                    <ul>
-                        <li>camelCase for all variable and function names. Exception - constructor functions</li>
-                        <li>Use 4-spaces to ident code. 2-space is also common</li>
-                        <li>add whitespace around all operators</li>
-                        <li>Each property of an object is given its own line</li>
-                        <li>Add Semicolons after every simple statement. Do NOT include a semicolon after loops, }, func declarations, etc</li>
-                        <li>Use logical and meaningful names. Additionally, the following rules apply based on type:</li>
-                        <ul>
-                            <li>Booleans are often named after questions - "isAlive" or "isPositive"</li>
-                            <li>Functions should be given a verb or action word describing its job</li>
-                            <li>Arrays should be given plural names</li>
-                            <li>Objects should be given singular names</li>
-                        </ul>
-                        <li>Line comments should be used more often than block comments. Generally, you should reserved block comments for extensive documentation.</li> 
-                    </ul>
-                <li>Data Types</li>
-                    <ul>
-                        <li>Immutable - the underlying data type, not the variable containing the data type, cannot be changed.</li>
-                        <ul>
-                            <li>Primitive Types:</li>
-                            <ul>
-                                <li>String: "anything enclosed by double or single quotes"</li>
-                                <li>Numeric: 1, 342.342, 0, and <span class="code">NaN</span></li>
-                                <li>Boolean: <span class="code">true</span> & <span class="code">false</span></li>
-                                <li>BigInt</li>
-                                <li>Symbol</li>
-                                <li>null</li>
-                                <li>undefined</li>
-                            </ul>
-                            <li>Example:</li>
-                            <p class="input code">let stringVar = "jello";</p>
-                            <p class="input code">console.log(stringVar);</p>
-                            <p class="output code">jello</p>
-                            <p class="input code">console.log(stringVar[0]);</p>
-                            <p class="output code">j</p>
-                            <p class="input code">stringVar[0] = "h";</p>
-                            <p class="input code">console.log(stringVar);</p>
-                            <p class="output code">jello</p>
-                            <li>Passed by value</li>
-                            <p class="input code">let age = 10;</p>
-                            <p class="input code">let OtherAge = age;</p>
-                            <p class="input code">otherAge = 12;</p>
-                            <p class="input code">console.log(otherAge);</p>
-                            <p class="output code">12</p>
-                            <p class="input code">console.log(age);</p>
-                            <p class="output code">10</p>
-                        </ul>
-                        <li>Mutable - data can changed. These two are effectively 'containers' in JS</li>
-                        <ul>
-                            <li>Reference Data Types</li>
-                            <ul>
-                                <li>Array (typeof will return 'object')</li>
-                                <li>Object</li>
-                                <li>Functions</li>
-                            </ul>
-                            <li>Example:</li>
-                            <p class="input code">let numericArray = [1, 2, 3, 4];</p>
-                            <p class="input code">console.log(numericArray);</p>
-                            <p class="output code">[ 1, 2, 3, 4 ]</p>
-                            <p class="input code">numericArray[0] = 99;</p>
-                            <p class="input code">console.log(numericArray);</p>
-                            <p class="output code">[99, 2, 3, 4]</p>
-                            <p class="input code">let person = {name : "harry", age : 15};</p>
-                            <p class="input code">console.log(person);</p>
-                            <p class="output code">{ name: 'harry', age: 15 }</p>
-                            <p class="input code">person.hasWand = true;</p>
-                            <p class="input code">console.log(person);</p>>
-                            <p class="output code">{ name: 'harry', age: 15, hasWand: true }</p>
-                            <p class="input code">delete person.hasWand;</p>
-                            <p class="input code">console.log(person);</p>
-                            <p class="output code">{ name: 'harry', age: 15 }</p>
-                            <li>Passed by Reference - note that if you reassign an array or object to a new variable, the two objects will be tethered</li>
-                            <p class="input code">let newPerson = person;</p>
-                            <p class="input code">newPerson.hasWand = true;</p>
-                            <p class="input code">console.log(person)</p>
-                            <p class="output code">{ name: 'harry', age: 15, hasWand: true }</p>
-                        </ul>
-                    </ul>
-                <li>Special Datatype Method</li>
-                    <ul>
-                        <li>Methods that are specific to every string - these are prebuilt functionality that are native to JS</li>
-                        <li class="key-concept">Array Methods</li>
-                            <ul>
-                                <li>Methods that modify the original array in place:</li>
-                                <ul>
-                                    <li><span class="code">arrayVariable.push()</span>: <b>adds</b> new element to end of array. Returns the new length of the array.</li>
-                                    <li><span class="code">arrayVariable.pop()</span>: 'pops-off' and element - it <b>removes</b> final element from end of array. Returns removed element</li>
-                                    <li><span class="code">arrayVariable.unshift()</span>: <b>adds</b> new element to beginning of array.</li>
-                                    <li><span class="code">arrayVariable.shift()</span>: <b>removes</b> first element from beginning of array.</li>
-                                    <li><span class="code">arrayVariable.splice(startIndex, deleteCount, "optionalElementToAddToArray", "otherElement", ..., "otherElementN")</span>: Allows you to 1.) cut out elements in array and 2.) add new elements. Modifies array by removing <span class="code">deleteCount</span> number of elements from array, starting at <span class="code">startIndex</span>. The third variable is optional - if left out, no new elements will be added.</li>
-                                </ul>
-                                <li>Methods that do NOT modify the original array in place:</li>
-                                <ul>
-                                    <li><span class="code">arrayVariable.concat(OtherArray)</span>: Combines two arrays into one - returns a new array</li>
-                                    <li><span class="code">arrayVariable.indexOf("elementInArray")</span>: Returns index of matching argument. Returns -1 if element if there isn't a match.</li>
-                                    <li><span class="code">arrayVariable.slice(startIndex, endIndex)</span>: Creates a new array starting at startIndex (inclusive) and ending at endIndex (exclusive). The second variable is optional - if left out, slice() will default to the final index + 1.</li>
-                                    <li><span class="code">arrayVariable.join("optionalSeperator")</span>: Turns an array into a string by concatenating all elements. Argument is a string that will separate each element in the original array. Default is ","</li>
-                                    <li><span class="code">arrayVariable.reverse()</span>: returns array in reverse order.</li>
-                                </ul>
-                                <li>Examples:</li>
-                                <ul>
-                                    <li class="key-concept">Set Up:</li>
-                                    <p class="code input">let arrOfFoods = ["pancakes", "egg", "ice cream", "pizza", "hamburger"];</p>
-                                    <p class="code input">console.log(arrOfFoods);</p>
-                                    <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
-                                    <li class="key-concept">push():</li>
-                                    <p class="code input">arrOfFoods.push("tacos");</p>
-                                    <p class="code output">6</p>  
-                                    <p class="code input">console.log(arrOfFoods);</p>
-                                    <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
-                                    <li class="key-concept">pop():</li>
-                                    <p class="code input">arrOfFoods.pop();</p>
-                                    <p class="code output">'tacos'</p>  
-                                    <p class="code input">console.log(arrOfFoods);</p>
-                                    <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
-                                    <li class="key-concept">Unshift():</li>
-                                    <p class="code input">arrOfFoods.unshift("tacos");</p>
-                                    <p class="code output">6</p>  
-                                    <p class="code input">console.log(arrOfFoods);</p>
-                                    <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
-                                    <li class="key-concept">shift():</li>
-                                    <p class="code input">arrOfFoods.shift();</p>
-                                    <p class="code output">'tacos'</p>  
-                                    <p class="code input">console.log(arrOfFoods);</p>
-                                    <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
-                                    <p class="code input">let arrOfDrinks = ["coffee", "whiskey", "water", "beer"];</p> 
-                                    <p class="code input">const foodsAndDrinks = arrOfFoods.concat(arrOfDrinks);</p>
-                                    <p class="code input">console.log(foodsAndDrinks);</p>
-                                    <p class="code output">['pancakes',  'egg', 'ice cream', 'pizza', 'hamburger', 'coffee', 'whiskey', 'water', 'beer']</p>  
-                                    <li class="key-concept">indexOf():</li>
-                                    <p class="code input">console.log(foodsAndDrinks.indexOf("pizza"));</p>
-                                    <p class="code output">3</p>  
-                                    <p class="code input">console.log(foodsAndDrinks.indexOf("milkshakes"));</p>
-                                    <p class="code output">-1</p>  
-                                    <li class="key-concept">slice():</li>
-                                    <p class="code input">console.log(foodsAndDrinks.slice(0, 3));</p>
-                                    <p class="code output">[ 'pancakes', 'egg', 'ice cream' ]</p>  
-                                    <li class="key-concept">join():</li>
-                                    <p class="code input">console.log("I like :" + foodsAndDrinks.join(", "));</p>
-                                    <p class="code output">I like :pancakes, egg, ice cream, pizza, hamburger, coffee, whiskey, water, beer</p>  
-                                    <li class="key-concept">reverse():</li>
-                                    <p class="code input">console.log(arrOfFoods.reverse());</p>
-                                    <p class="code output">[ 'hamburger', 'pizza', 'ice cream', 'egg', 'pancakes' ]</p>  
-                                    <li class="key-concept">splice():</li>
-                                    <p class="code input">foodsAndDrinks.splice(0, 1, "steak", "potatoes");</p>
-                                    <p class="code output">['pancakes']</p>  
-                                    <p class="code input">console.log("Anytime Food & Drinks:" + foodsAndDrinks);</p>
-                                    <p class="code output">Anytime Food & Drinks:steak,potatoes,egg,ice cream,pizza,hamburger,coffee,whiskey,water,beer</p> 
-                                </ul>
-                                <li>For a comprehensive list, see <a href="https://www.w3schools.com/jsref/jsref_obj_array.asp">W3 School Array Methods</a></li>
-                            </ul>
-                        <li class="key-concept">String Methods</li>
-                            <ul>
-                                <li>Note that, generally, these do not change the original variable. Rather, they return a new value:</li>
-                                <ul>
-                                    <li><span class="code">stringVariable.toUpperCase()</span> and <span class="code">stringVariable.toLowerCase()</span>: returns the string in either upper or lower case.</li>
-                                    <li><span class="code">stringVariable.concat("string To Concat")</span>: returns the string with the argument concatenated on the back.</li>
-                                    <li><span class="code">stringVariable.split("deliminatingString")</span>: returns an array that is seperated by the parameter. Note that the splitting character is removed.</li>
-                                    <li><span class="code">stringVariable.slice(startIndex, endIndex)</span>: Cuts segment of string starting at startIndex (inclusive) and ending at endIndex (exclusive). The second variable is optional - if left out, slice() will default to the final index + 1.</li>
-                                    <li><span class="code">stringVariable.indexOf()</span>: used to see if, and where, a pattern is within a string. -1 indicates that the pattern was not located.</li>
-                                </ul>
-                                <li>Examples:</li>
-                                <ul>
-                                    <li class="key-concept">Set up</li>
-                                    <p class="code input">let employeeName = "John, Smith";</p> 
-                                    <p class="code input">let phoneNumber = "8091234567";</p>
-                                    <li class="key-concept">toUpperCase():</li>
-                                    <p class="code input">employeeName.toUpperCase();</p>
-                                    <p class="code output">'JOHN, SMITH'</p>  
-                                    <li class="key-concept">toLowerCase():</li>
-                                    <p class="code input">employeeName.toLowerCase();</p> 
-                                    <p class="code output">'john, smith'</p>  
-                                    <li class="key-concept">concat():</li>
-                                    <p class="code input">employeeName.concat(" II");</p> 
-                                    <p class="code output">'John, Smith II'</p> 
-                                    <li class="key-concept">split():</li>
-                                    <p class="code input">employeeName.split(",");</p>  
-                                    <p class="code output">[ 'John', ' Smith' ];</p>  
-                                    <li class="key-concept">slice():</li>
-                                    <p class="code input">phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6)</p>  
-                                    <p class="code output">'809-123-4567'</p>  
-                                    <li class="key-concept">indexOf():</li>
-                                    <p class="code input">employeeName.indexOf(" ");</p> 
-                                    <p class="code output">5</p> 
-                                    <p class="code input">employeeName.indexOf("z");</p> 
-                                    <p class="code output">-1</p> 
-                                </ul>
-                                <li>For a comprehensive list, see <a href="https://www.w3schools.com/jsref/jsref_obj_string.asp">W3 School String Methods</a></li>
-                            </ul>
-                    </ul>
-                <li class="key-concept">Constructor Functions</li>
-                    <ul>
-                        <li>In same manner as an strictly typed OOP language, constructors allow us to create blueprints for objects</li>
-                        <li>By convention, constructor function names start with a capital letter</li>
-                        <li>Just like in Java, <span class="code">this.objectAttribute</span> is used to declare a standard value within the constructor function</li>
-                        <li>Also in Java, we can add methods to the constructor function that will be accessible by all objected created. However, it is bad practice to define methods within constructor function. The more appropraite way is to use the <span class="code">prototype</span>.</li>
-                        <li>After creating a constructor function, new instances of the object can be created using the <span class="code">new</span> keyword. See example below.</li>
-                        <li>Example</li>
-                        <p class="code input">function Car(make, model, year, honkSound) { </p>
-                        <p class="code input-indent">this.make = make;</p>
-                        <p class="code input-indent">this.model = model;</p>
-                        <p class="code input-indent">this.year = year;</p>
-                        <p class="code input-indent">this.honkSound = honkSound;</p>
-                        <ul>
-                            <li>This is the old school way of adding methods. Generally, it is frowned upon because the underlying method will be stored N number of times in memory. The preferred way of implementing methods is to use prototypes.</li>
-                        </ul>
-                        <p class="code input-indent">this.honk = function(){console.log(this.honkSound + "!")}</p>
-                        <p class="code input-indent">}</p>
-                        <p class="code input">let jeep = new Car("Jeep", "Cherokee", 1995, "BEEP");</p>
-                        <p class="code input">console.log(jeep);</p>
-                        <p class="code output">Car { make: 'Jeep', model: 'Cherokee', year: 1995, honkSound: 'BEEP', honk: [Function (anonymous)] }</p>
-                        <p class="code input">jeep.honk();</p>
-                        <p class="code output">"BEEP"</p>
-                        <p class="code input">let honda = new Car("Honda", "Accord", 2019, "MEEP");</p>
-                        <p class="code input">console.log(honda);</p>
-                        <p class="code output">Car { make: 'Honda', model: 'Accord', year: 2019, honkSound: 'MEEP', honk: [Function (anonymous)] }</p>
-                        <p class="code input">honda.honk();</p>
-                        <p class="code output">"MEEP"</p>
-                        <ul>
-                            <li>Prototype implementation (also how inheritance is acheived in JS):</li>
-                        </ul>
-                        <p class="code input">Car.prototype.betterHonk = function(){console.log(this.honkSound + "!!!!")}</p>
-                        <p class="code input">jeep.betterHonk()</p>
-                        <p class="code output">BEEP!!!!</p>
-                    </ul>
-                <li class="key-concept">Special Loops</li>
-                    <ul>
-                        <li class="key-concept">'For-Of' Loop</li>
-                        <ul>
-                            <li>Can be used on any iterable object with an index, such as an array or string</li>
-                            <li>Elements are visited in sequential order</li>
-                            <li>Cannot be used on elements that don't have an ordinal index, such as an object</li>
-                            <li>Example:</li>
-                            <p class="code input">const someIterable = [1, 2, 3, 4, 5];</p> <br />
-                            <p class="code input">for (element of someIterable) {<br/>console.log(element)<br/>}</p>
-                            <p class="code output">1</p>
-                            <p class="code output">2</p>
-                            <p class="code output">3</p>
-                            <p class="code output">4</p>
-                            <p class="code output">5</p>
-                            <li>Example: </li>
-                        </ul>
-                        <li class="key-concept">'For-In' Loop</li>
-                        <ul>
-                            <li>Iterates over <b>keys</b> in an object</li>
-                            <li>Effectively the same as 'for each' in Java</li>
-                            <li>Elements are visited in a nonsequential order based on implementation, so don't rely on a specific sequence.</li>
-                            <li>Prototype properties and standard keys are included in loop, however, certain other elements are not.</li>
-                            <li>Note that the 'For-In' loop can be used for arrays, but the resulting element is the index number:</li>
-                            <li class="key-concept">Examples - Objects:</li>
-                            <p class="code input">const companyRoster = {EID1 : "Jack", EID2 : "Jill", EID3 : "Pete", EID4 : "Susan"}</p>
-                            <p class="code input">for (employee in companyRoster) {<br/>console.log(employee);<br/>}</p>
-                            <p class="code output">EID1</p>
-                            <p class="code output">EID2</p>
-                            <p class="code output">EID3</p>
-                            <p class="code output">EID4</p>
-                            <p class="code input">for (employee in companyRoster) {<br/>console.log(companyRoster[employee]);<br/>}</p>
-                            <p class="code output">Jack</p>
-                            <p class="code output">Jill</p>
-                            <p class="code output">Pete</p>
-                            <p class="code output">Susan</p>
-                            <li class="key-concept">Example - Arrays:</li>
-                            <p class="code input">const someIterable = [1, 2, 3, 4, 5];</p>
-                            <p class="code input">for (element in someIterable) {<br/>console.log(element);<br/>}</p>
-                            <p class="code output">0</p>
-                            <p class="code output">1</p>
-                            <p class="code output">2</p>
-                            <p class="code output">3</p>
-                            <p class="code output">4</p>
-                        </ul>
-                    </ul>
-                <li class="key-concept">ES6 Syntax</li>
+            <li>lower case all html element, attributes, tags etc. One exception - the DOCTYPE at the start of the page </li>
+            <li>Names should be broken up with a dash</li>
+        </ul>
+    <h2 class="key-concept">CSS</h2>
+        <ul>
+            <li class="key-concept">Box Model</li>
                 <ul>
-                    <li>JS is updated annually, but ES6 was a major update. ES6 was release in 2015.</li>
-                    <li class="key-concept">Bracket Scoping: From <span class="code">var</span> to <span class="code">const</span> and <span class="code">let</span></li>
+                    <li>Elements of the Box Model</li>
                     <ul>
-                        <li>ES6 Introducted 'Bracket' Scoping, which allowed variables to live within the nearest set of curly brackets:</li>
+                        <li class="key-concept">Content</li>
                         <ul>
-                            <li><span class="code">const</span> For 'constant' variables - cannot be overwritten (but CAN be updated if its an mutable object)</li>
-                            <li><span class="code">let</span> For all other variables - can be overwritten and updated.</li>
+                            <li>Area where the text or content resides</li>
+                            <li>Determined by height and width</li>
+                            <li>If there aren't any elements (e.g., text, pictures, etc.), then height will equal 0</li>
                         </ul>
-                        <li>Before ES6, the only other scoping, aside from Global was Function scoping, where variables were scoped to the nearest function (or problem):</li>
+                        <li class="key-concept">Padding</li>
                         <ul>
-                            <li><span class="code">var</span> can be overwritten</li>
+                            <li>Blank space around content - inherents the same background color as content element</li>
+                            <li>Still considered to be part of the element itself. If padding is increased, the element's size will increase</li>
                         </ul>
-                        <li>Bracket versus Function Scoping example:</li>
-                        <p class="code input">function scopingExample(){</p>
-                        <p class="code input-indent">if (true) {</p>
-                        <p class="code input-indent">let a = "i am defined by let within a function's if statement!";</p>    
-                        <p class="code input-indent">var b = "i am defined by var within a function's if statement!";</p>    
-                        <p class="code input-indent">}</p>                        
-                        <p class="code input-indent">typeof a == "undefined" ? console.log("a is undefined...") : console.log(a);</p>
-                        <p class="code input-indent">typeof b == "undefined" ? console.log("a is undefined...") : console.log(b);</p>
-                        <p class="code input">}</p>
-                        <p class="code input">scopingExample()</p>
-                        <p class="code output">a is undefined...</p>
-                        <p class="code output">i am defined by var within a function's if statement!</p>
+                        <li class="key-concept">Border</li>
+                        <ul>
+                            <li>Akin to the plastic walls of someone wearing a bubble suit - it is the final boundary between the enclosed element and the outside world</li>
+                            <li>Note that even if border is '0px', if there is a linear border, it will count as a percent of the screen. You can override this by defining <span class="css-code">* {box-sizing: border-box;}</span> </li>
+                        </ul>
+                        <li class="key-concept">Margin</li>
+                        <ul>
+                            <li>Spacer between elements - not that increasing margin does NOT change the size of the object, just the empty space around the object</li>
+                        </ul>
                     </ul>
-                    <li class="key-concept">Spread and Rest operators: <span class="code">...</span></li>
-                    <li>Same operator for both spread and rest</li>
-                    <li>Rest operator (practically speaking, the rest operator 'gathers' arguments)</li>
+                    <li>Defining Properties - Shortcuts:</li>
                     <ul>
-                        <li>Combines arguments into a single array in function parameter</li>
-                        <li>Example:</li>
-                        <p class="code input">function() gatherNumbers(...nums){console.log(nums)}</p>
-                        <p class="code input">gatherNumbers(1, 235, 1245, 234);</p>
-                        <p class="code output">[ 1, 235, 1245, 234 ]</p>
+                        <li>Single Value: applies size to all sides - <span class="css-code">margin: 10px;</span></li>
+                        <li>Two Values: applies first value to Top and Bottom, and second value to Left and Right <span class="css-code">margin: 10px 20px;</span></li>
+                        <li>Three Values: applies first value to Top, second value to Bottom, and third value to both Left and Right <span class="css-code">margin: 10px 20px 30px;</span></li>
+                        <li>Four Values: defines Top, Right, Bottom, and Left <span class="css-code">margin: 10px 20px 30px 40px</span></li>
                     </ul>
-                    <li>Spread - Takes contents of an object or array, then copies contents</li>
-                    <ul>
-                        <li>Whenever <span class="code">...</span> appears outside of a function parameter, it is the Spread operator</li>
-                        <li>Directly copies array or object - since they are called by reference, this is a way to make an actual duplicate of an existing array or object.</li>
-                        <li>Example:</li>
-                        <p class="code input">const colors1 = ["red", "blue"];</p>
-                        <p class="code input">const colors2 = ["yellow", "green"];</p>
-                        <p class="code input">const allColors = [...colors1, ...colors2];</p>
-                        <p class="code input">console.log(allColors)</p>
-                        <p class="code output">[ 'red', 'blue', 'yellow', 'green' ]</p>
-                    </ul>
-                    <li><span class="code">import</span> and <span class="code">export</span></li>
-                    <ul>
-                        <li>Essentially, these are the equivalent to <span class="code">require()</span> and <span class="code">module.exports</span> used in node, however <span class="code">import</span> and <span class="code">export</span> are specific to native JS.</li>
-                    </ul>
-                    <li class="key-concept">The ES6 Fat Arrow Function</li>
-                        <ul>
-                            <li>Best practice is to arrow functions in place of all standard anonymous functions, and most other functions expressions.</li>
-                            <li>Basically, remove <span class="code">function</span> keyword and replace assignment operator with an arrow ("=>")</li>
-                            <li>If there is a single argument, the parentheses can be deleted</li>
-                            <li>If there is a single line with a return, the <span class="code">return</span> keyword can be deleted. This is known as an 'implicit return'</li>
-                            <li>Exmaples:</li>
-                            <ul>
-                                <li>Traditional Named Function:</li>
-                                <span class="code">function typicalNamedFunction(){return "Clicked!"}</span>
-                                <li>Named ES6 Arrow Function Equivalent, with implicit return:</li>
-                                <span class="code">let typicalNamedFunction = () => "Clicked!";</span>
-                                <li>Traditional Anonymous Function:</li>
-                                <span class="code">function(){return "Clicked!"}</span>
-                                <li>Anonymous ES6 Arrow Function Equivalent, with implicit return:</li>
-                                <span class="code">() => "Clicked!";</span>
-                                <li>Named ES6 Arrow Function with one argument:</li>
-                                <span class="code">let whoClicked = name => name + " clicked the element!";</span>
-                                <li>Named ES6 Arrow Function with two or more arguments:</li>
-                                <span class="code">let whoLikesClicking = (nameFirst, nameSecond) => nameFirst + " and " + nameSecond + " enjoy clicking elements!";</span>
-                                
-                            </ul>
-                            
-                        </ul>
-                    <li class="key-concept">Object Literals</li>
-                        <ul>
-                            <li>Object literals allow you to add elements to an object that have the same name for both the value and key by simply adding it within the curly brackets based on an existing variable (e.g., instead of <span class="code">Red : "Red"</span>, you can simply type <span class="code">Red</span></li>
-                        </ul>
-                    <li class="key-concept">Object Destructuring</li>
-                        <ul>
-                            <li>Mitigates the redundant calling of child nodes that are located deep within a nested object</li>
-                            <li>Object Destructuring syntax goes <span class="code">const {keyName1, keyName2, ..., keyNameN} = someObject</span></li>
-                            <li>Array Destructuring syntax goes <span class="code">const [element1, element2, ..., elementN] = someArray</span>. Note that for Array destructuring, you can name the elements whatever you want.</li>
-                            <li>Example</li>
-                            <p class="code input">const user =  {</p>
-                            <p class="code input-indent">userName: "petemiller1934", </p>
-                            <p class="code input-indent">age: 20, </p>
-                            <p class="code input-indent">_id: "asfasgfsjdhgjwgdsdf" </p>
-                            <p class="code input">}</p>
-                            <p class="code input">const {_id, userName, age} = user;</p>
-                            <p class="code input">console.log(_id)</p>
-                            <p class="code output">asfasgfsjdhgjwgdsdf</p>
-                            <p class="code input">console.log(userName)</p>
-                            <p class="code output">petemiller1934</p>
-                            <p class="code input">console.log(age)</p>
-                            <p class="code output">20</p>
-                        </ul>
-                    <li class="key-concept">Default parameters</li>
-                        <ul>
-                            <li>ES6 brought on default parameters... it works exactly like anybody would expect.</li>
-                        </ul>
                 </ul>
-            </ul>
-            <li class="key-concept">HTML</li>
-            <ul>
-                <li>lower case all html element, attributes, tags etc. One exception - the DOCTYPE at the start of the page </li>
-                <li>Names should be broken up with a dash</li>
-            </ul>
-            <li class="key-concept">CSS Selector Syntax</li>
-            <ul>
-                <li class="key-concept">Box Model</li>
+            <li class="key-concept">Positioning</li>
+                <ul>
+                    
+                    <li class="key-concept">static</li>
                     <ul>
-                        <li>Elements of the Box Model</li>
-                        <ul>
-                            <li class="key-concept">Content</li>
-                            <ul>
-                                <li>Area where the text or content resides</li>
-                                <li>Determined by height and width</li>
-                                <li>If there aren't any elements (e.g., text, pictures, etc.), then height will equal 0</li>
-                            </ul>
-                            <li class="key-concept">Padding</li>
-                            <ul>
-                                <li>Blank space around content - inherents the same background color as content element</li>
-                                <li>Still considered to be part of the element itself. If padding is increased, the element's size will increase</li>
-                            </ul>
-                            <li class="key-concept">Border</li>
-                            <ul>
-                                <li>Akin to the plastic walls of someone wearing a bubble suit - it is the final boundary between the enclosed element and the outside world</li>
-                                <li>Note that even if border is '0px', if there is a linear border, it will count as a percent of the screen. You can override this by defining <span class="css-code">* {box-sizing: border-box;}</span> </li>
-                            </ul>
-                            <li class="key-concept">Margin</li>
-                            <ul>
-                                <li>Spacer between elements - not that increasing margin does NOT change the size of the object, just the empty space around the object</li>
-                            </ul>
-                        </ul>
-                        <li>Defining Properties - Shortcuts:</li>
-                        <ul>
-                            <li>Single Value: applies size to all sides - <span class="css-code">margin: 10px;</span></li>
-                            <li>Two Values: applies first value to Top and Bottom, and second value to Left and Right <span class="css-code">margin: 10px 20px;</span></li>
-                            <li>Three Values: applies first value to Top, second value to Bottom, and third value to both Left and Right <span class="css-code">margin: 10px 20px 30px;</span></li>
-                            <li>Four Values: defines Top, Right, Bottom, and Left <span class="css-code">margin: 10px 20px 30px 40px</span></li>
-                        </ul>
+                        <li>Default position of elements</li>
                     </ul>
-                <li class="key-concept">Positioning</li>
+                    <li>By defining these, we gain access to the top, bottom, left, and right properties</li>
+                    <li class="key-concept">Relative</li>
                     <ul>
-                        
-                        <li class="key-concept">static</li>
-                        <ul>
-                            <li>Default position of elements</li>
-                        </ul>
-                        <li>By defining these, we gain access to the top, bottom, left, and right properties</li>
-                        <li class="key-concept">Relative</li>
-                        <ul>
-                            <li>leaves elements where they fall naturally, unless they are then further specified by the top, bottom, left, and right properties</li>
-                        </ul>
-                        <li class="key-concept">Absolute</li>
-                        <ul>
-                            <li>positions element with respect to window.</li>
-                            <li>Other elements will push to fill in the place of the original element as if it doesn't exists</li>
-                        </ul>
-                        <li class="key-concept">Fixed</li>
-                        <ul>
-                            <li>Look exactly like absolute except that it will remain in the same place regardless of scrolling.</li>
-                            <li>This is how you create a sticky navbar or sticky header</li>
-                        </ul>
+                        <li>leaves elements where they fall naturally, unless they are then further specified by the top, bottom, left, and right properties</li>
                     </ul>
-                <li class="key-concept">Responsive Styling Design</li>
+                    <li class="key-concept">Absolute</li>
                     <ul>
-                        <li>Intuition of responsive design is that the screen should be able to work on any sized screen.</li>
-                        <li>Design practice of <b>Mobile First</b>, which means that we design web apps for mobile-sized screens first, then design larger screens next.</li>
-                        <li>Responsive styling is originated by adding <span code="css-code">@media</span> to the beginning of a CSS statement</li>
-                        <li>Since some older browsers do not support dynamic styling, the <span code="css-code">only</span> keyword can be added after <span code="css-code">@media</span>. This will negate the responsive design, rather than breaking the styling sheet, if the browser doesn't support responsive design.</li>
-                        <li>The <b>media type</b> also be specified to apply styling to either <span class="css-code">print</span>, <span class="css-code">screen</span>, or <span class="css-code">all</span> (implied by default). The media type is defined immediately after the <span code="css-code">only</span></li>
-                        <li>Multiple conditions can be added with the <span code="css-code">and</span> operator </li>
-                        <li>Example:</li>
-                        <p class="css-code">@media only screen and (max-width: 599px) {</p>
-                        <p class="css-code css-level-1">div {</p>
-                        <p class="css-code css-level-2">background-color: green;</p>
-                        <p class="css-code css-level-1">}</p>
-                        <p class="css-code">}</p>
-                        <p class="css-code">@media only screen and (min-width: 600px) and (max-width: 649px) {</p>
-                        <p class="css-code css-level-1">div {</p>
-                        <p class="css-code css-level-2">background-color: firebrick;</p>
-                        <p class="css-code css-level-1">}</p>
-                        <p class="css-code">}</p>
-                        <p class="css-code">@media only screen and (min-width: 650px) and (max-width: 850px) {</p>
-                        <p class="css-code css-level-1">div {</p>
-                        <p class="css-code css-level-2">background-color: cornflowerblue;</p>
-                        <p class="css-code css-level-1">}</p>
-                        <p class="css-code">}</p>
-                        <p class="css-code">@media only screen and (min-width: 851px) {</p>
-                        <p class="css-code css-level-1">div {</p>
-                        <p class="css-code css-level-2">background-color: purple;</p>
-                        <p class="css-code css-level-1">}</p>
-                        <p class="css-code">}</p>
-                        <div id="responsive-design-box-dont-delete">
-                            <p></p>
-                        </div>
+                        <li>positions element with respect to window.</li>
+                        <li>Other elements will push to fill in the place of the original element as if it doesn't exists</li>
+                    </ul>
+                    <li class="key-concept">Fixed</li>
+                    <ul>
+                        <li>Look exactly like absolute except that it will remain in the same place regardless of scrolling.</li>
+                        <li>This is how you create a sticky navbar or sticky header</li>
+                    </ul>
+                </ul>
+            <li class="key-concept">Responsive Styling Design</li>
+                <ul>
+                    <li>Intuition of responsive design is that the screen should be able to work on any sized screen.</li>
+                    <li>Design practice of <b>Mobile First</b>, which means that we design web apps for mobile-sized screens first, then design larger screens next.</li>
+                    <li>Responsive styling is originated by adding <span code="css-code">@media</span> to the beginning of a CSS statement</li>
+                    <li>Since some older browsers do not support dynamic styling, the <span code="css-code">only</span> keyword can be added after <span code="css-code">@media</span>. This will negate the responsive design, rather than breaking the styling sheet, if the browser doesn't support responsive design.</li>
+                    <li>The <b>media type</b> also be specified to apply styling to either <span class="css-code">print</span>, <span class="css-code">screen</span>, or <span class="css-code">all</span> (implied by default). The media type is defined immediately after the <span code="css-code">only</span></li>
+                    <li>Multiple conditions can be added with the <span code="css-code">and</span> operator </li>
+                    <li>Example:</li>
+                    <p class="css-code">@media only screen and (max-width: 599px) {</p>
+                    <p class="css-code css-level-1">div {</p>
+                    <p class="css-code css-level-2">background-color: green;</p>
+                    <p class="css-code css-level-1">}</p>
+                    <p class="css-code">}</p>
+                    <p class="css-code">@media only screen and (min-width: 600px) and (max-width: 649px) {</p>
+                    <p class="css-code css-level-1">div {</p>
+                    <p class="css-code css-level-2">background-color: firebrick;</p>
+                    <p class="css-code css-level-1">}</p>
+                    <p class="css-code">}</p>
+                    <p class="css-code">@media only screen and (min-width: 650px) and (max-width: 850px) {</p>
+                    <p class="css-code css-level-1">div {</p>
+                    <p class="css-code css-level-2">background-color: cornflowerblue;</p>
+                    <p class="css-code css-level-1">}</p>
+                    <p class="css-code">}</p>
+                    <p class="css-code">@media only screen and (min-width: 851px) {</p>
+                    <p class="css-code css-level-1">div {</p>
+                    <p class="css-code css-level-2">background-color: purple;</p>
+                    <p class="css-code css-level-1">}</p>
+                    <p class="css-code">}</p>
+                    <div id="responsive-design-box-dont-delete">
+                        <p></p>
+                    </div>
 
-                        
-                    </ul>
-                <li class="key-concept">Basic Selectors</li>
+                    
+                </ul>
+            <li class="key-Concept">CSS Selectors</li>
                 <ul>
-                    <li>Select all HTML elements of a given tag: <span class="css-code">html.tag {background-color: white;}</span></li>
+                    <li class="key-concept">Basic Selectors</li>
                     <ul>
-                        <li>Example: div elements: <span class="css-code">div {background-color: white;}</span></li>
+                        <li>Select all HTML elements of a given tag: <span class="css-code">html.tag {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: div elements: <span class="css-code">div {background-color: white;}</span></li>
+                        </ul>
+                        <li>Select all elements with a given class: <span class="css-code">.html-class-name {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: select all elements with a class name of 'important-list-items': <span class="css-code">.important-list-items {background-color: white;}</span></li>
+                        </ul>
+                        <li>Select all elements with a given html ID: <span class="css-code">#html-id-name {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: select all elements (should only be one) with an ID name of 'earnings': <span class="css-code">#earnings-input {background-color: white;}</span></li>
+                        </ul>
                     </ul>
-                    <li>Select all elements with a given class: <span class="css-code">.html-class-name {background-color: white;}</span></li>
+                    <li class="key-concept">Combining Selectors</li>
                     <ul>
-                        <li>Example: select all elements with a class name of 'important-list-items': <span class="css-code">.important-list-items {background-color: white;}</span></li>
-                    </ul>
-                    <li>Select all elements with a given html ID: <span class="css-code">#html-id-name {background-color: white;}</span></li>
-                    <ul>
-                        <li>Example: select all elements (should only be one) with an ID name of 'earnings': <span class="css-code">#earnings-input {background-color: white;}</span></li>
+                        <li>Descendant Combinator - Select all X descendants of Y: <span class="css-code">Y X {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: this will select all li elements that exist within the ul elements: <span class="css-code">ul li {background-color: white;}</span></li>
+                        </ul>
+                        <li>Wildcare Descendant Combinator - Select all elements that are descendants of Y: <span class="css-code">Y * {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: this will select all elements that exist within the ul elements on the page: <span class="css-code">ul * {background-color: white;}</span></li>
+                        </ul>
+                        <li>Difference Combinator - Select only direct elements of X that are descendants of Y: <span class="css-code">Y > X {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: this will select all li elements that exist within the ul elements on the page (sub elements will be ignored): <span class="css-code">ul > li {background-color: white;}</span></li>
+                        </ul>
+                        <li>Adjacent Combinator - Selects element that is immediately preceded by former, or the first X with each Y: <span class="css-code">Y + X {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: this will select the first li element within each ul element on the page: <span class="css-code">ul + li {background-color: white;}</span></li>
+                        </ul>
+                        <li>Multi Selection - Selects all X and Y elements. Can be chained as long as needed: <span class="css-code">Y, X {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: this will select all ul and ol elements: <span class="css-code">ul, li {background-color: white;}</span></li>
+                        </ul>
+                        <li>Sibling Selector - Selects all X element, but only if it is immediately contained within a Y element. <span class="css-code">Y ~ X {background-color: white;}</span></li>
+                        <ul>
+                            <li>Example: this will select all p elements, but only if it is contained directly within a div element: <span class="css-code">div ~ p {background-color: white;}</span></li>
+                        </ul>
                     </ul>
                 </ul>
-                <li class="key-concept">Combining Selectors</li>
+            <li class="key-concept">Pseudo Selectors and Transitions</li>
                 <ul>
-                    <li>Descendant Combinator - Select all X descendants of Y: <span class="css-code">Y X {background-color: white;}</span></li>
+                    <li><span>Pseudo Selectors</span> are special CSS properties that can modify the underlying appearance of HTML elements (e.g., <span class="code">:active</span>, <span class="code">:hover</span>)</li>
                     <ul>
-                        <li>Example: this will select all li elements that exist within the ul elements: <span class="css-code">ul li {background-color: white;}</span></li>
+                        <li>Pseudo Selector are defined in CSS stylesheet by selecting the element and appending the pseudo class name to the end of the element (e.g, <span class="code">#html-element-id:hover</span></li>
                     </ul>
-                    <li>Wildcare Descendant Combinator - Select all elements that are descendants of Y: <span class="css-code">Y * {background-color: white;}</span></li>
+                    <li><span>Transitions</span> are CSS properties that modify how the changes take place. Transitions allow for smooth and aesthetically pleasing changes to the website rather than sudden changes.</li>
                     <ul>
-                        <li>Example: this will select all elements that exist within the ul elements on the page: <span class="css-code">ul * {background-color: white;}</span></li>
+                        <li>Transitions are defined in CSS stylesheet just like any other property. Properties can either be set long-hand or short hand. see example below.</li>
+                        <li>At a high level, the four transition properties are:</li>
+                        <ul>
+                            <li>transition-property: which property will be changed</li>
+                            <li>transition-duration: how long the transition will take to complete</li>
+                            <li>transition-timing-function: how will the speed of the transition be configured (default is 'linear')</li>
+                            <li>transition-delay: how long after the transition is triggered before it will start</li>
+                        </ul>
+                        <li>transition properties are not entirely generalized across all browsers, so it is a good idea to use <span class="key-concept">vendor prefixes</span> to ensure cross-browser compatibility.</li>
                     </ul>
-                    <li>Difference Combinator - Select only direct elements of X that are descendants of Y: <span class="css-code">Y > X {background-color: white;}</span></li>
-                    <ul>
-                        <li>Example: this will select all li elements that exist within the ul elements on the page (sub elements will be ignored): <span class="css-code">ul > li {background-color: white;}</span></li>
-                    </ul>
-                    <li>Adjacent Combinator - Selects element that is immediately preceded by former, or the first X with each Y: <span class="css-code">Y + X {background-color: white;}</span></li>
-                    <ul>
-                        <li>Example: this will select the first li element within each ul element on the page: <span class="css-code">ul + li {background-color: white;}</span></li>
-                    </ul>
-                    <li>Multi Selection - Selects all X and Y elements. Can be chained as long as needed: <span class="css-code">Y, X {background-color: white;}</span></li>
-                    <ul>
-                        <li>Example: this will select all ul and ol elements: <span class="css-code">ul, li {background-color: white;}</span></li>
-                    </ul>
-                    <li>Sibling Selector - Selects all X element, but only if it is immediately contained within a Y element. <span class="css-code">Y ~ X {background-color: white;}</span></li>
-                    <ul>
-                        <li>Example: this will select all p elements, but only if it is contained directly within a div element: <span class="css-code">div ~ p {background-color: white;}</span></li>
-                    </ul>
+                    <li>Example - Long Hand css Transition</li>
+                    <p class="css-code">#box {</p>
+                    <p class="css-code css-level-1">width: 200px;</p>
+                    <p class="css-code css-level-1">height: 200px;</p>
+                    <p class="css-code css-level-1">border: 1px solid black;</p>
+                    <p class="css-code css-level-1">background-color: cornflowerblue;</p>
+                    <p class="css-code css-level-1">transition-property: background-color;</p>
+                    <p class="css-code css-level-1">transition-duration: 1s;</p>
+                    <p class="css-code css-level-1">transition-timing-function: linear;</p>
+                    <p class="css-code css-level-1">transition-delay: 1s;</p>
+                    <p class="css-code">}</p>
+                    <li>Example - Long Hand css Transition</li>
+                    <p class="css-code">#circle {</p>
+                    <p class="css-code css-level-1">width: 200px;</p>
+                    <p class="css-code css-level-1">height: 200px;</p>
+                    <p class="css-code css-level-1">border: 1px solid black;</p>
+                    <p class="css-code css-level-1">border-radius: 50%;</p>
+                    <p class="css-code css-level-1">background-color: firebrick;</p>
+                    <p class="css-code css-level-1">transition-property: background-color;</p>
+                    <p class="css-code css-level-1">transition-duration: 1s;</p>
+                    <p class="css-code css-level-1">transition-timing-function: linear;</p>
+                    <p class="css-code css-level-1">transition-delay: 1s;</p>
+                    <p class="css-code">}</p>
+                    <li>Example - declaration of pseudo selectors</li>
+                    <p class="css-code">#circle:hover {</p>
+                    <p class="css-code css-level-1">background-color: cornflowerblue;</p>
+                    <p class="css-code">}</p>
+                    <p class="css-code">#box:hover {</p>
+                    <p class="css-code css-level-1">background-color: firebrick;</p>
+                    <p class="css-code">}</p>
+                    <p>Hover over shapes to see impact of pseudo selectors and transitions:</p>
+                    <div id="css-example-shapes">
+                        <div id="box"></div>
+                        <div id="circle"></div>
+                    </div>
                 </ul>
-    
-            </ul>
 
         </ul>
 
@@ -886,6 +560,385 @@
 
 
         </ul>
+    <h2>Basic JavaScript</h2>
+        <ul>
+            <li class="key-concept">Naming Convention</li>
+                <ul>
+                    <li>camelCase for all variable and function names. Exception - constructor functions</li>
+                    <li>Use 4-spaces to ident code. 2-space is also common</li>
+                    <li>add whitespace around all operators</li>
+                    <li>Each property of an object is given its own line</li>
+                    <li>Add Semicolons after every simple statement. Do NOT include a semicolon after loops, }, func declarations, etc</li>
+                    <li>Use logical and meaningful names. Additionally, the following rules apply based on type:</li>
+                    <ul>
+                        <li>Booleans are often named after questions - "isAlive" or "isPositive"</li>
+                        <li>Functions should be given a verb or action word describing its job</li>
+                        <li>Arrays should be given plural names</li>
+                        <li>Objects should be given singular names</li>
+                    </ul>
+                    <li>Line comments should be used more often than block comments. Generally, you should reserved block comments for extensive documentation.</li> 
+                </ul>
+            <li>Data Types</li>
+                <ul>
+                    <li>Immutable - the underlying data type, not the variable containing the data type, cannot be changed.</li>
+                    <ul>
+                        <li>Primitive Types:</li>
+                        <ul>
+                            <li>String: "anything enclosed by double or single quotes"</li>
+                            <li>Numeric: 1, 342.342, 0, and <span class="code">NaN</span></li>
+                            <li>Boolean: <span class="code">true</span> & <span class="code">false</span></li>
+                            <li>BigInt</li>
+                            <li>Symbol</li>
+                            <li>null</li>
+                            <li>undefined</li>
+                        </ul>
+                        <li>Example:</li>
+                        <p class="input code">let stringVar = "jello";</p>
+                        <p class="input code">console.log(stringVar);</p>
+                        <p class="output code">jello</p>
+                        <p class="input code">console.log(stringVar[0]);</p>
+                        <p class="output code">j</p>
+                        <p class="input code">stringVar[0] = "h";</p>
+                        <p class="input code">console.log(stringVar);</p>
+                        <p class="output code">jello</p>
+                        <li>Passed by value</li>
+                        <p class="input code">let age = 10;</p>
+                        <p class="input code">let OtherAge = age;</p>
+                        <p class="input code">otherAge = 12;</p>
+                        <p class="input code">console.log(otherAge);</p>
+                        <p class="output code">12</p>
+                        <p class="input code">console.log(age);</p>
+                        <p class="output code">10</p>
+                    </ul>
+                    <li>Mutable - data can changed. These two are effectively 'containers' in JS</li>
+                    <ul>
+                        <li>Reference Data Types</li>
+                        <ul>
+                            <li>Array (typeof will return 'object')</li>
+                            <li>Object</li>
+                            <li>Functions</li>
+                        </ul>
+                        <li>Example:</li>
+                        <p class="input code">let numericArray = [1, 2, 3, 4];</p>
+                        <p class="input code">console.log(numericArray);</p>
+                        <p class="output code">[ 1, 2, 3, 4 ]</p>
+                        <p class="input code">numericArray[0] = 99;</p>
+                        <p class="input code">console.log(numericArray);</p>
+                        <p class="output code">[99, 2, 3, 4]</p>
+                        <p class="input code">let person = {name : "harry", age : 15};</p>
+                        <p class="input code">console.log(person);</p>
+                        <p class="output code">{ name: 'harry', age: 15 }</p>
+                        <p class="input code">person.hasWand = true;</p>
+                        <p class="input code">console.log(person);</p>>
+                        <p class="output code">{ name: 'harry', age: 15, hasWand: true }</p>
+                        <p class="input code">delete person.hasWand;</p>
+                        <p class="input code">console.log(person);</p>
+                        <p class="output code">{ name: 'harry', age: 15 }</p>
+                        <li>Passed by Reference - note that if you reassign an array or object to a new variable, the two objects will be tethered</li>
+                        <p class="input code">let newPerson = person;</p>
+                        <p class="input code">newPerson.hasWand = true;</p>
+                        <p class="input code">console.log(person)</p>
+                        <p class="output code">{ name: 'harry', age: 15, hasWand: true }</p>
+                    </ul>
+                </ul>
+            <li>Special Datatype Method</li>
+                <ul>
+                    <li>Methods that are specific to every string - these are prebuilt functionality that are native to JS</li>
+                    <li class="key-concept">Array Methods</li>
+                        <ul>
+                            <li>Methods that modify the original array in place:</li>
+                            <ul>
+                                <li><span class="code">arrayVariable.push()</span>: <b>adds</b> new element to end of array. Returns the new length of the array.</li>
+                                <li><span class="code">arrayVariable.pop()</span>: 'pops-off' and element - it <b>removes</b> final element from end of array. Returns removed element</li>
+                                <li><span class="code">arrayVariable.unshift()</span>: <b>adds</b> new element to beginning of array.</li>
+                                <li><span class="code">arrayVariable.shift()</span>: <b>removes</b> first element from beginning of array.</li>
+                                <li><span class="code">arrayVariable.splice(startIndex, deleteCount, "optionalElementToAddToArray", "otherElement", ..., "otherElementN")</span>: Allows you to 1.) cut out elements in array and 2.) add new elements. Modifies array by removing <span class="code">deleteCount</span> number of elements from array, starting at <span class="code">startIndex</span>. The third variable is optional - if left out, no new elements will be added.</li>
+                            </ul>
+                            <li>Methods that do NOT modify the original array in place:</li>
+                            <ul>
+                                <li><span class="code">arrayVariable.concat(OtherArray)</span>: Combines two arrays into one - returns a new array</li>
+                                <li><span class="code">arrayVariable.indexOf("elementInArray")</span>: Returns index of matching argument. Returns -1 if element if there isn't a match.</li>
+                                <li><span class="code">arrayVariable.slice(startIndex, endIndex)</span>: Creates a new array starting at startIndex (inclusive) and ending at endIndex (exclusive). The second variable is optional - if left out, slice() will default to the final index + 1.</li>
+                                <li><span class="code">arrayVariable.join("optionalSeperator")</span>: Turns an array into a string by concatenating all elements. Argument is a string that will separate each element in the original array. Default is ","</li>
+                                <li><span class="code">arrayVariable.reverse()</span>: returns array in reverse order.</li>
+                            </ul>
+                            <li>Examples:</li>
+                            <ul>
+                                <li class="key-concept">Set Up:</li>
+                                <p class="code input">let arrOfFoods = ["pancakes", "egg", "ice cream", "pizza", "hamburger"];</p>
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <li class="key-concept">push():</li>
+                                <p class="code input">arrOfFoods.push("tacos");</p>
+                                <p class="code output">6</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
+                                <li class="key-concept">pop():</li>
+                                <p class="code input">arrOfFoods.pop();</p>
+                                <p class="code output">'tacos'</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <li class="key-concept">Unshift():</li>
+                                <p class="code input">arrOfFoods.unshift("tacos");</p>
+                                <p class="code output">6</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger', 'tacos' ]</p>  
+                                <li class="key-concept">shift():</li>
+                                <p class="code input">arrOfFoods.shift();</p>
+                                <p class="code output">'tacos'</p>  
+                                <p class="code input">console.log(arrOfFoods);</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream', 'pizza', 'hamburger' ]</p>  
+                                <p class="code input">let arrOfDrinks = ["coffee", "whiskey", "water", "beer"];</p> 
+                                <p class="code input">const foodsAndDrinks = arrOfFoods.concat(arrOfDrinks);</p>
+                                <p class="code input">console.log(foodsAndDrinks);</p>
+                                <p class="code output">['pancakes',  'egg', 'ice cream', 'pizza', 'hamburger', 'coffee', 'whiskey', 'water', 'beer']</p>  
+                                <li class="key-concept">indexOf():</li>
+                                <p class="code input">console.log(foodsAndDrinks.indexOf("pizza"));</p>
+                                <p class="code output">3</p>  
+                                <p class="code input">console.log(foodsAndDrinks.indexOf("milkshakes"));</p>
+                                <p class="code output">-1</p>  
+                                <li class="key-concept">slice():</li>
+                                <p class="code input">console.log(foodsAndDrinks.slice(0, 3));</p>
+                                <p class="code output">[ 'pancakes', 'egg', 'ice cream' ]</p>  
+                                <li class="key-concept">join():</li>
+                                <p class="code input">console.log("I like :" + foodsAndDrinks.join(", "));</p>
+                                <p class="code output">I like :pancakes, egg, ice cream, pizza, hamburger, coffee, whiskey, water, beer</p>  
+                                <li class="key-concept">reverse():</li>
+                                <p class="code input">console.log(arrOfFoods.reverse());</p>
+                                <p class="code output">[ 'hamburger', 'pizza', 'ice cream', 'egg', 'pancakes' ]</p>  
+                                <li class="key-concept">splice():</li>
+                                <p class="code input">foodsAndDrinks.splice(0, 1, "steak", "potatoes");</p>
+                                <p class="code output">['pancakes']</p>  
+                                <p class="code input">console.log("Anytime Food & Drinks:" + foodsAndDrinks);</p>
+                                <p class="code output">Anytime Food & Drinks:steak,potatoes,egg,ice cream,pizza,hamburger,coffee,whiskey,water,beer</p> 
+                            </ul>
+                            <li>For a comprehensive list, see <a href="https://www.w3schools.com/jsref/jsref_obj_array.asp">W3 School Array Methods</a></li>
+                        </ul>
+                    <li class="key-concept">String Methods</li>
+                        <ul>
+                            <li>Note that, generally, these do not change the original variable. Rather, they return a new value:</li>
+                            <ul>
+                                <li><span class="code">stringVariable.toUpperCase()</span> and <span class="code">stringVariable.toLowerCase()</span>: returns the string in either upper or lower case.</li>
+                                <li><span class="code">stringVariable.concat("string To Concat")</span>: returns the string with the argument concatenated on the back.</li>
+                                <li><span class="code">stringVariable.split("deliminatingString")</span>: returns an array that is seperated by the parameter. Note that the splitting character is removed.</li>
+                                <li><span class="code">stringVariable.slice(startIndex, endIndex)</span>: Cuts segment of string starting at startIndex (inclusive) and ending at endIndex (exclusive). The second variable is optional - if left out, slice() will default to the final index + 1.</li>
+                                <li><span class="code">stringVariable.indexOf()</span>: used to see if, and where, a pattern is within a string. -1 indicates that the pattern was not located.</li>
+                            </ul>
+                            <li>Examples:</li>
+                            <ul>
+                                <li class="key-concept">Set up</li>
+                                <p class="code input">let employeeName = "John, Smith";</p> 
+                                <p class="code input">let phoneNumber = "8091234567";</p>
+                                <li class="key-concept">toUpperCase():</li>
+                                <p class="code input">employeeName.toUpperCase();</p>
+                                <p class="code output">'JOHN, SMITH'</p>  
+                                <li class="key-concept">toLowerCase():</li>
+                                <p class="code input">employeeName.toLowerCase();</p> 
+                                <p class="code output">'john, smith'</p>  
+                                <li class="key-concept">concat():</li>
+                                <p class="code input">employeeName.concat(" II");</p> 
+                                <p class="code output">'John, Smith II'</p> 
+                                <li class="key-concept">split():</li>
+                                <p class="code input">employeeName.split(",");</p>  
+                                <p class="code output">[ 'John', ' Smith' ];</p>  
+                                <li class="key-concept">slice():</li>
+                                <p class="code input">phoneNumber.slice(0, 3) + "-" + phoneNumber.slice(3, 6) + "-" + phoneNumber.slice(6)</p>  
+                                <p class="code output">'809-123-4567'</p>  
+                                <li class="key-concept">indexOf():</li>
+                                <p class="code input">employeeName.indexOf(" ");</p> 
+                                <p class="code output">5</p> 
+                                <p class="code input">employeeName.indexOf("z");</p> 
+                                <p class="code output">-1</p> 
+                            </ul>
+                            <li>For a comprehensive list, see <a href="https://www.w3schools.com/jsref/jsref_obj_string.asp">W3 School String Methods</a></li>
+                        </ul>
+                </ul>
+            <li class="key-concept">Constructor Functions</li>
+                <ul>
+                    <li>In same manner as an strictly typed OOP language, constructors allow us to create blueprints for objects</li>
+                    <li>By convention, constructor function names start with a capital letter</li>
+                    <li>Just like in Java, <span class="code">this.objectAttribute</span> is used to declare a standard value within the constructor function</li>
+                    <li>Also in Java, we can add methods to the constructor function that will be accessible by all objected created. However, it is bad practice to define methods within constructor function. The more appropraite way is to use the <span class="code">prototype</span>.</li>
+                    <li>After creating a constructor function, new instances of the object can be created using the <span class="code">new</span> keyword. See example below.</li>
+                    <li>Example</li>
+                    <p class="code input">function Car(make, model, year, honkSound) { </p>
+                    <p class="code input-indent">this.make = make;</p>
+                    <p class="code input-indent">this.model = model;</p>
+                    <p class="code input-indent">this.year = year;</p>
+                    <p class="code input-indent">this.honkSound = honkSound;</p>
+                    <ul>
+                        <li>This is the old school way of adding methods. Generally, it is frowned upon because the underlying method will be stored N number of times in memory. The preferred way of implementing methods is to use prototypes.</li>
+                    </ul>
+                    <p class="code input-indent">this.honk = function(){console.log(this.honkSound + "!")}</p>
+                    <p class="code input-indent">}</p>
+                    <p class="code input">let jeep = new Car("Jeep", "Cherokee", 1995, "BEEP");</p>
+                    <p class="code input">console.log(jeep);</p>
+                    <p class="code output">Car { make: 'Jeep', model: 'Cherokee', year: 1995, honkSound: 'BEEP', honk: [Function (anonymous)] }</p>
+                    <p class="code input">jeep.honk();</p>
+                    <p class="code output">"BEEP"</p>
+                    <p class="code input">let honda = new Car("Honda", "Accord", 2019, "MEEP");</p>
+                    <p class="code input">console.log(honda);</p>
+                    <p class="code output">Car { make: 'Honda', model: 'Accord', year: 2019, honkSound: 'MEEP', honk: [Function (anonymous)] }</p>
+                    <p class="code input">honda.honk();</p>
+                    <p class="code output">"MEEP"</p>
+                    <ul>
+                        <li>Prototype implementation (also how inheritance is acheived in JS):</li>
+                    </ul>
+                    <p class="code input">Car.prototype.betterHonk = function(){console.log(this.honkSound + "!!!!")}</p>
+                    <p class="code input">jeep.betterHonk()</p>
+                    <p class="code output">BEEP!!!!</p>
+                </ul>
+            <li class="key-concept">Special Loops</li>
+                <ul>
+                    <li class="key-concept">'For-Of' Loop</li>
+                    <ul>
+                        <li>Can be used on any iterable object with an index, such as an array or string</li>
+                        <li>Elements are visited in sequential order</li>
+                        <li>Cannot be used on elements that don't have an ordinal index, such as an object</li>
+                        <li>Example:</li>
+                        <p class="code input">const someIterable = [1, 2, 3, 4, 5];</p> <br />
+                        <p class="code input">for (element of someIterable) {<br/>console.log(element)<br/>}</p>
+                        <p class="code output">1</p>
+                        <p class="code output">2</p>
+                        <p class="code output">3</p>
+                        <p class="code output">4</p>
+                        <p class="code output">5</p>
+                        <li>Example: </li>
+                    </ul>
+                    <li class="key-concept">'For-In' Loop</li>
+                    <ul>
+                        <li>Iterates over <b>keys</b> in an object</li>
+                        <li>Effectively the same as 'for each' in Java</li>
+                        <li>Elements are visited in a nonsequential order based on implementation, so don't rely on a specific sequence.</li>
+                        <li>Prototype properties and standard keys are included in loop, however, certain other elements are not.</li>
+                        <li>Note that the 'For-In' loop can be used for arrays, but the resulting element is the index number:</li>
+                        <li class="key-concept">Examples - Objects:</li>
+                        <p class="code input">const companyRoster = {EID1 : "Jack", EID2 : "Jill", EID3 : "Pete", EID4 : "Susan"}</p>
+                        <p class="code input">for (employee in companyRoster) {<br/>console.log(employee);<br/>}</p>
+                        <p class="code output">EID1</p>
+                        <p class="code output">EID2</p>
+                        <p class="code output">EID3</p>
+                        <p class="code output">EID4</p>
+                        <p class="code input">for (employee in companyRoster) {<br/>console.log(companyRoster[employee]);<br/>}</p>
+                        <p class="code output">Jack</p>
+                        <p class="code output">Jill</p>
+                        <p class="code output">Pete</p>
+                        <p class="code output">Susan</p>
+                        <li class="key-concept">Example - Arrays:</li>
+                        <p class="code input">const someIterable = [1, 2, 3, 4, 5];</p>
+                        <p class="code input">for (element in someIterable) {<br/>console.log(element);<br/>}</p>
+                        <p class="code output">0</p>
+                        <p class="code output">1</p>
+                        <p class="code output">2</p>
+                        <p class="code output">3</p>
+                        <p class="code output">4</p>
+                    </ul>
+                </ul>
+            <li class="key-concept">ES6 Syntax</li>
+            <ul>
+                <li>JS is updated annually, but ES6 was a major update. ES6 was release in 2015.</li>
+                <li class="key-concept">Bracket Scoping: From <span class="code">var</span> to <span class="code">const</span> and <span class="code">let</span></li>
+                <ul>
+                    <li>ES6 Introducted 'Bracket' Scoping, which allowed variables to live within the nearest set of curly brackets:</li>
+                    <ul>
+                        <li><span class="code">const</span> For 'constant' variables - cannot be overwritten (but CAN be updated if its an mutable object)</li>
+                        <li><span class="code">let</span> For all other variables - can be overwritten and updated.</li>
+                    </ul>
+                    <li>Before ES6, the only other scoping, aside from Global was Function scoping, where variables were scoped to the nearest function (or problem):</li>
+                    <ul>
+                        <li><span class="code">var</span> can be overwritten</li>
+                    </ul>
+                    <li>Bracket versus Function Scoping example:</li>
+                    <p class="code input">function scopingExample(){</p>
+                    <p class="code input-indent">if (true) {</p>
+                    <p class="code input-indent">let a = "i am defined by let within a function's if statement!";</p>    
+                    <p class="code input-indent">var b = "i am defined by var within a function's if statement!";</p>    
+                    <p class="code input-indent">}</p>                        
+                    <p class="code input-indent">typeof a == "undefined" ? console.log("a is undefined...") : console.log(a);</p>
+                    <p class="code input-indent">typeof b == "undefined" ? console.log("a is undefined...") : console.log(b);</p>
+                    <p class="code input">}</p>
+                    <p class="code input">scopingExample()</p>
+                    <p class="code output">a is undefined...</p>
+                    <p class="code output">i am defined by var within a function's if statement!</p>
+                </ul>
+                <li class="key-concept">Spread and Rest operators: <span class="code">...</span></li>
+                <li>Same operator for both spread and rest</li>
+                <li>Rest operator (practically speaking, the rest operator 'gathers' arguments)</li>
+                <ul>
+                    <li>Combines arguments into a single array in function parameter</li>
+                    <li>Example:</li>
+                    <p class="code input">function() gatherNumbers(...nums){console.log(nums)}</p>
+                    <p class="code input">gatherNumbers(1, 235, 1245, 234);</p>
+                    <p class="code output">[ 1, 235, 1245, 234 ]</p>
+                </ul>
+                <li>Spread - Takes contents of an object or array, then copies contents</li>
+                <ul>
+                    <li>Whenever <span class="code">...</span> appears outside of a function parameter, it is the Spread operator</li>
+                    <li>Directly copies array or object - since they are called by reference, this is a way to make an actual duplicate of an existing array or object.</li>
+                    <li>Example:</li>
+                    <p class="code input">const colors1 = ["red", "blue"];</p>
+                    <p class="code input">const colors2 = ["yellow", "green"];</p>
+                    <p class="code input">const allColors = [...colors1, ...colors2];</p>
+                    <p class="code input">console.log(allColors)</p>
+                    <p class="code output">[ 'red', 'blue', 'yellow', 'green' ]</p>
+                </ul>
+                <li><span class="code">import</span> and <span class="code">export</span></li>
+                <ul>
+                    <li>Essentially, these are the equivalent to <span class="code">require()</span> and <span class="code">module.exports</span> used in node, however <span class="code">import</span> and <span class="code">export</span> are specific to native JS.</li>
+                </ul>
+                <li class="key-concept">The ES6 Fat Arrow Function</li>
+                    <ul>
+                        <li>Best practice is to arrow functions in place of all standard anonymous functions, and most other functions expressions.</li>
+                        <li>Basically, remove <span class="code">function</span> keyword and replace assignment operator with an arrow ("=>")</li>
+                        <li>If there is a single argument, the parentheses can be deleted</li>
+                        <li>If there is a single line with a return, the <span class="code">return</span> keyword can be deleted. This is known as an 'implicit return'</li>
+                        <li>Exmaples:</li>
+                        <ul>
+                            <li>Traditional Named Function:</li>
+                            <span class="code">function typicalNamedFunction(){return "Clicked!"}</span>
+                            <li>Named ES6 Arrow Function Equivalent, with implicit return:</li>
+                            <span class="code">let typicalNamedFunction = () => "Clicked!";</span>
+                            <li>Traditional Anonymous Function:</li>
+                            <span class="code">function(){return "Clicked!"}</span>
+                            <li>Anonymous ES6 Arrow Function Equivalent, with implicit return:</li>
+                            <span class="code">() => "Clicked!";</span>
+                            <li>Named ES6 Arrow Function with one argument:</li>
+                            <span class="code">let whoClicked = name => name + " clicked the element!";</span>
+                            <li>Named ES6 Arrow Function with two or more arguments:</li>
+                            <span class="code">let whoLikesClicking = (nameFirst, nameSecond) => nameFirst + " and " + nameSecond + " enjoy clicking elements!";</span>
+                            
+                        </ul>
+                        
+                    </ul>
+                <li class="key-concept">Object Literals</li>
+                    <ul>
+                        <li>Object literals allow you to add elements to an object that have the same name for both the value and key by simply adding it within the curly brackets based on an existing variable (e.g., instead of <span class="code">Red : "Red"</span>, you can simply type <span class="code">Red</span></li>
+                    </ul>
+                <li class="key-concept">Object Destructuring</li>
+                    <ul>
+                        <li>Mitigates the redundant calling of child nodes that are located deep within a nested object</li>
+                        <li>Object Destructuring syntax goes <span class="code">const {keyName1, keyName2, ..., keyNameN} = someObject</span></li>
+                        <li>Array Destructuring syntax goes <span class="code">const [element1, element2, ..., elementN] = someArray</span>. Note that for Array destructuring, you can name the elements whatever you want.</li>
+                        <li>Example</li>
+                        <p class="code input">const user =  {</p>
+                        <p class="code input-indent">userName: "petemiller1934", </p>
+                        <p class="code input-indent">age: 20, </p>
+                        <p class="code input-indent">_id: "asfasgfsjdhgjwgdsdf" </p>
+                        <p class="code input">}</p>
+                        <p class="code input">const {_id, userName, age} = user;</p>
+                        <p class="code input">console.log(_id)</p>
+                        <p class="code output">asfasgfsjdhgjwgdsdf</p>
+                        <p class="code input">console.log(userName)</p>
+                        <p class="code output">petemiller1934</p>
+                        <p class="code input">console.log(age)</p>
+                        <p class="code output">20</p>
+                    </ul>
+                <li class="key-concept">Default parameters</li>
+                    <ul>
+                        <li>ES6 brought on default parameters... it works exactly like anybody would expect.</li>
+                    </ul>
+            </ul>
+        </ul>
     <h2>Advanced JS Concepts</h2>
         <ul>
             <li class="key-concept">Web Storage</li>
@@ -1116,11 +1169,12 @@
                     <li>Streamlines the addition of new features/refactoring since you can further encapsulate expected results at the smallest level possible.</li>
                     <li>Protects code against other developers through changes - everyone can see right away if something breaks after someone makes a change.</li>
                 </ul>
-                <li>Test Driven Development, or Red/Green Testing</li>
+                <li>Test Driven Development (TDD), or Red/Green Testing</li>
                 <ul>
-                    <li>TDD is a method that requires a test to be written before the function is created</li>
+                    <li>TDD is a method that requires the test to be written before the function is even created</li>
                     <li>At first, test will fail, thereby producing a 'red' in the console</li>
                     <li>As time goes on, the results turn green which shows everything is working as expected/desired.</li>
+                    <li>The idea is to have the testing methodology in mind before even starting with the function.</li>
                 </ul>
                 <li>Frameworks - There are many available, but V School uses <span class="key-concept">Mocha</span> and <span class="key-concept">Chai</span></li>
                 <ul>
