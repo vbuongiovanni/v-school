@@ -49,6 +49,9 @@ p.css-level-2 {
 .input-indent::before {
     content: "... ";
 }
+.double-indent::before {
+    content: "...... ";
+}
 
 .key-concept {
     font-weight: bold;

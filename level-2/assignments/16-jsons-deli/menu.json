@@ -1,0 +1,62 @@
+{
+    "appetizers" : {
+        "item1" : {
+            "name" : "cheese fries",
+            "ingredients" : ["potatoes", "cheddar cheese", "bacon", "sour cream"],
+            "description" : "Fries smothered in bacon, cheese, other stuff"
+        },
+        "item2" : {
+            "name" : "Nachos",
+            "ingredients" : ["Tortilla Chips", "cheddar cheese", "Steak", "sour cream", "salsa"],
+            "description" : "Chips smothered in steak, cheese, other goodies"
+        }
+    },
+    "cold sandwiches" : {
+        "item1" : {
+            "name" : "TLBA",
+            "ingredients" : ["White bread", "sliced turkey", "lettuce", "bacon", "avocado"],
+            "description" : "Turkey, lettuce, bacon, and avocado on white bread"
+        },
+        "item2" : {
+            "name" : "Ham and Cheese",
+            "ingredients" : ["White bread", "sliced ham", "swiss cheese"],
+            "description" : "Fresh honey ham accompanied by swiss cheese on white bread"
+        }
+    },
+    "hot sandwiches" : {
+        "item1" : {
+            "name" : "Philly Cheese Steak",
+            "ingredients" : ["Shredded Steak", "cheese melody", "jalapenos", "bell peppers", "deli hoagie"],
+            "description" : "Traditional Philly Cheese steak, with additional condiments to 'spice it up' a bit."
+        },
+        "item2" : {
+            "name" : "Grilled Cheese",
+            "ingredients" : ["white bread", "cheddar cheese", "mayo"],
+            "description" : "Traditional grilled cheese, toasted to perfection"
+        }
+    },
+    "desserts" : {
+        "item1" : {
+            "name" : "Apple Pie",
+            "ingredients" : ["Granny Smith Apples", "Pie Crust", "pie topping"],
+            "description" : "Fresh baked Apple pie, just like mom use to make."
+        },
+        "item2" : {
+            "name" : "Pumpkin Pie",
+            "ingredients" : ["pumpkin", "sugar", "pie crust"],
+            "description" : "Fresh Pumpkin pie from a local bakery, because nobody can do it better than them."
+        }
+    },
+    "drinks" : {
+        "item1" : {
+            "name" : "Water",
+            "ingredients" : ["H2O", "Other impurities from our sub-par piping"],
+            "description" : "Ice cold water"
+        },
+        "item2" : {
+            "name" : "Coffee",
+            "ingredients" : ["H2O", "coffee beans"],
+            "description" : "Fresh Hot coffee"
+        }
+    }
+}

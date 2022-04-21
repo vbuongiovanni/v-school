@@ -641,7 +641,7 @@
                         <p class="output code">{ name: 'harry', age: 15, hasWand: true }</p>
                     </ul>
                 </ul>
-            <li>Special Datatype Method</li>
+            <li>Special Datatype Methods</li>
                 <ul>
                     <li>Methods that are specific to every string - these are prebuilt functionality that are native to JS</li>
                     <li class="key-concept">Array Methods</li>
@@ -753,40 +753,79 @@
                             <li>For a comprehensive list, see <a href="https://www.w3schools.com/jsref/jsref_obj_string.asp">W3 School String Methods</a></li>
                         </ul>
                 </ul>
-            <li class="key-concept">Constructor Functions</li>
+            <li class="key-concept">Constructor Functions, ES6 Classes, and Factory Design Pattern</li>
                 <ul>
-                    <li>In same manner as an strictly typed OOP language, constructors allow us to create blueprints for objects</li>
-                    <li>By convention, constructor function names start with a capital letter</li>
-                    <li>Just like in Java, <span class="code">this.objectAttribute</span> is used to declare a standard value within the constructor function</li>
-                    <li>Also in Java, we can add methods to the constructor function that will be accessible by all objected created. However, it is bad practice to define methods within constructor function. The more appropraite way is to use the <span class="code">prototype</span>.</li>
-                    <li>After creating a constructor function, new instances of the object can be created using the <span class="code">new</span> keyword. See example below.</li>
-                    <li>Example</li>
-                    <p class="code input">function Car(make, model, year, honkSound) { </p>
-                    <p class="code input-indent">this.make = make;</p>
-                    <p class="code input-indent">this.model = model;</p>
-                    <p class="code input-indent">this.year = year;</p>
-                    <p class="code input-indent">this.honkSound = honkSound;</p>
+                    <li>Constructor Functions and Pre-ES6 inheritance:</li>
                     <ul>
-                        <li>This is the old school way of adding methods. Generally, it is frowned upon because the underlying method will be stored N number of times in memory. The preferred way of implementing methods is to use prototypes.</li>
+                        <li>In same manner as an strictly typed OOP language, constructors allow us to create blueprints for objects</li>
+                        <li>By convention, constructor function names start with a capital letter</li>
+                        <li>Just like in Java, <span class="code">this.objectAttribute</span> is used to declare a standard value within the constructor function</li>
+                        <li>Also in Java, we can add methods to the constructor function that will be accessible by all objected created. However, it is bad practice to define methods within constructor function. The more appropraite way is to use the <span class="code">prototype</span>.</li>
+                        <li>After creating a constructor function, new instances of the object can be created using the <span class="code">new</span> keyword. See example below.</li>
+                        <li>Example</li>
+                        <p class="code input">function Car(make, model, year, honkSound) { </p>
+                        <p class="code input-indent">this.make = make;</p>
+                        <p class="code input-indent">this.model = model;</p>
+                        <p class="code input-indent">this.year = year;</p>
+                        <p class="code input-indent">this.honkSound = honkSound;</p>
+                        <ul>
+                            <li>This is the old school way of adding methods. Generally, it is frowned upon because the underlying method will be stored N number of times in memory. The preferred way of implementing methods is to use prototypes.</li>
+                        </ul>
+                        <p class="code input-indent">this.honk = function(){console.log(this.honkSound + "!")}</p>
+                        <p class="code input-indent">}</p>
+                        <p class="code input">let jeep = new Car("Jeep", "Cherokee", 1995, "BEEP");</p>
+                        <p class="code input">console.log(jeep);</p>
+                        <p class="code output">Car { make: 'Jeep', model: 'Cherokee', year: 1995, honkSound: 'BEEP', honk: [Function (anonymous)] }</p>
+                        <p class="code input">jeep.honk();</p>
+                        <p class="code output">"BEEP"</p>
+                        <p class="code input">let honda = new Car("Honda", "Accord", 2019, "MEEP");</p>
+                        <p class="code input">console.log(honda);</p>
+                        <p class="code output">Car { make: 'Honda', model: 'Accord', year: 2019, honkSound: 'MEEP', honk: [Function (anonymous)] }</p>
+                        <p class="code input">honda.honk();</p>
+                        <p class="code output">"MEEP"</p>
+                        <ul>
+                            <li>Prototype implementation (also how inheritance, to some degree, can be achieved in JS):</li>
+                        </ul>
+                        <p class="code input">Car.prototype.betterHonk = function(){console.log(this.honkSound + "!!!!")}</p>
+                        <p class="code input">jeep.betterHonk()</p>
+                        <p class="code output">BEEP!!!!</p>
                     </ul>
-                    <p class="code input-indent">this.honk = function(){console.log(this.honkSound + "!")}</p>
-                    <p class="code input-indent">}</p>
-                    <p class="code input">let jeep = new Car("Jeep", "Cherokee", 1995, "BEEP");</p>
-                    <p class="code input">console.log(jeep);</p>
-                    <p class="code output">Car { make: 'Jeep', model: 'Cherokee', year: 1995, honkSound: 'BEEP', honk: [Function (anonymous)] }</p>
-                    <p class="code input">jeep.honk();</p>
-                    <p class="code output">"BEEP"</p>
-                    <p class="code input">let honda = new Car("Honda", "Accord", 2019, "MEEP");</p>
-                    <p class="code input">console.log(honda);</p>
-                    <p class="code output">Car { make: 'Honda', model: 'Accord', year: 2019, honkSound: 'MEEP', honk: [Function (anonymous)] }</p>
-                    <p class="code input">honda.honk();</p>
-                    <p class="code output">"MEEP"</p>
+                    <li>ES6 Classes:</li>
                     <ul>
-                        <li>Prototype implementation (also how inheritance is acheived in JS):</li>
+                        <li>Shorter and more concise means of accomplishing what is shown above</li>
+                        <li>Class construction is consolidated into a single set of braces</li>
+                        <li>Can inherit properties and methods from supertypes (or 'prototypical parents' in JS) using the <span class="code">extends</span> keyword</li>
+                        <li>Inherited properties can then be passed onto the child by adding <span class="code">super(propertyOne, propertyTwo)</span>, and adding the variable names to the child's arguments within its construction function.</li>
+                        <li>Properties defined within the class are not encapsulated - they are effectively public attributes. </li>
+                        Example:
+                        <p class="code input">class Dog {</p>
+                        <p class="code input-indent">constructor() {this.sound = "woof"}</p>
+                        <p class="code input-indent">talk() {console.log(this.sound)}</p>
+                        <p class="code input">}</p>
+                        <p class="code input">const snifffles = new Dog();</p>
+                        <p class="code input">sniffles.talk()</p>
+                        <p class="code output">woof</p>
+                        <p class="code input">console.log(sniffles.sound) // not encapsulated:</p>
+                        <p class="code output">woof</p>
                     </ul>
-                    <p class="code input">Car.prototype.betterHonk = function(){console.log(this.honkSound + "!!!!")}</p>
-                    <p class="code input">jeep.betterHonk()</p>
-                    <p class="code output">BEEP!!!!</p>
+                    <li>Factory Design Pattern</li>
+                    <ul>
+                        <li>Factories are functions that return structured objects </li>
+                        <li>In a sense, resolves the same problem as the ES6 Class, except that it is more flexible and usable from within the DOM</li>
+                        <li>Drawback - Factories are marginally slower (.00004ms to .00002ms) and less memory efficient than ES6 classes </li>
+                        <li>Properties defined within the factory are legitimately encapsulated - they are effectively private attributes. </li>
+                        Example:
+                        <p class="code input">const dog = () => {</p>
+                        <p class="code input-indent">const sound = "woof"</p>
+                        <p class="code input-indent">return {talk : () => console.log(sound)}</p>
+                        <p class="code input">}</p>
+                        <p class="code input">const sniffles = dog();</p>
+                        <p class="code input">sniffles.talk()</p>
+                        <p class="code output">woof</p>
+                        <p class="code input">console.log(sniffles.sound) // Encapsulated:</p>
+                        <p class="code output">undefined</p>
+                    </ul>
+
                 </ul>
             <li class="key-concept">Special Loops</li>
                 <ul>
@@ -1182,6 +1221,117 @@
                     <li>Chai - Assertion library including <span class="code">assert</span>, <span class="code">expect</span>, and <span class="code">should</span></li>
                 </ul>
             </ul>
+            <li class="key-concent">Hypertext Transfer Protocol (HTTP)</li>
+            <ul>
+                <li>Set of rules that govern how clients communicate with servers</li>
+                <li>Request-Response Cycle - Client sends request to Server, which will then take the process and resend a response back to the client.</li>
+                <li>Servers</li>
+                <ul>
+                    <li>Purposes: listens for requests and sends a response</li>
+                    <li>Types of Servers: Local and remote</li>
+                </ul>
+                <li>Application Programming Interface (API) - defines</li>
+                <ul>
+                    <li>Purposes: Defines how software components interact. Receives information from client request when it comes to the server, and then works to complete the tasks requests before letting server send back a responses </li>
+                </ul>
+                <li>Restaurant Analogy:</li>
+                <ul>
+                    <li>Client: Customer</li>
+                    <li>Server: The server/waiter/waitress</li>
+                    <li>API: the kitchen</li>
+                </ul>
+                <li><span class="key-concept">CRUD</span> - four main HTTP methods (POST, GET, PUT, DELETE)</li>
+                <ul>
+                    <li><span class="key-concept">C</span>reate Post request - Adding something to a database</li>
+                    <li><span class="key-concept">R</span>ead: Get request - Getting or retrieving data from a database</li>
+                    <li><span class="key-concept">U</span>pdate: Put request - Updating/Modifying existing data in a database</li>
+                    <li><span class="key-concept">D</span>estroy: DELETE request - Removing data from a databse</li>
+                </ul>
+            </ul>
+            <li class="key-concept">JSON - Javascript Object Notation</li>
+            <ul>
+                <li>Format convenient for transfering data. Effectively, JSON is just a long string of characters</li>
+                <li>Can be used to transfer strings, numbers, booleans, arrays, and objects</li>
+                <li>JSON can be converted to javascript using <span class="code">JSON.parse(jsonObject)</span> method</li>
+                <li>JavaScript can be converted to JSON using <span class="code">JSON.stringify(jsObject)</span> method</li>
+                <li>Rules - 1) You must use double quotes instead of single quote and 2.) no trailing comma on last object 3.) cannot transfer functions</li>
+                <li>You can used <a href="http://www.jsonlint.com">http://www.jsonlint.com</a></li>
+                <p class="code ">{</p>
+                <p class="code ">"name" : "Steve",</p>
+                <p class="code ">"age" : 20,</p>
+                <p class="code ">"isAlive" : true,</p>
+                <p class="code ">"friends" : ["bill", "pete", "rob"],</p>
+                <p class="code ">"address" : {"Street" : "1234 Street", "city" : "SLC"}</p>
+                <p class="code ">}</p>
+            </ul>
+            <li class="key-concept">URL - Uniform Resource Locator</li>
+            <ul>
+                <li><span class="key-concept">Base URLs</span> - component of URL which is the root for all extentions (e.g., a base url might be 'www.somethinghere.com' or 'https://swapi.dev/api').</li>
+                <li><span class="key-concept">Endpoint</span> - Extension appended to end of base URL to further specify the request (e.g., an extension might be '/clothing') </li>
+                <ul>
+                    <li>Note that there can be multiple additions to form the endpoint, e.g., "/clothing/jackets/adult/men"</li>
+                    <li>Example - <em>bold portion of text shows the <span class="key-concept">endpoint</span></em>: 'https://swapi.dev/api<span class="key-concept">/films</span>/1/'</li>
+                </ul>
+                <li><span class="key-concept">Parameter</span> - an additional element appended to Base URL, with its endpoint.</li>
+                <li>That is used to request a specific item. Typically, a primary key (SQL) or ID (mongoDB) </li>
+                <ul>
+                    <li>parameters are often denoted as ':_id' on the backend. This would be replaced by the actual id/primary key.</li>
+                    <li>Example - <em>bold portion of text shows the <span class="key-concept">parameter</span></em>: 'www.somethinghere.com/clothing/jackets/adult/men/<span class="key-concept">34sdfjhw43sf</span>'</li>
+                    <li>Example - <em>bold portion of text shows the <span class="key-concept">parameter</span></em>: 'https://swapi.dev/api/films/<span class="key-concept">1/</span>'</li>
+                </ul>
+                <li><span class="key-concept">Query</span> (query strings) - appended to end of to base URL, with its endpoint, after a question mark.</li>
+                <ul>
+                    <li>Often used to filter or refine search results</li>
+                    <li>question mark, followed by Key-Value pairs, joined by an equal sign, each of which are separated by an ampersand symbol e.g., <span class="code">?color=black&type=leather</span></li>
+                    <li>Example - <em>bold portion of text shows the <span class="key-concept">query</span></em>: 'www.somethinghere.com/clothing/jackets/adult/men/<span class="key-concept">?color=black&type=leather</span>'</li>
+                </ul>
+            </ul>
+            <li class="key-concept">Asynchronous JavaScript and XML - AJAX</li>
+            <ul>
+                <li>Allows browsers to communicate with servers without requiring a page to reload</li>
+                <li>Specifically, AJAX is implemented through the <span class="code">XMLHttpRequest</span> object</li>
+                Example (Note that <span class="code">XMLHttpRequest</span> is located within the web-browser, NOT node.js.)
+                <ol>
+                    <li>Instantiate a <span class="code">XMLHttpRequest</span> and stores it in a <span class="code">xhr</span></li>
+                    <p class="code input">const xhr = new XMLHttpRequest();</p> 
+                    
+                    <li>Set value of <span class="code">.onreadystatechange</span> to our function so that the function will run anytime there is a change in state (see below)</li>
+                    <p class="code input">xhr.onreadystatechange = function () {</p> 
+
+                    <li>The <span class="code">.readyState</span> property gives us updates on how far along the request has made before, during, and after executing the <span class="code">.send</span> method. 
+                        Each time the state changes, the <span class="code">.onreadystatechange</span> is fired to allow for other processes to run on the XHR actions.</li>
+                    <ul>
+                        <li>State '0' : UNSENT - request</li>
+                        <li>State '1' : OPENED -  meaning the <span class="code">.open()</span> method has been called.</li>
+                        <li>State '2' : HEADERS_RECEIVED - <span class="code">.send()</span> has been called, and headers and status are available.</li>
+                        <li>State '3' : LOADING - Downloading; responseText holds partial data</li>
+                        <li>State '4' : DONE - Operation is completed</li>
+                    </ul>
+                    <li>The <span class="code">.status</span> method shows the response code. 200 means success</li>
+                    <p class="code input-indent">if (xhr.readyState === 4 && xhr.status === 200) {</p> 
+                    <li>after <span class="code">.readyState</span> is of value '4' (DONE) and <span class="code">.status</span> is of value '200' (successful response), the content of the request will be saved in <span class="code">.responseText</span></li>
+                    <p class="code input-indent double-indent">   const jsonData = xhr.responseText;</p> 
+                    <li><span class="code">.responseText</span> is in JSON, so it is parsed into <span class="code">data</span> using <span class="code">JSON.parse()</span></li>
+                    <p class="code input-indent double-indent">   const data = JSON.parse(jsonData);</p> 
+                    <li>The rest of the code below is specific to the data received, but essentially <span class="code">data</span> is just a normal JS object.</li>
+                    <p class="code input-indent double-indent">   const name = data.name;</p> 
+                    <p class="code input-indent double-indent">   document.getElementById("demo1").textContent = "JSON results: " + jsonData;</p> 
+                    <p class="code input-indent double-indent">   document.getElementById("demo2").textContent = "Parsed JSON's 'name' property: " + data.name;</p> 
+                    <p class="code input-indent double-indent">   spaceshipurl = data.starships[0];</p> 
+                    <p class="code input-indent double-indent">   console.log(spaceshipurl);</p> 
+                    <p class="code input-indent">}</p> 
+                    <p class="code input">};</p> 
+                    <li>The <span class="code">.open</span> method allows us to specify information associated with the AJAX request. In this case, the <span class="key-concept">CRUD method</span> and 
+                        the <span class="key-concept">URL</span> of where the data resides, and a boolean that states whether or not the request should be asynchronous. Typically, we will want this to be 'true'</li>
+                    <p class="code input">xhr.open("GET", "http://swapi.co/api/people/1/", true);</p> 
+                    <li>The <span class="code">.send</span> method formally sends the request to the specified address.</li>
+                    <p class="code input">xhr.send();</p> 
+                </ol>
+                
+                
+                
+            </ul>
+
 
         </ul>
 
