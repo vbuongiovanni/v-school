@@ -1286,47 +1286,113 @@
                     <li>Example - <em>bold portion of text shows the <span class="key-concept">query</span></em>: 'www.somethinghere.com/clothing/jackets/adult/men/<span class="key-concept">?color=black&type=leather</span>'</li>
                 </ul>
             </ul>
-            <li class="key-concept">Asynchronous JavaScript and XML - AJAX</li>
+            <li><span class="key-concept">HTTP Requests</span></li>
             <ul>
-                <li>Allows browsers to communicate with servers without requiring a page to reload</li>
-                <li>Specifically, AJAX is implemented through the <span class="code">XMLHttpRequest</span> object</li>
-                Example (Note that <span class="code">XMLHttpRequest</span> is located within the web-browser, NOT node.js.)
-                <ol>
-                    <li>Instantiate a <span class="code">XMLHttpRequest</span> and stores it in a <span class="code">xhr</span></li>
-                    <p class="code input">const xhr = new XMLHttpRequest();</p> 
-                    
-                    <li>Set value of <span class="code">.onreadystatechange</span> to our function so that the function will run anytime there is a change in state (see below)</li>
-                    <p class="code input">xhr.onreadystatechange = function () {</p> 
+                <li><span class="key-concept">AJAX</span> Asynchronous JavaScript and XML</li>
+                <ul>
+                    <li>Allows browsers to communicate with servers without requiring a page to reload</li>
+                    <li>Specifically, AJAX is implemented through the <span class="code">XMLHttpRequest</span> object</li>
+                    Example (Note that <span class="code">XMLHttpRequest</span> is located within the web-browser, NOT node.js.)
+                    <ol>
+                        <li>Instantiate a <span class="code">XMLHttpRequest</span> and stores it in a <span class="code">xhr</span></li>
+                        <p class="code input">const xhr = new XMLHttpRequest();</p> 
+                        
+                        <li>Set value of <span class="code">.onreadystatechange</span> to our function so that the function will run anytime there is a change in state (see below)</li>
+                        <p class="code input">xhr.onreadystatechange = function () {</p> 
+    
+                        <li>The <span class="code">.readyState</span> property gives us updates on how far along the request has made before, during, and after executing the <span class="code">.send</span> method. 
+                            Each time the state changes, the <span class="code">.onreadystatechange</span> is fired to allow for other processes to run on the XHR actions.</li>
+                        <ul>
+                            <li>State '0' : UNSENT - request</li>
+                            <li>State '1' : OPENED -  meaning the <span class="code">.open()</span> method has been called.</li>
+                            <li>State '2' : HEADERS_RECEIVED - <span class="code">.send()</span> has been called, and headers and status are available.</li>
+                            <li>State '3' : LOADING - Downloading; responseText holds partial data</li>
+                            <li>State '4' : DONE - Operation is completed</li>
+                        </ul>
+                        <li>The <span class="code">.status</span> method shows the response code. 200 means success</li>
+                        <p class="code input-indent">if (xhr.readyState === 4 && xhr.status === 200) {</p> 
+                        <li>after <span class="code">.readyState</span> is of value '4' (DONE) and <span class="code">.status</span> is of value '200' (successful response), the content of the request will be saved in <span class="code">.responseText</span></li>
+                        <p class="code input-indent double-indent">   const jsonData = xhr.responseText;</p> 
+                        <li><span class="code">.responseText</span> is in JSON, so it is parsed into <span class="code">data</span> using <span class="code">JSON.parse()</span></li>
+                        <p class="code input-indent double-indent">   const data = JSON.parse(jsonData);</p> 
+                        <li>The rest of the code below is specific to the data received, but essentially <span class="code">data</span> is just a normal JS object.</li>
+                        <p class="code input-indent double-indent">   const name = data.name;</p> 
+                        <p class="code input-indent double-indent">   document.getElementById("demo1").textContent = "JSON results: " + jsonData;</p> 
+                        <p class="code input-indent double-indent">   document.getElementById("demo2").textContent = "Parsed JSON's 'name' property: " + data.name;</p> 
+                        <p class="code input-indent double-indent">   spaceshipurl = data.starships[0];</p> 
+                        <p class="code input-indent double-indent">   console.log(spaceshipurl);</p> 
+                        <p class="code input-indent">}</p> 
+                        <p class="code input">};</p> 
+                        <li>The <span class="code">.open</span> method allows us to specify information associated with the AJAX request. In this case, the <span class="key-concept">CRUD method</span> and 
+                            the <span class="key-concept">URL</span> of where the data resides, and a boolean that states whether or not the request should be asynchronous. Typically, we will want this to be 'true'</li>
+                        <p class="code input">xhr.open("GET", "http://swapi.co/api/people/1/", true);</p> 
+                        <li>The <span class="code">.send</span> method formally sends the request to the specified address.</li>
+                        <p class="code input">xhr.send();</p> 
+                    </ol>
+                </ul>
+                <li><span class="key-concept">fetch</span> - Native API to streamline HTTP requests</li>
+                <ul>
+                    <li>Expanded version of an XHR object, except that it has more features and is promise based.</li>
+                    <li></li>
+                </ul>
+                <li><span class="key-concept">axios</span> - </li>
+                <ul>
+                    <li></li>
+                </ul>
 
-                    <li>The <span class="code">.readyState</span> property gives us updates on how far along the request has made before, during, and after executing the <span class="code">.send</span> method. 
-                        Each time the state changes, the <span class="code">.onreadystatechange</span> is fired to allow for other processes to run on the XHR actions.</li>
+            </ul>
+
+            <li class="key-concept">Asynchronous code - Callbacks, Promises, and async/await</li>
+            <ul>
+                <li>Grocery Line Analogy - synchronous versus asynchronous code</li>
+                <ul>
+                    <li>Consider a grocery store with a single cashier - Customer B must wait for Customer A to be completed by the cashier before he/she can start, regardless of how many items Customer B has.</li>
+                    <li>Consider a grocery store with four self-checkout kiosks - this is like asynchronous code. Customer A may begin checking out at one kiosk, while another Customer B checks finishes checking out.
+                        Furthermore, just because Customer A started after Customer B doesn't necessarily mean that Customer B will finish first.</li>
+                    <li>Traditional/Synchronous code is known as <em>Blocking Code</em>, since it effectively blocks subsequent lines from being read in a program</li>
+                    <li>Asynchronous code, such as user-inputs, promises, callback functions, and <span class="code">async/await</span> are known as <em>non-blocking Code</em>, since they do NOT blocks subsequent lines from being read in a program</li>
+                </ul>
+                <li>Traditionally, <span class="key-concept">callbacks</span>, or functions that are programmed to be called later, such as with <span class="code">setTimeout()</span> / <span class="code">setInterval()</span>, were the go to solution for non-blocking code. However, they can quickly become nested, which makes them cumbersome and complicated.</li>
+                <li><span class="key-concept">Promises</span> were introduced in ES6 as a means to address the 'callback hell'. Note that, under the hood, promises are just a wrapper/syntactic sugar around callbacks, but provide a means to avoid 'callback hell'</li>
+                <ul>
+                    <li>Regarding Promises:</li>
                     <ul>
-                        <li>State '0' : UNSENT - request</li>
-                        <li>State '1' : OPENED -  meaning the <span class="code">.open()</span> method has been called.</li>
-                        <li>State '2' : HEADERS_RECEIVED - <span class="code">.send()</span> has been called, and headers and status are available.</li>
-                        <li>State '3' : LOADING - Downloading; responseText holds partial data</li>
-                        <li>State '4' : DONE - Operation is completed</li>
+                        <li>Promises are a JavaScript constructor that handle asynchronous code and acts sort of like an "IOU".</li>
+                        <li>Theoretically, a promise is a JS object that tells the program "I am not the value you are looking for, but I will be soon"</li>
+                        <li>Promises are <span class="key-concept">eager</span>, meaning that they are prioritized in the processing queue.</li>
                     </ul>
-                    <li>The <span class="code">.status</span> method shows the response code. 200 means success</li>
-                    <p class="code input-indent">if (xhr.readyState === 4 && xhr.status === 200) {</p> 
-                    <li>after <span class="code">.readyState</span> is of value '4' (DONE) and <span class="code">.status</span> is of value '200' (successful response), the content of the request will be saved in <span class="code">.responseText</span></li>
-                    <p class="code input-indent double-indent">   const jsonData = xhr.responseText;</p> 
-                    <li><span class="code">.responseText</span> is in JSON, so it is parsed into <span class="code">data</span> using <span class="code">JSON.parse()</span></li>
-                    <p class="code input-indent double-indent">   const data = JSON.parse(jsonData);</p> 
-                    <li>The rest of the code below is specific to the data received, but essentially <span class="code">data</span> is just a normal JS object.</li>
-                    <p class="code input-indent double-indent">   const name = data.name;</p> 
-                    <p class="code input-indent double-indent">   document.getElementById("demo1").textContent = "JSON results: " + jsonData;</p> 
-                    <p class="code input-indent double-indent">   document.getElementById("demo2").textContent = "Parsed JSON's 'name' property: " + data.name;</p> 
-                    <p class="code input-indent double-indent">   spaceshipurl = data.starships[0];</p> 
-                    <p class="code input-indent double-indent">   console.log(spaceshipurl);</p> 
-                    <p class="code input-indent">}</p> 
-                    <p class="code input">};</p> 
-                    <li>The <span class="code">.open</span> method allows us to specify information associated with the AJAX request. In this case, the <span class="key-concept">CRUD method</span> and 
-                        the <span class="key-concept">URL</span> of where the data resides, and a boolean that states whether or not the request should be asynchronous. Typically, we will want this to be 'true'</li>
-                    <p class="code input">xhr.open("GET", "http://swapi.co/api/people/1/", true);</p> 
-                    <li>The <span class="code">.send</span> method formally sends the request to the specified address.</li>
-                    <p class="code input">xhr.send();</p> 
-                </ol>
+                    <li>Use of Promises</li>
+                    <ul>
+                        <li>Promises can be instantiated using <span class="code"> new Promise()</span></li>
+                        <li>Promises can be in one of three states</li>
+                        <ol>
+                            <li><span class="key-concept">Pending</span> - state of promise immediate after it is created.</li>
+                            <li><span class="key-concept">Resolved</span> - state of promise once operation completes successfully</li>
+                            <li><span class="key-concept">Rejected</span> - state of promise when it fails. Typically, there is some sort of error also returned.</li>
+                        </ol>
+                        <li>Promises come with a built in <span class="code">.then()</span> method that takes a callback function that will be fired when the promise is resolved. Note that <span class="code">.then()</span> must return something, including a new promise, with it's own state.</li>
+                        <li>Additionally, since the promise can easily be rejected, it also comes with a built in <span class="code">.catch()</span> method, which will run in the event the promise fails</li>
+                        <li><span class="key-concept">Promise Chaining</span> - Effectively eliminates nested callbacks by linking operations, thereby allowing asynchronous operations as if they were synchronous</li>
+                        <ul>
+                            <li>Provides a means of linking operations that will run, contingent on the successful completion of preceding operations. </li>
+                            <li>Whatever is returned by preceding operation will be passed on the next. With respect to R, this works the same as the magrittr pipe (%>%) </li>
+                        </ul>
+                    </ul>
+                </ul>
+                <li><span class="code">async</span> and <span class="code">await</span> are syntactic sugar of promises - these are the most modern way of writing asynchronous code</li>
+                <ul>
+                    <li><span class="code">async</span> and <span class="code">await</span></li>
+                    <ul>
+                        <li><span class="code">async</span> keyword is placed in front of <span class="code">function</span> keyword, or <span class="code">() in the case of an arrow function</span>, when defining a function</li>
+                        <li>Two key things to note about a function declared as <span class="code">async</span></li>
+                        <ol>
+                            <li>An <span class="code">async</span> function is able to use the <span class="code">await</span> keyword inside the function (note that this is the only place where <span class="code">await</span> can be used).</li>
+                            <li>Function will automatically return a pending promise. Once the function returns a value, the promise's state will be resolved. If the function throws an error, the promise will be rejected.</li>
+                        </ol>
+                        <li><span class="code">await</span> will make the function pause and wait for the next asynchronous call (such as fetch) to finish before moving on.</li>
+                    </ul>
+                </ul>
+                
                 
                 
                 
