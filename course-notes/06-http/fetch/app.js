@@ -10,10 +10,6 @@ let url = "https://rickandmortyapi.com/api/character";
 //     .then(res => console.log(res.results)) // in the next .then(), the javascript object, so we console log res.results, which shows the actual results
 //     .catch(err => console.log(err))
 
-let result = 2 + 2
-
-result 
-
 fetch(url)
     .then(res => res.json()) // retrieve resolve, then parse into JSON
     .then(res => {

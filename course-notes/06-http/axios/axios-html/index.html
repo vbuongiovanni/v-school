@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="styles.css" rel="stylesheet">
+    </head>
+    <body>
+
+        
+        <div class="output">
+            <h2>Current To-Do List</h2>
+            <ul id="axios-response"></ul>
+        </div>
+
+        <div class="controls">
+            <form name="todoform">
+                <h2>Add new Item</h2>
+                <input name="title" placeholder="Title of To-Do">
+                <input name="description" placeholder="description of to-do">
+                <button>Submit!</button>
+            </form>
+    
+            <form name="responses">
+                <h2>Show Current To-Do List</h2>
+                <button>Show me my to-dos!!</button>
+            </form>
+    
+            <form name="delete">
+                <h2>Remove Item</h2>
+                <input name="delete-id">
+                <button>Delete the to-do</button>
+                <ul id="axios-delete-response"></ul>
+            </form>
+    
+            <form name="todoform-edit">
+                <h2>Update Item</h2>
+                <input name="id" placeholder="id of to-do">
+                <input name="title" placeholder="Title of To-Do">
+                <input name="description" placeholder="description of to-do">
+                <button>Submit!</button>
+            </form>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>

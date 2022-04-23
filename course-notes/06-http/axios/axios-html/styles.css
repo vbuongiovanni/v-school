@@ -1,0 +1,33 @@
+div {
+    border: 2px solid black ;
+    width: 1000px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 10px;
+    width: 400px;
+    min-height: 100px;
+    border: 1px grey dashed;
+}
+.output {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.output ul {
+    width: 800px;
+    min-height: 400px;
+    border: 1px grey dashed;
+}
+li {
+    padding-bottom: 10px;
+}
+.controls {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+h2 {
+    text-align: center;
+}

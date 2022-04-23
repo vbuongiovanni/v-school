@@ -1335,11 +1335,26 @@
                     <li>Expanded version of an XHR object, except that it has more features and is promise based.</li>
                     <li></li>
                 </ul>
-                <li><span class="key-concept">axios</span> - </li>
+                <li><span class="key-concept">axios</span></li>
                 <ul>
-                    <li></li>
+                    <li>Promise based HTTP request client</li>
+                    <li>Axios automatically parses response to json by default. Additionally, it automatically stringifies text in requests.</li>
+                    <li>Two means of using axios</li>
+                    <ul>
+                        <li>When using with node: NPM package</li>
+                        <li>When using with an .html file: Add an additional script tag in the HTML file to load the Content Delivery Network (CDN)</li>
+                    </ul>
+                    Example
+                    <p class="code input">axios.get(urlToApi)</p>
+                    <p class="code input-indent">.then(res => {console.log(res.data)})</p>
+                    <p class="code input-indent">.catch(err => {console.log("something went wrong!")})</p>
+                    <p class="code output">[{id : 1, name : "john"}, {id : 2, name : "suzy"}]</p>
+                    <p class="code input">const newName = {name : "Robert"}</p>
+                    <p class="code input">axios.post(urlToApi, newName)</p>
+                    <p class="code input-indent">.then(res => {console.log(res.data)})</p>
+                    <p class="code input-indent">.catch(err => {console.log("something went wrong!")})</p>
+                    <p class="code output">{id : 3, name : "Robert"}</p>
                 </ul>
-
             </ul>
 
             <li class="key-concept">Asynchronous code - Callbacks, Promises, and async/await</li>
@@ -1388,14 +1403,16 @@
                         <ol>
                             <li>An <span class="code">async</span> function is able to use the <span class="code">await</span> keyword inside the function (note that this is the only place where <span class="code">await</span> can be used).</li>
                             <li>Function will automatically return a pending promise. Once the function returns a value, the promise's state will be resolved. If the function throws an error, the promise will be rejected.</li>
+                            <li>In the readability-performance trade-off, <span class="code">async</span> / <span class="code">await</span> runs purely linear, whereas promises can run in parallel. This is mostly an issue deeply nested operations</li>
+                            <ul>
+                                <li><span class="code">async</span> / <span class="code">await</span> thrives in situations where we want to force our process to be linear or completed in a sequential order... Or in any situation where readability is preferred</li>
+                                <li>Promises thrive, with respect to performance, in situations with deeply nested requests - e.g., get requests of users, which have multiple cats, which have multiple ages, each of which have multiple pictures.</li>
+                            </ul>
+                            
                         </ol>
-                        <li><span class="code">await</span> will make the function pause and wait for the next asynchronous call (such as fetch) to finish before moving on.</li>
+                        <li><span class="code">await</span> will make the function pause and wait for the next asynchronous call (such as fetch) to finish (or, to resolve the promises) before moving on.</li>
                     </ul>
-                </ul>
-                
-                
-                
-                
+                </ul>                
             </ul>
 
 
