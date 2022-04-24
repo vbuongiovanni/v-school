@@ -1,3 +1,9 @@
+
+// Open items:
+    // need to make separate button for delete functionality
+    // step 5
+    // wrap up/clean up css styling
+
 const newEntry =  document["new-entry"];
 let user = newEntry.user.value;
 
