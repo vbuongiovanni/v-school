@@ -25,7 +25,11 @@ url = `https://api.vschool.io/${name}/todo/`
 
 // post requests
 
-    const newToDo = {"complete" : false, "title" : "This entry was created in JS using axios"};
+    const newToDo = {"complete" : false, 
+            "title" : "Oranges",
+            "description" : "juicy spherical fruit that are orange in color",
+            "price" : 5.99,
+            "imgUrl" : "https://images.heb.com/is/image/HEBGrocery/000375170-2?id=DNnRj3&fmt=jpg&dpr=off&fit=constrain,1&wid=196&hei=196"};
     
     axios.post(url, newToDo)
         .then(res => console.log(res.data))

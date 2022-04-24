@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="styles.css" rel="stylesheet">
+
+    </head>
+
+
+    <body>
+        <header>
+            <h1>My To Do List</h1>
+            <div></div>
+        </header>
+
+        <main>
+            <form name="to-do" id="to-do">
+                <ul id="list">
+                    <li class="entry" id="entry">
+                        <div class="button-container">
+                            <div class="check-item"></div>
+                        </div>
+                        <span class="title">Red Apples</span>
+                        <span class="price">2.99</span>
+                        <span class="description">Similar to green apples, only not as good</span>
+                        <img class="item-image" src="res/apples.jpeg"></span>
+                    </li>
+                </ul>
+            </form>
+        </main>
+
+        <footer>
+            <h3>New To Do </h3>
+            <form name="new-entry"  id="new-entry">
+                <input name="title" id="title" placeholder="To Do Title"/>
+                <input name="price" id="price"  type="number" placeholder="00.00"/>
+                <textarea name="desc" id="desc"  placeholder="Description"></textarea>
+                <input name="image" id="image-url"  placeholder="www.url-to-your-image-here.com/an-image.jpg"/>
+                <div class="submit-button-container">
+                    <button>Add New Item</button>
+                </div>
+                <div id="user-name" >
+                    <label for="user-name">User Name:</label>
+                    <input name="user" value="vinceb"/>
+                    <button id="change-user">Change User</button>
+                </div>
+                
+            </form>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>
