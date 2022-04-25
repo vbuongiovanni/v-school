@@ -5,7 +5,7 @@
     // wrap up/clean up css styling
 
 const newEntry =  document["new-entry"];
-let user = newEntry.user.value;
+let user = "vinceb";
 
 // clear and populate list with get request:
 
@@ -26,20 +26,31 @@ const postToDo = (user) => {
     
     const userInput = {
         "title" : newEntry.title.value,
-        "description" : newEntry.description.value,
+        "description" : newEntry.desc.value,
         "price" : newEntry.price.value,
-        "imgUrl" : newEntry.imgUrl.value,
-        "completed" : newEntry.completed.value
+        "imgUrl" : newEntry.image.value,
+        "completed" : false
     }
+    console.log(userInput);
 
     axios.post(getURL(user), userInput)
-    .then(res => {
-        getToDos(user);
-        console.log("post request was successful")
-    })
-    .catch(err => console.log("something went wrong with the post request"))
+        .then(res => {
+            getToDos(user);
+            console.log("post request was successful")
+        })
+        .catch(err => console.log("something went wrong with the post request"))
 }
 
+// event listener to post new to-do:
+
+newEntry.addEventListener("submit", e => {
+    e.preventDefault();
+    postToDo(user);
+    getToDos(user);
+    clearInputs();
+})
+
+// function to change styling/put status change of check'ed item:
 
 const toggleCompleted = (user, id, args) => {    
     axios.put(getURL(user, id), args)
@@ -47,15 +58,15 @@ const toggleCompleted = (user, id, args) => {
     .catch(err => console.log("something went wrong with the post request"))
 }
 
+
 // initialize list:
 getToDos(user);
 
 
 
-// postToDo(user, userInput)
+// support functions - declarations:
 
-// function that takes a to-do item from the API, generates/populates HTML elements/content,
-// and appends it to the DOM.
+// function that takes a to-do item from the API, generates/populates HTML elements/content, and appends it to the DOM.
 
 function createToDo({title, description, price, imgUrl, _id, completed}){
     
@@ -70,8 +81,13 @@ function createToDo({title, description, price, imgUrl, _id, completed}){
             const newCheckItem = document.createElement("div");
             newCheckItem.setAttribute("class", "check-item");
             newCheckItem.addEventListener("click", (e) => toggleStatus(e))
-            newCheckItem.addEventListener("dblclick", (e) => deleteToDo(e))
-        newButtonContainer.appendChild(newCheckItem);
+            const newDeleteItem = document.createElement("div");
+            newDeleteItem.setAttribute("class", "delete-item");
+            newDeleteItem.addEventListener("click", (e) => deleteToDo(e))
+                const deleteImage = document.createElement("img");
+                deleteImage.src = "res/delete.jpg";
+                newDeleteItem.append(deleteImage);
+        newButtonContainer.append(newCheckItem, newDeleteItem);
 
     // Title element
         const newTitle = document.createElement("span");
@@ -98,6 +114,7 @@ function createToDo({title, description, price, imgUrl, _id, completed}){
         if (completed) {
             newTitle.setAttribute("class", "title completed");
             newDescription.setAttribute("class", "description completed");
+            newCheckItem.textContent = '\u2713';
         }
 
     // Assemble List Object:
@@ -127,20 +144,23 @@ function toggleStatus(e){
     toggleCompleted(user, parent.getAttribute("id"), {
         "completed" : (putStatus.join("").indexOf("completed") === -1 ? false : true)
     })
+    e.target.textContent = (putStatus.join("").indexOf("completed") === -1 ? "" : '\u2713')
+
 }
 
 // delete item
 function deleteToDo(e){
-    const parent = e.target.parentNode.parentNode;
+    const parentID = e.target.parentNode.parentNode.parentNode.getAttribute("id");
     let confirmationResult = confirm("You are about to delete to-do item.\nEither OK or Cancel.");
     if (confirmationResult) {
-        axios.delete(getURL(user, parent.getAttribute("id")))
-            .then(res => console.log("To-Do deleted"))
+        axios.delete(getURL(user, parentID))
+            .then(res => {
+                console.log("To-Do deleted");
+                getToDos(user);
+            })
             .catch(err => console.log("Delete request failed."))
-        getToDos(user);
     }
 }
-
 
 // while-loop to run through list and remove all elements.
 
@@ -150,6 +170,17 @@ function clearList() {
     }
 }
 
+// creates v-school url
+
 function getURL (user, entryId = ""){
     return `https://api.vschool.io/${user}/todo/${entryId}`;
 } 
+
+// clear input form (e.g., w/o refresh of page)
+
+function clearInputs(){
+    newEntry.title.value = "";
+    newEntry.desc.value = "";
+    newEntry.price.value = "";
+    newEntry.image.value = "";
+}
