@@ -1,20 +1,20 @@
 const newEntry =  document["new-entry"];
 let user = "vinceb";
 
-// clear and populate list with get request:
+// make get request to vschool API, then clear and populate list with results request:
 
 const getToDos = (user) => {
     axios.get(getURL(user))
-    .then(res => {
-        clearList();
-        res.data.forEach(element => {
-            createToDo(element)
+        .then(res => {
+            clearList();
+            res.data.forEach(element => {
+                createToDo(element)
+            })
         })
-    })
-    .catch(err => console.log("something went wrong with the get request"))
+        .catch(err => console.log("something went wrong with the get request"))
 }
 
-// post new to-do
+// post new to-do - inputs taken directly from input form.
 
 const postToDo = (user) => {
     
@@ -34,20 +34,18 @@ const postToDo = (user) => {
         .catch(err => console.log("something went wrong with the post request"))
 }
 
-// event listener to post new to-do:
+    // event listener to post new to-do:
 
-newEntry.addEventListener("submit", e => {
-    e.preventDefault();
-    postToDo(user);
-    getToDos(user);
-    clearInputs();
-})
-
-// function to change styling/put status change of check'ed item:
+    newEntry.addEventListener("submit", e => {
+        e.preventDefault();
+        postToDo(user);
+        getToDos(user);
+        clearInputs();
+    })
 
 // implementation of editing functionality:
 
-    // function 1/2: changes icon to 'save' icons and converts selected entry's span elements into editable input entries:
+    // function set 1/2: changes icon to 'save' icons and converts selected entry's span elements into editable input entries:
 
         const startEdits = (e) => {
 
@@ -118,7 +116,7 @@ newEntry.addEventListener("submit", e => {
 
             }
 
-    // function 2/2: changes icon to 'edit' icons, sends put request to v-school API, and changes HTML back to spans from input elements.
+    // function set 2/2: changes icon to 'edit' icons, sends put request to v-school API, and changes HTML back to spans from input elements.
 
     const saveEdits = (e) => {
 
@@ -188,9 +186,9 @@ newEntry.addEventListener("submit", e => {
         }
     }
 
-// support functions
+// support functions declarations
 
-    // function that takes a to-do item from the API, generates/populates HTML elements/content, and appends it to the DOM.
+    // function that takes an individual to-do object from the Vschool API, creates/populates HTML element, and appends it to the DOM.
 
     function createToDo({title, description, price, imgUrl, _id, completed}){
         
@@ -255,7 +253,7 @@ newEntry.addEventListener("submit", e => {
 
     }
 
-    // function to toggle status and change css formatting
+    // function to toggle completion status and change css formatting (e.g. line out)
 
     function toggleStatus(e){
         const parent = e.target.parentNode.parentNode;
