@@ -1,27 +1,29 @@
 * {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+h1 {
+    font-size: 40px;
+}
 body {
     max-width: 8.5in;
     min-height: 5in;
-    border: 1px dashed lightblue;
+    border: 1px dashed lightgray;
+    margin: auto;
     display: grid;
-    grid-template-rows: 10% auto 20%;
-}
-body * {
-    background-color: aliceblue;
+    grid-template-rows: repeat(3, auto);
 }
     header {
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-        header h1 {
+        header h1, footer h2 {
             font-family: cursive;
         }
         header div {
-            width: 7in;
-            border-bottom: 4px solid slategray;
+            padding: 10px;
+            width: 8in;
+            border-bottom: 3px solid slategray;
         }
     main {
         display: flex;
@@ -33,6 +35,9 @@ body * {
             min-height: 120px;
             margin: 10px 20px;
             padding: 10px 0px;
+        }
+        li:last-child {
+            border-bottom: 0px dashed slategray;
         }
             .entry {
                 display: grid;
@@ -73,19 +78,65 @@ body * {
             .price {
                 grid-column: 3 / 4;
                 grid-row: 1 / 2;
+                font-size: 17px;
             }
+                .price::before {
+                    content: "$";
+                }
             .description {
                 grid-column: 2 / 4;
                 grid-row: 2 / 4;
             }
             .item-image {
-                max-height: 110px;
+                max-width: 150px;
+                max-height: 150px;
+                width: 100%;
                 grid-column: 4 / 5;
                 grid-row: 1 / 4;
             }
+            #edit-container {
+                grid-column: 2 / 5;
+                grid-row: 1 / 4;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+            }
+            #edit-container * {
+                margin: 5px;
+                font: 17px
+            }
+                #title-edit {
+                    grid-column: 1 / 5;
+                    grid-row: 1 / 2;
+                }
+                #price-edit {
+                    grid-column: 5 / 6;
+                    grid-row: 1 / 2;
+                    
+                }
+                #description-edit {
+                    grid-column: 1 / 6;
+                    grid-row: 2 / 3;
+                    
+                }
+                #image-edit {
+                    grid-column: 1 / 6;
+                    grid-row: 3 / 4;
+                    
+                }
     footer {
-        padding-bottom: 10px;
-        border-top: 2px solid black;
+        margin-top: 20px;
+        padding: 10px;
+        
+    }
+    footer .footer-break {
+        display: flex;
+        justify-content: center;
+        
+    }
+    footer .footer-break * {
+        width: 8in;
+        border-top: 3px solid slategray;
+        
     }
     footer * {
         text-align: center;
