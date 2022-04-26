@@ -120,7 +120,6 @@ newEntry.addEventListener("submit", e => {
 
     // function 2/2: changes icon to 'edit' icons, sends put request to v-school API, and changes HTML back to spans from input elements.
 
-
     const saveEdits = (e) => {
 
         e.target.setAttribute("src", "res/edit-icon.png");
@@ -145,7 +144,6 @@ newEntry.addEventListener("submit", e => {
         
 
         // append updated nodes:
-        console.log(e.target.parentNode.parentNode.parentNode);
         createSavedHtmlElements(e.target.parentNode.parentNode.parentNode, updateParameters);
         
     }
@@ -173,8 +171,7 @@ newEntry.addEventListener("submit", e => {
                 newImage.src = imgUrl;
 
             // changing attributes to completed, if applicable
-
-            if (housingParentNode.parentNode.firstChild.firstChild.textContent === '\u2713') {
+            if (housingParentNode.firstChild.firstChild.textContent === '\u2713') {
                 newTitle.setAttribute("class", "title completed");
                 newDescription.setAttribute("class", "description completed");
             }
