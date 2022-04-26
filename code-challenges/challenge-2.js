@@ -30,7 +30,7 @@ console.log(countLengthMap(people));
 //     .catch(err => console.log(err))
 
 
-// 
+// using spread to put arr1 & arr2 into arr3
 
 const arr1 = [ 1, 3, 5 ]
 const arr2= [ 2, 4, 6 ]
