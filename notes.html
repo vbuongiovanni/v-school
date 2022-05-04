@@ -1422,6 +1422,9 @@
             <li>Why use React?</li>
             <ul>
                 <li>Allows us to write Composable Code: Smaller components can be added/synthesized together to create something larger. </li>
+                <ul>
+                    <li>With respect to web development, it means we can construct and design individual UI elements, then combine the individual elements to form something that is  </li>
+                </ul>
                 <li>Declarative: Rather than having to specify each step in the process of creating, modifying, adding html elements in JavaScript (which can be considered <em>imperative</em>), we can simply write JS as though it were HTML, then quickly add it to a given parent. In essence, standard tasks become much easier.</li>
                 <ul>
                     <li>It's declarative nature is achieved through using <b>JSX</b> (JavaScript XML), which is basically a flavor of JavaScript that mimics HTML.</li>
@@ -1429,6 +1432,7 @@
             </ul>
             <li class="key-concept">JSX - JavaScript XML</li>
             <ul>
+                <li>JSX is a special syntax that is stored in the <span class="code">'react'</span> module and can be accessed using <span class="code">import React from 'react'</span> </li>
                 <li>In a way, JSX is a function that returns a special object that is interpretable by React</li>
                 <li>Note that JSX must be a single parent element (which can contain any number of children elements).</li>
                 <li>Creates a plan old JavaScript object that consists of various properties:</li>
@@ -1441,6 +1445,17 @@
                 <p class="code input">h1.className = "header"</p>
                 <p class="code input">console.log(h1)</p>
                 <p class="code output">&lt;h1 class="header"&gt;&lt;/h1&gt;</p>
+            </ul>
+            <li>Custom React Components</li>
+            <ul>
+                <li>Fosters reusability by using a function that returns a JSX react </li>
+                <li>By convention, it should be PascalCase and the function should be wrapped in angular brackets</li>
+                <li>Typical usage of JS function in ReactDOM.render() - INCORRECT CONVENTION:</li>
+                <p class="code input">ReactDOM.render(mainElement(), document.getElementById("root"))</p>
+                <li>Typical usage of JS function in ReactDOM.render() - PROPEER CONVENTION:</li>
+                <p class="code input">ReactDOM.render(&lt;mainElement /&gt;, document.getElementById("root"))</p>
+
+
 
             </ul>
 
