@@ -1,0 +1,95 @@
+html, body {
+    margin: 0px;
+    width: 550px; 
+    height: 868px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #23252c;
+
+}
+body * {
+    max-width: 317px;
+    background-color: #1A1B21;
+    color: #F5F5F5;
+    font-family: inter;
+}
+#root {
+    margin-top: 200px;
+    border-radius: 0px 0px 10px 10px;
+    
+}
+.container {
+    display: grid;
+    grid-template-rows: 485px minmax(auto 230px) 64px;
+    border-radius: 0px 0px 10px 10px;
+}
+/* Header */
+.header--container * {
+    text-align: center;
+    padding: 0;
+    border-radius: 10px 10px 0px 0px;
+}
+.header--name {
+    font-size: 25px;
+    line-height: 30px;
+    color: #FFFFFF;
+    margin: 12px 0px 0px 0px;
+}
+.header--job-title {
+    margin: 4px 0px 0px 0px;
+    color: #F3BF99;
+    font-size: 12.8px;
+    line-height: 15px;
+}
+.header--personal-website {
+    font-size: 10.24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    margin: 4px 0px 0px 0px;
+}
+.header--button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 20px 0px 20px;
+}
+/* Main */
+.main--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0px;
+}
+.main--header {
+    width: 247px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    padding: 0px;
+    margin: 0px;
+    
+}
+.main--text {
+    width: 247px;
+    color: #DCDCDC;
+    font-size: 10.2px;
+    font-weight: 400;
+    line-height: 150%;
+    padding: 0px;
+    margin: 10px 0px 0px 0px;
+}
+
+/* Footer */
+
+.footer--container {
+    background-color: #161619;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 0px 0px 10px 10px;
+}
+.footer--container > * {
+    margin: 20px 0px 20px 0px;
+    
+}
