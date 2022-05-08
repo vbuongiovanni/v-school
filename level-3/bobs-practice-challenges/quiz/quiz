@@ -1,0 +1,39 @@
+
+*** Custom Components Quiz:
+
+1. What is a React component?
+A React component is a JS function that uses JSX to return React Elements (writes HTML elements to the DOM). 
+
+2. What's wrong with this code?
+
+The name of the function isn't written in PascalCase. It should be MyComponent() rather than myComponent().
+Additionally, the code doesn't actually add anything to the DOM. In order for the code to be rendered,
+we would also need to include 'ReactDOM.render(<MyComponent />, document.getElementById("root"));'
+Also... we would need to import React and ReactDOM modules.
+```
+function myComponent() {
+    return (
+        <small>I'm tiny text!</small>
+    )
+}
+```
+
+3. What's wrong with this code?
+
+The syntax to call the Header() function is incorrect - it should be '<Header />' instead of 'Header()'
+```
+function Header() {
+    return (
+        <header>
+            <nav>
+                <img src="./react-logo.png" width="40px" />
+            </nav>
+        </header>
+    )
+}
+
+ReactDOM.render(Header(), document.getElementById("root"))
+```
+
+
+

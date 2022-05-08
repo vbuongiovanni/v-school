@@ -1,0 +1,36 @@
+* {
+    background-color: #242424;
+    color: white;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style-type: none;
+}
+.nav-items * {
+    padding: 0px 50px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #00ccff;
+}
+h1 {
+    text-decoration: underline;
+}
+.content-list * {
+    padding-top: 10px;
+}
+.nav-logo {
+    width: 100px;
+}
+footer {
+    margin-top: 50px;
+}
+small {
+    color: silver;
+}
