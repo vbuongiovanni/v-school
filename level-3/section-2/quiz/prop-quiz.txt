@@ -1,0 +1,28 @@
+1. What do props help us accomplish?
+Create reusable code through parameterized components.
+
+
+2. How do you pass a prop into a component?
+By adding properties to the function call in the JSX code. E.g.:
+"<Component propertyToPassOne="something here" propertyToPassTwo="something else here"/>
+
+3. Can I pass a custom prop (e.g. `blahblahblah={true}`) to a native
+   DOM element? (e.g. <div blahblahblah={true}>) Why or why not?
+No. Native DOM is, effectively, the same as standard HTML. Since standard HTML only understands predefined properties, this will not work.
+
+
+4. How do I receive props in a component?
+function Navbar() {
+    return (
+        <header>
+            ...
+        </header>
+    )
+}
+By adding a parameter to the function. The first argument will then be an object that stores all properties.
+Note that you can name this parameter whatever you want, but by convention it should be named 'props'
+
+
+5. What data type is `props` when the component receives it?
+
+its an Object.
