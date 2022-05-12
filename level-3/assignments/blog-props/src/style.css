@@ -1,0 +1,47 @@
+body, html {
+    margin: 0px;
+    padding: 0px;
+}
+.header--container {
+    /* background-image: url(https://startbootstrap.github.io/startbootstrap-clean-blog/assets/img/home-bg.jpg); */
+    background-color: #212529;
+    height: 100vh;
+    margin-top: -70px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.header--container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #212529;
+    opacity: 0.5;
+}
+.header--container-text, .header--container-navbar {
+    position: relative;
+    width: 100%;
+    margin-top: 70px;
+    color: #ffff;
+}  
+.header--container-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header--container-navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.navbar--container {
+    padding: 20px;
+}
+.navbar--container * {
+    padding-left: 10px;
+}
+
