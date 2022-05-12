@@ -1,0 +1,97 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+}
+* {
+    font-family: Inter;
+    color: #2B283A;
+}
+#root {
+    display: flex;
+    justify-content: center;
+}
+.header-bar {
+    display: flex;
+    background-color: #F55A5A;
+    padding: 20px 0px;
+    justify-content: center;
+}
+.header-bar--logo {
+    padding-right: 7px;
+    width: 24px;
+    height: 24px;
+}
+.header-bar--text {
+    font-weight: 500;
+    font-size: 14.4608px;
+    line-height: 18px;
+    letter-spacing: -0.075em;
+    color: #FFFFFF;
+}
+.destination--list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.destination--card {
+    display: grid;
+    grid: auto auto;
+    width: 470px;
+    margin: 36px 40px 0px 40px;
+}
+    .destination--image {
+        border-radius: 10px;
+        width: 125px;
+        height: 168px;
+        grid-column: 1 / 2;
+        grid-row: 1 / 5;
+        margin-right: 19px;
+    }
+    .destination--content {
+        grid-column: 2 / 3;
+        display: flex;
+        flex-direction: column;
+    }
+        .destination--location, .destination--title, .destination--dates, .destination--description {
+            grid-column: 2 / 3;
+            padding: 0px;
+            margin: 0px;
+        }
+        .destination--location {
+            padding-top: 10px;
+        }
+            .destination--location-title {
+                padding-left: 5px;
+                text-transform: uppercase;
+            }
+            .destination--location-map-url {
+                padding-left: 12px;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 10.24px;
+                line-height: 12px;
+                text-decoration-line: underline;
+                color: #918E9B;
+            }
+        .destination--title {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 30px;
+        }
+        .destination--dates {
+            padding-top: 15px;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 10.24px;
+            line-height: 12px;
+            
+        }
+        .destination--description {
+            padding-top: 10px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10.24px;
+            line-height: 150%;
+        }
