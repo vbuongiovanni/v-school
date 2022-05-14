@@ -1,0 +1,66 @@
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.header-container {
+    height: 100px;
+}
+.header-container--title {
+    border-bottom: 2px solid slategray;
+    color: cornflowerblue;
+}
+.friend-list {
+    width: 650px;
+    padding: 0px;
+    margin: 0px;
+}
+.friend-container {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(79, 119, 194);
+    border-left: 1px solid rgb(79, 119, 194);
+    border-right: 1px solid rgb(79, 119, 194);
+    width: 100%;
+    padding: 10px 20px 10px 20px;
+}
+.friend-container:first-child {
+    border-radius: 10px 10px 0px 0px;
+    border-top: 1px solid rgb(79, 119, 194);
+}
+.friend-container:last-child {
+    border-radius: 0px 0px 10px 10px;
+}
+.friend-container--name, .friend-container--age, .label {
+    font-size: 20px;
+}
+.label {
+    font-weight: 600;
+}
+.pet-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0px;
+}
+.pet-item {
+    border-bottom: 1px dashed lightblue;
+}
+.pet-item:last-child {
+    border-bottom: 0px dashed lightblue;
+}
+.list-label, .pet-item--name, .pet-item--breed {
+    font-size: 18px;
+}
+.list-label {
+    font-weight: 600;
+}
+.footer-container {
+    height: 100px;
+}
+.pet-detail {
+    padding: 10px 100px;
+}
+li::marker {
+    content: counter(list-item) ".)    ";
+    font-size: 20px;
+}
