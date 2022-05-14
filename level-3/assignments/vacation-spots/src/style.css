@@ -1,0 +1,69 @@
+#root {
+    width: 100%;
+    display: flex;
+    justify-content: center
+}
+* {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.page-title {
+    font-size: 60px;
+    font-weight: 800;
+    text-align: center;
+    text-shadow: 4px 4px lightgrey;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(70, 86, 101);
+}
+.card--container {
+    border: 2px solid black;
+    width: 650px;
+    margin: 15px;
+    padding: 0px 25px;
+}
+.card-text-label {
+    font-weight: 600;
+}
+.card-location {
+    text-align: center;
+    border-bottom: 1px solid black;
+    margin: 20px 25%;
+}
+.card-text, .card-text-label{
+    font-size: 20px
+}
+.other {
+    background-color: rgb(177, 179, 181)
+}
+.spring {
+    background-color: rgb(2, 85, 2);
+    color: #fff
+}
+.winter {
+    background-color: #fff;
+}
+.summer {
+    background-color: rgb(68, 79, 239);
+    color: #fff;
+    
+}
+.fall {
+    background-color: rgb(197, 151, 15);
+    color: #fff;
+}
+
+.summer h1 {
+    text-shadow: 4px 4px rgb(20, 24, 71);
+}
+
+.spring h1 {
+    text-shadow: 4px 4px rgb(1, 36, 1);
+}
+
+.winter h1 {
+    text-shadow: 4px 4px lightgrey;
+}
+
+.fall h1 {
+    text-shadow: 4px 4px rgb(63, 50, 11);
+}
+
