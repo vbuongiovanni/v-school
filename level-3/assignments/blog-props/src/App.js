@@ -7,10 +7,10 @@ import Footer from "./components/Footer"
 
 
 export default function App(){
-    // <Header />
-    return (
+
+    return (        
         <>
-            
+            <Header />
             <BlogList />
             <Footer />
         </>        
