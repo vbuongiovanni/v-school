@@ -1,0 +1,14 @@
+1. How would you describe the concept of "state"?
+A state is effectively a local variable within a component that is mutable.
+Contrary to props, states are dynamic and will be change in order to appropriately implement the desired functionality
+
+
+2. When would you want to use props instead of state?
+If the value is static and does not need to be changed by the component itself. Props should be used like parameters in a function - when you need to pass values into a component.
+
+3. When would you want to use state instead of props?
+If the value is dynamic and DOES need to be changed by the component itself. Props should be used like local variables within a function. 
+States are needed when a component needs to maintain or remember values irrespective of render cycles.
+
+4. What does "immutable" mean? Are props immutable? Is state immutable?
+Mutability refers to whether or not the value can be changed. Props are immutable, while state is mutable.

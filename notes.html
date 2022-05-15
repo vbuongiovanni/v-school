@@ -1454,9 +1454,19 @@
                 <p class="code input">ReactDOM.render(mainElement(), document.getElementById("root"))</p>
                 <li>Typical usage of JS function in ReactDOM.render() - PROPEER CONVENTION:</li>
                 <p class="code input">ReactDOM.render(&lt;mainElement /&gt;, document.getElementById("root"))</p>
-
-
-
+            </ul>
+            <li class="key-concept">Props</li>
+            <ul>
+                <li>Refers to the <b>properties</b> that are passed into a React component in order for it to work correctly, similar to parameters in the context of a function</li>
+                <li>In a way, the props are required for the sake of proper configuration, such as displaying an element in light mode or dark mode</li>
+                <li>A component that receives props cannot modify the values - props are immutable</li>
+            </ul>
+            <li class="key-concept">State</li>
+            <ul>
+                <li>Refers to values that are managed by the component, similar to a local variables that are defined within a function.</li>
+                <li>Put another way, state refers to values that a component can maintain between render cycles.</li>
+                <li>Any time you have changing values that should be saved/displayed, you'll likely be using state.</li>
+                <li>State is similar to declaring variables within a component, except there are added bonuses</li>
             </ul>
 
         </ul>
