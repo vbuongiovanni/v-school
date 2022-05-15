@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import data from "./memesData"
 
 export default function Meme(){
@@ -10,14 +10,13 @@ export default function Meme(){
      * about displaying the image yet)
      */
     
-     let memeImage = require("./memeimg.png");
+     let [memeImage, setMemeImage] = useState(require("./memeimg.png"))
 
      const getMemeImage = (e) => {
         e.preventDefault();
         const memesArray = data.data.memes;
         let randomIndex = Math.floor((Math.random() * memesArray.length));
-        memeImage = memesArray[randomIndex].url;
-        console.log(memeImage);
+        setMemeImage(memesArray[randomIndex].url)
      } 
 
     return(
