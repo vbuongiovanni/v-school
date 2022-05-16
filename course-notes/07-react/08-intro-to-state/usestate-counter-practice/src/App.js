@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import Count from "./Count"
 import "./style.css";
 
 export default function App() {
@@ -36,15 +37,28 @@ export default function App() {
     const halve = () => setCurrentCount(prevCount => prevCount / 2)
         
 
+    /**
+     * Challenge:
+     * - Create a new component named Count
+     *    - It should receive a prop called `number`, whose value
+     *      is the current value of our count
+     *    - Have the component render the whole div.counter--count
+     *      and display the incoming prop `number`
+     * - Replace the div.counter--count below with an instance of
+     *   the new Count component:
+     *      <div className="counter--count">
+                <h1>{currentCount}</h1>
+            </div>
+     */
+
+    console.log("App component has rendered.")
 
     return (
         <div className="counter">
             <button onClick={double} className="counter--double">X2</button>
             <button onClick={halve} className="counter--half">/2</button>
             <button onClick={minus} className="counter--minus">–</button>
-            <div className="counter--count">
-                <h1>{currentCount}</h1>
-            </div>
+                <Count number={currentCount} />
             <button onClick={add} className="counter--plus">+</button>
         </div>
     )

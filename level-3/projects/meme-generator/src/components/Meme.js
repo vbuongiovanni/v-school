@@ -10,32 +10,40 @@ export default function Meme(){
      * about displaying the image yet)
      */
     
-     let [memeImage, setMemeImage] = useState(require("./memeimg.png"))
+     const [meme, setMeme] = useState({
+         randomImage : "http://i.imgflip.com/1bij.jpg",
+         topText : "Top Text",
+         bottomText : "Bottom Text",
+        })
+
+     const [allMemeImages, setAllMemeImages] = useState(data)
 
      const getMemeImage = (e) => {
         e.preventDefault();
-        const memesArray = data.data.memes;
-        let randomIndex = Math.floor((Math.random() * memesArray.length));
-        setMemeImage(memesArray[randomIndex].url)
+        const memesArray = allMemeImages.data.memes;
+        const randomIndex = Math.floor((Math.random() * memesArray.length));
+        setMeme(prevMeme => {
+            return {...prevMeme, randomImage : memesArray[randomIndex].url}
+        })
      } 
 
     return(
         <main>
             <form className="main--container">
                 <div className="main--input-container">
-                    <input className="main--input-text" type="text" placeholder="Shut up"/>
-                    <input className="main--input-text" type="text" placeholder="and take my money"/>
+                    <input className="main--input-text" type="text" placeholder="Top text"/>
+                    <input className="main--input-text" type="text" placeholder="Bottom text"/>
                 </div>
                 <button onClick={getMemeImage} className="main--button">
                     <span>Get a new meme image 🖼</span>
                 </button>
                 <div className="main--display-container">
-                    <img className="main--meme-display" src={memeImage}></img>
+                    <img className="main--meme-display" src={meme.randomImage}></img>
                     <div className="main--meme-text-1">
-                        <span id="meme-text-top">Shut up</span>
+                        <span id="meme-text-top">{meme.topText}</span>
                     </div>
                     <div className="main--meme-text-2">
-                        <span id="meme-text-bottom">And take my money</span>
+                        <span id="meme-text-bottom">{meme.bottomText}</span>
                     </div>
                 </div>
             </form>
