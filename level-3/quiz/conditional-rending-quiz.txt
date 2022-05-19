@@ -1,0 +1,15 @@
+1. What is "conditional rendering"
+rendering elements or text based on some sort of condition, such as a boolean or a value of a given variable
+
+
+2. When would you use &&?
+If you want to conditionally render a single element, or text, based on a condition.
+
+
+3. When would you use a ternary?
+If you want to conditionally render one out of two elements, or text, based on a condition.
+
+
+4. What if you need to decide between > 2 options on
+   what to display?
+Use a if-else or switch-case

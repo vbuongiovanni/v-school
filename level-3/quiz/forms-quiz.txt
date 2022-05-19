@@ -1,0 +1,20 @@
+1. In a vanilla JS app, at what point in the form submission
+   process do you gather all the data from the filled-out form?
+At the time of submissions (e.g., when user hits submit through <button></button> or <input type="button"/>).
+
+2. In a React app, when do you gather all the data from
+   the filled-out form?
+If using state/controlled components, all inputs are gathered everytime there is a change. E.g., as the form is being filled out
+This is because react carries each field's state rather than delegating it to the html elements.
+
+3. Which attribute in the form elements (value, name, onChange, etc.)
+   should match the property name being held in state for that input?
+'name' should match property name to facilitate the calculated naming of properties within the formData object(s).
+
+4. What's different about saving the data from a checkbox element
+   vs. other form elements?
+The checkbox element doesn't use a 'value' property to store it's content. Instead, it uses 'checked' which is a boolean representation of whether or not the element is checked.
+
+5. How do you watch for a form submit? How can you trigger
+   a form submit?
+You can watch for a submit event by using the 'onSubmit' handler on the <form></form> element. Usually with a button click - this will work by default using the <button></button> element.
