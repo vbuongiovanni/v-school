@@ -2,21 +2,6 @@ import React, {useState, useEffect} from "react";
 import data from "./memesData"
 
 export default function Meme(){
-     /**
-     * Challenge: Get a random image from the `memesData` array
-     * when the "new meme image" button is clicked.
-     * 
-     * Log the URL of the image to the console. (Don't worry
-     * about displaying the image yet)
-     */
-
-    /**
-     * Challenge: 
-     * 1. Set up the text inputs to save to
-     *    the `topText` and `bottomText` state variables.
-     * 2. Replace the hard-coded text on the image with
-     *    the text being saved to state.
-     */
     
     // declare state for meme and data
 
@@ -46,28 +31,13 @@ export default function Meme(){
         })
      } 
 
-    /**
-     * Challenge: 
-     * As soon as the Meme component loads the first time,
-     * make an API call to "https://api.imgflip.com/get_memes".
-     * 
-     * When the data comes in, save just the memes array part
-     * of that data to the `allMemes` state
-     * 
-     * Think about if there are any dependencies that, if they
-     * changed, you'd want to cause to re-run this function.
-     * 
-     * Hint: for now, don't try to use an async/await function.
-     * Instead, use `.then()` blocks to resolve the promises
-     * from using `fetch`. We'll learn why after this challenge.
-     */
+     // leverage useEffect() to make API call.
 
      useEffect(() => {
          fetch("https://api.imgflip.com/get_memes")
             .then(res => res.json())
             .then(data => setAllMemeImages(data.data.memes))
      }, [])
-
 
     return(
         <main>
