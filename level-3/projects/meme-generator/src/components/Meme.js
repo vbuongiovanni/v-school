@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import data from "./memesData"
 
 export default function Meme(){
@@ -26,7 +26,7 @@ export default function Meme(){
          bottomText : "Bottom Text",
         })
 
-     const [allMemeImages, setAllMemeImages] = useState(data)
+     const [allMemeImages, setAllMemeImages] = useState([])
 
      // declare function that will be tied to input fields, thereby making them controlled components
 
@@ -39,12 +39,35 @@ export default function Meme(){
 
      const getMemeImage = (e) => {
         e.preventDefault();
-        const memesArray = allMemeImages.data.memes;
+        const memesArray = allMemeImages;
         const randomIndex = Math.floor((Math.random() * memesArray.length));
         setMeme(prevMeme => {
             return {...prevMeme, randomImage : memesArray[randomIndex].url}
         })
      } 
+
+    /**
+     * Challenge: 
+     * As soon as the Meme component loads the first time,
+     * make an API call to "https://api.imgflip.com/get_memes".
+     * 
+     * When the data comes in, save just the memes array part
+     * of that data to the `allMemes` state
+     * 
+     * Think about if there are any dependencies that, if they
+     * changed, you'd want to cause to re-run this function.
+     * 
+     * Hint: for now, don't try to use an async/await function.
+     * Instead, use `.then()` blocks to resolve the promises
+     * from using `fetch`. We'll learn why after this challenge.
+     */
+
+     useEffect(() => {
+         fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then(data => setAllMemeImages(data.data.memes))
+     }, [])
+
 
     return(
         <main>

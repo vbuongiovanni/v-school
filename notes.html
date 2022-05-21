@@ -1460,7 +1460,7 @@
                 <li>In a way, the props are required for the sake of proper configuration, such as displaying an element in light mode or dark mode</li>
                 <li>A component that receives props cannot modify the values - props are immutable</li>
             </ul>
-            <li class="key-concept">State</li>
+            <li class="key-concept">State - useState()</li>
             <ul>
                 <li>Refers to values that are managed by the component, similar to a local variables that are defined within a function.</li>
                 <li>Put another way, state refers to values that a component can maintain between render cycles.</li>
@@ -1489,6 +1489,47 @@
 
                     </ul>
                 </ul>
+            </ul>
+            <li class="key-concept">Effect Hooks - <span class="code">useEffect()</span></li>
+            <ul>
+                <li>At a high-level, React's primary goal is to work with the DOM and browser to render UI to a page, manage State between render cycles, and keep the UI updated when State changes.</li>
+                <li>Given React's primary tasks, there are <b>side effects</b> that come into play React cannot handle localStorage API/database interactions, web sockets, or syncing states.</li>
+                <li>< class="code"span>useEffect()</span> is a tool that provides a means of synchronizing state with elements that are exogenous to the scope of the React App, such as an external API for local storage </li>
+                <ul>
+                    <li>Allows to interact outside the React ecosystem</li>
+                    <li>Also known as 'the effect hook'</li>
+                </ul>
+                <li>What exactly does <span class="code">useEffect()</span> do?</li>
+                <ul>
+                    <li><span class="code">useEffect()</span>, in a nutshell, tells React to do something after render.</li>
+                    <li>React will remember the function, or the "effect", and call it later after performing updates to the DOM</li>
+                    <li>By default, <span class="code">useEffect()</span> runs after the first render and after every update (this can be customized).</li>
+                    <li>The callback function passed to <span class="code">useEffect()</span> is refered to as the 'effect' and, unlike componentDidMount and ComponentDidUpdate, will not block the browser from updating the screen, making the app feel more responsive</li>
+                    <li>Note that you can use multiple <span class="code">useEffect()</span> calls. With that, they will be executed in the order they are defined.</li>
+                </ul>
+                <li>There are two types of Side Effects</li>
+                <ol>
+                    <li>Side effects that don't require cleanup</li>
+                    <ul>
+                        <li>Examples: Network requests, manual DOM mutations, and logging</li>
+                    </ul>
+                    <li>Side effects that do require cleanup</li>
+                    <ul>
+                        <li>Typically, these are effects that will leave residual data behind, such as API calls. In that case, we need a way to clean up so we don't introduce a memory leak.</li>
+                        <li>Examples: Data requests, API calls, example</li>
+                        <li>To resolve these issues, an effect that returns a function (e.g., a function that will clean up) will automatically be executed by useEffect() after the effect finishes execution, and the component unmounts.</li>
+                    </ul>
+                </ol>
+                <li>How to use <span class="code">useEffect()</span></li>
+                <ul>
+                    <li><span class="code">useEffect()</span> takes two params - a callback function containing side-effect and a <b>Dependency array</b> which stores previous values so <span class="code">useEffect()</span> knows when it needs to run.</li>
+                    <ul>
+                        <li>If <b>Dependency array</b> is empty, then effect will be executed exactly 1 time - after the first render.</li>
+                        <li>If <b>Dependency array</b> is contains a variable containing state, then the effect will be executed 1.) after the first render, and 2) after every subsequent render when the state variable isn't equal to the previous value (stored in the Dependency Array)</li>
+                    </ul>
+                </ul>
+
+
             </ul>
 
         </ul>

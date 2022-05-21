@@ -1,0 +1,21 @@
+1. What is a "side effect" in React? What are some examples?
+    
+    In short, it is any code that React isn't able to handle. 
+    More specifically, q side effect is anything that causes lasting impacts on a React app / DOM. Essentially this happens when something outside React changes something within React (changes to State)
+    Examples include manual mutation of the DOM after initial render, calls to an external database, calls to an external API, sockets, two separate  that etc.
+
+2. What is NOT a "side effect" in React? Examples?
+    Anything that React IS in charge of..For example - changes in state from within React, render DOM, etc.. An input field changing a State?
+
+3. When does React run your useEffect function? When does it NOT run
+   the effect function?
+   
+   useEffect() takes a callback function and dependency array. useEffect() runs after the initial render and after every rerender. 
+   However, the callback function will only execute if the dependency array has any false values. If the array was empty, the callback function will not be reran. 
+   If the array contains all true values (values of variables within the dependency array are equal to their values on the last run), then the callback function will not be reran.
+   
+4. How would you explain what the "dependencies array" is?
+    
+    It is the second parameter to the useEffect function and tells useEffect whether or not the callback function should be reran.
+    its an array of variables that will be compared by useEffect() prior to the execution of the callback Function.
+    If the current value of any of the variables are not equal to the value from the last time useEffect() was called, then useEffect() will be executed.
