@@ -111,7 +111,17 @@ body {
     vertical-align: Top;
     color: #FFFFFF;
     text-transform: uppercase;
-    -webkit-text-stroke: 1px black;
+    /* -webkit-text-stroke: 1px black; */
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 2px 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        -2px 0 0 #000,
+        2px 2px 5px #000;
 }
 .main--meme-text-1 {
     position: absolute;

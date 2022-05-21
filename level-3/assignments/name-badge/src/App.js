@@ -5,19 +5,25 @@ import BadgeList from "./components/BadgeList"
 
 export default function App(){
 
+    // Set State of inputs used in form
+
     const [formData, setFormData] = useState({
-        firstName : "Bob",
-        lastName : "Smith",
-        email : "BSmith@Gmail.com",
-        birthPlace : "california",
-        phone : "1234567890",
-        favFoods : "Pizza",
-        notes : "I Like Stuff",
+        firstName : "",
+        lastName : "",
+        email : "",
+        birthPlace : "",
+        phone : "",
+        favFoods : "",
+        notes : "",
         id : 0
     })
 
+    // Set State of array that will hold existing badges
+
     const [badgeList, setBadgeList] = useState([])
     
+    // declare function to handle form Submit
+
     const handleSubmit = (e) => {
         e.preventDefault();
         setBadgeList(prevBadgeList => [...prevBadgeList, formData])
@@ -33,11 +39,15 @@ export default function App(){
             id : ++formData.id
         }))
     }
+
+    // declare function to update formData on change
     
     const handleFormChange = (e) => {
         const {name, value} = e.target;
         setFormData(prevFormData => ({...prevFormData, [name] : value}))
     }
+
+    // consolidate props that will be passed to Form
 
     const formProps = {
         handleSubmit,
