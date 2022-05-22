@@ -19,7 +19,7 @@ body {
     font-size: 12px;
 }
 .header--container {
-    background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+    background: linear-gradient(90deg, #151348 1.18%, #2f26d3 100%);
     width: 100%;
     height: 65px;
     display: flex;
@@ -27,13 +27,14 @@ body {
     align-items: center;
 }
 .header--troll-face {
-    width: 31.31px;
-    height: 26.22px;
+    width: 40px;
+    height: 35.22px;
     position: relative;
     top: 5px;
     padding-left: 20px;
     padding-right: 10px;
 }
+
 .header--text-title {
     font-family: 'Karla';
     font-weight: 700;
@@ -42,6 +43,26 @@ body {
     letter-spacing: -0.1em;
     color: #FFFFFF;
 }
+.header--text-title * {
+    user-select: none;
+}
+.active {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+.inactive {
+    color: #ffffffca;
+    font-weight: 600;
+}
+.header--text-title > span {
+    margin-left: 10px;
+    padding: 5px 0px;
+}
+.header--text-title > span:hover {
+    color: #FFFFFF;
+    font-weight: 800;
+}
+
 #root > .header--container > .header--text-sub-title {
     font-family: 'Inter';
     font-weight: 500;
@@ -79,7 +100,7 @@ body {
     height: 40px;
     left: 36px;
     top: 151px;
-    background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+    background: linear-gradient(90deg, #2f26d3 1.18%, #151348 100%);
     margin-bottom: 36px;
     border: 0px solid #D5D4D8;
 }

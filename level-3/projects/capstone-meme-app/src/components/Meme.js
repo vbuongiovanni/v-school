@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from "react";
 
-export default function Meme(){
-    
+export default function Meme(props){
+
+    const {memeList, setMemeList} = props
+
     // declare state for meme and data
 
      const [meme, setMeme] = useState({
          randomImage : "http://i.imgflip.com/1bij.jpg",
-         topText : "Top Text",
-         bottomText : "Bottom Text",
+         topText : "",
+         bottomText : "",
         })
 
      const [allMemeImages, setAllMemeImages] = useState([])
@@ -19,14 +21,10 @@ export default function Meme(){
          setMeme(prevMeme => ({...prevMeme, [name] : value}))
      }
 
-     const saveToLibrary = (e) => {
-         console.log("under construction... will save meme to list")
-     }
-
      // declare function that will pull a random meme from the local memesData.js
 
-     const getMemeImage = (e) => {
-        e.preventDefault();
+     const getMemeImage = (event) => {
+        event.preventDefault();
         const memesArray = allMemeImages;
         const randomIndex = Math.floor((Math.random() * memesArray.length));
         setMeme(prevMeme => {
@@ -46,6 +44,14 @@ export default function Meme(){
         getMemes()
         
      }, [])
+
+     // handler to save meme to memeList and clear inputs:
+
+    const saveToLibrary = (event) => {
+        event.preventDefault()
+        setMemeList(prevMemeList => [...prevMemeList, meme])
+        console.log(memeList)
+    }
 
     return(
         <main>
@@ -78,7 +84,7 @@ export default function Meme(){
                         <span id="meme-text-bottom">{meme.bottomText}</span>
                     </div>
                 </div>
-                <button onClick={getMemeImage} className="main--button">
+                <button onClick={saveToLibrary} className="main--button">
                     <span>Save Meme to Library</span>
                 </button>
             </form>
