@@ -1,0 +1,135 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+}
+body {
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+}
+#root {
+    max-width: 550px;
+    height: 550px;
+    width: 100%;
+    border: 1px solid rgb(197, 197, 197);
+}
+#root * {
+    font-family: 'Karla';
+    font-size: 12px;
+}
+.header--container {
+    background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
+    width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header--troll-face {
+    width: 31.31px;
+    height: 26.22px;
+    position: relative;
+    top: 5px;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+.header--text-title {
+    font-family: 'Karla';
+    font-weight: 700;
+    font-size: 20.7482px;
+    line-height: 24px;
+    letter-spacing: -0.1em;
+    color: #FFFFFF;
+}
+#root > .header--container > .header--text-sub-title {
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: right;
+    color: #FFFFFF;
+    padding-right: 37px;
+}
+.main--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: inherit;
+}
+.main--button, .main--input-text {
+    border-radius: 5px;
+}
+.main--input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+.main--input-text {
+    display: inline;
+    height: 35px;
+    width: 230px;
+    margin: 15px 0px;
+    border: 1px solid #D5D4D8;
+    text-indent: 5px;
+}
+.main--button {
+    width: 90%;
+    height: 40px;
+    left: 36px;
+    top: 151px;
+    background: linear-gradient(90.41deg, #711F8D 1.14%, #A818DA 100%);
+    margin-bottom: 36px;
+    border: 0px solid #D5D4D8;
+}
+.main--button * {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: -0.1em;
+    color: #fff;
+}
+.main--display-container {
+    margin: 0px 37px;
+}
+.main--meme-display {
+    border-radius: 2px;
+    width: 100%;
+    height: 268px;
+}
+.main--display-container {
+    position: relative;
+    text-align: center;
+  }
+#meme-text-bottom, #meme-text-top {
+    font-family: Impact;
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 100%;
+    vertical-align: Top;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    /* -webkit-text-stroke: 1px black; */
+    text-shadow:
+        2px 2px 0 #000,
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        0 2px 0 #000,
+        2px 0 0 #000,
+        0 -2px 0 #000,
+        -2px 0 0 #000,
+        2px 2px 5px #000;
+}
+.main--meme-text-1 {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+}
+.main--meme-text-2 {
+    position: absolute;
+    top: 80%;
+    width: 100%;
+}
