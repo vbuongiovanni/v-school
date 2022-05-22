@@ -33,10 +33,22 @@ export default function Meme(){
 
      // leverage useEffect() to make API call.
 
+     // Note - since async functions inherently return promises, and useEffect() expects the returned value to be a cleanup callback function
+     // the only way you can use an async function with useEffect is to use it as a secondary function. see below:
+
      useEffect(() => {
-         fetch("https://api.imgflip.com/get_memes")
-            .then(res => res.json())
-            .then(data => setAllMemeImages(data.data.memes))
+
+        //  fetch("https://api.imgflip.com/get_memes")
+        //     .then(res => res.json())
+        //     .then(data => setAllMemeImages(data.data.memes))
+
+        async function getMemes() {
+            const response = await fetch("https://api.imgflip.com/get_memes")
+            const data = await response.json()
+            setAllMemeImages(data.data.memes)
+        }
+        getMemes()
+        
      }, [])
 
     return(
