@@ -10,7 +10,7 @@ export default function App(){
     const [inLibrary, setInLibrary] = useState(false)
 
     // set state of memeList - array representing saved memes
-    const [memeList, setMemeList] = useState([{}])
+    const [memeList, setMemeList] = useState([])
 
     // set handlers for header navigation
 
@@ -22,9 +22,6 @@ export default function App(){
     }
 
     const navHandler = {navToMemeGenerator, navToLibrary}
-
-
-    
 
     return (
         <>

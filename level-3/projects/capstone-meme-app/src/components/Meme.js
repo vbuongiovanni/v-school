@@ -10,6 +10,7 @@ export default function Meme(props){
          randomImage : "http://i.imgflip.com/1bij.jpg",
          topText : "",
          bottomText : "",
+         memeId : 0
         })
 
      const [allMemeImages, setAllMemeImages] = useState([])
@@ -35,7 +36,6 @@ export default function Meme(props){
      // wrap API call in useEffect(). setting dependency array to empty array, since we should only need to get memes array once.
 
      useEffect(() => {
-
         async function getMemes() {
             const response = await fetch("https://api.imgflip.com/get_memes")
             const data = await response.json()
@@ -47,10 +47,19 @@ export default function Meme(props){
 
      // handler to save meme to memeList and clear inputs:
 
+     console.log(memeList)
+     
     const saveToLibrary = (event) => {
         event.preventDefault()
         setMemeList(prevMemeList => [...prevMemeList, meme])
-        console.log(memeList)
+        setMeme(prevMeme => {
+            return {
+                randomImage : "http://i.imgflip.com/1bij.jpg",
+                topText : "",
+                bottomText : "",
+                memeId : memeList.length + 1}
+        }
+        )
     }
 
     return(
@@ -73,7 +82,7 @@ export default function Meme(props){
                     />
                 </div>
                 <button onClick={getMemeImage} className="main--button">
-                    <span>Refresh meme image 🖼</span>
+                    <span>Refresh image 🖼</span>
                 </button>
                 <div className="main--display-container">
                     <img className="main--meme-display" src={meme.randomImage}></img>
