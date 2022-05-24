@@ -12,6 +12,11 @@ export default function App(){
     // set state of memeList - array representing saved memes
     const [memeList, setMemeList] = useState([])
 
+    // set state of inEditMode - this is primarily used by the MemeLibrary component.
+    // However, it is included in the App component, since it impacts the navbar.
+    const [inEditMode, setEditMode] = useState(false)
+    
+
     // set handlers for header navigation
 
     const navToMemeGenerator = () => {
@@ -25,8 +30,10 @@ export default function App(){
 
     return (
         <>
-            <Header inLibrary={inLibrary} {...navHandler}/>
-            {inLibrary ? <MemeLibrary memeList={memeList} /> : <Meme {...{memeList, setMemeList}} />}
+            <Header inLibrary={inLibrary} inEditMode={inEditMode} {...navHandler}/>
+            {inLibrary ? 
+                <MemeLibrary {...{memeList, setMemeList, inEditMode, setEditMode}} /> : 
+                <Meme {...{memeList, setMemeList}} />}
         </>        
     )
 }

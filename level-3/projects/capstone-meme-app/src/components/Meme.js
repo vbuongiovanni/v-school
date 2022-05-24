@@ -10,7 +10,7 @@ export default function Meme(props){
          randomImage : "http://i.imgflip.com/1bij.jpg",
          topText : "",
          bottomText : "",
-         memeId : 0
+         memeId : `${Math.floor(Math.random() * 10000)}-${Math.floor(Math.random() * 10000)}`
         })
 
      const [allMemeImages, setAllMemeImages] = useState([])
@@ -28,8 +28,12 @@ export default function Meme(props){
         event.preventDefault();
         const memesArray = allMemeImages;
         const randomIndex = Math.floor((Math.random() * memesArray.length));
+        const uniqueId = `${memesArray[randomIndex].id}-${Math.floor(Math.random() * 10000)}`
         setMeme(prevMeme => {
-            return {...prevMeme, randomImage : memesArray[randomIndex].url}
+            return {
+                ...prevMeme,
+                randomImage : memesArray[randomIndex].url,
+                memeId : uniqueId}
         })
      } 
 
@@ -46,25 +50,25 @@ export default function Meme(props){
      }, [])
 
      // handler to save meme to memeList and clear inputs:
-
-     console.log(memeList)
      
     const saveToLibrary = (event) => {
         event.preventDefault()
         setMemeList(prevMemeList => [...prevMemeList, meme])
+        
+        const uniqueId = `${meme.memeId.split("-")[0]}-${Math.floor(Math.random() * 10000)}`
         setMeme(prevMeme => {
             return {
-                randomImage : "http://i.imgflip.com/1bij.jpg",
+                ...prevMeme, 
                 topText : "",
                 bottomText : "",
-                memeId : memeList.length + 1}
-        }
-        )
+                memeId : uniqueId}
+        })
     }
 
     return(
         <main>
             <form className="main--container">
+                <h1>Meme Generator</h1>
                 <div className="main--input-container">
                     <input className="main--input-text"
                         type="text"

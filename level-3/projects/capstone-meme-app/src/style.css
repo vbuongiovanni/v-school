@@ -24,6 +24,7 @@ body {
     }
     .library--main {
         height: 100vh;
+        max-height: 100%;
         border: 1px solid rgb(197, 197, 197);
         margin-bottom: 50px;
     }
@@ -105,7 +106,7 @@ body {
     border: 1px solid #D5D4D8;
     text-indent: 5px;
 }
-.main--button {
+.main--button, .edit--button-save, .edit--button-cancel {
     width: 90%;
     height: 40px;
     left: 36px;
@@ -201,4 +202,14 @@ body {
 }
 #library--meme-text-top, #library--meme-text-bottom {
     font-size: 16px;
+}
+/* Edit Menu */
+.edit--controls {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    gap: 20px;
+    padding-top: 10px;
+}
+.edit--controls * {color: #FFFFFF;
 }

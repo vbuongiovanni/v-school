@@ -2,10 +2,23 @@ import React from "react";
 
 export default function MemeLibraryItem(props) {
 
-    const {randomImage, topText, bottomText, memeId} = props
+    const {randomImage, topText, bottomText, memeId, setMemeList, memeList, toggleEditMode, setEditMeme} = props
+
+    const deleteMeme = (event) => {
+        event.preventDefault();
+        const idOfInterest = event.target.parentNode.parentNode.getAttribute('id');
+        setMemeList(prevMemeList => prevMemeList.filter(meme => meme.memeId !== idOfInterest))
+    }
+
+    const editMeme = (event) => {
+        const idOfInterest = event.target.parentNode.parentNode.getAttribute('id');
+        const [memeToEdit] = memeList.filter(meme => meme.memeId === idOfInterest);
+        setEditMeme(memeToEdit)
+        toggleEditMode()
+    }
 
     return (
-        <li className="library--list-item" id={`list-item-${memeId}`}>
+        <li className="library--list-item" id={memeId}>
             <div className="library--item-presentation">
                 <img className="library--meme-display" src={randomImage}></img>
                 <div className="library--meme-text-1">
@@ -16,8 +29,8 @@ export default function MemeLibraryItem(props) {
                 </div>
             </div>
             <div className="library--item-controls">
-                <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={editMeme}>Edit</button>
+                <button onClick={deleteMeme}>Delete</button>
             </div>
         </li>
     )
