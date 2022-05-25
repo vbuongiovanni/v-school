@@ -2,29 +2,40 @@ import React, {useState, useEffect} from "react";
 
 export default function Meme(props){
 
+    // deconstruct props:
     const {memeList, setMemeList} = props
 
     // declare state for meme and data
+    const [meme, setMeme] = useState({
+        randomImage : "http://i.imgflip.com/1bij.jpg",
+        topText : "",
+        bottomText : "",
+        memeId : `${Math.floor(Math.random() * 10000)}-${Math.floor(Math.random() * 10000)}`
+    })
 
-     const [meme, setMeme] = useState({
-         randomImage : "http://i.imgflip.com/1bij.jpg",
-         topText : "",
-         bottomText : "",
-         memeId : `${Math.floor(Math.random() * 10000)}-${Math.floor(Math.random() * 10000)}`
-        })
+    // state for meme data
+    const [allMemeImages, setAllMemeImages] = useState([])
 
-     const [allMemeImages, setAllMemeImages] = useState([])
+    // useEffect() w/ nested async function to make API call, handle promises and setAllMemeImages 
+    // dependency array is left empty, so useEffect will run nested async one time (after initial render)
+    useEffect(() => {
+        async function getMemes() {
+            const response = await fetch("https://api.imgflip.com/get_memes")
+            const data = await response.json()
+            setAllMemeImages(data.data.memes)
+        }
+        getMemes()
+    }, [])
 
-     // declare function that will be tied to input fields, thereby making them controlled components
+    // handler UI change - used to synchronize meme state & UI 
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setMeme(prevMeme => ({...prevMeme, [name] : value}))
+    }
 
-     const handleChange = (e) => {
-         const {name, value} = e.target;
-         setMeme(prevMeme => ({...prevMeme, [name] : value}))
-     }
-
-     // declare function that will pull a random meme from the local memesData.js
-
-     const getMemeImage = (event) => {
+    // handler that will draw a random meme from allMemeImage, then add it to meme state along with
+    // unique id.
+    const getMemeImage = (event) => {
         event.preventDefault();
         const memesArray = allMemeImages;
         const randomIndex = Math.floor((Math.random() * memesArray.length));
@@ -35,26 +46,12 @@ export default function Meme(props){
                 randomImage : memesArray[randomIndex].url,
                 memeId : uniqueId}
         })
-     } 
+    } 
 
-     // wrap API call in useEffect(). setting dependency array to empty array, since we should only need to get memes array once.
-
-     useEffect(() => {
-        async function getMemes() {
-            const response = await fetch("https://api.imgflip.com/get_memes")
-            const data = await response.json()
-            setAllMemeImages(data.data.memes)
-        }
-        getMemes()
-        
-     }, [])
-
-     // handler to save meme to memeList and clear inputs:
-     
+    // handler to add meme to memeList, then clear inputs:
     const saveToLibrary = (event) => {
         event.preventDefault()
         setMemeList(prevMemeList => [...prevMemeList, meme])
-        
         const uniqueId = `${meme.memeId.split("-")[0]}-${Math.floor(Math.random() * 10000)}`
         setMeme(prevMeme => {
             return {
@@ -66,18 +63,22 @@ export default function Meme(props){
     }
 
     return(
-        <main>
-            <form className="main--container">
-                <h1>Meme Generator</h1>
-                <div className="main--input-container">
-                    <input className="main--input-text"
+        <main className="generator--main">
+            <form className="meme--container border-box">
+                <div className="page--header">
+                    <h1>Meme Generator</h1>
+                </div>
+                <div className="meme--input-container">
+                    <input
+                        className="meme--input-text"
                         type="text"
                         placeholder="Top text"
                         name="topText"
                         value={meme.topText}
                         onChange={handleChange}
                     />
-                    <input className="main--input-text"
+                    <input
+                        className="meme--input-text"
                         type="text"
                         placeholder="Bottom text"
                         name="bottomText"
@@ -85,20 +86,20 @@ export default function Meme(props){
                         onChange={handleChange}
                     />
                 </div>
-                <button onClick={getMemeImage} className="main--button">
-                    <span>Refresh image 🖼</span>
+                <button onClick={getMemeImage} className="control-button">
+                    Refresh image 🖼
                 </button>
-                <div className="main--display-container">
-                    <img className="main--meme-display" src={meme.randomImage}></img>
-                    <div className="main--meme-text-1">
-                        <span id="meme-text-top">{meme.topText}</span>
+                <div className="meme--display-container">
+                    <img className="meme--meme-display" src={meme.randomImage}></img>
+                    <div className="meme-text-container-top">
+                        <span id="meme--text">{meme.topText}</span>
                     </div>
-                    <div className="main--meme-text-2">
-                        <span id="meme-text-bottom">{meme.bottomText}</span>
+                    <div className="meme-text-container-bottom">
+                        <span id="meme--text">{meme.bottomText}</span>
                     </div>
                 </div>
-                <button onClick={saveToLibrary} className="main--button">
-                    <span>Save Meme to Library</span>
+                <button onClick={saveToLibrary} className="control-button">
+                    Save Meme to Library
                 </button>
             </form>
         </main>

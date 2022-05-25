@@ -1,13 +1,22 @@
 import React from "react";
+import {confirm} from "react-confirm-box"
 
 export default function MemeLibraryItem(props) {
 
     const {randomImage, topText, bottomText, memeId, setMemeList, memeList, toggleEditMode, setEditMeme} = props
 
+    const onDeleteConfirm = async(event) => {
+        const result = await confirm(`Are you sure you want to delete this meme? It will be wiped from existence.`);
+        if (result) {
+            const idOfInterest = event.target.parentNode.parentNode.getAttribute('id');
+            setMemeList(prevMemeList => prevMemeList.filter(meme => meme.memeId !== idOfInterest))
+        }
+
+    }
+
     const deleteMeme = (event) => {
         event.preventDefault();
-        const idOfInterest = event.target.parentNode.parentNode.getAttribute('id');
-        setMemeList(prevMemeList => prevMemeList.filter(meme => meme.memeId !== idOfInterest))
+        onDeleteConfirm(event);
     }
 
     const editMeme = (event) => {
@@ -20,17 +29,17 @@ export default function MemeLibraryItem(props) {
     return (
         <li className="library--list-item" id={memeId}>
             <div className="library--item-presentation">
-                <img className="library--meme-display" src={randomImage}></img>
-                <div className="library--meme-text-1">
-                    <span id="library--meme-text-top">{topText}</span>
+                <img className="meme--meme-display" src={randomImage}></img>
+                <div className="meme-text-container-top list-item-meme-text-top">
+                    <span id="meme--text">{topText}</span>
                 </div>
-                <div className="library--meme-text-2">
-                    <span id="library--meme-text-bottom">{bottomText}</span>
+                <div className="meme-text-container-bottom list-item-meme-text-bottom">
+                    <span id="meme--text">{bottomText}</span>
                 </div>
             </div>
-            <div className="library--item-controls">
-                <button onClick={editMeme}>Edit</button>
-                <button onClick={deleteMeme}>Delete</button>
+            <div className="list-item--controls button-container">
+                <button className="control-button" onClick={editMeme}>Edit</button>
+                <button className="control-button" onClick={deleteMeme}>Delete</button>
             </div>
         </li>
     )

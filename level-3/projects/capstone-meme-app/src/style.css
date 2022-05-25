@@ -1,33 +1,26 @@
 /* General */
+* {
+    font-family: 'Karla';
+    font-size: 12px;
+}
 html, body {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     margin: 0px;
+    padding: 0px;
 }
 body {
     display: flex;
     justify-content: center;
-    padding-top: 25px;
+    padding: 10px 0px;
 }
 #root {
-    max-width: 550px;
+    max-width: 600px;
     width: 100%;
+    height: 100%;
+    box-sizing: border-box;
 }
-#root * {
-    font-family: 'Karla';
-    font-size: 12px;
-}
-/* Main Styling */
-    main {
-        height: 500px;
-        border: 1px solid rgb(197, 197, 197);
-    }
-    .library--main {
-        height: 100vh;
-        max-height: 100%;
-        border: 1px solid rgb(197, 197, 197);
-        margin-bottom: 50px;
-    }
 /* Header Styling */
 .header--container {
     background: linear-gradient(90deg, #151348 1.18%, #2f26d3 100%);
@@ -35,7 +28,7 @@ body {
     height: 65px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;   
 }
 .header--troll-face {
     width: 40px;
@@ -45,26 +38,24 @@ body {
     padding-left: 20px;
     padding-right: 10px;
 }
-
 .header--text-title {
-    font-family: 'Karla';
     font-weight: 700;
-    font-size: 20.7482px;
+    font-size: 21px;
     line-height: 24px;
-    letter-spacing: -0.1em;
+    letter-spacing: -0.05em;
     color: #FFFFFF;
 }
 .header--text-title * {
     user-select: none;
 }
-.active {
-    color: #FFFFFF;
-    text-decoration: underline;
-}
-.inactive {
-    color: #ffffffca;
-    font-weight: 600;
-}
+    .active {
+        color: #FFFFFF;
+        text-decoration: underline;
+    }
+    .inactive {
+        color: #ffffffca;
+        font-weight: 600;
+    }
 .header--text-title > span {
     margin-left: 10px;
     padding: 5px 0px;
@@ -76,66 +67,58 @@ body {
 #root > .header--container > .header--text-sub-title {
     font-family: 'Inter';
     font-weight: 500;
-    font-size: 12px;
     line-height: 15px;
     text-align: right;
     color: #FFFFFF;
     padding-right: 37px;
 }
-/* Main Meme Page */
-.main--container {
+/* Meme Generator Page */
+.generator--main {
+    width: 100%;
+    margin-bottom: 50px;
+    display: table;
+    height: 100%;
+}
+.meme--container {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: inherit;
+    box-sizing: border-box;
 }
-.main--button, .main--input-text {
-    border-radius: 5px;
+.border-box {
+    border: 1px solid rgb(197, 197, 197);
 }
-.main--input-container {
+.meme--input-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 90%;
 }
-.main--input-text {
+.meme--input-text {
     display: inline;
     height: 35px;
     width: 230px;
-    margin: 15px 0px;
+    margin-top: 17px;
     border: 1px solid #D5D4D8;
     text-indent: 5px;
+    border-radius: 5px;
 }
-.main--button, .edit--button-save, .edit--button-cancel {
-    width: 90%;
-    height: 40px;
-    left: 36px;
-    top: 151px;
-    background: linear-gradient(90deg, #2f26d3 1.18%, #151348 100%);
-    margin-bottom: 36px;
-    border: 0px solid #D5D4D8;
-}
-.main--button * {
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    letter-spacing: -0.1em;
-    color: #fff;
-}
-.main--display-container {
+.meme--display-container {
     margin: 0px 37px;
 }
-.main--meme-display {
+.meme--meme-display {
     border-radius: 2px;
-    width: 100%;
+    width: auto;
     height: 268px;
+    margin-top: 17px;
 }
-.main--display-container, .library--item-presentation {
+.meme--display-container, .library--item-presentation {
     position: relative;
     text-align: center;
   }
-#meme-text-bottom, #meme-text-top, #library--meme-text-top, #library--meme-text-bottom {
+/* using an html id for this style, otherwise class-level styling above will overwrite. */
+#meme--text {
     font-family: Impact;
     font-weight: 900;
     font-size: 32px;
@@ -154,17 +137,35 @@ body {
         -2px 0 0 #000,
         2px 2px 5px #000;
 }
-.main--meme-text-1 {
+.meme-text-container-top {
     position: absolute;
-    top: 5%;
+    top: 10%;
     width: 100%;
 }
-.main--meme-text-2 {
+.meme-text-container-bottom {
     position: absolute;
-    top: 80%;
+    top: 85%;
     width: 100%;
+}
+.list-item-meme-text-top {
+    top: 10%
+}
+.list-item-meme-text-bottom {
+    top: 82%
 }
 /* Library Page*/
+.library--main {
+    width: 100%;
+    margin-bottom: 50px;
+    display: table;
+    box-sizing: border-box;
+}
+    .editor {
+        height: 400px;
+    }
+    .listing {
+        height: 100%;
+    }
 .library--list-item {
     display: grid;
     grid-template-rows: auto auto;
@@ -175,41 +176,50 @@ body {
 .library--item-presentation > img {
     max-height: 200px;
 }
-.library--item-controls {
+.library--list {
+    list-style-type: none;
+    padding: 0px;
+}
+    .library--list > li {
+        border-bottom: 1px lightgrey dashed;
+        padding: 30px 40px 20px 40px;
+        margin: 0px 40px;
+    }
+    .library--list > li:last-child {
+        border-bottom: 0px lightgrey dashed;
+    }
+/* Edit Menu */
+.page--header, .page--header * {
+    font-family: Impact;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 28px;
+    color: #151348;
+    margin: 5px 0px;
+    width: 100%;
+}
+/* Button Container and Text */
+.button-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: row;
     gap: 40px;
     grid-row: 2 / 3;
 }
-.meme-library--list {
-    list-style-type: none;
-}
-.meme-library--list > li {
-    border-bottom: 1px grey dashed;
-    padding: 40px 0px;
-    margin: 0px 10px;
-}
-.library--meme-text-1 {
-    position: absolute;
-    top: 5%;
-    width: 100%;
-}
-.library--meme-text-2 {
-    position: absolute;
-    top: 80%;
-    width: 100%;
-}
-#library--meme-text-top, #library--meme-text-bottom {
-    font-size: 16px;
-}
-/* Edit Menu */
 .edit--controls {
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-    gap: 20px;
-    padding-top: 10px;
+    width: 60%;
 }
-.edit--controls * {color: #FFFFFF;
-}
+    .control-button {
+        width: 90%;
+        height: 40px;
+        background: linear-gradient(90deg, #2f26d3 1.18%, #151348 100%);
+        border: 0px solid #D5D4D8;
+        border-radius: 5px;
+        margin-top: 17px;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: -0.05em;
+        color: #fff;
+    }
