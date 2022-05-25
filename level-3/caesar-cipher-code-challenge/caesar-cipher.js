@@ -1,10 +1,3 @@
-const readLine = require("readline-sync")
-
-// const input = readline.question('What phrase would you like to encrypt? ').toLowerCase();
-
-// const shift = parseInt(readline.question('How many letters would you like to shift? '));
-
-
 /* 
 Requirements:
 Implementing a Caeser cipher using Javascript. Your program will receive two inputs:
@@ -13,30 +6,39 @@ Implementing a Caeser cipher using Javascript. Your program will receive two inp
     note - only shift characters in 26-letter alphabet. Print all others without modification
  */
 
-
-
-const testCaseText = "V School is Awesome!"
-const testCaseShift = 11
-const expectedOutput = "g dnszzw td lhpdzxp"
+const readLine = require('readline-sync');
+const input = readLine.question('What phrase would you like to encrypt? ');
+const shift = parseInt(readLine.question('How many letters would you like to shift? '));
 
 const caesarCipher = (text, shift) => {
-    // initialize key
-    const alphabetKey = "abcdefghijklmnopqrstuvwxyz" // alphabetKey.split("")
-    let textArray = text.toLowerCase().split("") // convert to array
-    let charIndex
+    // initialize key, split into array
+    const alphabetKey = "abcdefghijklmnopqrstuvwxyz".split("")
 
-    for (let i = 0; i < textArray.length; i++) {
-        charIndex = alphabetKey.indexOf(textArray[i])
-        if (charIndex >= 0) {
-            charIndex += shift
-            charIndex = charIndex >= 26 ? charIndex - 26 : charIndex;
-            textArray[i] = alphabetKey.split("")[charIndex]
-        } else {
-            textArray[i] = textArray[i];
-        }
-    }
-    
-    return textArray.join("")
+    // Convert to input text to lowercase and split into array
+    let textArray = text.toLowerCase().split("") // convert to array
+
+    // refactored solution using reduce()
+    return textArray.reduce((prevString, char) => {
+            let newCharIndex = alphabetKey.indexOf(char) + shift; // get unadjusted shift position
+            // Reverse shift factor, check if character wasn't found in alphabet key
+            if ((newCharIndex - shift) >= 0) { 
+                char = alphabetKey[newCharIndex >= 26 ? newCharIndex - 26 : newCharIndex] // Adjust shift position using ternary 
+            }
+            return prevString + char // concat modified char
+        }, "")
 }
 
-console.log(caesarCipher(testCaseText, testCaseShift))
+console.log(caesarCipher(input, shift))
+
+/* 
+// Test case:
+const testCaseText = "V School is Awesome!"
+const testCaseShift = 11
+const expectedOutput = "g dnszzw td lhpdzxp!"
+
+console.log(`Test:
+    "${caesarCipher(testCaseText, testCaseShift)}"
+            ===
+    "${expectedOutput}"
+outcome: ${caesarCipher(testCaseText, testCaseShift) === expectedOutput}`)
+ */
