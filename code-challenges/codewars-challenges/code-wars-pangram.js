@@ -6,19 +6,18 @@
 let string = "The quick brown fox jumps over the lazy dog."
 
 function isPangram(string){
-
+/* 
     // my initial solution:
-
-    // let requiredLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-    // let removeIndex
-    // string.split("").map(letter => {
-    //     removeIndex = requiredLetters.indexOf(letter.toUpperCase())
-    //     if (removeIndex >= 0 ) {
-    //         requiredLetters.splice(removeIndex, 1)
-    //     }
-    // })
-    // return requiredLetters.length === 0;
-
+    let requiredLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+    let removeIndex
+    string.split("").map(letter => {
+        removeIndex = requiredLetters.indexOf(letter.toUpperCase())
+        if (removeIndex >= 0 ) {
+            requiredLetters.splice(removeIndex, 1)
+        }
+    })
+    return requiredLetters.length === 0;
+ */
     // best solution - my comments are added for explanation:
     string = string.toLowerCase() // change case of provided string to lower case
     return "abcdefghijklmnopqrstuvwxyz" // declare string of all characters that are required (complete alphabet)
