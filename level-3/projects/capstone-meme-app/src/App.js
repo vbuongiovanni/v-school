@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./style.css";
 import Header from "./components/Header"
-import Meme from "./components/Meme"
+import MemeGenerator from "./components/MemeGenerator"
 import MemeLibrary from "./components/MemeLibrary";
 
 export default function App(){
@@ -12,13 +12,10 @@ export default function App(){
     // set state of memeList - array representing saved memes
     const [memeList, setMemeList] = useState([])
 
-    // set state of inEditMode - this is primarily used by the MemeLibrary component.
-    // However, it is included in the App component, since it impacts the navbar.
+    // set state of inEditMode - primarily used by the MemeLibrary but also impacts the navbar.
     const [inEditMode, setEditMode] = useState(false)
     
-
     // set handlers for header navigation
-
     const navToMemeGenerator = () => {
         setInLibrary(false)
     }
@@ -26,14 +23,18 @@ export default function App(){
         setInLibrary(true)
     }
 
-    const navHandler = {navToMemeGenerator, navToLibrary}
+    // consolidate handlers for Header component
+    const navProps = {navToMemeGenerator, navToLibrary, inEditMode, inLibrary}
+
+    // consolidate handlers for Header component
+    const memeLibraryProps = {memeList, setMemeList, inEditMode, setEditMode}
 
     return (
         <>
-            <Header inLibrary={inLibrary} inEditMode={inEditMode} {...navHandler}/>
+            <Header {...navProps}/>
             {inLibrary ? 
-                <MemeLibrary {...{memeList, setMemeList, inEditMode, setEditMode}} /> : 
-                <Meme {...{memeList, setMemeList}} />}
+                <MemeLibrary {...memeLibraryProps} /> : 
+                <MemeGenerator setMemeList={setMemeList} />}
         </>        
     )
 }

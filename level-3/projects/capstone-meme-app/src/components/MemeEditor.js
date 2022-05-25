@@ -7,8 +7,8 @@ export default function MemeEditor(props) {
 
     return (
         <>
-            <div className="page--header"><h1>Meme Editor</h1></div>
-            <form className="meme--container">
+            <form className="meme--container component-container--content">
+                <div className="page--header"><h1>Meme Editor</h1></div>
                 <div className="meme--input-container">
                     <input
                         className="meme--input-text"
@@ -28,12 +28,12 @@ export default function MemeEditor(props) {
                     />
                 </div>
                 <div className="meme--display-container">
-                    <img className="meme--meme-display" src={randomImage}></img>
+                    <img className="meme-display" src={randomImage}></img>
                     <div className="meme-text-container-top">
-                        <span id="meme--text">{topText}</span>
+                        <span className="meme-text focus-meme-text">{topText}</span>
                     </div>
                     <div className="meme-text-container-bottom">
-                        <span id="meme--text">{bottomText}</span>
+                        <span className="meme-text focus-meme-text">{bottomText}</span>
                     </div>
                 </div>
                 <div className="edit--controls button-container">

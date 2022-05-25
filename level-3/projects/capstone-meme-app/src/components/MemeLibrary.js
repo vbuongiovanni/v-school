@@ -1,11 +1,13 @@
 import React, {useState} from "react"
 import {confirm} from "react-confirm-box"
-import MemeLibraryItem from "./MemeLibraryItem"
+import MemeListItem from "./MemeListItem"
 import MemeEditor from "./MemeEditor"
 
 export default function MemeLibrary(props){
 
+    // Deconstruct props
     const {memeList, setMemeList, inEditMode, setEditMode} = props;
+    
     const [editMeme, setEditMeme] = useState({
         randomImage : "",
         topText : "",
@@ -30,10 +32,8 @@ export default function MemeLibrary(props){
         const result = await confirm("Are you sure you want to save edits?")
         if (result) {
             setMemeList(prevMemeList => prevMemeList.filter(meme => meme.memeId !== editMeme.memeId))
-            setMemeList(prevMemeList => [...prevMemeList, editMeme])
+            setMemeList(prevMemeList => [editMeme, ...prevMemeList])
             toggleEditMode()
-        } else {
-            console.log("ok nvm")
         }
     }
 
@@ -53,19 +53,17 @@ export default function MemeLibrary(props){
     const libraryMode = () => {
         if (inEditMode === true) {
             return (
-                <main className="library--main editor border-box">
+                <main className="component-container">
                     <MemeEditor {...memeEditorProps}/>
                 </main>
             )
         } else {
             return (
-                <main className="library--main listing border-box">
-                    <div className="page--header">
-                        <h1>Meme Library</h1>
-                    </div>
-                    <ul className="library--list">
-                        {memeList.length > 0 && memeList.map(memeDetail => <MemeLibraryItem key={memeDetail.memeId} {...memeLibraryProperties} {...memeDetail}/>)}
-                        {memeList.length === 0 && <h1>meme library is empty</h1>}
+                <main className="component-container">
+                    <ul className="library--list component-container--content">
+                        <div className="page--header"><h1>Meme Library</h1></div>
+                        {memeList.length > 0 && memeList.map(memeDetail => <MemeListItem key={memeDetail.memeId} {...memeLibraryProperties} {...memeDetail}/>)}
+                        {memeList.length === 0 && <h1 className="message-text">Your meme library is empty... Create a new meme or two, then come back!</h1>}
                     </ul>
                 </main>
             )

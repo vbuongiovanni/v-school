@@ -3,9 +3,9 @@ import React, {useState, useEffect} from "react";
 export default function Meme(props){
 
     // deconstruct props:
-    const {memeList, setMemeList} = props
+    const {setMemeList} = props
 
-    // declare state for meme and data
+    // initialize state for meme and data
     const [meme, setMeme] = useState({
         randomImage : "http://i.imgflip.com/1bij.jpg",
         topText : "",
@@ -13,8 +13,12 @@ export default function Meme(props){
         memeId : `${Math.floor(Math.random() * 10000)}-${Math.floor(Math.random() * 10000)}`
     })
 
-    // state for meme data
+    // initialize state for meme data - will be filled using api.imgflip.com
     const [allMemeImages, setAllMemeImages] = useState([])
+
+    // for message transition: 
+    const [inProp, setInProp] = useState(false)
+
 
     // useEffect() w/ nested async function to make API call, handle promises and setAllMemeImages 
     // dependency array is left empty, so useEffect will run nested async one time (after initial render)
@@ -27,13 +31,14 @@ export default function Meme(props){
         getMemes()
     }, [])
 
-    // handler UI change - used to synchronize meme state & UI 
+    // handler to synchronize meme state & UI - makes active components
     const handleChange = (e) => {
         const {name, value} = e.target;
         setMeme(prevMeme => ({...prevMeme, [name] : value}))
     }
 
-    // handler that will draw a random meme from allMemeImage, then add it to meme state along with
+    // handler that will draw a random meme from allMemeImage, 
+    // then add it to meme state along with
     // unique id.
     const getMemeImage = (event) => {
         event.preventDefault();
@@ -60,11 +65,12 @@ export default function Meme(props){
                 bottomText : "",
                 memeId : uniqueId}
         })
+        setInProp(true)
     }
 
     return(
-        <main className="generator--main">
-            <form className="meme--container border-box">
+        <main className="component-container">
+            <form className="meme--container component-container--content">
                 <div className="page--header">
                     <h1>Meme Generator</h1>
                 </div>
@@ -90,12 +96,12 @@ export default function Meme(props){
                     Refresh image 🖼
                 </button>
                 <div className="meme--display-container">
-                    <img className="meme--meme-display" src={meme.randomImage}></img>
+                    <img className="meme-display" src={meme.randomImage}></img>
                     <div className="meme-text-container-top">
-                        <span id="meme--text">{meme.topText}</span>
+                        <span className="meme-text focus-meme-text">{meme.topText}</span>
                     </div>
                     <div className="meme-text-container-bottom">
-                        <span id="meme--text">{meme.bottomText}</span>
+                        <span className="meme-text focus-meme-text">{meme.bottomText}</span>
                     </div>
                 </div>
                 <button onClick={saveToLibrary} className="control-button">
