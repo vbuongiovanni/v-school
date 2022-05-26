@@ -120,7 +120,7 @@
     }
     .meme-text-container-bottom {
         position: absolute;
-        top: 85%;
+        top: 80%;
         width: 100%;
     }
 /* Library Page*/
@@ -196,10 +196,10 @@
         2px 2px 5px #000;
 }
 .focus-meme-text {
-    font-size: 32px;
+    font-size: 27px;
 }
 .list-item--meme-text {
-    font-size: 25px;
+    font-size: 20px;
 }
 /* text shown in place for empty library */
 .message-text {

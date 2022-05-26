@@ -19,7 +19,6 @@ export default function Meme(props){
     // for message transition: 
     const [inProp, setInProp] = useState(false)
 
-
     // useEffect() w/ nested async function to make API call, handle promises and setAllMemeImages 
     // dependency array is left empty, so useEffect will run nested async one time (after initial render)
     useEffect(() => {
