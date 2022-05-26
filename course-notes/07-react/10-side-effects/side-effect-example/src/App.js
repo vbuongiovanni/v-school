@@ -66,7 +66,6 @@ export default function App(){
             .then(data => setStarWarsData(data))
     }, [count])
 
-
     return (
         <div>
             <h2>Character Number: {count}</h2>
