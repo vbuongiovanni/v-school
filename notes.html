@@ -1528,6 +1528,75 @@
                         <li>If <b>Dependency array</b> is contains a variable containing state, then the effect will be executed 1.) after the first render, and 2) after every subsequent render when the state variable isn't equal to the previous value (stored in the Dependency Array)</li>
                     </ul>
                 </ul>
+            <li class="key-concept">Shallow Comparison</li>
+            <ul>
+                <li>React will use 'shallow comparison' to evaluate state in order to optimize the performance of the App</li>
+                <li>Shallow comparison is effectively the same as "===" in vanilla javascript for primitive data types</li>
+                Example
+                <p class="code input">const state1Prim = "Some text here"</p>
+                <p class="code input">const state2Prim = "Some text here"</p>
+                <p class="code input">// React's shallow comparison will show state1Prim to be equal to state2Prim.</p>
+                <p class="code input">// This is effectively the same as 'state1Prim === state2Prim'</p>
+                <li>In contrast, for complex data types, shallow comparison evaluates the first-level key-values between two the two elements being compared.</li>
+                Example
+                <p class="code input">const state1 = {name : "bob", age : 30}</p>
+                <p class="code input">const state2 = {name : "bob", age : 30}</p>
+                <p class="code input">// React's shallow comparison will show state1 to be equal to state2</p>
+                <p class="code input">// This is because the 'name' and 'age' properties will be compared as primitives.</p>
+                <p class="code input">const state3 = {name : "bob", age : 30, address : </p>
+                <p class="code input-indent">{street : "123 fake street", city : "fake city"}</p>
+                <p class="code input-indent">}</p>
+                <p class="code input">const state4 = {name : "bob", age : 30, address : </p>
+                <p class="code input-indent">{street : "123 fake street", city : "fake city"}</p>
+                <p class="code input-indent">}</p>
+                <p class="code input">// React's shallow comparison will show state3 to NOT be equal to state4</p>
+                <p class="code input">// This is because the 'address' property is a complex data type, meaning it is passed by reference.</p>
+                <p class="code input">// Shallow comparison only evaluates one level down in objects.</p>
+                <p class="code input">// This is the same for arrays - only the contents of the respective indices will be compared</p>
+            </ul>
+            <li class="key-concept">Tree Rendering - Organization of Components & Optimization</li>
+            <ul>
+                <li>React will recursively render components down one branch until there are no more to render</li>
+                <li>If there is a change to a component's state or props, it will re-render, then recursively rerender down the remaining tree regardless of whether the child components have changed.</li>
+                <li>To improve performance of the React App, state should be pushed as far down the branch as possible (e.g., away, from the App Component)</li>
+                <li>In situations where it isn't feasible to to set state in a low brach, such as where the state needs to be accessible throughout the entire App, tools such as <span class="code">shouldComponentUpdate(), React.PureComponent, </span> and <span class="code">React.memo()</span> can be used to specify the update behavior</li>
+            </ul>
+            <li><span class="code">shouldComponentUpdate()</span></li>
+            <ul>
+                <li>Lifecycle method on any class component which allows you to determine if the component should be rerendered or not</li>
+                <li>Receives upcoming props and state so you can compare them against current props and state</li>
+                <li>Will return either <span class="code">true</span> or <span class="code">false</span>, where <span class="code">true</span> will trigger a rerender</li>
+                <li>Do NOT do explicit deep comparisons, as it will hinder performance</li>
+            </ul>
+            <li><span class="code">React.PureComponent</span></li>
+            <ul>
+                <li>Newer implementation that solves the issues of <span class="code">shouldComponentUpdate()</span> by providing a method that automatically performs shallow update on <span class="code">nextProps</span> and <span class="code">nextState</span></li>
+                <li>Disallows using <span class="code">shouldComponentUpdate()</span> manually</li>
+                <li>Skips rendering all children in the tree automatically, so they must also be 'pure'</li>
+                <li>Main drawback is that, inherently, React.PureComponent only works with class based components.</li>
+            </ul>
+            <li><span class="code">React.Memo()</span></li>
+            <ul>
+                <li><span class="code">React.Memo()</span> is a higher order component realsed in v16.6. It is, effectively, the same as <span class="code">React.PureComponent</span>, except for functional components</li>
+                <li>Implementation Differences of React.Meme() to React.PureComponent:</li>
+                <ul>
+                    <li>Only checks props - <span class="code">prevProps</span> and <span class="code">nextProps</span>. State is not checked.</li>
+                    <li><span class="code">React.Memo()</span> does allow you to implement your own checking function</li>
+                    <li>
+                        The manual implementation of the function is similar to <span class="code">shouldComponentUpdate()</span>, 
+                        except that it uses React's <span class="code">areEqual</span>, which will only rerender if the returned value is <span class="code">false</span>. 
+                        In contrast, <span class="code">shouldComponentUpdate()</span> will rerender if returned value is <span class="code">true</span>. 
+                    </li>
+
+                </ul>
+            <li><span class="code">useRef</span></li>
+            <ul>
+                <li>Gives us a means of keeping values around for the entire lifecycle of the component</li>
+                <li>The common use of this is grabbing one of the DOM nodes and making spot changes to it.</li>
+            </ul>
+                
+                
+            </ul>
 
 
             </ul>
