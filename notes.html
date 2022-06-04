@@ -1594,6 +1594,25 @@
                 <li>Gives us a means of keeping values around for the entire lifecycle of the component</li>
                 <li>The common use of this is grabbing one of the DOM nodes and making spot changes to it.</li>
             </ul>
+            <li><span class="key-concept">Context</span></li>
+            <ul>
+                <li>State Management Tool</li>
+                <li>Means of eliminating 'prop drilling' which is where you end up passing props through N number of components in order finally get a component at the bottom of the tree the data it needs</li>
+                <li>Put another way, it is a way to pass data through the component tree without having to pass props down manually at every level.</li>
+                <li>Implementation/use:</li>
+                <ul>
+                    <li>
+                        Context can be used by first picking the lowest common parent, 
+                        or the parent component that is connected to every component needing the data/methods (e.g., App.js). 
+                        This component becomes the <span class="key-concept">Provider</span>
+                    </li>
+                    <li>
+                        Then, all other components that need the data will be designated as a <span class="key-concept">consumer</span>
+                    </li>
+                    
+                </ul>
+
+            </ul>
                 
                 
             </ul>
