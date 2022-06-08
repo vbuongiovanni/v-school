@@ -1490,7 +1490,7 @@
                     </ul>
                 </ul>
             </ul>
-            <li class="key-concept">Effect Hooks - <span class="code">useEffect()</span></li>
+            <li class="key-concept">Effect - <span class="code">useEffect()</span></li>
             <ul>
                 <li>At a high-level, React's primary goal is to work with the DOM and browser to render UI to a page, manage State between render cycles, and keep the UI updated when State changes.</li>
                 <li>Given React's primary tasks, there are <b>side effects</b> that come into play React cannot handle localStorage API/database interactions, web sockets, or syncing states.</li>
@@ -1528,98 +1528,151 @@
                         <li>If <b>Dependency array</b> is contains a variable containing state, then the effect will be executed 1.) after the first render, and 2) after every subsequent render when the state variable isn't equal to the previous value (stored in the Dependency Array)</li>
                     </ul>
                 </ul>
-            <li class="key-concept">Shallow Comparison</li>
-            <ul>
-                <li>React will use 'shallow comparison' to evaluate state in order to optimize the performance of the App</li>
-                <li>Shallow comparison is effectively the same as "===" in vanilla javascript for primitive data types</li>
-                Example
-                <p class="code input">const state1Prim = "Some text here"</p>
-                <p class="code input">const state2Prim = "Some text here"</p>
-                <p class="code input">// React's shallow comparison will show state1Prim to be equal to state2Prim.</p>
-                <p class="code input">// This is effectively the same as 'state1Prim === state2Prim'</p>
-                <li>In contrast, for complex data types, shallow comparison evaluates the first-level key-values between two the two elements being compared.</li>
-                Example
-                <p class="code input">const state1 = {name : "bob", age : 30}</p>
-                <p class="code input">const state2 = {name : "bob", age : 30}</p>
-                <p class="code input">// React's shallow comparison will show state1 to be equal to state2</p>
-                <p class="code input">// This is because the 'name' and 'age' properties will be compared as primitives.</p>
-                <p class="code input">const state3 = {name : "bob", age : 30, address : </p>
-                <p class="code input-indent">{street : "123 fake street", city : "fake city"}</p>
-                <p class="code input-indent">}</p>
-                <p class="code input">const state4 = {name : "bob", age : 30, address : </p>
-                <p class="code input-indent">{street : "123 fake street", city : "fake city"}</p>
-                <p class="code input-indent">}</p>
-                <p class="code input">// React's shallow comparison will show state3 to NOT be equal to state4</p>
-                <p class="code input">// This is because the 'address' property is a complex data type, meaning it is passed by reference.</p>
-                <p class="code input">// Shallow comparison only evaluates one level down in objects.</p>
-                <p class="code input">// This is the same for arrays - only the contents of the respective indices will be compared</p>
             </ul>
-            <li class="key-concept">Tree Rendering - Organization of Components & Optimization</li>
-            <ul>
-                <li>React will recursively render components down one branch until there are no more to render</li>
-                <li>If there is a change to a component's state or props, it will re-render, then recursively rerender down the remaining tree regardless of whether the child components have changed.</li>
-                <li>To improve performance of the React App, state should be pushed as far down the branch as possible (e.g., away, from the App Component)</li>
-                <li>In situations where it isn't feasible to to set state in a low brach, such as where the state needs to be accessible throughout the entire App, tools such as <span class="code">shouldComponentUpdate(), React.PureComponent, </span> and <span class="code">React.memo()</span> can be used to specify the update behavior</li>
-            </ul>
-            <li><span class="code">shouldComponentUpdate()</span></li>
-            <ul>
-                <li>Lifecycle method on any class component which allows you to determine if the component should be rerendered or not</li>
-                <li>Receives upcoming props and state so you can compare them against current props and state</li>
-                <li>Will return either <span class="code">true</span> or <span class="code">false</span>, where <span class="code">true</span> will trigger a rerender</li>
-                <li>Do NOT do explicit deep comparisons, as it will hinder performance</li>
-            </ul>
-            <li><span class="code">React.PureComponent</span></li>
-            <ul>
-                <li>Newer implementation that solves the issues of <span class="code">shouldComponentUpdate()</span> by providing a method that automatically performs shallow update on <span class="code">nextProps</span> and <span class="code">nextState</span></li>
-                <li>Disallows using <span class="code">shouldComponentUpdate()</span> manually</li>
-                <li>Skips rendering all children in the tree automatically, so they must also be 'pure'</li>
-                <li>Main drawback is that, inherently, React.PureComponent only works with class based components.</li>
-            </ul>
-            <li><span class="code">React.Memo()</span></li>
-            <ul>
-                <li><span class="code">React.Memo()</span> is a higher order component realsed in v16.6. It is, effectively, the same as <span class="code">React.PureComponent</span>, except for functional components</li>
-                <li>Implementation Differences of React.Meme() to React.PureComponent:</li>
+            <li class="key-concept">Shallow Comparison - How to control what components are/are not rerendered</li>
                 <ul>
-                    <li>Only checks props - <span class="code">prevProps</span> and <span class="code">nextProps</span>. State is not checked.</li>
-                    <li><span class="code">React.Memo()</span> does allow you to implement your own checking function</li>
-                    <li>
-                        The manual implementation of the function is similar to <span class="code">shouldComponentUpdate()</span>, 
-                        except that it uses React's <span class="code">areEqual</span>, which will only rerender if the returned value is <span class="code">false</span>. 
-                        In contrast, <span class="code">shouldComponentUpdate()</span> will rerender if returned value is <span class="code">true</span>. 
-                    </li>
+                    <li>React will use 'shallow comparison' to evaluate state in order to optimize the performance of the App</li>
+                    <li>Shallow comparison is effectively the same as "===" in vanilla javascript for primitive data types</li>
+                    Example
+                    <p class="code input">const state1Prim = "Some text here"</p>
+                    <p class="code input">const state2Prim = "Some text here"</p>
+                    <p class="code input">// React's shallow comparison will show state1Prim to be equal to state2Prim.</p>
+                    <p class="code input">// This is effectively the same as 'state1Prim === state2Prim'</p>
+                    <li>In contrast, for complex data types, shallow comparison evaluates the first-level key-values between two the two elements being compared.</li>
+                    Example
+                    <p class="code input">const state1 = {name : "bob", age : 30}</p>
+                    <p class="code input">const state2 = {name : "bob", age : 30}</p>
+                    <p class="code input">// React's shallow comparison will show state1 to be equal to state2</p>
+                    <p class="code input">// This is because the 'name' and 'age' properties will be compared as primitives.</p>
+                    <p class="code input">const state3 = {name : "bob", age : 30, address : </p>
+                    <p class="code input-indent">{street : "123 fake street", city : "fake city"}</p>
+                    <p class="code input-indent">}</p>
+                    <p class="code input">const state4 = {name : "bob", age : 30, address : </p>
+                    <p class="code input-indent">{street : "123 fake street", city : "fake city"}</p>
+                    <p class="code input-indent">}</p>
+                    <p class="code input">// React's shallow comparison will show state3 to NOT be equal to state4</p>
+                    <p class="code input">// This is because the 'address' property is a complex data type, meaning it is passed by reference.</p>
+                    <p class="code input">// Shallow comparison only evaluates one level down in objects.</p>
+                    <p class="code input">// This is the same for arrays - only the contents of the respective indices will be compared</p>
+                    <li class="key-concept">Tree Rendering - Organization of Components & Optimization</li>
+                    <ul>
+                        <li>React will recursively render components down one branch until there are no more to render</li>
+                        <li>If there is a change to a component's state or props, it will re-render, then recursively rerender down the remaining tree regardless of whether the child components have changed.</li>
+                        <li>To improve performance of the React App, state should be pushed as far down the branch as possible (e.g., away, from the App Component)</li>
+                        <li>In situations where it isn't feasible to to set state in a low brach, such as where the state needs to be accessible throughout the entire App, tools such as <span class="code">shouldComponentUpdate(), React.PureComponent, </span> and <span class="code">React.memo()</span> can be used to specify the update behavior</li>
+                    </ul>
+                    <li><span class="code">shouldComponentUpdate()</span></li>
+                    <ul>
+                        <li>Lifecycle method on any class component which allows you to determine if the component should be rerendered or not</li>
+                        <li>Receives upcoming props and state so you can compare them against current props and state</li>
+                        <li>Will return either <span class="code">true</span> or <span class="code">false</span>, where <span class="code">true</span> will trigger a rerender</li>
+                        <li>Do NOT do explicit deep comparisons, as it will hinder performance</li>
+                    </ul>
+                    <li><span class="code">React.PureComponent</span></li>
+                    <ul>
+                        <li>Newer implementation that solves the issues of <span class="code">shouldComponentUpdate()</span> by providing a method that automatically performs shallow update on <span class="code">nextProps</span> and <span class="code">nextState</span></li>
+                        <li>Disallows using <span class="code">shouldComponentUpdate()</span> manually</li>
+                        <li>Skips rendering all children in the tree automatically, so they must also be 'pure'</li>
+                        <li>Main drawback is that, inherently, React.PureComponent only works with class based components.</li>
+                    </ul>
+                    <li><span class="code">React.Memo()</span></li>
+                    <ul>
+                        <li><span class="code">React.Memo()</span> is a higher order component realeased in v16.6. It is, effectively, the same as <span class="code">React.PureComponent</span>, except for functional components</li>
+                        <li>Implementation Differences of React.Meme() to React.PureComponent:</li>
+                        <ul>
+                            <li>Only checks props - <span class="code">prevProps</span> and <span class="code">nextProps</span>. State is not checked.</li>
+                            <li><span class="code">React.Memo()</span> does allow you to implement your own checking function</li>
+                            <li>
+                                The manual implementation of the function is similar to <span class="code">shouldComponentUpdate()</span>, 
+                                except that it uses React's <span class="code">areEqual</span>, which will only rerender if the returned value is <span class="code">false</span>. 
+                                In contrast, <span class="code">shouldComponentUpdate()</span> will rerender if returned value is <span class="code">true</span>. 
+                            </li>
 
+                        </ul>
+                    </ul>
                 </ul>
-            <li><span class="code">useRef</span></li>
-            <ul>
-                <li>Gives us a means of keeping values around for the entire lifecycle of the component</li>
-                <li>The common use of this is grabbing one of the DOM nodes and making spot changes to it.</li>
-            </ul>
-            <li><span class="key-concept">Context</span></li>
-            <ul>
-                <li>State Management Tool</li>
-                <li>Means of eliminating 'prop drilling' which is where you end up passing props through N number of components in order finally get a component at the bottom of the tree the data it needs</li>
-                <li>Put another way, it is a way to pass data through the component tree without having to pass props down manually at every level.</li>
-                <li>Implementation/use:</li>
+            <li class="key-concept">React Refs - <span class="code">useRef()</span></li>
                 <ul>
-                    <li>
-                        Context can be used by first picking the lowest common parent, 
-                        or the parent component that is connected to every component needing the data/methods (e.g., App.js). 
-                        This component becomes the <span class="key-concept">Provider</span>
-                    </li>
-                    <li>
-                        Then, all other components that need the data will be designated as a <span class="key-concept">consumer</span>
-                    </li>
-                    
+                    <li>Gives us a means of keeping values around for the entire lifecycle of the component</li>
+                    <li>The common use of this is grabbing one of the DOM nodes and making spot changes to it.</li>
+                    <li>Returns a mutable object whose <span class="code">.current</span> is initialized with the initial value</li>
+                    <li>Can be used to access or select DOM elements</li>
                 </ul>
-
-            </ul>
-                
-                
-            </ul>
-
-
-            </ul>
-
+            <li class="key-concept">React Context - <span class="code">createContext()</span> and <span class="code">useContext()</span></li>
+                <ul>
+                    <li>State Management Tool</li>
+                    <li>Means of eliminating 'prop drilling' which is where you end up passing props through N number of components in order finally get a component at the bottom of the tree the data it needs</li>
+                    <li>Put another way, it is a way to pass data through the component tree without having to pass props down manually at every level.</li>
+                    <li>Implementation/use:</li>
+                    <ul>
+                        <li>
+                            Context can be used by first picking the lowest common parent, 
+                            or the parent component that is connected to every component needing the data/methods (e.g., App.js). 
+                            This component becomes the <span class="key-concept">Provider</span>
+                        </li>
+                        <li>
+                            Then, all other components that need the data will be designated as a <span class="key-concept">consumer</span>
+                        </li>
+                    </ul>
+                </ul>
+            <li><span class="key-concept">React Router</span></li>
+                <ul>
+                    <li>Defacto way of handling single page applications (SPAs)</li>
+                    <li>Not native to React, its actually a separate library</li>
+                    <li>Allows us to conditionally render large parts of a page</li>
+                    <li>Declarative API with useful hooks and components to easily handle switching of pages</li>
+                    <li>At the most basic level, the Routes do the exact same thing as conditionally rendering... the only exception is that React Router allows you to implement the same functionality in a declarative manner. The only difference is that different URL paths can be specified</li>
+                    <li>Routes can be nested - When nesting components, the parent component should generally be constant (e.g., the App.js component), while the child components are subject to change.</li>                    
+                    <li>Primary Components (3 categories)</li>
+                    <ol>
+                        <li>Routers</li>
+                        <ul>
+                            <li><span class="code">&lt;BrowserRouter&gt;</span></li>
+                            <ul>
+                                <li>Allows navigation between different components, modification of url, and history, all while keeping UI in sync. In the case of BrowserRouter, the HTML5 API is used to accomplish this task.</li>
+                            </ul>
+                            <li><span class="code">&lt;HashRouter&gt;</span></li>
+                        </ul>
+                        <li>Route Matchers </li>
+                        <ul>
+                            <li><span class="code">&lt;Route&gt;</span></li>
+                            <ul>
+                                <li>Used to search for an individual route, by name. Routes are used to organize and sort through organize multiple routes. </li>
+                                <li>Requires two props, 1) <span class="code">path</span>, or the endpoint of the url, and 2) <span class="code">element</span>, which is the component to be rendered</li>                                
+                                <li>When specifying the <span class="code">path</span> attribute, a dynamic identifier can be incorporated by appending <span class="code">/:someId</span> to the endpoint. For example, <span class="code">path="products/:someId"</span> </li>
+                            </ul>
+                            <li><span class="code">&lt;Switch&gt;</span></li>
+                        </ul>
+                        <li>Navigation("route changers")</li>
+                        <ul>
+                            <li><span class="code">&lt;Link&gt;</span></li>
+                            <ul>
+                                <li>Similar <span class="code">anchor</span> element from HTML. Has a <span class="code">to</span> attribute, which matches the <span class="code">path</span> attribute of the corresponding <span class="code">&lt;Route&gt;</span> component</li>
+                                <li>If a <span class="code">&lt;Link&gt;</span> component has a <span class="code">to</span> path that does not correspond to a <span class="code">&lt;Route&gt;</span>, the App will render but no component will appear.</li>
+                            </ul>
+                            <li><span class="code">&lt;NavLink&gt;</span></li>
+                            <li><span class="code">&lt;Redirect&gt;</span></li>
+                        </ul>
+                    </ol>
+                    <li>Main Hooks</li>
+                    <ul>
+                        <li><span class="code">useNavigate()</span></li>
+                        <ul>
+                            <li>Hook that is typically tied to an event, such as <span class="code">onClick()</span></li>
+                            <li>function that takes one of two arguments:</li>
+                            <ol>
+                                <li><span class="code">path</span>, which will send user a specified user of the URL endpoint declared in the <span class="code">&lt;Route&gt;</span> component</li>
+                                <li>A delta value, representing forward and backward movement in pages. E.g., <span class="code">useNavigate(-1)</span> will go 1 back page, where as <span class="code">useNavigate(1)</span> will go forward 1 page.</li>
+                            </ol>
+                        </ul>
+                        <li><span class="code">useParams()</span></li>
+                        <ul>
+                            <li>Used in conjunction with a dynamically specified endpoint (<span class="code">/:someId</span>) on a <span class="code">&lt;Link&gt;</span> component, where <span class="code">someId</span> would be accessed by the child component by using <span class="code">const {someId} = useParams()</span></li>
+                        </ul>
+                        <li><span class="code">useHistory()</span></li>
+                        <li><span class="code">useLocation()</span></li>
+                    </ul>
+                </ul>
         </ul>
 
     </body>
