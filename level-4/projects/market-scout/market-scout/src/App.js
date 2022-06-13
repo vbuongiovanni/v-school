@@ -1,10 +1,9 @@
 import React from "react";
 import Plot from "react-plotly.js"
-import Key from "./res/auth/auth.js"
+import auth from "./res/auth/auth.js"
+import PocTradeData from "./components/PocTradeData.js";
 
 export default function App(){
-
-    console.log(Key)
 
     // sample data - this will all be supplied by API
 
@@ -44,8 +43,6 @@ export default function App(){
 
     const data = getPlotlyData(stockDates, stockData);
 
-    console.log(data)
-
     let layout = {
         dragmode: 'zoom', 
         margin: {
@@ -76,8 +73,8 @@ export default function App(){
 
     return (
         <>
-        <h1>Hello!</h1>
-            
+          <h1>Hello!</h1>
+          <PocTradeData apiKey={auth.apiKey}/>            
         </>
     )
 }
