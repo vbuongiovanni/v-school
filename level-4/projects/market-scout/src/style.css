@@ -1,0 +1,158 @@
+body {
+    margin: 0px;
+    width: 100vw;
+}
+#root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#root * {
+    box-sizing: border-box;
+}
+
+
+/* Navbar Component */
+nav {
+    background-color: cornflowerblue;
+    width: 100%;
+    height: 100%;
+    max-height: 150px;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+}
+    /* User Input - form */
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 40%;
+        padding: 0px 40px;
+    }
+        form > div {
+            display: flex;
+            justify-content: space-between;
+            
+        }
+            .navbar--button-container {
+                display: flex;
+                justify-content: center;
+            }
+            .navbar--button-container > button {
+                width: 60%;
+            }
+        input {
+            width: 300px;
+        }
+    /* Search Results Table */
+    .navbar--search-results {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+        table {
+            width: 100%;
+            max-width: 700px;
+        }
+        table * {
+            background-color: lightblue;
+            font-size: 95%;
+            border-spacing: 0px;
+        }
+            thead * {
+                font-size: 110%;
+                background-color: rgb(255, 255, 255);
+            }
+                thead, thead > tr {
+                    display:block;
+                }
+                thead > tr {
+                    padding-right: 10px;
+                }
+            tbody {
+                display: block;
+                overflow: auto;
+                height: 100px;
+            }
+            .table-header-symbol, .table-header-name {
+                font-size: 97%;
+                font-weight: 800;
+                padding-bottom: 0px;
+                padding: 3px 3px;
+                text-align: center;
+            }
+            .table-header-name, .table-content-name {
+                width: 500px;
+            }
+            .table-header-symbol, .table-content-symbol {
+                width: 200px;
+            }
+            .table-content-name, .table-content-symbol {
+                min-height: 17px;
+                font-weight: 600;
+            }
+            .table-content-name {
+                padding-left: 10px;
+                display: flex;
+            }
+            .table-content-row:hover * {
+                background-color: white;
+                cursor: pointer;
+            }
+            .table-content-row-blank * {
+                background-color: rgb(123, 123, 123);
+            }
+/* Main Component */
+main {
+    height: 70%;
+    width: 100%;
+}
+    .report-selection {
+        width: 100%;
+        height: 7%;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 5px 0px 5px;
+        border-bottom: 1px solid rgb(123, 123, 123);
+    }
+    .report-selection > a {
+        text-decoration: none;
+    }
+        .report-selection-tab {
+            font-size: 120%;
+            padding: 5px 30px;
+            color: rgb(123, 123, 123);
+            background-color: rgb(240, 240, 240);
+            border: 1px solid rgb(240, 240, 240);
+            border-radius: 10px 10px 0px 0px;
+            border-bottom: 0px;
+        }
+        .report-selection-tab:hover, .active-tab {
+            color: rgb(58, 58, 58);
+            background-color: white;
+            cursor: pointer;
+            border: 1px solid rgb(123, 123, 123);
+            padding-bottom: 10px;
+            border-bottom: 0;
+        }
+        .active-tab {
+            cursor: pointer;
+        }
+    section {
+        height: 90%;
+        border: 1px solid rgb(123, 123, 123);
+        border-top: 0px;
+    }
+
+/* Footer Component */
+footer {
+    border-top: 1px solid grey;
+    text-align: center;
+}
+
+.plotly-container {
+    width: 100%;
+}

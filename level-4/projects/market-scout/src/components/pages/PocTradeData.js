@@ -17,8 +17,6 @@ export default function PocTradeData(props){
     }
   };
 
-  console.log(options)
-
   axios.request(options).then(function (response) {
       // const data = JSON.stringify(response.data);
       // fs.writeFile("sampleStockData.json", data, 'utf8', function (err) {

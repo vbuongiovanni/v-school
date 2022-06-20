@@ -9,6 +9,7 @@ const getCompanyDetails = (cikNumber) => {
 
     const options = {
         method: 'GET',
+        headers : {origin : "http://localhost:3000/"},
         url: `https://data.sec.gov/submissions/CIK${paddedCIKNumber}.json`
     };
 
@@ -16,4 +17,5 @@ const getCompanyDetails = (cikNumber) => {
         .then(res => console.log(res.data))
         .catch(error => console.log(error))
 }
+
 getCompanyDetails(cikNumber)
