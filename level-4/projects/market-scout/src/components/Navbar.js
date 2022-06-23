@@ -12,6 +12,7 @@ export default function Navbar(){
         getData("sec", "details")
         getData("sec", "financials")
         getData("prices", "")
+        getData("tweets", "")
     }, [company])
 
     // get array of Company Details

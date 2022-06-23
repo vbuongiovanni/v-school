@@ -147,12 +147,78 @@ main {
         border-top: 0px;
     }
 
+/* Overview Module */
+.overview-container {
+    display: flex;
+    min-height: 450px;
+    overflow: scroll;
+}
+    .overview-container > div {
+        width: 50%;
+        padding-left: 1%;
+    }
+    .address-container > p {
+        padding-left: 2%;
+    } 
+    .overview-item-title {
+        font-weight: 600;
+    }
+
+/* Tweets Component */
+.module-container {
+    margin: 1% 0% 2% 5%;
+    max-width: 80%;
+    max-height: 450px;
+    border: black 2px solid;    
+}
+.tweets-container {
+    overflow: scroll;
+}
+    /* tweet Badges */
+    .tweet-badge-container {
+        border: lightgrey 1px solid;
+        padding: 0.5% 1%;
+        display: flex;
+        flex-direction: row;
+    }
+    .tweet-badge-profile-picture {
+        border-radius: 25px;
+        margin-right: 15px;
+    }
+    .tweet-badge-info {
+        display: flex ;
+        align-items: center;
+    }
+    .tweet-badge-info * {
+        padding-right: 5px;
+    }
+        .tweet-badge-alias-name, .tweet-badge-alias-name > *  {
+            font-weight: 600;
+            color: black;
+            text-decoration: none;
+        }
+        .tweet-badge-alias-nam:hover, .tweet-badge-alias-name > *:hover {
+            text-decoration: underline;
+
+        }
+        .tweet-badge-user-name, .tweet-badge-time-date {
+            color: #536471;
+        }
+        path {
+            fill: currentColor;
+            stroke: currentColor;
+        }
+        .tweet-badge-verification-icon {
+            fill: white; /* color of Outline & check mark */
+            /* twitter blue - rgb(29, 155, 240); */
+            stroke: black; /* color of icon */ 
+            stroke-width: .01%;
+            height: 25px;
+        }
+
 /* Footer Component */
 footer {
+    max-height: 50px;
     border-top: 1px solid grey;
     text-align: center;
-}
-
-.plotly-container {
-    width: 100%;
 }

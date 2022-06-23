@@ -1,7 +1,9 @@
 const express = require('express');
 const axios = require("axios");
 const {auth} = require("./auth/auth");
-const tradeData = require("./auth/tradeData"); // dev only - using static instance of API call to avoid over usage
+const tradeData = require("./auth/tradeData"); // **dev only** - using static instance of API call to avoid over usage
+const tweetData = require("./auth/tweetData"); // **dev only** - using static instance of API call to avoid over usage
+
 
 // server setup and launch
   // instantiate app:
@@ -14,7 +16,7 @@ const tradeData = require("./auth/tradeData"); // dev only - using static instan
 // filter and deconstruct API keys:
   let [rapidApiKey] = auth.filter(authData => authData.source === "rapid")
     .map(authData => authData.key);
-
+  
   let [twitterKey] = auth.filter(authData => authData.source === "twitter")
     .map(authData => authData.key);
 
@@ -159,7 +161,7 @@ const tradeData = require("./auth/tradeData"); // dev only - using static instan
     
       const timeSeriesData = data['Time Series (Daily)'];
       
-      const timeSeriesDates = Object.keys(timeSeriesData);
+      const timeSeriesDates = Object.keys(timeSeriesData).slice(0, 30);
       let timeSeriesArray = Object.values(timeSeriesData).map(timeEntry => {
           const [open, high, low, close, adjusted_close, volume, dividend] = Object.values(timeEntry); 
           return {
@@ -171,7 +173,7 @@ const tradeData = require("./auth/tradeData"); // dev only - using static instan
               volume : Number(volume),
               dividend : Number(dividend)
           }
-      })
+      }).slice(0, 30)
 
       // function to transform above arrays into plotly-ready data
       const getPlotlyData = (dates, value) => {
@@ -213,32 +215,107 @@ const tradeData = require("./auth/tradeData"); // dev only - using static instan
           l: 60
         }, 
         showlegend: false, 
+        // xaxis: {
+        //   autorange: true, 
+        //   tick0: `${firstDate} 12:00`,
+        //   dtick: 86400000.0,
+        //   domain: [0, 1], 
+        //   range: [`${firstDate} 12:00`, `${lastDate} 12:00`], 
+        //   rangeslider : {visible: false},
+        //   title: 'Date', 
+        //   type: 'date'
+        // }, 
         xaxis: {
           autorange: true, 
+          tick0: 0,
+          categoryorder : "array",
+          categoryarray : timeSeriesDates.reverse(),
+          dtick: 2,
           domain: [0, 1], 
-          range: [`${firstDate} 12:00`, `${lastDate} 12:00`], 
-          rangeslider: {range: [`${firstDate} 12:00`, `${lastDate} 12:00`]}, 
-          title: 'Date', 
-          type: 'date'
+          range: [0, timeSeriesDates.length - 1], 
+          rangeslider : {visible: false},
+          type: 'category'
         }, 
         yaxis: {
           autorange: true, 
           domain: [0, 1], 
-          range: [0, maxPrice], 
+          fixedrange : true,
+          range: [0, maxPrice*1.05], 
           type: 'linear'
         }
       };
       
       res.json({plotData, layout})
-      // res.json({plotData : stockSymbol, layout : "Other test"})
     }
     
-    // getStockPrices(stockSymbol)
-    res.json(tradeData)
+    // getStockPrices(stockSymbol) // **dev only** - using static instance of API call to avoid over usage
+    res.json(tradeData) // **dev only** - using static instance of API call to avoid over usage
 
-
-    
   })
 
+  // endpoint for GET requests to twitter
+  app.get('/tweets', (req, res) => {
 
+    res.set({
+      'Content-Type': 'text/plain'
+    })
 
+    const {stockSymbol} = req.query;
+
+    const getData = async (stockSymbol) => {
+      const myHeaders = {
+        headers : {Authorization : "Bearer " + twitterKey}
+        };
+      const queryParams = "&expansions=author_id&tweet.fields=created_at&user.fields=profile_image_url,url,verified"
+      let response = await axios.request(`https://api.twitter.com/2/tweets/search/recent?max_results=50&query="$${stockSymbol}"${queryParams}`, myHeaders)
+      let responseData = await response.data
+      let nextToken = responseData.meta.next_token;
+      let textResponses = [...responseData.data];
+      let userData = [...responseData.includes.users];
+      response = await axios.request(`https://api.twitter.com/2/tweets/search/recent?max_results=50&query="$${stockSymbol}"${queryParams}&next_token=${nextToken}`, myHeaders)
+      responseData = await response.data
+      textResponses = [...textResponses, ...responseData.data]
+      userData = [...userData, ...responseData.includes.users]
+
+      // remove duplicates from userData
+      let existingUserIds = []
+      userData = userData.map(tweet => {
+        if (existingUserIds.indexOf(tweet.id) === -1){
+          existingUserIds.push(tweet.id)
+          return tweet;
+        }})
+        .filter(tweet => tweet != undefined)
+
+      // remove duplicates from textResponses
+      let existingTweetIds = []
+      textResponses = textResponses.map(tweet => {
+        if (existingTweetIds.indexOf(tweet.id) === -1){
+          // push ID of tweet
+          existingTweetIds.push(tweet.id)
+          // clean up text
+          let tweetText = tweet.text.replaceAll("&amp;", "&")
+          tweet.text = tweetText
+                      .split(" ")
+                      .map(word => word[0] === "$" ? word.toUpperCase() : word)
+                      // .map(word => word === "$" + stockSymbol.toUpperCase() ? "&lt;b&gt;" + word + "&lt;/b&gt;" : word)
+                      .join(" ")
+
+          // get matched userData
+          const [tweetUser] = userData.filter(user => user.id === tweet.author_id);
+          const {verified, name, username, profile_image_url, url} = tweetUser;
+          // return consolidated object
+          return {...tweet, verified, name, username, profile_image_url, url};
+        }})
+        .filter(tweet => (tweet !== undefined) && (tweet.text.includes(`$${stockSymbol.toUpperCase()}`)))
+        // .filter(tweet => tweet !== undefined)
+
+        res.json(textResponses)
+        //console.log(textResponses)
+
+    }
+
+    // getData(stockSymbol) // **dev only** - using static instance of API call to avoid over usage
+
+    res.json(tweetData) // **dev only** - using static instance of API call to avoid over usage
+    
+  })

@@ -17,6 +17,8 @@ export const AppContextProvider = (props) => {
         const [companyFinancials, setCompanyFinancials] = useState(undefined)
     // alpha-vantage State (for prices)
         const [pricesData, setPricesData] = useState(undefined)
+    // Tweets (for prices)
+        const [tweets, setTweets] = useState([])
 
 
     // API request function - sends request to proxy server, which relays applicable request to
@@ -36,7 +38,7 @@ export const AppContextProvider = (props) => {
         } else if (source === "prices") {
             proxyServerEndpoint = `/${source}?stockSymbol=${company.stockSymbol}`;
         } else if (source === "tweets") {
-            proxyServerEndpoint = `/${source}?type=${type}&cik=${company.cik}`;
+            proxyServerEndpoint = `/${source}?stockSymbol=${company.stockSymbol}`;
         }
 
         const response = await fetch(proxyServerEndpoint, options)
@@ -51,6 +53,8 @@ export const AppContextProvider = (props) => {
             setCompanyFinancials(data)
         } else if (source === "prices") {
             setPricesData(data)
+        } else if (source === "tweets") {
+            setTweets(data)
         }
         
     }
@@ -60,7 +64,7 @@ export const AppContextProvider = (props) => {
             value={{
                 company, setCompany, 
                 getData, 
-                companyDetails, companyFinancials, pricesData
+                companyDetails, companyFinancials, pricesData, tweets
             }}
         >
             {props.children}
