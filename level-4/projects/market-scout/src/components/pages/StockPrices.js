@@ -24,7 +24,6 @@ export default function StockPrices() {
                 {...layout, 
                 width : plotWidth,
                 height : plotHeight
-                // xaxis : {dtick : (86400000.0*3)}
             }}/>)
     } else {
         renderContent =  (<h1>Loading...</h1>)

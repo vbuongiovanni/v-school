@@ -1,5 +1,4 @@
 import React from "react";
-import Plot from "react-plotly.js";
 import { AppContextProvider } from "./components/AppContext";
 import Navbar from "./components/Navbar";
 import Main from "./components/Main"

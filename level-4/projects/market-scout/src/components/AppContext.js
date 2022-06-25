@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from "react";
+import React, {createContext, useState} from "react";
 export const AppContext = createContext();
 
 export const AppContextProvider = (props) => {
@@ -56,7 +56,6 @@ export const AppContextProvider = (props) => {
         } else if (source === "tweets") {
             setTweets(data)
         }
-        
     }
 
     return (
@@ -64,7 +63,8 @@ export const AppContextProvider = (props) => {
             value={{
                 company, setCompany, 
                 getData, 
-                companyDetails, companyFinancials, pricesData, tweets
+                companyDetails, companyFinancials, pricesData, tweets,
+                setCompanyFinancials
             }}
         >
             {props.children}

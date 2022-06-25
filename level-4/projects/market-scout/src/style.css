@@ -53,26 +53,23 @@ nav {
         justify-content: center;
         width: 100%;
     }
-        table {
+        #search-table {
             width: 100%;
             max-width: 700px;
         }
-        table * {
+        #search-table * {
             background-color: lightblue;
             font-size: 95%;
             border-spacing: 0px;
         }
-            thead * {
+            #search-table-head * {
                 font-size: 110%;
                 background-color: rgb(255, 255, 255);
             }
-                thead, thead > tr {
+                #search-table-head {
                     display:block;
                 }
-                thead > tr {
-                    padding-right: 10px;
-                }
-            tbody {
+            #search-table-body {
                 display: block;
                 overflow: auto;
                 height: 100px;
@@ -98,11 +95,11 @@ nav {
                 padding-left: 10px;
                 display: flex;
             }
-            .table-content-row:hover * {
+            #table-content-row:hover * {
                 background-color: white;
                 cursor: pointer;
             }
-            .table-content-row-blank * {
+            #table-content-row-blank * {
                 background-color: rgb(123, 123, 123);
             }
 /* Main Component */
@@ -146,7 +143,6 @@ main {
         border: 1px solid rgb(123, 123, 123);
         border-top: 0px;
     }
-
 /* Overview Module */
 .overview-container {
     display: flex;
@@ -163,6 +159,31 @@ main {
     .overview-item-title {
         font-weight: 600;
     }
+/* Financials */
+
+.data-grid {
+    box-sizing: border-box;
+    border-spacing: 0px;
+}
+    .financials-table-cell {
+        border: 1px solid rgb(226, 226, 226);
+        padding: 2px;
+        height: 20px;
+    }
+    .financials-table-label {
+        font-weight: 800;
+        text-align: center;
+    }
+    .financials-table-row-label {
+        border-right: 1px solid black;
+    }
+    .financials-table-header {
+        border-bottom: 2px solid black;
+    }
+    .financials-table-bottom {
+        border-bottom: 2px solid black;
+    }
+
 
 /* Tweets Component */
 .module-container {
