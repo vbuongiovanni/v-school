@@ -17,11 +17,6 @@ const getCompanyDetails = async (cik, type, res) => {
 
     // if original request type from React App is of type "financials", perform preprocessing on response:
     if (type === "financials") {
-      
-      console.log(`CIK Number: ${paddedCIKNumber} VVV`)
-      console.log(`CIK Number: ${paddedCIKNumber} VVV`)
-      console.log(`CIK Number: ${paddedCIKNumber} VVV`)
-      console.log(data.facts["us-gaap"])
 
       const {
         // income statement
@@ -143,7 +138,6 @@ const getCompanyDetails = async (cik, type, res) => {
       }
 
       res.json(rows) 
-      // console.log(rows) // comment me
 
     } else { // otherwise, just return the object
 

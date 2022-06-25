@@ -1,9 +1,7 @@
 const axios = require("axios");
 
 const getStockPrices = async (stockSymbol, rapidApiKey, res) => {
-    
-
-  
+      
     // commented out for debugging to avoid hitting their API too much...
     let response
     let data;
@@ -31,6 +29,19 @@ const getStockPrices = async (stockSymbol, rapidApiKey, res) => {
       data = await response.data;
       console.log("rapid API hit - Alpha Vantage")
       timeSeriesData = data['Time Series (Daily)'];
+      timeSeriesDates = Object.keys(timeSeriesData).slice(0, 30);
+      timeSeriesArray = Object.values(timeSeriesData).map(timeEntry => {
+        return {
+            open : Number(timeEntry.open),
+            high : Number(timeEntry.high),
+            low : Number(timeEntry.low),
+            close : Number(timeEntry.close),
+            adjusted_close : Number(timeEntry.adjusted_close),
+            volume : Number(timeEntry.volume),
+            dividend : Number(timeEntry.dividend)
+        }
+      }).slice(0, 30)
+
     } catch (error) {
       options = {
         method: 'GET',
@@ -43,22 +54,23 @@ const getStockPrices = async (stockSymbol, rapidApiKey, res) => {
       };
       response = await axios.request(options);
       timeSeriesData = await response.data;
+      timeSeriesData = timeSeriesData
       console.log("rapid API hit - Stock Prices")
+      timeSeriesDates = Object.keys(timeSeriesData).reverse().slice(0, 30);
+      timeSeriesArray = Object.values(timeSeriesData).map(timeEntry => {
+        return {
+            open : Number(timeEntry.Open),
+            high : Number(timeEntry.High),
+            low : Number(timeEntry.Low),
+            close : Number(timeEntry.Close),
+            volume : Number(timeEntry.Volume),
+            dividend : Number(timeEntry.Dividend)
+        }
+      }).reverse().slice(0, 30)
     }
     
-    timeSeriesDates = Object.keys(timeSeriesData).slice(0, 30);
-    timeSeriesArray = Object.values(timeSeriesData).map(timeEntry => {
-      const [open, high, low, close, adjusted_close, volume, dividend] = Object.values(timeEntry); 
-      return {
-          open : Number(open),
-          high : Number(high),
-          low : Number(low),
-          close : Number(close),
-          adjusted_close : Number(adjusted_close),
-          volume : Number(volume),
-          dividend : Number(dividend)
-      }
-    }).slice(0, 30)
+    
+
 
     // function to transform above arrays into plotly-ready data
     const getPlotlyData = (dates, value) => {

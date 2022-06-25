@@ -44,8 +44,8 @@ const getCompanyDetails = require("./funcs/getCompanyDetails");
     })
     // deconstruct query params from request
     const {stockSymbol} = req.query;
-    getStockPrices(stockSymbol, rapidApiKey, res) // **dev only** - using static instance of API call to avoid over usage
-    // res.json(tradeData) // **dev only** - using static instance of API call to avoid over usage
+    // getStockPrices(stockSymbol, rapidApiKey, res) // **dev only** - using static instance of API call to avoid over usage
+    res.json(tradeData) // **dev only** - using static instance of API call to avoid over usage
   })
 
   // endpoint for GET requests to twitter
@@ -56,6 +56,6 @@ const getCompanyDetails = require("./funcs/getCompanyDetails");
     })
     // deconstruct query params from request
     const {stockSymbol} = req.query;
-    getTwitterData(stockSymbol, twitterKey, res) // **dev only** - using static instance of API call to avoid over usage
-    // res.json(tweetData) // **dev only** - using static instance of API call to avoid over usage
+    // getTwitterData(stockSymbol, twitterKey, res) // **dev only** - using static instance of API call to avoid over usage
+    res.json(tweetData) // **dev only** - using static instance of API call to avoid over usage
   })
