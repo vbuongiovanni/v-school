@@ -517,6 +517,7 @@
                 </ul>
             </ul>
         </ul>
+
     <h2>Node.js</h2>
         <ul>
             <li>Intro</li>
@@ -555,6 +556,27 @@
                     </ul>
                     <li>Finally, the add the new package to the .js enviroment, enter <span class="code">const somePackageThatSomeoneElseCreated = require("some-package-that-someone-else-created");</span></li>
                 </ol>
+            </ul>
+            <li>Node Modules</li>
+            <ul>
+                <li>At a high-level, modules are a means of breaking the application into separate files to foster organization and clean code</li>
+                <li>ECMAScript Modules</li>
+                <li>CommonJS Modules</li>
+                <ul>
+                    <li>Uses the <span class="code">module.exports</span> (source file) and <span class="code">require()</span> function (consumer file)</li>
+                    <li><span class="code">.exports</span> is an object that can either contain a single element or an object</li>
+                    <li>Exporting a single element:</li>
+                    <p class="input code">module.exports = () => {console.log("Hello")}</p>
+                    <li>Exporting a multiple element:</li>
+                    <p class="input code">module.exports = {someFunction, someFunction2 }
+                    </p>
+                </ul>
+                
+            </ul>
+            <li>Backend Development</li>
+            <ul>
+                <li>Listens for CRUD requests from frontend, then fullfills the request</li>
+                <li>If necessary, it server will interact with database</li>
             </ul>
 
 

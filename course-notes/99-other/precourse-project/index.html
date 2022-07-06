@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Pre-course Project</title>
+        <link href="styles.css" rel="stylesheet"/> 
+    </head>
+
+    <body>
+
+        <header>
+            <h1 id="page-header">Pre-Course Project</h1>
+        </header>
+
+        <main>
+            
+            <h2 class = "header-class styles" id="styles-header">No Style? No problem.</h2>
+
+                <div class="outer-div" id="styles-content">
+                    <p>This page may look dull and boring, but we can restyle basically everything in JS using the DOM. For now, we can do the following:</p>
+                    <ul>
+                        <li>Double click the content sections to change the background and font to a random color</li>
+                        <li>Give it a single click to the section headers to see other font types</li>
+                    </ul>
+                </div>
+
+            <h2 class = "header-class greeter" id="greeter-header">Greeter!</h2>
+
+                <div class="outer-div">
+                    <div class="inner-div" id="greeter-content">
+                        <p>Also, just to keep things interesting, this page can also greet people based on inputted names</p>
+                    
+                        <form class="greeter">
+                            Enter the names of everyone attending this meeting:
+                            <br />
+                            <input id="attendee1" type="text" class="attendeeInputs" value="vince"/>
+                            <br />
+                            <input id="attendee2" type="text" class="attendeeInputs" value="jon"/>
+                            <br />
+                            <input id="attendee2" type="text" class="attendeeInputs"/>
+                            <br />
+                            <input id="attendee4" type="text" class="attendeeInputs"/>
+                            <br />
+                        </form>                        
+                    </div>
+    
+                    <input id="greeter-button" type="button" value="Greet Attendees"></button>
+    
+                    <p id="greeting-output"></p>
+
+                </div>
+
+        </main>
+
+        <footer>
+            <p><em>So.... did I pass?</em></p>
+        </footer>
+
+        <script src="app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+body {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+header {
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+footer {
+    padding-top: 100px;
+    border-top: 2px solid black;
+    font-size: 8px;
+    text-align: center;
+}
+
+h2 {
+    font-family:Arial, Helvetica, sans-serif;
+    padding: 20px;
+}
+
+input {
+    margin: 10px;
+}
+
+div.outer-div {
+    margin-left: 50px;
+    margin-bottom: 25px;
+    border: .25px dashed lightgrey;
+
+}
+#greeting-output {
+    font-size: 35px;
+    font-weight: bolder;
+    color: blue;
+    font-family: fantasy;
+    text-align: center;
+}
+
+div.inner-div {
+    margin-left: 50px;
+
+}
+
