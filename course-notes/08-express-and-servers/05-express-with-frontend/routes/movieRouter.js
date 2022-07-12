@@ -29,7 +29,6 @@ const movieRouter = express.Router();
         movieRouter.get("/:movieId", (req, res) => {
             const {movieId} = req.params;
             const requestedMovie = movies.find(movie => movie._id === movieId);
-            console.log(requestedMovie)
             res.send(requestedMovie)
         })
 
@@ -53,6 +52,10 @@ const movieRouter = express.Router();
         movieRouter.put("/:movieId", (req, res) => {
             const {movieId} = req.params;
             const movieIndex = movies.findIndex(movie => movie._id === movieId)
+
+            console.log(movieId)
+            console.log(req.body)
+            console.log(movies[movieIndex])
 
             // merge movie
             const updatedMovie = Object.assign(movies[movieIndex], req.body) // note that Object.assign moves in place

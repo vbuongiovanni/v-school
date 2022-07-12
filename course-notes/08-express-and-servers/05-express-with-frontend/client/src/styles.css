@@ -32,6 +32,10 @@ button {
     background-color: firebrick;
     color: whitesmoke;
 }
+.edit-btn {
+    background-color: cornflowerblue;
+    color: whitesmoke;
+}
 .movie-container {
     display: flex;
     flex-direction: column;

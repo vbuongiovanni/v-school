@@ -2,9 +2,11 @@ import React, {useState} from "react";
 
 export default (props) => {
 
-    const {addMovie} = props;
+    const {submit} = props;
 
-    const initInputs = {title : "", genre : ""}
+    const initInputs = {
+        title : props.title || "",
+        genre : props.genre || ""}
     const [inputs, setInputs] = useState(initInputs)
 
     const inputHandler = e => {
@@ -14,8 +16,11 @@ export default (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        addMovie(inputs);
+        submit(inputs, props._id);
         setInputs(initInputs);
+        if (props.switchToggle !== undefined) {
+            props.switchToggle();
+        }
     }
 
     return (
@@ -32,7 +37,7 @@ export default (props) => {
                 onChange={inputHandler}
                 placeholder="Movie genre"
                 />
-            <button>Add Movie</button>
+            <button>{props.btnText}</button>
         </form>
     )
 }

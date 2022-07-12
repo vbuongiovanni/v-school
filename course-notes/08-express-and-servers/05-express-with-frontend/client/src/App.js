@@ -27,13 +27,12 @@ export default () => {
             .catch(err => console.log(err))   
     }
 
-    // const updateMovie = (movieId, updatedMovie) => {
-    //     axios.put(`/movies/${movieId}`, updatedMovie)
-    //         .then(res => setMovies(prevMovies => prevMovies.filter(movie => movie._id !== movieId)))
-    //         .catch(err => console.log(err))   
-    // }
-
-    const formProps = {addMovie}
+    const editMovie = (updatedMovie, movieId) => {
+        axios.put(`/movies/${movieId}`, updatedMovie)
+            .then(res => setMovies(prevMovies => prevMovies.map(movie => movie._id  === movieId ? res.data : movie))
+            )
+            .catch(err => console.log(err))   
+    }
 
     useEffect(() => {
         getMovies()
@@ -41,10 +40,13 @@ export default () => {
 
     return (
         <div>
-            <AddMovieForm {...formProps}/>
+            <AddMovieForm
+                submit={addMovie}
+                btnText={"Add Movie"}
+            />
             <div className="movie-container">
                 {movies.map((movie, index) => {
-                    return <Movie {...movie} key={index} deleteMovie={deleteMovie}/>
+                    return <Movie {...movie} key={index} deleteMovie={deleteMovie} editMovie={editMovie}/>
                     })
                 }
             </div>
