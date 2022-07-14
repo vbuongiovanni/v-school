@@ -1,0 +1,125 @@
+body, html {
+    margin: 0px;
+    width: 100vw;
+    height: 100vh;
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+}
+#root {
+    width: 100%;
+    height: 100%;
+}
+#root * {
+    box-sizing: border-box;
+}
+nav {
+    max-height: 400px;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    background-color: rgb(52, 52, 52);
+    color: white;
+} 
+main {
+    height: 100%;
+    background-color: rgb(138, 138, 138);
+    color: white;
+}
+main > * {
+    background-color: rgb(52, 52, 52);
+    color: white;
+}
+
+.main-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main-form > button {
+    width: 100%;
+    max-width: 400px;
+    font-size: 18px;
+}
+
+.input-div {
+    padding: 10px;
+}
+.input-div  * {
+    margin-left: 10px;
+}
+.input-div > input, .input-div > select {
+    font-size: 16px;
+}
+button {
+    font-weight: 600;
+    font-size: 16px;
+}
+.bounties-container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 450px));
+    grid-template-rows: repeat(auto-fill, 300px);
+}
+.bounty-card {
+    border: 1px lightgray solid;
+    max-width: 500px;
+    max-height: 300px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bounty-card > * {
+    padding: 0px;
+    margin: 0px;
+    margin-top: 15px;
+}
+.bounty-card-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bounty-card-buttons > button, .bounty-form > button {
+    width: 100%;
+    margin-top: 15px;
+    max-width: 150px;
+}
+.delete-button {
+    background-color: firebrick;
+    color: white;
+}
+.in-edit > button {
+    width: 100%;
+    margin-top: 0px;
+}
+.bounty-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bounty-form > .input-div > .name-label {
+    font-size: 0px;
+}
+.bounty-form > button {
+    margin-top: 5px;
+}
+.label-type, .label-living, .label-bounty {
+    font-size: 16px;
+    font-weight: 400;
+}
+.name-input {
+    font-weight: 800;
+    font-size: 24px;
+    width: 170px;
+}
+.main-form > .name-input-div > .name-input {
+    width: 200px;
+}
+footer {
+    margin: 0px;
+    padding: 0px;
+}

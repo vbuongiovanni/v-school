@@ -1,13 +1,7 @@
 const express = require("express");
 const {v4 : uuid} = require("uuid");
-
 const bountyRoute = express.Router();
-
-const bounties = [
-    {firstName : "Luke", lastName : "Skywalker", living : true, bountyAmount : 100000, type : "Jedi", _id : uuid()},
-    {firstName : "Darth", lastName : "Vader", living : true, bountyAmount : 900000, type : "Sith", _id : uuid()},
-    {firstName : "Obiwan", lastName : "Kanobi", living : true, bountyAmount : 500000, type : "Jedi", _id : uuid()},
-]
+let bounties = require("./bountyData")
 
 // routes - w/o ID param
 bountyRoute.route("/")
@@ -18,6 +12,7 @@ bountyRoute.route("/")
         const newBounty = req.body;
         newBounty._id = uuid();
         bounties.push(newBounty)
+        console.log(newBounty)
         res.send(newBounty)
     })
 
@@ -32,13 +27,14 @@ bountyRoute.route("/:requestedId")
         const {requestedId} = req.params;
         const boundyIndex = bounties.findIndex(bounty => bounty._id === requestedId)
         bounties.splice(boundyIndex, 1)
-        res.send(bounties)
+        res.send(requestedId)
     })
     .put((req, res) => {
         const {requestedId} = req.params;
         const boundyIndex = bounties.findIndex(bounty => bounty._id === requestedId)
-        Object.assign(bounties[boundyIndex], req.body)
-        res.send(bounties)
+        const updatedBounty = {...req.body, _id : requestedId};
+        Object.assign(bounties[boundyIndex], updatedBounty)
+        res.send(updatedBounty)
     })
 
 module.exports = bountyRoute;
