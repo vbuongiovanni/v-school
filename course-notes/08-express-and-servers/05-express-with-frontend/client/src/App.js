@@ -12,26 +12,25 @@ export default () => {
     const getMovies = () => {
         axios.get("/movies")
             .then(res => setMovies(res.data))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.response.data.error))
     }
 
     const addMovie = (newMovie) => {
         axios.post("/movies", newMovie)
             .then(res => setMovies(prevMovies => [...prevMovies, res.data]))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.response.data.error))
     }
 
     const deleteMovie = (movieId) => {
         axios.delete(`/movies/${movieId}`)
             .then(res => setMovies(prevMovies => prevMovies.filter(movie => movie._id !== movieId)))
-            .catch(err => console.log(err))   
+            .catch(err => console.log(err.response.data.error))   
     }
 
     const editMovie = (updatedMovie, movieId) => {
         axios.put(`/movies/${movieId}`, updatedMovie)
-            .then(res => setMovies(prevMovies => prevMovies.map(movie => movie._id  === movieId ? res.data : movie))
-            )
-            .catch(err => console.log(err))   
+            .then(res => setMovies(prevMovies => prevMovies.map(movie => movie._id  === movieId ? res.data : movie)))
+            .catch(err => console.log(err.response.data.error))   
     }
 
     useEffect(() => {

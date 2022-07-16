@@ -1,0 +1,35 @@
+SQL to MongoDB terminology Key:
+
+    In a nutshell, SQL uses Tables of Records that are uniquely identified via Primary Key.
+    In Contrast, MongoDB uses Collections of Documents that are uniquely identified via id's
+
+
+    Table/Relation      |       Collections (think JS array)
+    Records             |       Documents (think JS Object)
+    Primary Key         |       _id
+
+    Note that the 3 types of relationships of SQL translate over to SQL in the same manner...
+
+    - 1 to 1
+    - 1 to M
+    - M to M
+
+    Collections are defined using 'models', which provide a blueprint. Example:
+
+    User {
+        name : String,
+        age : Age,
+        _id : asdfaskdjfhhbasdjk
+    }
+
+
+
+
+** One Huge Difference Between SQL & MongoDB **
+
+    By default, MongoDB is similar to SQLLite in that it is the wild-west in terms of data enforcement... It just doesn't.
+
+    Therefore, we will use:
+        - MongoDB stores the data.
+        - Mongoose to enforce rigidity. Additionally, it creates models and facilitates the data query process.
+        
