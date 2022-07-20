@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {Schema, Model} = mongoose;
+const {Schema, model} = mongoose;
 
 // create schema:
     const bountySchema = new Schema({
@@ -13,9 +13,9 @@ const {Schema, Model} = mongoose;
         type : {
             type : String,
             required : true,
-            enum : ["jedi", "sith"]
+            enum : ["Jedi", "Sith"]
         }
     })
 
 // export 
-module.exports = Model("Bounty", bountySchema)
+module.exports = model("Bounty", bountySchema)

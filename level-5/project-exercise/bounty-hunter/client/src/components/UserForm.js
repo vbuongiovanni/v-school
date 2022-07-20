@@ -4,17 +4,17 @@ import { appContext } from "../AppContext";
 const UserForm = (props) => {
     
     const context = useContext(appContext);
-    // const {postBounty} = context;
-
     const {submitFunction, toggleEditMode, className, buttonText, firstName, lastName, living, type, bountyAmount, _id} = props;
 
-    const [userInput, setUserInputs] = useState({
+    const initFormValues = {
         firstName : firstName || "",
         lastName : lastName || "",
         living : living === undefined ? true : living,
-        type : type || "",
+        type : type || "Jedi",
         bountyAmount : bountyAmount || ""
-    })
+    }
+
+    const [userInput, setUserInputs] = useState(initFormValues)
 
     const inputHandler = (e) => {
         let {name, value} = e.target;
@@ -26,8 +26,9 @@ const UserForm = (props) => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        submitFunction(userInput, _id)
-        toggleEditMode()
+        submitFunction(userInput, _id);
+        setUserInputs(initFormValues);
+        toggleEditMode();
     }
 
     return (
@@ -63,7 +64,6 @@ const UserForm = (props) => {
                     <option value="Sith">Sith</option>
                 </select>
             </div>
-
             <div className="input-div">
                 <label htmlFor="living" className="label-living">Status: </label>
                 <select
@@ -75,7 +75,6 @@ const UserForm = (props) => {
                     <option value="true">Alive</option>
                 </select>
             </div>
-
             <div className="input-div">
                 <label htmlFor="bountyAmount" className="label-bounty">Bounty Amount: </label>
                 <input
@@ -87,14 +86,13 @@ const UserForm = (props) => {
                     required
                 />
             </div>
-
             <button>{buttonText}</button>
         </form>
     )
 }
 
 UserForm.defaultProps = {
-    toggleEditMode : undefined
+    toggleEditMode : () => {}
 }
 
 export default UserForm;
