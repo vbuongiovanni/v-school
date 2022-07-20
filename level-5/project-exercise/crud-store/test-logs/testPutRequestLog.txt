@@ -1,0 +1,46 @@
+
+Updated added Item:
+    _id: 62d7487433fc6745b6daecac
+    Product: Some Updated Titled
+    Description: Some Updated Description
+    Price: 999999999
+    In Stock: false
+
+
+                        
+Updated added Item:
+    _id: 62d7487433fc6745b6daecaa
+    Product: Some Updated Titled
+    Description: Some Updated Description
+    Price: 999999999
+    In Stock: false
+
+
+                        
+Updated added Item:
+    _id: 62d74896dc5d748eef546a1b
+    Product: Some Updated Titled
+    Description: Some Updated Description
+    Price: 999999999
+    In Stock: false
+
+
+                        
+Updated added Item:
+    _id: 62d74896dc5d748eef546a23
+    Product: Some Updated Titled
+    Description: Some Updated Description
+    Price: 999999999
+    In Stock: false
+
+
+                        
+Updated added Item:
+    _id: 62d74896dc5d748eef546a21
+    Product: Some Updated Titled
+    Description: Some Updated Description
+    Price: 999999999
+    In Stock: false
+
+
+                        

@@ -1,0 +1,46 @@
+
+Newly added Item:
+    _id: 62d74896dc5d748eef546a1b
+    Product: Rubber Raft
+    Description: Rubber raft for floating on water
+    Price: 75
+    In Stock: true
+
+
+            
+Newly added Item:
+    _id: 62d74896dc5d748eef546a21
+    Product: Headphones
+    Description: Generic Headphones
+    Price: 10
+    In Stock: false
+
+
+            
+Newly added Item:
+    _id: 62d74896dc5d748eef546a23
+    Product: Jabra Headphones
+    Description: Fancy Headphones
+    Price: 90
+    In Stock: true
+
+
+            
+Newly added Item:
+    _id: 62d74896dc5d748eef546a1d
+    Product: Radio
+    Description: Radio that plays music
+    Price: 10
+    In Stock: true
+
+
+            
+Newly added Item:
+    _id: 62d74896dc5d748eef546a1f
+    Product: Satellite Radio
+    Description: Satellite Radio - plays music from multiple sources!
+    Price: 65
+    In Stock: true
+
+
+            
