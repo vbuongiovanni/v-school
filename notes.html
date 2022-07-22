@@ -42,46 +42,173 @@
                     <li>Triggered manually</li>
                     <li>Creates a chain of history that allows one to go back to a specific commit</li>
                     <li>Intelligently combines changes from different source - asks specifically about conflicts</li>
-                    <li><span class="code">'git init'</span></li>
+                    <li class="key-concept">Creating new repo</li>
                     <ul>
-                        <li>Initializes new git repository in local directory</li>
+                        <li><span class="code">'git init'</span></li>
+                        <ul>
+                            <li>Initializes new git repository in local directory</li>
+                        </ul>
+                        <li><span class="code">'git status'</span></li>
+                        <ul>
+                            <li>Shows status of project from perspective of git</li>
+                        </ul>
+                        <li><span class="code">'git add file-name'</span> or <span class="code">'git add -A'</span></li>
+                        <ul>
+                            <li>Staging files for commit - allows you to pick and choose what will be committed. Adding ' -A' stages all files</li>
+                        </ul>
+                        <li><span class="code">'git commit -m "meaningful message that describes changes here"'</span></li>
+                        <ul>
+                            <li>commits staged files, note that -m "message" flag is required and should include brief description of what was changed</li>
+                        </ul>
+                        <li><span class="code">'git log'</span></li>
+                        <ul>
+                            <li>shows log of previous commits</li>
+                        </ul>
+                        <li><span class="code">'git remote add origin URL_TO_GITHUB'</span></li>
+                        <ul>
+                            <li>Creates remote connection between local git folder and github</li>
+                            <li>Example using HTTPS (requires periodic login): 'git remote add origin https://github.com/vbuongiovanni/vs-level-1.git'</li>
+                            <li>Example without SSH Key (requires set up of key file, must be initialized locally, then copy-pasted to github): 'git remote add origin git@github.com:vbuongiovanni/vs-level-1.git'</li>
+                        </ul>
+                        <li><span class="code">'git remote -v'</span></li>
+                        <ul>
+                            <li>Shows details and permission of remote connection between local and Github. can be used to verify 'git remote add' worked</li>
+                        </ul>
+                        <li><span class="code">'git push -u origin master'</span></li>
+                        <ul>
+                            <li>Required for initial setup of repo, initializes git push command</li>
+                        </ul>
+                        <li><span class="code">'git push'</span></li>
+                        <ul>
+                            <li>Pushes commits to repository. In this case, Github</li>
+                        </ul>
                     </ul>
-                    <li><span class="code">'git status'</span></li>
+                    <li>Git Flow</li>
                     <ul>
-                        <li>Shows status of project from perspective of git</li>
+                        <ul>
+                            <li>Remote Master - main repository, e.g., what is shown on github</li>
+                            <li>Local Master - entire repository but saved on local computer</li>
+                            <li>Remote Branch - branch that is loaded to repo. Example: branch is loaded to github's branch</li>
+                            <li>Local Branch - branch that is saved locally on computer</li>
+                        </ul>
+                        <li><span class="code">'git branch BRANCH_NAME'</span> - creating a branch</li>
+                        <ul>
+                            <li class="key-concept">What is a branch and why do it use them?</li>
+                            <ul>
+                                <li>Effectively, it is the same as <span class="key-concept">local master</span> before making any changes.</li>
+                                <li>used to create a duplicate project when working on code to prevent breaking the entire codebase</li>
+                            </ul>
+                        </ul>
+                        <li><span class="code">'git checkout'</span> - moving to a branch so you can work on it:</li>
+                        <ul>
+                            <li class="key-concept">How is a branch used?</li>
+                            <ul>
+                                <li>You 'check out' branches, similar to a library book, so everyone knows that you are actively working on it</li>
+                                <li>This also prevents multiple people from working on the same code.</li>
+                            </ul>
+                        </ul>
+                        <li><span class="code">'git merge'</span> - Unify codebase</li>
+                        <ul>
+                            <li class="key-concept">How do we unify, or synchronize, code between the master repo and branches?</li>
+                            <ul>
+                                <li>This will either 'go well' and merge, or a <span class="key-concet">conflict</span> will arise</li>
+                                <li>A <span class="key-concet">conflict</span> is a scenario where the code of a specific file doesn't match between the branch and the master</li>
+                                <li>git will then allow you to allow you to work through the conflict and resolve it, then finish the merge</li>
+                            </ul>
+                        </ul>
                     </ul>
-                    <li><span class="code">'git add file-name'</span> or <span class="code">'git add -A'</span></li>
-                    <ul>
-                        <li>Staging files for commit - allows you to pick and choose what will be committed. Adding ' -A' stages all files</li>
-                    </ul>
-                    <li><span class="code">'git commit -m "meaningful message that describes changes here"'</span></li>
-                    <ul>
-                        <li>commits staged files, note that -m "message" flag is required and should include brief description of what was changed</li>
-                    </ul>
-                    <li><span class="code">'git log'</span></li>
-                    <ul>
-                        <li>shows log of previous commits</li>
-                    </ul>
-                    <li><span class="code">'git remote add origin URL_TO_GITHUB'</span></li>
-                    <ul>
-                        <li>Creates remote connection between local git folder and github</li>
-                        <li>Example using HTTPS (requires periodic login): 'git remote add origin https://github.com/vbuongiovanni/vs-level-1.git'</li>
-                        <li>Example without SSH Key (requires set up of key file, must be initialized locally, then copy-pasted to github): 'git remote add origin git@github.com:vbuongiovanni/vs-level-1.git'</li>
-                    </ul>
-                    <li><span class="code">'git remote -v'</span></li>
-                    <ul>
-                        <li>Shows details and permission of remote connection between local and Github. can be used to verify 'git remote add' worked</li>
-                    </ul>
-                    <li><span class="code">'git push -u origin master'</span></li>
-                    <ul>
-                        <li>Required for initial setup of repo, initializes git push command</li>
-                    </ul>
-                    <li><span class="code">'git push'</span></li>
-                    <ul>
-                        <li>Pushes commits to repository. In this case, Github</li>
-                    </ul>
-
-
+                    <li>Basic Steps - git collaboration</li>
+                    <ol>
+                        <li>Create git repository on github</li>
+                            <ul>
+                                <li>Either git init or setup a project in github. In a group setting, one person will do this.</li>
+                                <li>In essence, this is the Remote Master</li>
+                            </ul>
+                        <li>Connect/clone locally</li>
+                            <ul>
+                                <li>Connect project, created with 'git init', to github. Or, if created on github, clone the repository locally to create the 'Local Master'</li>
+                            </ul>
+                        <li>Set up the code base</li>
+                        <ul>
+                            <li>create folder structure, initialize npm & react app, install dependencies</li>
+                            <li>note that empty folders are not recognized by git</li>
+                            <li>Push everything to Remote Master</li>
+                            <li>This ensures the dev environment is ready to go for everyone else</li>
+                        </ul>
+                        ~~~~~~
+                        <li>Clone Repository (this is where all contributors start)</li>
+                        <ul>
+                            <li>Go to the github page of whoever created/started the project, and copy the project URL </li>
+                            <li><span class="code">git clone URL_OF_GITHUB</span></li>
+                            <ul>
+                                <li>At this point, everyone has the same 'Local Master'</li>
+                            </ul>
+                        </ul>
+                        ~~~~~~
+                        <li>Create a feature Branch</li>
+                        <ul>
+                            <li>Best practice is to have a branch for each feature. For example, one branch for the server setup, one branch for the routing, etc.</li>
+                            <li>Example <span class="code">git branch server-setup</span></li>
+                        </ul>
+                        <li>Check out Branch</li>
+                        <ul>
+                            <li>Check out a branch, then you can code on it without worry of screwing up the Remote Master</li>
+                            <li>Example <span class="code">git checkout server-setup</span></li>
+                            <li>When ready, commit and push the changes to github</li>
+                            <ul>
+                                <li>
+                                    Note: if this is the first time using the given branch, you will get an error from github stating there is no upstream origin.
+                                    this can be overcame by copy-pasting the code given by github (<span class="code">git set upstream origin BRANCH_NAME</span>)
+                                </li>
+                            </ul>
+                        </ul>
+                        <li>Commit and push branch to github</li>
+                        <ul>
+                            <li>standard git add, git commit, and git push</li>
+                        </ul>
+                        <li>Checkout the code of the recent Remote Master</li>
+                        <ul>
+                            <li>Check out Remote Master before incorporating Local Branch.</li>
+                            <li>Example <span class="code">git checkout master</span></li>
+                        </ul>
+                        <li>Pull down Remote Master and synchronize code changes</li>
+                        <ul>
+                            <li>At this point, Local Master will be updated with all code that was previously committed/pushed to Remote Master by other team members</li>
+                            <li>Additionally, the updated Local Master will be synchronized with Local Branch, except for whatever YOU personally changed.</li>
+                            <li>Example <span class="code">git pull</span></li>
+                        </ul>
+                        <li>Checkout back to local branch</li>
+                        <ul>
+                            <li>The updated Local Master will be synchronized with Local Branch, except for newly added changes</li>
+                            <li>Example <span class="code">git checkout server-setup</span></li>
+                        </ul>
+                        <li>Merge Local Master into Local Branch (this is the dangerous step):</li>
+                        <ul>
+                            <li>This step attempts to merge the Local Branch in with Local Master. This will either be successful or it will uncover all conflicts:</li>
+                            <ul>
+                                <li>If this goes well, you will see a hash message. When you see that, hit <span class="key-concept">shift + ZZ</span> to end merge process</li>
+                                <li>If there are conflicts, you will then need to go through VSC and resolve conflicts locally</li>
+                            </ul>
+                            <li>Example <span class="code">git merge --no-ff master</span></li>
+                        </ul>
+                        <li>Push Local Branch to Remote Branch</li>
+                        <ul>
+                            <li>After everything finally goes well (e.g., after resolving local conflicts), run this to load Remote Branch</li>
+                            <li>The Remote Branch will now have all the updated code from the Local Master (freshly updated from Remote Master), and all recent changes made in Local Branch</li>
+                            <li>Perform git add, git commit, and git push commands </li>
+                        </ul>
+                        <li>Create Pull Request (PR) on github</li>
+                        <ul>
+                            <li>A PR is a request to incorporate the Remote Branch into the Remote Branch. If accepted, it will instantly be incorporated into the Remote Master</li>
+                            <li>After completion, this will merge the Remote Branch into the Remote Master</li>
+                        </ul>
+                        <li>Checkout to Master and Pull new Code</li>
+                        <ul>
+                            <li>This will synchronize Remote Master with Local Master. At that point, you can start again with a different feature.. start again at step 5.</li>
+                            <li>Example <span class="code">git checkout to master</span></li>
+                            <li>Example <span class="code">git pull</span></li>
+                        </ul>
+                    </ol>
                 </ul>
             <li>Github</li>
                 <ul>
