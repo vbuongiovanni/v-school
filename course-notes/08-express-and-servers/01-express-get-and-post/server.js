@@ -25,6 +25,7 @@ const users = [
 // Parameters: placeholder for data when making requests. This is denoted as ":nounId". e.g., `/ski/:skiId`.
 
 // Query (query string): means of filtering passing information to server. They are ampersand separated and are key-value pairs. which is . e.g., `/ski/:skiId?brand=armada&length=180`.
+
 // Client: The person/machine that is consuming the information from your API. In our course, this will usually be a browser application (like an Angular app running in a Chrome browser), but could also be an iOS or Android app, or even another server reaching out to our API for data.
 // Server: The machine your API is running on.
 // Request method: The kind of operation we want to perform on the database. Available options are GET, POST, PUT, and DELETE. GET is for retrieving (reading) data, POST is for creating (writing) new data, PUT is for updating data, and DELETE is for removing data.

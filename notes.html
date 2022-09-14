@@ -686,17 +686,87 @@
             </ul>
             <li>Node Modules</li>
             <ul>
-                <li>At a high-level, modules are a means of breaking the application into separate files to foster organization and clean code</li>
-                <li>ECMAScript Modules</li>
-                <li>CommonJS Modules</li>
+                <li>At it's core, a <span class="key-concept">Module</span> is simply a file. At a higher level, modules are a means of breaking the application into separate files to foster organization and clean code</li>
+                <li><span class="key-concept">ECMAScript Modules</span> - More modern way of using modules</li>
                 <ul>
-                    <li>Uses the <span class="code">module.exports</span> (source file) and <span class="code">require()</span> function (consumer file)</li>
-                    <li><span class="code">.exports</span> is an object that can either contain a single element or an object</li>
-                    <li>Exporting a single element:</li>
-                    <p class="input code">module.exports = () => {console.log("Hello")}</p>
-                    <li>Exporting a multiple element:</li>
-                    <p class="input code">module.exports = {someFunction, someFunction2 }
-                    </p>
+                    <li>In order to use ECMAScript Modules in a project, you must add <span class="code">"type": "module"</span> in the package.json file</li>
+                    <li>Examples:</li>
+                    <ul>
+                        <li>Single element modules:</li>
+                        <ul>
+                            <li class="key-concept">Exporting</li>
+                            <div class="code">
+                                <p>// logHello.js </p>
+                                <p>const logHello = () => console.log("Hello, from logHello.js");</p>
+                                <p>export default logHello;</p>
+                                <p>// or</p>
+                                <p>// export default () => console.log("Hello, from logHello.js, imported via ECMAScript Modules!");</p>
+                            </div>
+                            <li class="key-concept">Importing - module path must be defined relatively unless it is handled by package manager</li>
+                            <div class="code">
+                                <p>// index.js </p>
+                                <p>import greeting from "./logHello.js";</p>
+                                <p>greeting(); // "Hello, from logHello.js, imported via ECMAScript Modules!"</p>
+                            </div>
+                        </ul>
+                        <li>Multiple element Modules:</li>
+                        <ul>
+                            <li class="key-concept">Exporting</li>
+                            <div class="code">
+                                <p>// mathFuncs.js </p>
+                                <p>const add = (a, b) => a + b</p>
+                                <p>const multiply = (a, b) => a * b</p>
+                                <p>export {add, multiply};</p>
+                            </div>
+                            <li class="key-concept">Importing - module path must be defined relatively unless it is handled by package manager</li>
+                            <div class="code">
+                                <p>// index.js </p>
+                                <p>import {add, multiply} from "./mathFuncs.js";</p>
+                                <p>add(2, 2); // 4</p>
+                                <p>multiply(2, 8); // 16</p>
+                            </div>
+                        </ul>
+                    </ul>
+                </ul>
+                <li><span class="key-concept">CommonJS Modules</span> - older way of using modules, still commonly used (as of when this was written...)</li>
+                <ul>
+                    <li>Uses the <span class="code">module.exports</span> (source file) to export functions, variables, or objects from the module, and <span class="code">require()</span> function to import in the consumer file.</li>
+                    <li>note that <span class="code">.exports</span> is an object that can contain either a single element or an object that contains one or more children.</li>
+                    <li>Examples:</li>
+                    <ul>
+                        <li>Single element modules:</li>
+                        <ul>
+                            <li class="key-concept">Exporting</li>
+                            <div class="code">
+                                <p>// logHello.js </p>
+                                <p>const logHello = () => console.log("Hello, from logHello.js");</p>
+                                <p>module.exports = logHello;</p>
+                            </div>
+                            <li class="key-concept">Importing - module path must be defined relatively unless it is handled by package manager</li>
+                            <div class="code">
+                                <p>// index.js </p>
+                                <p>const greeting = require("./logHello.js");</p>
+                                <p>greeting(); // "Hello, from logHello.js"</p>
+                            </div>
+                        </ul>
+                        <li>Multiple element Modules:</li>
+                        <ul>
+                            <li class="key-concept">Exporting</li>
+                            <div class="code">
+                                <p>// mathFuncs.js </p>
+                                <p>const add = (a, b) => a + b</p>
+                                <p>const multiply = (a, b) => a * b</p>
+                                <p>module.exports = {add, multiply};</p>
+                            </div>
+                            <li class="key-concept">Importing - module path must be defined relatively unless it is handled by package manager</li>
+                            <div class="code">
+                                <p>// index.js </p>
+                                <p>const {add, multiply} = require("./mathFuncs.js");</p>
+                                <p>add(2, 2); // 4</p>
+                                <p>multiply(2, 8); // 16</p>
+                            </div>
+                        </ul>
+                    </ul>
                 </ul>
                 
             </ul>
@@ -1823,6 +1893,89 @@
                         <li><span class="code">useLocation()</span></li>
                     </ul>
                 </ul>
+            <li><span class="key-concept">Server Side Programming using Express</span></li>
+            <ul>
+                <li>With respect to the client-server architecture, server side programming is concerned with the backend (e.g., the server and database).</li>
+                <li>Types of Servers:</li>
+                <ul>
+                    <li><span class="key-concept">Remote</span>: Anything that is not on your device</li>
+                    <li><span class="key-concept">Local</span>: Running a server on your local machine</li>   
+                </ul>
+                <li>Vocabulary</li>
+                <ul>
+                    <li>
+                        <span class="key-concept">REST (representational State transfer</span>:
+                        A standardized and semi-structured framework for APIs. In general, endpoints should singular nouns - <span class="code">/user</span> would return all users while <span class="code">/user/:userId would return a specific user</span>
+                    </li>
+                    <li>
+                        <span class="key-concept">Resource</span>:
+                        A single instance or item of an object within a database. For example, a specific users.
+                    </li>
+                    <li>
+                        <span class="key-concept">Collection</span>:
+                        A collection of similar objects, e.g.: all the users that exist within a database
+                    </li>
+                    <li>
+                        <span class="key-concept">Base (or Root) URL</span>:
+                        The first portion of the URL used for all requests. Usually looks something like <span class="code">http://api.equipment.com/v1</span> or <span class="code">http://equipment.com/api/v1</span>. 
+                    </li>
+                    <li>
+                        <span class="key-concept">Parameters</span>:
+                        Placeholder for data when making requests that will then be available on the backend via named variable. This is denoted as ":nounId". e.g., <span class="code">.../:skiId</span>.
+                    </li>
+                    <li>
+                        <span class="key-concept">Query (query string)</span>:
+                        Information passed to server at end of URL to request a subset of data - ampersand separated key-value pairs that precede a question mark. Typically used as a means of filtering <span class="code">?brand=armada&length=180</span>.
+                    </li>
+                    <li>
+                        <span class="key-concept">API Endpoint</span>:
+                        Extension of URL that comes after the Base URL that specifies the request. Usually looks something like <span class="code">/ski</span> or <span class="code">/ski/:skiId</span>.
+                    </li>
+                    <li>
+                        <span class="key-concept">Endpoint, or 'mount path'</span>:
+                        A unique combination of URL and a request type, or verb (e.g., a get request to "http://api.equipment.com/v1/ski/124342easdf2342354") 
+                    </li>
+                    <li>
+                        <span class="key-concept">Route</span>:
+                        The action, or actions, taken in response to an endpoint receiving a request. In essence, this is similar to an event listener.
+                    </li>
+                </ul>
+                <li class="key-concept">Using Express.js</li>
+                <ul>
+                    <li>Fast, unopinionated, minimalist web framework for Node.js. In essence, it is a library to create servers.</li>
+                    <li>Initial/Minimal Setup</li>
+                    <ol>
+                        <li>Create manifest by initializing new npm project - run <span class="code">npm init -y</span> in commandline</li>
+                        <li>Install express by running <span class="code">npm install express</span></li>
+                        <li>The main script of the server project will, at a minimum have a main file (e.g., server.js, index.js, app.js, etc.) with the following to start running:</li>
+                        <div class="code">
+                            <p>// server.js</p>
+                            <p>// 1.) import express</p>
+                            <p>const express = require(express);</p>
+                            <p>// or, if using ECMAScript Modules</p>
+                            <p>// import express from 'express';</p>
+                            <p>// 2.) declare server variable - general convention is to call it 'app'</p>
+                            <p>const app = express()</p>
+                            <p>// 3.) Start the server by providing a port number and a callback function that will run upon execution</p>
+                            <p>app.list(9000, () => console.log('server is listening on port 9000'));</p>
+                        </div>
+                        <li>With that, every middleware and route MUST end in either next() or res.send()</li>
+                    </ol>
+                    <li>Middleware - a function that fires on the in-between, from the time a request is received all the way until it is responded</li>
+                    <ul>
+                        <li><span class="code">app.use(mountPath - optional, callbackFunction)</span> - note that the callbackFunction receives the request and a next() func. if mountPath isn't defined, the callback will be executed on all requests</li>
+                        <li><span class="code">next()</span> moves on to the next middleware in line</li>
+                    </ul>
+                    <li>Passing information from frontend to backend</li>
+                    <ul>
+                        <li>Request Body: </li>
+                        <li>Parameter: Accessed server side by calling <span class="code">req.param</span>, parameters are passed by using ":variableName" in the endpoint</li>
+                        <li>Query: Accessed server side by calling <span class="code">req.query</span>, (Query Strings). There isn't any additional modifications needed to the URL endpoint - express takes care of that natively</li>
+                    </ul>
+
+                </ul>
+
+            </ul>
         </ul>
 
     </body>

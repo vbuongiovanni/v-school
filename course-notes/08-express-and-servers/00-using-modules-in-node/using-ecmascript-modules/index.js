@@ -2,24 +2,9 @@
 //     "type": "module"
 // to package.json
 
-/* 
-// module1.js
-    export default function greeting() {
-        return "Hello, from Module 1!"
-    }
-*/
-import greeting from "./module1.js";
-console.log(greeting())
+import greeting from "./logHello.js";
+greeting(); // Hello, from logHello.js, imported via ECMAScript Modules!
 
-/* 
-// module1.js
-// module1.js
-    export default function greeting() {
-        return "Hello, from Module 1!"
-    }
-*/
-import {moduleTwoGreeting, moduleTwoInfo} from "./module2.js";
-console.log(moduleTwoGreeting())
-console.log(moduleTwoInfo())
-
-
+import {add, multiply} from "./mathFuncs.js";
+console.log(add(2, 2)); //
+console.log(multiply(2, 8)); //
