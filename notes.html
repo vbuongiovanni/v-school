@@ -1893,90 +1893,127 @@
                         <li><span class="code">useLocation()</span></li>
                     </ul>
                 </ul>
-            <li><span class="key-concept">Server Side Programming using Express</span></li>
+            
+            
+        </ul>
+    <h2>Server Side Programming using Express</h2>
+    <ul>
+        <li>With respect to the client-server architecture, server side programming is concerned with the backend (e.g., the server and database).</li>
+        <li>Types of Servers:</li>
+        <ul>
+            <li><span class="key-concept">Remote</span>: Anything that is not on your device</li>
+            <li><span class="key-concept">Local</span>: Running a server on your local machine</li>   
+        </ul>
+        <li>Vocabulary</li>
+        <ul>
+            <li>
+                <span class="key-concept">REST (representational State transfer</span>:
+                A standardized and semi-structured framework for APIs. In general, endpoints should singular nouns - <span class="code">/user</span> would return all users while <span class="code">/user/:userId would return a specific user</span>
+            </li>
+            <li>
+                <span class="key-concept">Resource</span>:
+                A single instance or item of an object within a database. For example, a specific users.
+            </li>
+            <li>
+                <span class="key-concept">Collection</span>:
+                A collection of similar objects, e.g.: all the users that exist within a database
+            </li>
+            <li>
+                <span class="key-concept">Base (or Root) URL</span>:
+                The first portion of the URL used for all requests. Usually looks something like <span class="code">http://api.equipment.com/v1</span> or <span class="code">http://equipment.com/api/v1</span>. 
+            </li>
+            <li>
+                <span class="key-concept">Parameters</span>:
+                Placeholder for data when making requests that will then be available on the backend via named variable. This is denoted as ":nounId". e.g., <span class="code">.../:skiId</span>.
+            </li>
+            <li>
+                <span class="key-concept">Query (query string)</span>:
+                Information passed to server at end of URL to request a subset of data - ampersand separated key-value pairs that precede a question mark. Typically used as a means of filtering <span class="code">?brand=armada&length=180</span>.
+            </li>
+            <li>
+                <span class="key-concept">API Endpoint</span>:
+                Extension of URL that comes after the Base URL that specifies the request. Usually looks something like <span class="code">/ski</span> or <span class="code">/ski/:skiId</span>.
+            </li>
+            <li>
+                <span class="key-concept">Endpoint, or 'mount path'</span>:
+                A unique combination of URL and a request type, or verb (e.g., a get request to "http://api.equipment.com/v1/ski/124342easdf2342354") 
+            </li>
+            <li>
+                <span class="key-concept">Route</span>:
+                The action, or actions, taken in response to an endpoint receiving a request. In essence, this is similar to an event listener.
+            </li>
+        </ul>
+        <li class="key-concept">Using Express.js</li>
+        <ul>
+            <li>Fast, unopinionated, minimalist web framework for Node.js. In essence, it is a library to create servers.</li>
+            <li>Initial/Minimal Setup</li>
+            <ol>
+                <li>Create manifest by initializing new npm project - run <span class="code">npm init -y</span> in commandline</li>
+                <li>Install express by running <span class="code">npm install express</span></li>
+                <li>The main script of the server project will, at a minimum have a main file (e.g., server.js, index.js, app.js, etc.) with the following to start running:</li>
+                <div class="code">
+                    <p>// server.js</p>
+                    <p>// 1.) import express</p>
+                    <p>const express = require(express);</p>
+                    <p>// or, if using ECMAScript Modules</p>
+                    <p>// import express from 'express';</p>
+                    <p>// 2.) declare server variable - general convention is to call it 'app'</p>
+                    <p>const app = express()</p>
+                    <p>// 3.) Start the server by providing a port number and a callback function that will run upon execution</p>
+                    <p>app.list(9000, () => console.log('server is listening on port 9000'));</p>
+                </div>
+                <li>With that, every middleware and route MUST end in either next() or res.send()</li>
+            </ol>
+            <li>Middleware - a function that fires on the in-between, from the time a request is received all the way until it is responded</li>
             <ul>
-                <li>With respect to the client-server architecture, server side programming is concerned with the backend (e.g., the server and database).</li>
-                <li>Types of Servers:</li>
-                <ul>
-                    <li><span class="key-concept">Remote</span>: Anything that is not on your device</li>
-                    <li><span class="key-concept">Local</span>: Running a server on your local machine</li>   
-                </ul>
-                <li>Vocabulary</li>
-                <ul>
-                    <li>
-                        <span class="key-concept">REST (representational State transfer</span>:
-                        A standardized and semi-structured framework for APIs. In general, endpoints should singular nouns - <span class="code">/user</span> would return all users while <span class="code">/user/:userId would return a specific user</span>
-                    </li>
-                    <li>
-                        <span class="key-concept">Resource</span>:
-                        A single instance or item of an object within a database. For example, a specific users.
-                    </li>
-                    <li>
-                        <span class="key-concept">Collection</span>:
-                        A collection of similar objects, e.g.: all the users that exist within a database
-                    </li>
-                    <li>
-                        <span class="key-concept">Base (or Root) URL</span>:
-                        The first portion of the URL used for all requests. Usually looks something like <span class="code">http://api.equipment.com/v1</span> or <span class="code">http://equipment.com/api/v1</span>. 
-                    </li>
-                    <li>
-                        <span class="key-concept">Parameters</span>:
-                        Placeholder for data when making requests that will then be available on the backend via named variable. This is denoted as ":nounId". e.g., <span class="code">.../:skiId</span>.
-                    </li>
-                    <li>
-                        <span class="key-concept">Query (query string)</span>:
-                        Information passed to server at end of URL to request a subset of data - ampersand separated key-value pairs that precede a question mark. Typically used as a means of filtering <span class="code">?brand=armada&length=180</span>.
-                    </li>
-                    <li>
-                        <span class="key-concept">API Endpoint</span>:
-                        Extension of URL that comes after the Base URL that specifies the request. Usually looks something like <span class="code">/ski</span> or <span class="code">/ski/:skiId</span>.
-                    </li>
-                    <li>
-                        <span class="key-concept">Endpoint, or 'mount path'</span>:
-                        A unique combination of URL and a request type, or verb (e.g., a get request to "http://api.equipment.com/v1/ski/124342easdf2342354") 
-                    </li>
-                    <li>
-                        <span class="key-concept">Route</span>:
-                        The action, or actions, taken in response to an endpoint receiving a request. In essence, this is similar to an event listener.
-                    </li>
-                </ul>
-                <li class="key-concept">Using Express.js</li>
-                <ul>
-                    <li>Fast, unopinionated, minimalist web framework for Node.js. In essence, it is a library to create servers.</li>
-                    <li>Initial/Minimal Setup</li>
-                    <ol>
-                        <li>Create manifest by initializing new npm project - run <span class="code">npm init -y</span> in commandline</li>
-                        <li>Install express by running <span class="code">npm install express</span></li>
-                        <li>The main script of the server project will, at a minimum have a main file (e.g., server.js, index.js, app.js, etc.) with the following to start running:</li>
-                        <div class="code">
-                            <p>// server.js</p>
-                            <p>// 1.) import express</p>
-                            <p>const express = require(express);</p>
-                            <p>// or, if using ECMAScript Modules</p>
-                            <p>// import express from 'express';</p>
-                            <p>// 2.) declare server variable - general convention is to call it 'app'</p>
-                            <p>const app = express()</p>
-                            <p>// 3.) Start the server by providing a port number and a callback function that will run upon execution</p>
-                            <p>app.list(9000, () => console.log('server is listening on port 9000'));</p>
-                        </div>
-                        <li>With that, every middleware and route MUST end in either next() or res.send()</li>
-                    </ol>
-                    <li>Middleware - a function that fires on the in-between, from the time a request is received all the way until it is responded</li>
-                    <ul>
-                        <li><span class="code">app.use(mountPath - optional, callbackFunction)</span> - note that the callbackFunction receives the request and a next() func. if mountPath isn't defined, the callback will be executed on all requests</li>
-                        <li><span class="code">next()</span> moves on to the next middleware in line</li>
-                    </ul>
-                    <li>Passing information from frontend to backend</li>
-                    <ul>
-                        <li>Request Body: </li>
-                        <li>Parameter: Accessed server side by calling <span class="code">req.param</span>, parameters are passed by using ":variableName" in the endpoint</li>
-                        <li>Query: Accessed server side by calling <span class="code">req.query</span>, (Query Strings). There isn't any additional modifications needed to the URL endpoint - express takes care of that natively</li>
-                    </ul>
-
-                </ul>
-
+                <li><span class="code">app.use(mountPath - optional, callbackFunction)</span> - note that the callbackFunction receives the request and a next() func. if mountPath isn't defined, the callback will be executed on all requests</li>
+                <li><span class="code">next()</span> moves on to the next middleware in line</li>
             </ul>
+            <li>Passing information from frontend to backend</li>
+            <ul>
+                <li>Request Body: </li>
+                <li>Parameter: Accessed server side by calling <span class="code">req.param</span>, parameters are passed by using ":variableName" in the endpoint</li>
+                <li>Query: Accessed server side by calling <span class="code">req.query</span>, (Query Strings). There isn't any additional modifications needed to the URL endpoint - express takes care of that natively</li>
+            </ul>
+
         </ul>
 
+    </ul>
+    <h2>Authentication</h2>
+    <ul>
+        <li>Authentication is the process of allowing a user of your application to create an account, sign in, have specific permissions, get data, etc.</li>
+        <li>Authentication has two key areas of importance - security and usability. Security, because authentication enforces the fact that we want to safe guard user data from being visible and/or modified by other users, and usability because we want to only sure users the information that is relavnt to them (e.g., a to-do list).</li>
+        <li>Three Main types of Authentication:</li>
+        <ol>
+            <li><span class="key-concept">Session/cookie-based authentication</span> - generally considered to be inferior compared to others</li>
+            <li><span class="key-concept">Token-based authentication</span> - A service exchanges a user inputted username and password for a unique string of seemingly random text, called a token.</li>
+            <ul>
+                <li>The token then allows the users to access certain elements of a website or app. The token is often stored in sessionStorage or localStorage.</li>
+                <li>After obtaining a token, the client will send the token with every http request. The server will then check the token to ensure it is valid before fullfilling the request.</li>
+                <li>Upon log out, the token is removed from sessionStorage or localStorage, thereby revoking access to the servers protected assets</li>
+                <li>One common format of the tokens are <span class="key-concept">JSON Web Tokens (JWTs)</span>, which is pronounced as 'jots'</li>
+            </ul>
+            <li><span class="key-concept">OAuth (Open Authentication)</span> - Allows third-party services to exchange information without forcing the user to manually type in password.</li>
+        </ol>
+        <li>Types of Requests in Authentication</li>
+        <ul>
+            <li>Sign Up (New User) - Client sends POST request to server, which then saves the user contingent that the same username doesn't already exist. If username exists, then it will send error back to user stating that they need to pick a different username. Upon successful creation, a unique token is created for the user.</li>
+            <li>Log In (Existing User) - Client sends a password and username to server, which then checks to see if username and password coincide with database. Upon successful sign in, the unique token is sent back to the client.</li>
+        </ul>
+        <li><span class="key-concept">JSON Web Tokens (JWTs)</span></li>
+        <ul>
+            <li>Per <a href="https://jwt.io/">jwt.io</a>, JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties. Put simply, JWT.IO allows you to decode, verify and generate JWT.</li>
+            <li>JWT does NOT send information securely... it is merely used to ensure that the person making the request is authorized to make the request.</li>
+            <li>A JWT is an open standard that defined a compact and self-contained way to securely transmit information between two parties as a JSON object.</li>
+            <li>JWTs can be verified and trusted because it is digitally signed (either using a secrete, such as an HMAC algorithm), or a public/private key using RSA or ECDSA</li>
+            <li>Relative to Simple Web Tokens (SWT) and Security Assertion Markup Language Tokens (SAML), JWTs are more compact. </li>
+            <li>Structure of JWTs - three parts, making JWT look something like <span className="code">xxxxx.yyyyy.zzzzz</span>, where each segment is separated by a period. Elements are Base64URL encoded.</li>
+            <ol>
+                <li>Header - typically shows the type, denoted as 'typ', and algorithm, or 'alg'.</li>
+                <li>Payload - contains the 'claims'. Claims include either 1) Registered claims, 2) public claims, or 3) private claims</li>
+                <li>Signature - created by signing the encoded header, encoded payload, a secret, the algorithm specified in the header. This ensures that the message wasn't changed along the way.</li>
+            </ol>
+        </ul>
+    </ul>
     </body>
 </html>
