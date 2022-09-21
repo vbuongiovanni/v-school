@@ -10,9 +10,11 @@ loginRoute.post("/login", (req, res, next) => {
   const failedLoginErr = new Error("Login failed - username does not exist or password is incorrect.");
   User.findOne({username : reqUsername}, (err, user) => {
     if (err) {
+      res.status(500);
       return next(err);
     };
     if ((user === null) || (user.password !== reqPassword)) {
+      res.status(403);
       return next(failedLoginErr);
     };
     // create JWT : 
@@ -30,9 +32,11 @@ loginRoute.post("/new", (req, res, next) => {
   const existingUserErr = new Error("User already exists - please try a different username.");
   User.findOne({username : reqUsername}, (err, user) => {
     if (err) {
+      res.status(500)
       return next(err);
     };
     if (user !== null) {
+      res.status(403);
       return next(existingUserErr);
     };
     const newUser = new User({
@@ -41,6 +45,7 @@ loginRoute.post("/new", (req, res, next) => {
     });
     newUser.save((err, newUser) => {
       if (err) {
+        res.status(500);
         return next(err);
       };
       // create JWT : 

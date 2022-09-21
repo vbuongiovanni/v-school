@@ -15,7 +15,11 @@ const issueSchema = new Schema({
     ref : "User",
     required: true,
   },
-  issueCreatedDate : {
+  votes : {
+    type : Number,
+    default : 0
+  },
+  createdDate : {
     type : Date,
     default : Date.now
   }
