@@ -21,14 +21,15 @@ authRouter.post("/signup", (req, res, next) => {
         return next(err)
       }
                             // payload,            // secret
-      const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
-      return res.status(201).send({ token, user: savedUser })
+      const token = jwt.sign(savedUser.removePassword(), process.env.SECRET)
+      return res.status(201).send({ token, user: savedUser.removePassword() })
     })
   })
 })
 
 // Login
 authRouter.post("/login", (req, res, next) => {
+  const failedLoginErr = new Error("Username or Password are incorrect");
   User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
     if(err){
       res.status(500)
@@ -36,14 +37,19 @@ authRouter.post("/login", (req, res, next) => {
     }
     if(!user){
       res.status(403)
-      return next(new Error("Username or Password are incorrect"))
+      return next(failedLoginErr)
     }
-    if(req.body.password !== user.password){
-      res.status(403)
-      return next(new Error("Username or Password are incorrect"))
-    }
-    const token = jwt.sign(user.toObject(), process.env.SECRET)
-    return res.status(200).send({ token, user })
+    // use checkPassword method
+    user.checkPassword(req.body.password, (err, isMatch) => {
+      // if there is an error or isMatch is false, then return failed login err
+      if (err || !isMatch) {
+        res.status(403);
+        return next(failedLoginErr);
+      } 
+      // otherwise, sign token and send response
+      const token = jwt.sign(user.removePassword(), process.env.SECRET)
+      return res.status(200).send({ token, user : user.removePassword() })
+    })
   })
 })
 

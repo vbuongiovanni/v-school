@@ -16,7 +16,8 @@ const UserProvider = (props) => {
   const initialState = {
     user : JSON.parse(localStorage.getItem("user")) || {},
     token : localStorage.getItem("token") || "",
-    todos : []
+    todos : [],
+    errMsg : ""
   };
 
   const [userState, setUserState] = useState(initialState);
@@ -44,7 +45,7 @@ const UserProvider = (props) => {
           })
         })
       })
-      .catch(err => console.log(err.response.data.errMsg))
+      .catch(err => handleAuthErr(err.response.data.errMsg))
   };
 
   const login = (credentials) => {
@@ -62,7 +63,7 @@ const UserProvider = (props) => {
           })
         })
       })
-      .catch(err => console.log(err.response.data.errMsg))
+      .catch(err => handleAuthErr(err.response.data.errMsg))
   };
 
   const logout = () => {
@@ -75,18 +76,26 @@ const UserProvider = (props) => {
     })
   }
 
+  const handleAuthErr = (errMsg) => {
+    setUserState(prevState => ({...prevState, errMsg}))
+  }
+
+  const resetAuthErr = () => {
+    setUserState(prevState => ({...prevState, errMsg : ""}))
+  }
+
   const addTodo = (newTodo) => {
     // using custom instance of axios, since it has bearer token baked in:
     userAxios.post("/api/todo", newTodo)
       .then(res => {
         setUserState(prevUserState => ({...prevUserState, todos : [...prevUserState.todos, res.data]}))
       })
-      .catch(err => console.log(err.response.data.errMsg))
+      .catch(err => handleAuthErr(err.response.data.errMsg))
   }
 
 
   return (
-    <UserContext.Provider value={{...userState, signup, login, logout, addTodo}}>
+    <UserContext.Provider value={{...userState, signup, login, logout, addTodo, handleAuthErr, resetAuthErr}}>
       {props.children}
     </UserContext.Provider>
   );
