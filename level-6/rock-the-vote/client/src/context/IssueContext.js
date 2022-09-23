@@ -1,17 +1,10 @@
-import {useState, createContext} from "react";
-import axios from "axios";
+import {useState, createContext, useContext} from "react";
+import { AppContext } from "./AppContext";
 
 const IssueContext = createContext();
-const userAxios = axios.create();
-
-// create custom instance of axios w/ bearer header baked into request
-userAxios.interceptors.request.use(config => {
-  const token = localStorage.get("token");
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
-})
 
 const IssueContextProvider = props => {
+  const {userAxios} = useContext(AppContext);
 
   return (
     <IssueContext.Provider value={1}>
