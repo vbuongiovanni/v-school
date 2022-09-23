@@ -28,7 +28,6 @@ const userSchema = new Schema({
     // note that we do NOT want to use an arrow function here because we want to use the .this keyword
   userSchema.pre("save", function(next) {
     const user = this;
-    console.log("userSchema.pre('save', function(next) fired");
     // this ensures that the pre-save hook ONLY fires on initial sign up:
     if (!user.isModified("password")) return next()
     // bcrypt's .hash() method takes a string, or the user password, a hash param, and a callback function that returns

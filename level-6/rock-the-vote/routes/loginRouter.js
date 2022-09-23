@@ -1,6 +1,6 @@
 import {Router} from "express";
 import jwt from "jsonwebtoken";
-import User from "../models/User.js"
+import User from "../models/user.js"
 
 const loginRoute = Router();
 
@@ -13,17 +13,23 @@ loginRoute.post("/login", (req, res, next) => {
       res.status(500);
       return next(err);
     };
-    if ((user === null) || (user.password !== reqPassword)) {
+    if ((user === null)) {
       res.status(403);
       return next(failedLoginErr);
     };
-    // create JWT : 
-    const token = jwt.sign(
-      user.toObject(), // payload
-      process.env.SECRET // secret
-    );
-    res.send({user, token});
-  })
+    user.evalPasswords(reqPassword, (err, isMatch) => {
+      if (err || !isMatch) {
+        res.status(403);
+        return next(failedLoginErr);
+      };
+      // create JWT : 
+      const token = jwt.sign(
+        user.removePassword(), // payload
+        process.env.SECRET // secret
+      );
+      res.send({user : user.removePassword(), token});
+    });
+  });
 });
 
 // new user
@@ -50,10 +56,10 @@ loginRoute.post("/new", (req, res, next) => {
       };
       // create JWT : 
         const token = jwt.sign(
-          newUser.toObject(), // payload
+          newUser.removePassword(), // payload
           process.env.SECRET // secret
         );
-      res.send({user : newUser, token});
+      res.send({user : newUser.removePassword(), token});
     })
   })
 });
