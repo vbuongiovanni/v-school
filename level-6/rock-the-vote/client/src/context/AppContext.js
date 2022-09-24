@@ -1,5 +1,5 @@
 import {createContext} from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import axios from "axios";
 
 const AppContext = createContext();
@@ -42,12 +42,15 @@ const AppContextProvider = (props) => {
 
   const postNewIssue = (issue) => {
     userAxios.post("/api/issues/new", {...issue})
-      .then(res => console.log(res.data))
+      .then(res => {
+        navToUserIssues();
+      })
       .catch(err => console.log(err.response.data.errMsg))
   };
+
   
   return (
-    <AppContext.Provider value={{inputHandler, navToLogin, navToAllIssues, navToUserIssues, navToNewIssues, userAxios, postNewIssue}}>
+    <AppContext.Provider value={{inputHandler, navToLogin, navToAllIssues, navToUserIssues, navToNewIssues, userAxios, postNewIssue, useLocation}}>
       {props.children}
     </AppContext.Provider>
   );

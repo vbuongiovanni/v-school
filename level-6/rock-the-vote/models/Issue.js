@@ -10,14 +10,18 @@ const issueSchema = new Schema({
     type : String,
     required: true,
   },
-  author : {
+  authorId : {
     type : Schema.Types.ObjectId,
     ref : "User",
     required: true,
   },
+  author : {
+    type : String,
+    required: true,
+  },
   votes : {
-    type : Number,
-    default : 0
+    type : Schema.Types.ObjectId,
+    ref : "Vote"
   },
   createdDate : {
     type : Date,

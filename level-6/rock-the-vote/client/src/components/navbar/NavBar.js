@@ -7,7 +7,7 @@ import { AppContext } from "../../context/AppContext";
 const NavBar = () => {
   const navigate = useNavigate();
   const {logout} = useContext(UserContext);
-  const {navToAllIssues, navToUserIssues, navToNewIssues} = useContext(AppContext);
+  const {navToAllIssues, navToUserIssues, navToNewIssues, useLocation} = useContext(AppContext);
 
   return (
     <nav>
