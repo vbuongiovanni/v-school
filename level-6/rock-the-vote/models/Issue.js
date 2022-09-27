@@ -19,10 +19,10 @@ const issueSchema = new Schema({
     type : String,
     required: true,
   },
-  votes : {
+  votes : [{
     type : Schema.Types.ObjectId,
     ref : "Vote"
-  },
+  }],
   createdDate : {
     type : Date,
     default : Date.now

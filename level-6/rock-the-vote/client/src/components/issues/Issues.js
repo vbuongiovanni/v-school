@@ -15,7 +15,7 @@ const Issues = props => {
     description : "",
     title : "",
     votes : 0,
-    _id : "",
+    _id : 0,
   };
 
   const [issues, setIssues] = useState([initIssue]);
@@ -23,7 +23,7 @@ const Issues = props => {
 
   useEffect(() => {
     getIssues(props.username, setIssues);
-  }, [location, issues[0]._id])
+  }, [location])
 
   const handleIssueSelect = (e) => {
     const {id} = e.target;
@@ -41,9 +41,11 @@ const Issues = props => {
 
       {!selectedIssue ? 
         <div className="issue-card-container">
-          {issues.map(issue => {
-            return <IssueCard key={issue._id} issueDetails={issue} handleIssueSelect={handleIssueSelect}/>
-          })}
+          { 
+          issues.map(issue => {
+            return <IssueCard issueDetails={issue} handleIssueSelect={handleIssueSelect}/>
+          })
+          }
         </div>
         :
         <div className="issue-detail-container">

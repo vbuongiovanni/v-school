@@ -3,6 +3,7 @@ import Issue from "../models/issue.js";
 import User from "../models/user.js";
 import Vote from "../models/vote.js";
 import jwt_decode from "jwt-decode";
+import { Schema, set } from "mongoose";
 const issuesRoute = Router();
 
 // add new Issue
@@ -49,16 +50,21 @@ issuesRoute.get("", (req, res, next) => {
   Issue
     .find(queryObject)
     .populate("votes")
-    .then((err, issues) => {
-      if (err) {
+    .then(
+      issues => {
+        const totaledIssue = issues.map(issue => {
+          const voteValue = issue.votes.reduce((prev, current) => current.voteValue + prev, 0);
+          const {_id, title, description, authorId, author, createdDate} = issue;
+          return {_id, title, description, authorId, author, createdDate, votes : voteValue}
+        });
+        res.send(totaledIssue)
+      }, 
+      err => {
         res.status(500);
         return next(err);
-      };
-      res.send(issues)
-    })
+      }
+    )
     
-    
-
   // Issue.find(queryObject, (err, issues) => {
   //   if (err) {
   //     res.status(500);
@@ -125,7 +131,36 @@ issuesRoute.post("/vote/:voteType", (req, res, next) => {
             res.status(403);
             return next(err);
           }
-          res.send({voteValue : vote.voteValue});
+          Issue.findOne({_id : reqIssueId}, (err, issue) => {
+            if (err) {
+              res.status(500);
+              return next(err);
+            }
+            const updatedVoteIds = [...issue.votes, vote._id];
+            const existingVoteIds = [];
+            const uniqueVoteIds = updatedVoteIds.filter(voteId => {
+              if (existingVoteIds.indexOf(voteId.toString()) === -1) {
+                existingVoteIds.push(voteId.toString())
+                return true;
+              } else {
+                return false;
+              }
+            })
+            
+            Issue.findOneAndUpdate(
+              {_id : reqIssueId},
+              {votes : [...uniqueVoteIds]},
+              {runValidators : true, returnOriginal : false},
+              (err, updatedIssue) => {
+                if (err) {
+                  res.status(500);
+                  return next(err);
+                }
+                res.send({voteValue : vote.voteValue, issueId : updatedIssue._id});
+              }
+              )
+          })
+          
       });
     }
   })

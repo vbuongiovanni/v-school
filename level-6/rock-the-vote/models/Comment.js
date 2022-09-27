@@ -4,6 +4,10 @@ const commentSchema = new Schema({
     type : String,
     required: true
   },
+  level : {
+    type : Number,
+    default : 0
+  },
   authorId : {
     type : Schema.Types.ObjectId,
     ref : "User",

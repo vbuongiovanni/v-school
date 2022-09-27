@@ -7,7 +7,7 @@ const Issue = props => {
   
 
   return (
-    <article className="issue-article">
+    <article className="issue-article" key={_id}>
       <h1>{title}</h1>
       <h4>Created date {createdDate}</h4>
       <h4>Authored by {author}</h4>
