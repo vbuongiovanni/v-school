@@ -5,6 +5,7 @@ import LoginHeader from "./components/navbar/LoginHeader";
 import Login from "./components/login/Login.js";
 import ProtectedRoute from "./ProtectedRoute.js";
 import Issues from "./components/issues/Issues.js";
+import Issue from "./components/issues/Issue";
 import NewIssue from "./components/issues/NewIssue";
 import { UserContext } from "./context/UserContext.js";
 import "./style.css";
@@ -19,6 +20,7 @@ const App = () => {
           {/* protected routes: */}
           <Route path="/issues" element={ <ProtectedRoute token={token} redirectRoute="/"><Issues/></ProtectedRoute> }/>
           <Route path="/myissues" element={ <ProtectedRoute token={token} redirectRoute="/"><Issues username={user.username}/></ProtectedRoute> }/>
+          <Route path="/issue/:issueId" element={ <ProtectedRoute token={token} redirectRoute="/"><Issue/></ProtectedRoute> }/>
           <Route path="/newissue" element={<ProtectedRoute token={token} redirectRoute="/"><NewIssue/></ProtectedRoute>}/>
         </Routes>
       </div>

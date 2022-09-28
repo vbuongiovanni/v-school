@@ -23,6 +23,10 @@ const issueSchema = new Schema({
     type : Schema.Types.ObjectId,
     ref : "Vote"
   }],
+  comments : [{
+    type : Schema.Types.ObjectId,
+    ref : "Comment"
+  }],
   createdDate : {
     type : Date,
     default : Date.now

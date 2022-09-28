@@ -6,7 +6,7 @@ import { AppContext } from "../../context/AppContext";
 
 const Issues = props => {
   const {getIssues} = useContext(IssueContext);
-  const {useLocation} = useContext(AppContext);
+  const {useLocation, navToSpecificIssue} = useContext(AppContext);
   const location = useLocation().pathname;
 
   const initIssue = {
@@ -14,12 +14,11 @@ const Issues = props => {
     createdDate : "",
     description : "",
     title : "",
-    votes : 0,
+    voteBalance : 0,
     _id : 0,
   };
 
   const [issues, setIssues] = useState([initIssue]);
-  const [selectedIssue, setSelectedIssue] = useState();
 
   useEffect(() => {
     getIssues(props.username, setIssues);
@@ -27,33 +26,16 @@ const Issues = props => {
 
   const handleIssueSelect = (e) => {
     const {id} = e.target;
-    setSelectedIssue(id);
-  }
-
-  const handleBack = (e) => {
-    e.preventDefault();
-    setSelectedIssue(undefined);
-    return false;
+    navToSpecificIssue(id);
   }
 
   return (
     <main className="issues-container">
-
-      {!selectedIssue ? 
         <div className="issue-card-container">
           { 
-          issues.map(issue => {
-            return <IssueCard issueDetails={issue} handleIssueSelect={handleIssueSelect}/>
-          })
+            issues.map((issue, index) => <IssueCard key={index} issueDetails={issue} handleIssueSelect={handleIssueSelect}/>)
           }
         </div>
-        :
-        <div className="issue-detail-container">
-          <Issue  issueDetails={issues.find(issue => issue._id === selectedIssue)}/>
-          <button onClick={handleBack}>See all Issues</button>
-        </div>
-      }
-
     </main>
   )
 }

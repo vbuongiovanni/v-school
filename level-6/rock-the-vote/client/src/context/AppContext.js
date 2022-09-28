@@ -32,6 +32,10 @@ const AppContextProvider = (props) => {
     navigate("/issues")
   };
 
+  const navToSpecificIssue = (issueId) => {
+    navigate(`/issue/${issueId}`)
+  };
+
   const navToUserIssues = () => {
     navigate("/myissues")
   };
@@ -41,16 +45,26 @@ const AppContextProvider = (props) => {
   };
 
   const postNewIssue = (issue) => {
-    userAxios.post("/api/issues/new", {...issue})
+    userAxios.post("/api/issue/new", {...issue})
       .then(res => {
         navToUserIssues();
       })
       .catch(err => console.log(err.response.data.errMsg))
   };
 
+  const postNewComment = (issueId, comment, stateSetterFunc) => {
+    console.log({issueId, ...comment})
+    userAxios.post(`/api/comment/new/${issueId}`, comment)
+      .then(res => {
+        stateSetterFunc(prevState => ({...prevState, comments : [...prevState.comments, {...res.data, commentId : res.data._id}]}))
+        console.log(res.data)
+      })
+      .catch(err => console.log(err.response.data.errMsg))
+  };
+
   
   return (
-    <AppContext.Provider value={{inputHandler, navToLogin, navToAllIssues, navToUserIssues, navToNewIssues, userAxios, postNewIssue, useLocation}}>
+    <AppContext.Provider value={{inputHandler, navToLogin, navToAllIssues, postNewComment, navToSpecificIssue, navToUserIssues, navToNewIssues, userAxios, postNewIssue, useLocation}}>
       {props.children}
     </AppContext.Provider>
   );

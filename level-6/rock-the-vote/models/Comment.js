@@ -8,9 +8,12 @@ const commentSchema = new Schema({
     type : Number,
     default : 0
   },
-  authorId : {
+  rootCommentId : {
     type : Schema.Types.ObjectId,
-    ref : "User",
+    ref : "Comment",
+  },
+  commenter : {
+    type : String,
     required: true,
   },
   issueId : {

@@ -8,7 +8,8 @@ dotenv.config();
 
 // import routes
   import loginRoute from "./routes/loginRouter.js";
-  import issuesRoute from "./routes/issuesRouter.js";
+  import issueRoute from "./routes/issueRouter.js";
+  import commentRoute from "./routes/commentRouter.js";
 
 const app = express();
 // connect to database
@@ -25,8 +26,9 @@ app.use(morgan("dev"));
   // set up jwt restricted route:
   app.use("/api", expressjwt({secret : process.env.SECRET, algorithms: ['HS256']}));
     // routes behind jwt restrictions
-    app.use("/api/issues", issuesRoute)
-
+    app.use("/api/issue", issueRoute);
+    app.use("/api/comment", commentRoute);
+    
 // error handling
 app.use((err, req, res, next) => {
   return res.send({errMsg : err.message});
