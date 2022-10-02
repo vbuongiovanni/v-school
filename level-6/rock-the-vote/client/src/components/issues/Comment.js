@@ -1,10 +1,10 @@
 import {useState, useContext} from "react";
-import { AppContext } from "../../context/AppContext";
+import { IssueContext } from "../../context/IssueContext";
 
 const Comment = props => {
   const {text, commenter, commentCreatedDate, subComments, commentId, level} = props.commentData;
   const {issueId, setIssueState} = props;
-  const {postNewComment} = useContext(AppContext);
+  const {postNewComment} = useContext(IssueContext);
 
   const [commentText, setCommentText] = useState();
 

@@ -6,7 +6,7 @@ import jwt_decode from "jwt-decode";
 const issueRoute = Router();
 
 // add new Issue
-  issueRoute.post("/new/", (req, res, next) => {
+  issueRoute.post("/", (req, res, next) => {
     const {title, description} = req.body;
     // parse username of author
     const jwt = req.get('Authorization').toString().replace("Bearer ", "").trim();
@@ -98,6 +98,42 @@ const issueRoute = Router();
           return next(err);
         }
       )
+  });
+
+// route to handle editing an existing issue - under construction
+  issueRoute.put("/:issueId", (req, res, next) => {
+    const {issueId} = req.params;
+    const {title, description} = req.body;
+    const jwt = req.get('Authorization').toString().replace("Bearer ", "").trim();
+    const userId = jwt_decode(jwt)._id;
+
+    Issue.findOneAndUpdate(
+      {_id : issueId, authorId : userId},
+      {title, description},
+      {runValidators : true, returnOriginal : false},
+      (err, updatedIssue) => {
+        if (err) {
+          res.status(500);
+          return next(err);
+        }
+        res.send(updatedIssue);
+      })
+  });
+
+// route to delete an existing post
+  issueRoute.delete("/:issueId", (req, res, next) => {
+    const {issueId} = req.params;
+    const jwt = req.get('Authorization').toString().replace("Bearer ", "").trim();
+    const userId = jwt_decode(jwt)._id;
+
+    Issue
+      .findOneAndDelete({_id : issueId, authorId : userId}, (err, deletedIssue) => {
+        if (err) {
+          res.status(500)
+          return next(err);
+        }
+        res.send(deletedIssue);
+      })
   });
 
 // route to handle voting

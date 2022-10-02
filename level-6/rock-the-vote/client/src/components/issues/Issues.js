@@ -1,12 +1,11 @@
 import { useState, useContext, useEffect} from "react";
 import IssueCard from "./IssueCard";
-import Issue from "./Issue";
 import {IssueContext} from "../../context/IssueContext";
 import { AppContext } from "../../context/AppContext";
 
 const Issues = props => {
   const {getIssues} = useContext(IssueContext);
-  const {useLocation, navToSpecificIssue} = useContext(AppContext);
+  const {useLocation, navToSpecificIssue, navToEditUserIssue} = useContext(AppContext);
   const location = useLocation().pathname;
 
   const initIssue = {

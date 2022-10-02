@@ -1,11 +1,11 @@
 import Comment from "./Comment.js";
 import { useState, useContext} from "react";
-import { AppContext } from "../../context/AppContext";
+import { IssueContext } from "../../context/IssueContext";
 
 const Comments = props => {
   const {comments, issueId, setIssueState} = props;
 
-  const {postNewComment} = useContext(AppContext);
+  const {postNewComment} = useContext(IssueContext);
   const [commentText, setCommentText] = useState();
 
   const toggleComment = (e) => {
@@ -15,9 +15,6 @@ const Comments = props => {
   const handleTextChange = (e) => {
     setCommentText(e.target.value)
   }
-
-
-
 
   let baseComments = comments.filter(comment => comment.level === 0)
 
@@ -29,6 +26,11 @@ const Comments = props => {
         })
       return {...baseComment, subComments}
   })
+
+  const handlePostComment = e => {
+    postNewComment(issueId, {text : commentText, rootCommentId : e.target.id, level : 0}, setIssueState)
+    setCommentText(undefined)
+  }
   
   return (
     <div className="comments-container">
@@ -41,7 +43,7 @@ const Comments = props => {
         <div className="comment-btn-container">
           <button onClick={toggleComment}>{commentText === undefined ? "Comment" : "Cancel"}</button>
           {commentText !== undefined && 
-            <button id={issueId} onClick={e => postNewComment(issueId, {text : commentText, rootCommentId : e.target.id, level : 0}, setIssueState)}>Submit</button>
+            <button id={issueId} onClick={handlePostComment}>Submit</button>
           }
         </div>
       </div>

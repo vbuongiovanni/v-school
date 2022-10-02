@@ -19,9 +19,10 @@ const App = () => {
           <Route path="/" element={!token ? <Login/> : <Navigate to={"/issues"}/>}/>
           {/* protected routes: */}
           <Route path="/issues" element={ <ProtectedRoute token={token} redirectRoute="/"><Issues/></ProtectedRoute> }/>
+          <Route path="/issues/:issueId" element={ <ProtectedRoute token={token} redirectRoute="/"><Issue/></ProtectedRoute> }/>
           <Route path="/myissues" element={ <ProtectedRoute token={token} redirectRoute="/"><Issues username={user.username}/></ProtectedRoute> }/>
-          <Route path="/issue/:issueId" element={ <ProtectedRoute token={token} redirectRoute="/"><Issue/></ProtectedRoute> }/>
-          <Route path="/newissue" element={<ProtectedRoute token={token} redirectRoute="/"><NewIssue/></ProtectedRoute>}/>
+          <Route path="/myissues/:issueId" element={ <ProtectedRoute token={token} redirectRoute="/"><NewIssue isEdit={true}/></ProtectedRoute> }/>
+          <Route path="/newissue" element={<ProtectedRoute token={token} redirectRoute="/"><NewIssue isEdit={false}/></ProtectedRoute>}/>
         </Routes>
       </div>
     </div>

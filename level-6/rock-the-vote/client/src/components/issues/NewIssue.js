@@ -1,19 +1,45 @@
-import { useState, useContext } from "react"; 
+import { useState, useContext, useEffect} from "react"; 
+import {useParams} from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
+import { IssueContext } from "../../context/IssueContext";
 
-const NewIssue = () => {
-  const {inputHandler, postNewIssue} = useContext(AppContext);
+const NewIssue = (props) => {
+
+  const {isEdit} = props;
+  let { issueId } = useParams();
+  const {inputHandler, navToUserIssues} = useContext(AppContext);
+  const {getIssue, postNewIssue, deleteIssue, editIssue} = useContext(IssueContext);
 
   const initFormInputs = {
     title : "",
     description : ""
   }
-  const [issueInputs, setIssueInputs] = useState(initFormInputs);
 
-  const handleFormSubmit = e => {
-    e.preventDefault();
-    postNewIssue(issueInputs);
-  }
+  const [issueInputs, setIssueInputs] = useState(initFormInputs);
+  
+  useEffect(() => {
+    if (isEdit) {
+      getIssue(issueId, setIssueInputs);
+    }
+  }, [])
+
+  // conditional - either send PUT request if isEdit is true, otherwise send POST request:
+    const handleFormSubmit = e => {
+      e.preventDefault();
+      if (isEdit) {
+        editIssue(issueId, issueInputs)
+      } else {
+        postNewIssue(issueInputs);
+      }
+      navToUserIssues();
+    }
+
+  // handle DELETE request - will only render if isEdit is true
+    const handleDeleteRequest = e => {
+      e.preventDefault();
+      deleteIssue(issueId);
+      navToUserIssues();
+    }
 
   return (
     <form className="new-issue-form" onSubmit={handleFormSubmit}>
@@ -34,7 +60,8 @@ const NewIssue = () => {
         onChange={e => inputHandler(e, setIssueInputs)}
         required
         cols="100" rows="3"></textarea>
-        <button>Submit Issue</button>
+        <button>{isEdit ? "Submit Edited Issue" : "Submit Issue"}</button>
+        {isEdit && <button onClick={handleDeleteRequest}>Delete Issue</button>}
     </form>
   )
 };
