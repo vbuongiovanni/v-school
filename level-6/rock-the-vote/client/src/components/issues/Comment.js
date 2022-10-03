@@ -31,12 +31,12 @@ const Comment = props => {
            <>
             {
             (commentText !== undefined) && 
-              <textarea value={commentText} onChange={handleTextChange}></textarea>
+              <textarea className="new-subcomment-input" value={commentText} onChange={handleTextChange}></textarea>
             }
-            <div className="comment-btn-container">
-              <button onClick={toggleComment}>{commentText === undefined ? "Comment" : "Cancel"}</button>
+            <div className="comment-btn-container-single">
+              <button className="color-btn clickable issue-btn" onClick={toggleComment}>{commentText === undefined ? `Reply to ${commenter}'s comment` : "Cancel"}</button>
               {commentText !== undefined && 
-                <button onClick={handlePostComment}>Submit</button>
+                <button className="color-btn clickable issue-btn" onClick={handlePostComment}>Submit</button>
               }
             </div>
            </>

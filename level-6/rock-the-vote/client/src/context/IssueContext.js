@@ -24,12 +24,11 @@ const IssueContextProvider = props => {
   };
 
   // callback to handle voting
-  const sendVote = (issueId, voteAction, voteBalanceSetter, liveVoteBalance, userVote, issueStateSetter) => {
+  const sendVote = (issueId, voteAction, userVote, issueStateSetter) => {
     userAxios.post(`/api/issue/vote/${voteAction}`, {issueId})
       .then(res => {
         const voteValue = voteAction === "upvote" ? 1 : voteAction === "downvote" ? -1 : 0;
         if (voteValue !== userVote) {
-          voteBalanceSetter((liveVoteBalance - userVote) + res.data.voteValue)
           issueStateSetter(prevIssueState => ({...prevIssueState, userVote : res.data.voteValue}))
         }
       })

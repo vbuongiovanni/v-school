@@ -36,9 +36,9 @@ const LoginForm = (props) => {
         <input type="text" placeholder="Password" name="password" value={password} onChange={handleFormInput} required/>
         {!isSignIn && <input type="text" placeholder="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={handleFormInput}/>}
       </div>
-      <p className="loginMsg">{userMsg}</p>
+      <p className="login-msg">{userMsg}</p>
       <div className="btn-container">
-        <button onClick={handleFormSubmit}>{btnTxt}</button>
+        <button className="color-btn clickable" onClick={handleFormSubmit}>{btnTxt}</button>
       </div>
     </form>
   )

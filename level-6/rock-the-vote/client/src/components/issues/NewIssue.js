@@ -44,7 +44,7 @@ const NewIssue = (props) => {
   return (
     <form className="new-issue-form" onSubmit={handleFormSubmit}>
       <input
-        className="issue-name-title"
+        className="issue-form-title"
         placeholder="Issue Title"
         name="title"
         value={issueInputs.title}
@@ -53,15 +53,15 @@ const NewIssue = (props) => {
       />
       <p>Provide a clear and concise summary of the issue you want to raise attention to: </p>
       <textarea
-        className="issue-description"
+        className="issue-form-description"
         placeholder="Description of issue"
         name="description"
         value={issueInputs.description}
         onChange={e => inputHandler(e, setIssueInputs)}
         required
         cols="100" rows="3"></textarea>
-        <button>{isEdit ? "Submit Edited Issue" : "Submit Issue"}</button>
-        {isEdit && <button onClick={handleDeleteRequest}>Delete Issue</button>}
+        <button className="color-btn clickable">{isEdit ? "Submit Edited Issue" : "Submit Issue"}</button>
+        {isEdit && <button className="caution-btn clickable" onClick={handleDeleteRequest}>Delete Issue</button>}
     </form>
   )
 };

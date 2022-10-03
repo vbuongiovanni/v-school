@@ -9,8 +9,8 @@ const UserContextProvider = (props) => {
   const {navToLogin} = useContext(AppContext)
 
   const initUserContext = {
-    user : JSON.parse(localStorage.getItem("user")),
-    token : localStorage.getItem("token")
+    user : JSON.parse(localStorage.getItem("user")) || "",
+    token : localStorage.getItem("token") || ""
   };
   const [userContext, setUserContext] = useState(initUserContext);
 
