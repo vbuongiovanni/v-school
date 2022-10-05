@@ -8,11 +8,9 @@ const Issues = props => {
   const {useLocation, navToSpecificIssue, prettyDate} = useContext(AppContext);
   const {pathname} = useLocation();
 
-  console.log(useLocation())
-
   const {username} = JSON.parse(localStorage.getItem("user"));
 
-  const greetingText = pathname.substring(0, 3) === "/my" ? `Issues raised by ${username}` : "Community Issues"
+  const greetingText = pathname.substring(0, 3) === "/my" ? `Issues raised by ${username}` : "Community Issues";
 
   const initIssue = {
     author : "",
@@ -27,7 +25,7 @@ const Issues = props => {
 
   useEffect(() => {
     getIssues(props.username, setIssues);
-  }, [pathname, issues.length])
+  }, [pathname, issues.filter(issue => issue._id !== 0).length]);
 
   const handleIssueSelect = (e) => {
     const {id} = e.target;

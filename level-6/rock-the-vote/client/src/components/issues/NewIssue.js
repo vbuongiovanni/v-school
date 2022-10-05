@@ -7,13 +7,13 @@ const NewIssue = (props) => {
 
   const {isEdit} = props;
   let { issueId } = useParams();
-  const {inputHandler, navToUserIssues} = useContext(AppContext);
+  const {inputHandler, navToUserIssues, navToSpecificIssue} = useContext(AppContext);
   const {getIssue, postNewIssue, deleteIssue, editIssue} = useContext(IssueContext);
 
   const initFormInputs = {
     title : "",
     description : ""
-  }
+  };
 
   const [issueInputs, setIssueInputs] = useState(initFormInputs);
   
@@ -21,15 +21,15 @@ const NewIssue = (props) => {
     if (isEdit) {
       getIssue(issueId, setIssueInputs);
     }
-  }, [])
+  }, []);
 
   // conditional - either send PUT request if isEdit is true, otherwise send POST request:
     const handleFormSubmit = e => {
       e.preventDefault();
       if (isEdit) {
-        editIssue(issueId, issueInputs)
+        editIssue(issueId, issueInputs, navToSpecificIssue);
       } else {
-        postNewIssue(issueInputs);
+        postNewIssue(issueInputs, navToSpecificIssue);
       }
       navToUserIssues();
     }
@@ -63,7 +63,7 @@ const NewIssue = (props) => {
         <button className="color-btn clickable">{isEdit ? "Submit Edited Issue" : "Submit Issue"}</button>
         {isEdit && <button className="caution-btn clickable" onClick={handleDeleteRequest}>Delete Issue</button>}
     </form>
-  )
+  );
 };
 
 export default NewIssue;

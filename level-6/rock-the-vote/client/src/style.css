@@ -277,6 +277,10 @@
       min-height: 50px;
       border-radius: 5px;
       overflow-y: scroll;
+      overflow-x: hidden;
+    }
+    .issue-description {
+      width: 90%;
     }
     .issue-form-description {
       height: 400px;

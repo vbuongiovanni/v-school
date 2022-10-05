@@ -21,31 +21,31 @@ const AppContextProvider = (props) => {
     stateSetter(prevState => ({
       ...prevState,
       [name] : value
-    })) 
+    })); 
   };
 
   const navToLogin = () => {
-    navigate("/")
+    navigate("/");
   };
 
   const navToAllIssues = () => {
-    navigate("/issues")
+    navigate("/issues");
   };
 
   const navToSpecificIssue = (issueId) => {
-    navigate(`/issues/${issueId}`)
+    navigate(`/issues/${issueId}`);
   };
 
   const navToUserIssues = () => {
-    navigate("/myissues")
+    navigate("/myissues");
   };
 
   const navToEditUserIssue = (issueId) => {
-    navigate(`/myissues/${issueId}`)
+    navigate(`/myissues/${issueId}`);
   };
 
   const navToNewIssues = () => {
-    navigate("/newissue")
+    navigate("/newissue");
   };
 
   const prettyDate = (date) => {
@@ -53,8 +53,8 @@ const AppContextProvider = (props) => {
     const months = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
-  ]
-    const prettyDate = `${months[toDate.getMonth()]} ${toDate.getDate()}, ${toDate.getFullYear()}`
+  ];
+    const prettyDate = `${months[toDate.getMonth()]} ${toDate.getDate()}, ${toDate.getFullYear()}`;
     return prettyDate;
   }
   
@@ -64,4 +64,4 @@ const AppContextProvider = (props) => {
     </AppContext.Provider>
   );
 }
-export {AppContext, AppContextProvider}
+export {AppContext, AppContextProvider};

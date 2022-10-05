@@ -25,7 +25,7 @@ const LoginForm = (props) => {
         setUserMsg("")
       }, 5000)
     } else {
-      loginHandler({username, password});
+      loginHandler({username, password}, setUserMsg);
     }
   }
 

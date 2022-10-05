@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import NavBtn from "./NavBtn";
-import {useLocation} from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { AppContext } from "../../context/AppContext";
 

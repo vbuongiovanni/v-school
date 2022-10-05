@@ -55,7 +55,7 @@ const issueRoute = Router();
             const {_id, title, description, authorId, author, createdDate} = issue;
             return {_id, title, description, authorId, author, createdDate, voteBalance}
           });
-          res.send(totaledIssues)
+          res.send(totaledIssues.sort((a, b) => a.voteBalance <= b.voteBalance ? 1 : -1))
         }, 
         err => {
           res.status(500);

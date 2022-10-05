@@ -1,10 +1,12 @@
 import {useState, useContext} from "react";
 import { IssueContext } from "../../context/IssueContext";
+import { AppContext } from "../../context/AppContext";
 
 const Comment = props => {
   const {text, commenter, commentCreatedDate, subComments, commentId, level} = props.commentData;
   const {issueId, setIssueState} = props;
   const {postNewComment} = useContext(IssueContext);
+  const {prettyDate} = useContext(AppContext);
 
   const [commentText, setCommentText] = useState();
 
@@ -24,7 +26,7 @@ const Comment = props => {
   return (
     <div key={props.index} id={commentId} className={`comment`}>
         <p>{text}</p>
-        <h4>{commentCreatedDate}</h4>
+        <h4>{prettyDate(commentCreatedDate)}</h4>
         <h4>{commenter}</h4>
         {
            (level < 2) && 
