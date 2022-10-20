@@ -2014,6 +2014,40 @@
                 <li>Signature - created by signing the encoded header, encoded payload, a secret, the algorithm specified in the header. This ensures that the message wasn't changed along the way.</li>
             </ol>
         </ul>
+        <li class="key-concept">Key NPM packages to consider:</li>
+        <ul>
+            <li><span class="code">dotenv</span></li>
+            <ul>
+                <li>Facilitates the management and use of a <span class="code">.env</span>, or environment, file</li>
+                <li>This is often used to safeguard API keys, secrets, etc.</li>
+                <li><span class="code">dotenv</span> is loaded into enviroment by calling <span class="code">require('dotenv').config()</span></li>
+                <li>Variables from within the .env file can then be accessed using <span class="code">process.env.VARIABLE_NAME_DEFINED_IN_ENV_FILE</span></li>
+            </ul>
+            <li><span class="code">jsonwebtoken</span></li>
+            <ul>
+                <li>Used to create a JWT</li>
+                <li>Requires a payload, in the form of a javascript object, and a secret, which is typically called form <span class="code">process.env.SECRET</span></li>
+                <li>Used by calling <span class="code">jwt.sign(myPayloadObject, process.env.SECRET)</span></li>
+            </ul>
+            <li><span class="code">express-jwt</span></li>
+            <ul>
+                <li>Used to protect endpoints by evaluating the secret in the requestor's JWT against a known secret </li>
+                <li>Also adds <span class="code">.auth</span> property to a request.</li>
+                <li>If the requesting service doesn't have a JWT or has an incorrect secret, express-jwt will throw an "UnauthorizedError" </li>
+                <li><span class="code">express-jwt</span> is loaded into enviroment by calling <span class="code">const {expressjwt} = require('express-jwt')</span></li>
+                <li>implemented by adding middleware to an endpoint in express - <span class="code">app.use("/myEndpoint", expressjwt({process.env.SECRET}, algorithms : "HS256"))</span></li>
+            </ul>
+            <li><span class="code">bcrypt</span></li>
+            <ul>
+                <li>Used to hash a string in order to protect it's privacy. In essence, this is used to encrypt a string - typically a password</li>
+                <li>To encrypt a string, Often used in conjunction with a pre-save hook in mongoDB, the following implementation is used - <span class="code">bcrypt.hash(someString, 10)</span>. The second parameter is the number of 'salt rounds'</li>
+                <li>To decrypt a string, often used in conjunction with a custom method in mongoDB, the following implementation is used - <span class="code">bcrypt.compare(unencryptedString, encryptedString, (err, isMatch) => isMatch)</span>.</li>
+            </ul>
+            <li><span class="code">jwt-decode</span></li>
+            <ul>
+                <li>Takes a JWT and returns an object of decoded properties from the JWT's payload</li>
+            </ul>
+        </ul>
     </ul>
     </body>
 </html>
